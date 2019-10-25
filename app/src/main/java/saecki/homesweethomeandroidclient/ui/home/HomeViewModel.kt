@@ -1,13 +1,16 @@
 package saecki.homesweethomeandroidclient.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import saecki.homesweethomeandroidclient.datatypes.devices.Device
+import saecki.homesweethomeandroidclient.datatypes.devices.Heating
+import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    var devices: List<Device> = listOf(
+        Heating("idkkek", "Wohnzimmer", 23.4, 24.0),
+        Heating("ldssal", "Küche", 24.1, 24.0),
+        Lamp("lkjf", "Küche", true)
+    )
+
 }
