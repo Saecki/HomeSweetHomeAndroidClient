@@ -8,9 +8,17 @@
     <path
         android:fillColor="@color/colorPrimary"
         android:fillType="nonZero"
-        android:pathData="M38, 78 L38, 50 L32, 52 L54, 30 L68, 44 L68, 30 L68, 44 L76, 52 L70, 50 L70, 78 L60, 78 L60, 70 C60, 60, 50, 60, 50, 60 C40, 60, 40, 70, 40, 70 L40, 78 L38, 78"
-        android:strokeWidth="8.5"
+        android:pathData="M34, 76 c0, 4, 4, 4, 4, 4 l3, 0 c4, 0, 4, -4, 4, -4 l0, -14 c0, -4, 4, -4, 4 -4 l3, 0, c4, 0, 4, 4, 4, 4 l0, 14 c0, 4, 4, 4, 4, 4 l10, 0 c4, 0, 4 -4, 4, -4 l0, -24, l-20, -16 l-20, 16"
         android:strokeColor="@color/colorPrimary"
         android:strokeLineCap="round"
         android:strokeLineJoin="round"/>
+
+    <path
+        android:fillColor="@color/colorPrimary"
+        android:fillType="nonZero"
+        android:pathData="M30, 50, l24, -20 l24, 20 c4, 4, 8, 0, 4, -4 l-24, -20 c-4, -4, -8, 0, -8, 0 l-24, 20 c-4, 4, 0, 8, 4, 4"
+        android:strokeColor="@color/colorPrimary"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+
 </vector>
