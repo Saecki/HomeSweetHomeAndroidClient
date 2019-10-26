@@ -8,9 +8,9 @@ import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
 class HomeViewModel : ViewModel() {
 
     var devices: List<Device> = listOf(
-        Heating("idkkek", "Wohnzimmer", 23.4, 24.0),
-        Heating("ldssal", "Küche", 24.1, 24.0),
-        Lamp("lkjf", "Küche", true)
+        Heating("idkkek", "Living Room", 23.4, 24.0),
+        Heating("ldssal", "Kitchen", 24.1, 24.0),
+        Lamp("lkjf", "Kitchen", true)
     )
 
 }

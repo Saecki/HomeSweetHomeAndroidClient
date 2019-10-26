@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import saecki.homesweethomeandroidclient.R
@@ -25,25 +26,21 @@ class DeviceListAdapter(private val context: Context, var devices: List<Device>)
             val heating = device as Heating
             val heatingView = inflater.inflate(R.layout.device_heating, parent, false)
             val name: TextView = heatingView.findViewById(R.id.name)
-            val type: TextView = heatingView.findViewById(R.id.type)
             val actualTemp: TextView = heatingView.findViewById(R.id.actualTemp)
             val targetTemp: TextView = heatingView.findViewById(R.id.targetTemp)
 
             name.text = heating.name
-            type.text = heating.type
-            actualTemp.text = (round(heating.actualTemp * 10) / 10).toString()
-            targetTemp.text = (round(heating.targetTemp * 10) / 10).toString()
+            actualTemp.text = heating.formatActualTemp()
+            targetTemp.text = heating.formatTargetTemp()
 
             return heatingView
         } else if (device.type == Lamp.type) {
             val lamp = device as Lamp
             val lampView = inflater.inflate(R.layout.device_lamp, parent, false)
             val name: TextView = lampView.findViewById(R.id.name)
-            val type: TextView = lampView.findViewById(R.id.type)
             val state: Switch = lampView.findViewById(R.id.state)
 
             name.text = lamp.name
-            type.text = lamp.type
             state.isChecked = lamp.state
 
             return lampView
