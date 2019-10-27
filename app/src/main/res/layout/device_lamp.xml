@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/device_end_margin"
-        android:layout_marginStart="@dimen/device_start_margin"
         android:orientation="horizontal">
 
         <ImageView

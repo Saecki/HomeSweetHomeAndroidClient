@@ -1,64 +1,58 @@
 package saecki.homesweethomeandroidclient.ui.custom
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.Switch
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.devices.Device
 import saecki.homesweethomeandroidclient.datatypes.devices.Heating
 import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
-import kotlin.math.round
 
-class DeviceListAdapter(private val context: Context, var devices: List<Device>) : BaseAdapter() {
+class DeviceListAdapter(var devices: List<Device>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val inflater: LayoutInflater =
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+        when (viewType) {
+            Heating.type -> {
+                val heatingView = inflater.inflate(R.layout.device_heating, parent, false)
+                return HeatingViewHolder(heatingView)
+            }
+            Lamp.type -> {
+                val lampView = inflater.inflate(R.layout.device_lamp, parent, false)
+                return LampViewHolder(lampView)
+            }
+            else -> {
+                val dummyView = inflater.inflate(R.layout.dummy, parent, false)
+                return DummyViewHolder(dummyView)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return devices.get(position).type
+    }
+
+    override fun getItemCount(): Int {
+        return devices.size
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val device = devices.get(position)
 
-        if (device.type == Heating.type) {
-            val heating = device as Heating
-            val heatingView = inflater.inflate(R.layout.device_heating, parent, false)
-            val name: TextView = heatingView.findViewById(R.id.name)
-            val actualTemp: TextView = heatingView.findViewById(R.id.actualTemp)
-            val targetTemp: TextView = heatingView.findViewById(R.id.targetTemp)
-
-            name.text = heating.name
-            actualTemp.text = heating.formatActualTemp()
-            targetTemp.text = heating.formatTargetTemp()
-
-            return heatingView
-        } else if (device.type == Lamp.type) {
-            val lamp = device as Lamp
-            val lampView = inflater.inflate(R.layout.device_lamp, parent, false)
-            val name: TextView = lampView.findViewById(R.id.name)
-            val state: Switch = lampView.findViewById(R.id.state)
-
-            name.text = lamp.name
-            state.isChecked = lamp.state
-
-            return lampView
+        when (device.type) {
+            Heating.type -> {
+                val heatingViewHolder = holder as HeatingViewHolder
+                val heating = device as Heating
+                heatingViewHolder.bindView(heating)
+            }
+            Lamp.type -> {
+                val lampViewHolder = holder as LampViewHolder
+                val lamp = device as Lamp
+                lampViewHolder.bindView(lamp)
+            }
         }
-
-        return null
-    }
-
-    override fun getItem(position: Int): Any {
-        return devices.get(position)
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getCount(): Int {
-        return devices.size
     }
 
 }
