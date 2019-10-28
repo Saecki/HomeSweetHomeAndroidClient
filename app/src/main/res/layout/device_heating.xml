@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/targetTempLabel" />
+            android:text="@string/target_temp_label" />
 
         <EditText
             android:id="@+id/detailedViewTargetTemp"
