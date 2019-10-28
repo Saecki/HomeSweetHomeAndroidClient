@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/icon_margin"
-            android:src="@drawable/ic_light_bulb" />
+            android:src="@drawable/ic_heating_black_24dp" />
 
         <TextView
             android:id="@+id/name"
@@ -55,7 +55,7 @@
             android:layout_gravity="center_vertical"
             android:background="#00000000"
             android:padding="@dimen/control_icon_padding"
-            android:src="@drawable/ic_arrow_down" />
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
 
     </LinearLayout>
 
@@ -98,14 +98,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/control_icon_padding"
-            android:src="@drawable/ic_btn_minus" />
+            android:src="@drawable/ic_remove_black_24dp" />
 
         <ImageView
             android:id="@+id/plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/control_icon_padding"
-            android:src="@drawable/ic_btn_plus" />
+            android:src="@drawable/ic_add_black_24dp" />
 
     </LinearLayout>
 

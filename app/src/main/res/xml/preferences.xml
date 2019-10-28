@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListPreference
-        android:key="@string/pref_temperature_unit_title"
+        android:key="@string/pref_temperature_unit_key"
         android:title="@string/pref_temperature_unit_title" />
 
     <EditTextPreference
-        android:key="@string/pref_temperature_decimals_title"
+        android:digits="0123"
+        android:inputType="number"
+        android:key="@string/pref_temperature_decimals_key"
         android:title="@string/pref_temperature_decimals_title" />
 
 </PreferenceScreen>

@@ -20,6 +20,8 @@ class HeatingViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     var extended = false
 
     init {
+
+
         arrow.setOnClickListener {
             if (extended) {
                 arrow.animate().rotation(0f).setDuration(250).start()

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/icon_margin"
-            android:src="@drawable/ic_light_bulb" />
+            android:src="@drawable/ic_lightbulb_outline_black_24dp" />
 
         <TextView
             android:id="@+id/name"
