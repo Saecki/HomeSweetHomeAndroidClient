@@ -2,14 +2,40 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ListPreference
-        android:key="@string/pref_temperature_unit_key"
-        android:title="@string/pref_temperature_unit_title" />
+    <PreferenceCategory
+        android:key="@string/pref_temperature_category_key"
+        android:title="@string/pref_temperature_category_title">
 
-    <EditTextPreference
-        android:digits="0123"
-        android:inputType="number"
-        android:key="@string/pref_temperature_decimals_key"
-        android:title="@string/pref_temperature_decimals_title" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/pref_temperature_unit_entries"
+            android:entryValues="@array/pref_temperature_unit_entry_values"
+            android:key="@string/pref_temperature_unit_key"
+            android:summary="%s"
+            android:title="@string/pref_temperature_unit_title" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/pref_temperature_decimals_entries"
+            android:entryValues="@array/pref_temperature_decimals_entries"
+            android:key="@string/pref_temperature_decimals_key"
+            android:summary="%s"
+            android:title="@string/pref_temperature_decimals_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_ui_category_key"
+        android:title="@string/pref_ui_category_title">
+
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/pref_dark_mode_entries"
+            android:entryValues="@array/pref_dark_mode_entry_values"
+            android:key="@string/pref_dark_mode_key"
+            android:summary="Use %s mode"
+            android:title="@string/pref_dark_mode_title" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

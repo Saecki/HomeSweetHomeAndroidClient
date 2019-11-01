@@ -5,12 +5,12 @@
     android:viewportHeight="108">
 
     <path
-        android:fillColor="@color/colorPrimary"
+        android:fillColor="@color/color_primary"
         android:fillType="nonZero"
         android:pathData="M34, 76 c0, 4, 4, 4, 4, 4 l3, 0 c4, 0, 4, -4, 4, -4 l0, -14 c0, -4, 4, -4, 4 -4 l3, 0, c4, 0, 4, 4, 4, 4 l0, 14 c0, 4, 4, 4, 4, 4 l10, 0 c4, 0, 4 -4, 4, -4 l0, -24, l-20, -16 l-20, 16" />
 
     <path
-        android:fillColor="@color/colorPrimary"
+        android:fillColor="@color/color_primary"
         android:fillType="nonZero"
         android:pathData="M30, 50, l24, -20 l24, 20 c4, 4, 8, 0, 4, -4 l-24, -20 c-4, -4, -8, 0, -8, 0 l-24, 20 c-4, 4, 0, 8, 4, 4" />
 

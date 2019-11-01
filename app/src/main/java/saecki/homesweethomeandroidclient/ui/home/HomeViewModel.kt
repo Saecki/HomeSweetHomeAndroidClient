@@ -12,25 +12,29 @@ class HomeViewModel : ViewModel() {
         Heating(
             "idkkek",
             "Living Room",
-            Temperature().apply { setCelsius(24.1) },
-            Temperature().apply { setCelsius(24.0) }),
+            Temperature(24.1, Temperature.Unit.CELSIUS),
+            Temperature(24.0, Temperature.Unit.CELSIUS)
+        ),
         Heating(
             "ldssal",
             "Kitchen",
-            Temperature().apply { setCelsius(24.2) },
-            Temperature().apply { setCelsius(24.0) }),
+            Temperature(24.2, Temperature.Unit.CELSIUS),
+            Temperature(24.0, Temperature.Unit.CELSIUS)
+        ),
         Lamp("lkjf", "Kitchen", true),
         Heating(
             "lkfjasjl",
             "Office",
-            Temperature().apply { setCelsius(23.6) },
-            Temperature().apply { setCelsius(24.0) }),
+            Temperature(23.6, Temperature.Unit.CELSIUS),
+            Temperature(24.0, Temperature.Unit.CELSIUS)
+        ),
         Lamp("oijaisomf", "Office", false),
         Heating(
             "lkfjasjl",
             "Bathroom",
-            Temperature().apply { setCelsius(23.8) },
-            Temperature().apply { setCelsius(24.0) }),
+            Temperature(23.8, Temperature.Unit.CELSIUS),
+            Temperature(24.0, Temperature.Unit.CELSIUS)
+        ),
         Lamp("oijaisomf", "Bathroom", true)
     )
 

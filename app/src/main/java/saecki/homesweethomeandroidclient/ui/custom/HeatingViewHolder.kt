@@ -10,6 +10,7 @@ import saecki.homesweethomeandroidclient.datatypes.devices.Heating
 
 class HeatingViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
+    val typeIcon: ImageView = view.findViewById(R.id.typeIcon)
     val name: TextView = view.findViewById(R.id.name)
     val actualTemp: TextView = view.findViewById(R.id.actualTemp)
     val targetTemp: TextView = view.findViewById(R.id.targetTemp)
@@ -20,8 +21,6 @@ class HeatingViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     var extended = false
 
     init {
-
-
         arrow.setOnClickListener {
             if (extended) {
                 arrow.animate().rotation(0f).setDuration(250).start()

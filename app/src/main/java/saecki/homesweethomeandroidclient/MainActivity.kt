@@ -1,11 +1,12 @@
 package saecki.homesweethomeandroidclient
 
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,13 +24,16 @@ class MainActivity : AppCompatActivity() {
 
         when (currentNightMode) {
             Configuration.UI_MODE_NIGHT_YES -> {
-
+                TODO()
+                Log.d("TAG", "dark")
             }
             Configuration.UI_MODE_NIGHT_NO -> {
-
+                TODO()
+                Log.d("TAG", "bright")
             }
             Configuration.UI_MODE_NIGHT_UNDEFINED -> {
-
+                TODO()
+                Log.d("TAG", "bright")
             }
         }
 
