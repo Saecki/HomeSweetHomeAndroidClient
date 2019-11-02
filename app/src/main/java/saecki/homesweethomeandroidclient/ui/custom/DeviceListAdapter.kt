@@ -39,7 +39,7 @@ class DeviceListAdapter(var devices: List<Device>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val device = devices.get(position)
+        val device = devices[position]
 
         when (device.type) {
             Heating.type -> {
@@ -54,5 +54,4 @@ class DeviceListAdapter(var devices: List<Device>) :
             }
         }
     }
-
 }

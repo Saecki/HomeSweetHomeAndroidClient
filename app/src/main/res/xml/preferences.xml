@@ -17,10 +17,18 @@
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/pref_temperature_decimals_entries"
-            android:entryValues="@array/pref_temperature_decimals_entries"
+            android:entryValues="@array/pref_temperature_decimals_entry_values"
             android:key="@string/pref_temperature_decimals_key"
             android:summary="%s"
             android:title="@string/pref_temperature_decimals_title" />
+
+        <ListPreference
+            android:defaultValue="0.5"
+            android:entries="@array/pref_temperature_increment_entries"
+            android:entryValues="@array/pref_temperature_increment_entry_values"
+            android:key="@string/pref_temperature_increment_key"
+            android:summary="%s"
+            android:title="@string/pref_temperature_increment_title" />
 
     </PreferenceCategory>
 

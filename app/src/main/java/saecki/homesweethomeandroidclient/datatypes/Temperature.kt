@@ -1,11 +1,11 @@
 package saecki.homesweethomeandroidclient.datatypes
 
-import kotlin.math.pow
-import kotlin.math.round
+import saecki.homesweethomeandroidclient.MainActivity
+import saecki.homesweethomeandroidclient.R
 
 class Temperature {
 
-    private var temp: Double = 0.0
+    private var temp: Double = 273.0
 
     constructor(temp: Double, unit: Unit) {
         set(temp, unit)
@@ -16,11 +16,26 @@ class Temperature {
     companion object {
 
         fun globalUnit(): Unit {
-            return Unit.FAHRENHEIT
+            val key: String = MainActivity.res.getString(R.string.pref_temperature_unit_key)
+            val index = MainActivity.getPrefInt(key)
+
+            for (u in Unit.values()) {
+                if (index == u.index) {
+                    return u
+                }
+            }
+
+            return Unit.CELSIUS
         }
 
         fun globalDecimals(): Int {
-            return 2
+            val key: String = MainActivity.res.getString(R.string.pref_temperature_decimals_key)
+            val decimals: Int = MainActivity.getPrefInt(key)!!
+            return if (decimals == -1) {
+                1
+            } else {
+                decimals
+            }
         }
     }
 
@@ -59,7 +74,7 @@ class Temperature {
     }
 
     fun format(unit: Unit, decimals: Int): String {
-        return roundToDecimals(get(unit), decimals).toString() + unit.unit
+        return roundToDecimals(get(unit), decimals) + unit.unit
     }
 
     fun getKelvin(): Double {
@@ -86,8 +101,8 @@ class Temperature {
         this.temp = (5 / 9) * (temp - 32) + 273
     }
 
-    private fun roundToDecimals(value: Double, decimals: Int): Double {
-        val power = 10.0.pow(decimals)
-        return round(value * power) / power
+    private fun roundToDecimals(value: Double, decimals: Int): String {
+        val format: String = "%." + decimals + "f"
+        return format.format(value)
     }
 }

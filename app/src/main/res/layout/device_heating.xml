@@ -56,7 +56,7 @@
             android:layout_gravity="center_vertical"
             android:background="#00000000"
             android:padding="@dimen/control_icon_padding"
-            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+            android:src="@drawable/ic_expand_more_black_24dp" />
 
     </LinearLayout>
 
@@ -70,29 +70,25 @@
         android:visibility="gone">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/target_temp_label" />
-
-        <EditText
             android:id="@+id/detailedViewTargetTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/text_margin"
             android:inputType="numberDecimal"
             android:maxLines="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="C°" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_icon_padding"
+            android:src="@drawable/ic_more_horiz_black_24dp" />
 
         <ImageView
             android:id="@+id/minus"
