@@ -26,12 +26,21 @@ class MainActivity : AppCompatActivity() {
         lateinit var preferences: SharedPreferences
         lateinit var res: Resources
 
-        fun getPrefInt(key: String): Int? {
+        fun getPrefInt(key: String): Int {
             return try {
-                MainActivity.preferences.getString(key, "")?.toInt()
+                preferences.getString(key, "")!!.toInt()
             } catch (e: Exception) {
                 Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
                 -1
+            }
+        }
+
+        fun getPrefDouble(key: String): Double {
+            return try {
+                preferences.getString(key, "")!!.toDouble()
+            } catch (e: Exception) {
+                Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
+                -1.0
             }
         }
     }

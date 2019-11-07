@@ -30,7 +30,7 @@ class Temperature {
 
         fun globalDecimals(): Int {
             val key: String = MainActivity.res.getString(R.string.pref_temperature_decimals_key)
-            val decimals: Int = MainActivity.getPrefInt(key)!!
+            val decimals: Int = MainActivity.getPrefInt(key)
             return if (decimals == -1) {
                 1
             } else {

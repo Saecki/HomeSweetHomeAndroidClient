@@ -12,8 +12,15 @@ class LampViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     val name: TextView = view.findViewById(R.id.name)
     val state: Switch = view.findViewById(R.id.state)
 
-    fun bindView(lamp: Lamp) {
+    fun update(lamp: Lamp) {
         name.text = lamp.name
         state.isChecked = lamp.state
+    }
+
+    fun bindView(lamp: Lamp) {
+        update(lamp)
+        state.setOnCheckedChangeListener { _, isChecked ->
+            lamp.state = isChecked
+        }
     }
 }

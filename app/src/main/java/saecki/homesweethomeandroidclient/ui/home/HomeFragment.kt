@@ -1,14 +1,17 @@
 package saecki.homesweethomeandroidclient.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import saecki.homesweethomeandroidclient.R
+import saecki.homesweethomeandroidclient.datatypes.devices.Device
 import saecki.homesweethomeandroidclient.ui.custom.DeviceListAdapter
 
 class HomeFragment : Fragment() {

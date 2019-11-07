@@ -13,27 +13,27 @@ class HomeViewModel : ViewModel() {
             "idkkek",
             "Living Room",
             Temperature(24.2341, Temperature.Unit.CELSIUS),
-            Temperature(24.023432, Temperature.Unit.CELSIUS)
+            Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
         Heating(
             "ldssal",
             "Kitchen",
             Temperature(24.2342, Temperature.Unit.CELSIUS),
-            Temperature(24.0234, Temperature.Unit.CELSIUS)
+            Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
         Lamp("lkjf", "Kitchen", true),
         Heating(
             "lkfjasjl",
             "Office",
             Temperature(23.6324432, Temperature.Unit.CELSIUS),
-            Temperature(24.023423, Temperature.Unit.CELSIUS)
+            Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
         Lamp("oijaisomf", "Office", false),
         Heating(
             "lkfjasjl",
             "Bathroom",
             Temperature(23.82432, Temperature.Unit.CELSIUS),
-            Temperature(24.540, Temperature.Unit.CELSIUS)
+            Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
         Lamp("oijaisomf", "Bathroom", true)
     )

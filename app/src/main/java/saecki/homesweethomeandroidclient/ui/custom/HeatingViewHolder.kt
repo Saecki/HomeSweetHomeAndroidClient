@@ -1,9 +1,11 @@
 package saecki.homesweethomeandroidclient.ui.custom
 
 import android.view.View
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
+import saecki.homesweethomeandroidclient.MainActivity
 import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.devices.Heating
 
@@ -16,9 +18,9 @@ class HeatingViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     val arrow: ImageView = view.findViewById(R.id.arrow)
     val detailedView: LinearLayout = view.findViewById(R.id.detailedView)
     val detailedViewTargetTemp: TextView = view.findViewById(R.id.detailedViewTargetTemp)
+    val edit: ImageView = view.findViewById(R.id.edit)
     val minus: ImageView = view.findViewById(R.id.minus)
     val plus: ImageView = view.findViewById(R.id.plus)
-    val edit: ImageView = view.findViewById(R.id.edit)
     var extended = false
 
     init {
@@ -36,11 +38,29 @@ class HeatingViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun bindView(heating: Heating) {
+    fun update(heating: Heating) {
         name.text = heating.name
         actualTemp.text = heating.actualTemp.formatGlobal()
         targetTemp.text = heating.targetTemp.formatGlobal()
         detailedViewTargetTemp.text = heating.targetTemp.formatGlobal()
+    }
+
+    fun bindView(heating: Heating) {
+        update(heating)
         extended = false
+        minus.setOnClickListener {
+            val key = MainActivity.res.getString(R.string.pref_temperature_increment_key)
+            val increment = MainActivity.getPrefDouble(key)
+            heating.targetTemp.setGlobal(heating.targetTemp.getGlobal() - increment)
+            targetTemp.text = heating.targetTemp.formatGlobal()
+            detailedViewTargetTemp.text = heating.targetTemp.formatGlobal()
+        }
+        plus.setOnClickListener {
+            val key = MainActivity.res.getString(R.string.pref_temperature_increment_key)
+            val increment = MainActivity.getPrefDouble(key)
+            heating.targetTemp.setGlobal(heating.targetTemp.getGlobal() + increment)
+            targetTemp.text = heating.targetTemp.formatGlobal()
+            detailedViewTargetTemp.text = heating.targetTemp.formatGlobal()
+        }
     }
 }
