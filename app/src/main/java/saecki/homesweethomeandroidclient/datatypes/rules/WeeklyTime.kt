@@ -8,7 +8,7 @@ class WeeklyTime {
                 seconds / (24 * 60 * 60) % 7,
                 seconds / (60 * 60) % 24,
                 seconds / 60 % 60,
-                seconds
+                seconds % 60
             )
         }
     }
@@ -33,7 +33,7 @@ class WeeklyTime {
         }
 
     private var minute = 0
-        set(hour: Int) {
+        set(minute: Int) {
             field = clamp(minute, 0, 59)
         }
 

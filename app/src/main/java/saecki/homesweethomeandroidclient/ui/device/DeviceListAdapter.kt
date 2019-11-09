@@ -1,4 +1,4 @@
-package saecki.homesweethomeandroidclient.ui.custom
+package saecki.homesweethomeandroidclient.ui.device
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.devices.Device
 import saecki.homesweethomeandroidclient.datatypes.devices.Heating
 import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
+import saecki.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 
 class DeviceListAdapter(var devices: List<Device>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

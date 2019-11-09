@@ -1,4 +1,4 @@
-package saecki.homesweethomeandroidclient.ui.custom
+package saecki.homesweethomeandroidclient.ui.dummy
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

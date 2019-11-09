@@ -1,4 +1,4 @@
-package saecki.homesweethomeandroidclient.ui.custom
+package saecki.homesweethomeandroidclient.ui.device
 
 import android.view.View
 import android.widget.Switch
