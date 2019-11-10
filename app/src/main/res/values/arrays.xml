@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- View !-->
     <string-array name="pref_sort_type_entries">
         <item>None</item>
         <item>Type</item>
@@ -15,6 +16,7 @@
         <item>2</item>
     </string-array>
 
+    <!-- Temperature !-->
     <string-array name="pref_temperature_unit_entries">
         <item>Kelvin</item>
         <item>Celsius</item>
@@ -57,6 +59,7 @@
         <item>1</item>
     </string-array>
 
+    <!-- User Interface !-->
     <string-array name="pref_dark_mode_entries">
         <item>Dark</item>
         <item>Bright</item>

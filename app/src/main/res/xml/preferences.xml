@@ -58,6 +58,12 @@
             android:summary="Use %s mode"
             android:title="@string/pref_dark_mode_title" />
 
+        <SeekBarPreference
+            android:defaultValue="250"
+            android:key="@string/pref_animation_duration_key"
+            android:max="500"
+            android:title="@string/pref_animation_duration_title" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

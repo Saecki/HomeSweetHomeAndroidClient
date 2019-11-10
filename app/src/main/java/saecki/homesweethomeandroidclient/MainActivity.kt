@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -26,22 +27,35 @@ class MainActivity : AppCompatActivity() {
         lateinit var preferences: SharedPreferences
         lateinit var res: Resources
 
-        fun getPrefInt(key: String): Int {
+        fun getPrefInt(key: String, defaultValue: Int): Int {
             return try {
-                preferences.getString(key, "")!!.toInt()
+                preferences.getInt(key, defaultValue)
             } catch (e: Exception) {
                 Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
-                -1
+                defaultValue
             }
         }
 
-        fun getPrefDouble(key: String): Double {
+        fun getPrefStringAsInt(key: String, defaultValue: Int): Int {
             return try {
-                preferences.getString(key, "")!!.toDouble()
+                preferences.getString(key, defaultValue.toString())!!.toInt()
             } catch (e: Exception) {
                 Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
-                -1.0
+                defaultValue
             }
+        }
+
+        fun getPrefStringAsDouble(key: String, defaultValue: Double): Double {
+            return try {
+                preferences.getString(key, defaultValue.toString())!!.toDouble()
+            } catch (e: Exception) {
+                Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
+                defaultValue
+            }
+        }
+
+        fun convertDpToPx(dp: Float): Int {
+            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.displayMetrics).toInt()
         }
     }
 

@@ -15,18 +15,18 @@ class DeviceListAdapter(var devices: List<Device>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
-        when (viewType) {
+        return when (viewType) {
             Heating.type -> {
                 val heatingView = inflater.inflate(R.layout.device_heating, parent, false)
-                return HeatingViewHolder(heatingView)
+                HeatingViewHolder(heatingView, parent.context)
             }
             Lamp.type -> {
                 val lampView = inflater.inflate(R.layout.device_lamp, parent, false)
-                return LampViewHolder(lampView)
+                LampViewHolder(lampView)
             }
             else -> {
                 val dummyView = inflater.inflate(R.layout.dummy, parent, false)
-                return DummyViewHolder(dummyView)
+                DummyViewHolder(dummyView)
             }
         }
     }

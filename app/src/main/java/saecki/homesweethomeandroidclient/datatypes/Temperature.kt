@@ -17,7 +17,7 @@ class Temperature {
 
         fun globalUnit(): Unit {
             val key: String = MainActivity.res.getString(R.string.pref_temperature_unit_key)
-            val index = MainActivity.getPrefInt(key)
+            val index = MainActivity.getPrefStringAsInt(key, 1)
 
             for (u in Unit.values()) {
                 if (index == u.index) {
@@ -30,7 +30,7 @@ class Temperature {
 
         fun globalDecimals(): Int {
             val key: String = MainActivity.res.getString(R.string.pref_temperature_decimals_key)
-            val decimals: Int = MainActivity.getPrefInt(key)
+            val decimals: Int = MainActivity.getPrefStringAsInt(key, 1)
             return if (decimals == -1) {
                 1
             } else {
