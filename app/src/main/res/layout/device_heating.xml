@@ -2,11 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/card_view_margin"
+    android:layout_marginTop="@dimen/card_view_margin"
+    android:layout_marginEnd="@dimen/card_view_margin"
+    android:background="@drawable/card_view"
+    android:elevation="@dimen/card_view_elvation"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/device_end_margin"
         android:orientation="horizontal">
 
@@ -24,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/text_margin"
-            android:layout_weight="30"
+            android:layout_weight="6"
             android:textStyle="bold" />
 
         <TextView
@@ -33,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/text_margin"
-            android:layout_weight="5"
+            android:layout_weight="1"
             android:textStyle="bold" />
 
         <TextView
@@ -42,12 +47,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/text_margin"
-            android:layout_weight="5" />
+            android:layout_weight="1" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10" />
+            android:layout_weight="2" />
 
         <ImageView
             android:id="@+id/arrow"

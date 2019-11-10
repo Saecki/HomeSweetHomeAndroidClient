@@ -94,11 +94,11 @@ class Temperature {
     }
 
     fun getFahrenheit(): Double {
-        return (9 / 5) * (temp - 273) + 32
+        return (9.0 / 5) * (temp - 273) + 32
     }
 
     fun setFahrenheit(temp: Double) {
-        this.temp = (5 / 9) * (temp - 32) + 273
+        this.temp = (5.0 / 9) * (temp - 32) + 273
     }
 
     private fun roundToDecimals(value: Double, decimals: Int): String {

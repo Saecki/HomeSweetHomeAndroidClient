@@ -39,6 +39,33 @@ class HomeViewModel : ViewModel() {
             Temperature(23.82432, Temperature.Unit.CELSIUS),
             Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
+        Lamp("oijaisomf", "lamp", "Bathroom", true),
+        Lamp("oijaisomf", "lamp", "Office", false),
+        Heating(
+            "lkfjsdfl",
+            "Heating",
+            "Bathroom",
+            Temperature(23.82432, Temperature.Unit.CELSIUS),
+            Temperature(24.0, Temperature.Unit.CELSIUS)
+        ),
+        Lamp("oijaisomf", "lamp", "Bathroom", true),
+        Lamp("oijaisomf", "lamp", "Office", false),
+        Heating(
+            "lkfjsdfl",
+            "Heating",
+            "Bathroom",
+            Temperature(23.82432, Temperature.Unit.CELSIUS),
+            Temperature(24.0, Temperature.Unit.CELSIUS)
+        ),
+        Lamp("oijaisomf", "lamp", "Bathroom", true),
+        Lamp("oijaisomf", "lamp", "Office", false),
+        Heating(
+            "lkfjsdfl",
+            "Heating",
+            "Bathroom",
+            Temperature(23.82432, Temperature.Unit.CELSIUS),
+            Temperature(24.0, Temperature.Unit.CELSIUS)
+        ),
         Lamp("oijaisomf", "lamp", "Bathroom", true)
     )
 }

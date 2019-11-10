@@ -7,6 +7,8 @@
         android:id="@+id/devices"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/card_view_margin"
         android:scrollbars="vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

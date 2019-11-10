@@ -9,6 +9,7 @@ import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
 
 class LampViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
+    lateinit var lamp: Lamp
     val name: TextView = view.findViewById(R.id.name)
     val state: Switch = view.findViewById(R.id.state)
 
@@ -18,6 +19,7 @@ class LampViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun bindView(lamp: Lamp) {
+        this.lamp = lamp
         update(lamp)
         state.setOnCheckedChangeListener { _, isChecked ->
             lamp.state = isChecked

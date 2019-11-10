@@ -9,7 +9,11 @@
     <dimen name="icon_margin">16dp</dimen>
     <dimen name="control_margin">8dp</dimen>
 
-    <dimen name="device_end_margin">10dp</dimen>
+    <dimen name="card_view_elvation">4dp</dimen>
+    <dimen name="card_view_radius">8dp</dimen>
+    <dimen name="card_view_margin">8dp</dimen>
+
+    <dimen name="device_end_margin">0dp</dimen>
     <dimen name="device_start_margin">10dp</dimen>
     <!-- icon-width(24dp) + 2 * icon_margin + !-->
     <dimen name="device_detailed_view_start_margin">56dp</dimen>

@@ -6,18 +6,23 @@ import android.view.animation.Transformation
 
 class CollapseAnimation(var view: View) : Animation() {
 
-    val initialHeight = view.measuredHeight
+    var initialHeight = view.measuredHeight
 
     override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-        view.alpha = 1 - interpolatedTime
-        view.layoutParams.height = (initialHeight * (1 - interpolatedTime)).toInt()
-        if (hasEnded()) {
+        if (interpolatedTime == 1f) {
             view.visibility = View.GONE
+        } else {
+            view.alpha = 1 - interpolatedTime
+            view.layoutParams.height = (initialHeight * (1 - interpolatedTime)).toInt()
         }
         view.requestLayout()
     }
 
     override fun willChangeBounds(): Boolean {
         return true
+    }
+
+    fun updateInitialHeight() {
+        initialHeight = view.layoutParams.height
     }
 }
