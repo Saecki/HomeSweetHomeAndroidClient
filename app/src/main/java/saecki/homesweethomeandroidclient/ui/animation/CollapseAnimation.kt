@@ -23,6 +23,7 @@ class CollapseAnimation(var view: View) : Animation() {
     }
 
     fun updateInitialHeight() {
-        initialHeight = view.layoutParams.height
+        view.requestLayout()
+        initialHeight = view.height
     }
 }

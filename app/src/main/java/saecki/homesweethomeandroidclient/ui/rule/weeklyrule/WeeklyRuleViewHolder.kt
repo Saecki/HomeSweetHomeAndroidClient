@@ -1,4 +1,4 @@
-package saecki.homesweethomeandroidclient.ui.rule
+package saecki.homesweethomeandroidclient.ui.rule.weeklyrule
 
 import android.view.View
 import android.widget.TextView

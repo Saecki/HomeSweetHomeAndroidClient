@@ -7,6 +7,7 @@ import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.rules.Rule
 import saecki.homesweethomeandroidclient.datatypes.rules.WeeklyRule
 import saecki.homesweethomeandroidclient.ui.dummy.DummyViewHolder
+import saecki.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleViewHolder
 
 class RuleListAdapter(var rules: List<Rule>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

@@ -9,6 +9,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -55,7 +56,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun convertDpToPx(dp: Float): Int {
-            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.displayMetrics).toInt()
+            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.displayMetrics)
+                .toInt()
         }
     }
 
@@ -66,44 +68,27 @@ class MainActivity : AppCompatActivity() {
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         res = resources
 
-        val currentNightMode = super.getResources().configuration.uiMode
+        val currentNightMode = AppCompatDelegate.getDefaultNightMode()
 
-        Log.d("UI", "currentNightMode: %s".format(currentNightMode))
-        Log.d("UI", "UI_MODE_NIGHT_UNDEFINED: %s".format(Configuration.UI_MODE_NIGHT_UNDEFINED))
-        Log.d("UI", "UI_MODE_TYPE_NORMAL: %s".format(Configuration.UI_MODE_TYPE_NORMAL))
-        Log.d("UI", "UI_MODE_TYPE_DESK: %s".format(Configuration.UI_MODE_TYPE_DESK))
-        Log.d("UI", "UI_MODE_TYPE_CAR: %s".format(Configuration.UI_MODE_TYPE_CAR))
-        Log.d("UI", "UI_MODE_TYPE_TELEVISION: %s".format(Configuration.UI_MODE_TYPE_TELEVISION))
-        Log.d("UI", "UI_MODE_TYPE_APPLIANCE: %s".format(Configuration.UI_MODE_TYPE_APPLIANCE))
-        Log.d("UI", "UI_MODE_TYPE_WATCH: %s".format(Configuration.UI_MODE_TYPE_WATCH))
-        Log.d("UI", "UI_MODE_TYPE_HEADSET: %s".format(Configuration.UI_MODE_TYPE_VR_HEADSET))
-        Log.d("UI", "UI_MODE_TYPE_MASK: %s".format(Configuration.UI_MODE_TYPE_MASK))
-        Log.d("UI", "UI_MODE_NIGHT_NO: %s".format(Configuration.UI_MODE_NIGHT_NO))
-        Log.d("UI", "UI_MODE_NIGHT_YES: %s".format(Configuration.UI_MODE_NIGHT_YES))
-
-        Log.d("UI", "UiModeManager.MODE_NIGHT_YES: %s".format(UiModeManager.MODE_NIGHT_YES))
-        Log.d("UI", "UiModeManager.MODE_NIGHT_NO: %s".format(UiModeManager.MODE_NIGHT_NO))
-        Log.d("UI", "UiModeManager.MODE_NIGHT_AUTO: %s".format(UiModeManager.MODE_NIGHT_AUTO))
+        Log.d("UI", "currentNightMode: $currentNightMode")
+        Log.d("UI", "AppCompatDelegate.MODE_NIGHT_YES: ${AppCompatDelegate.MODE_NIGHT_YES}")
+        Log.d("UI", "AppCompatDelegate.MODE_NIGHT_NO: ${AppCompatDelegate.MODE_NIGHT_NO}")
+        Log.d(
+            "UI",
+            "AppCompatDelegate.MODE_NIGHT_UNSPECIFIED: ${AppCompatDelegate.MODE_NIGHT_UNSPECIFIED}"
+        )
 
         when (currentNightMode) {
-            Configuration.UI_MODE_NIGHT_YES -> {
+            AppCompatDelegate.MODE_NIGHT_YES -> {
                 Log.d("UI", "UI_MODE_NIGHT_YES")
                 TODO()
             }
-            Configuration.UI_MODE_NIGHT_NO -> {
+            AppCompatDelegate.MODE_NIGHT_NO -> {
                 Log.d("UI", "UI_MODE_NIGHT_NO")
                 TODO()
             }
-            Configuration.UI_MODE_NIGHT_UNDEFINED -> {
-                Log.d("UI", "UI_MODE_NIGHT_UNDEFINED")
-                TODO()
-            }
-            Configuration.UI_MODE_NIGHT_MASK -> {
-                Log.d("UI", "UI_MODE_NIGHT_MASK")
-                TODO()
-            }
             else -> {
-                Log.d("UI", "else")
+                Log.d("UI", "UI_MODE_NIGHT_UNDEFINED")
             }
         }
 

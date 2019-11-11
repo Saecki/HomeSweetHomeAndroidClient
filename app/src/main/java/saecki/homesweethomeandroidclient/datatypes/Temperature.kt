@@ -53,8 +53,8 @@ class Temperature {
         set(temp, globalUnit())
     }
 
-    fun formatGlobal(): String {
-        return format(globalUnit(), globalDecimals())
+    fun formatGlobal(appendUnit: Boolean): String {
+        return format(globalUnit(), globalDecimals(), appendUnit)
     }
 
     fun get(unit: Unit): Double {
@@ -73,8 +73,11 @@ class Temperature {
         }
     }
 
-    fun format(unit: Unit, decimals: Int): String {
-        return roundToDecimals(get(unit), decimals) + unit.unit
+    fun format(unit: Unit, decimals: Int, appendUnit: Boolean): String {
+        return roundToDecimals(get(unit), decimals) + when (appendUnit) {
+            true -> unit.unit
+            false -> ""
+        }
     }
 
     fun getKelvin(): Double {

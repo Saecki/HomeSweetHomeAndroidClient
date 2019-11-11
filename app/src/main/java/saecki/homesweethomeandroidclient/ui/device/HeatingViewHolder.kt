@@ -53,27 +53,35 @@ class HeatingViewHolder(
             showInputDialog()
         }
         minus.setOnClickListener {
-            heating.targetTemp.setGlobal(heating.targetTemp.getGlobal() - getIncrement())
+            var temp = heating.targetTemp.getGlobal()
+            temp -= if (temp.rem(getIncrement()) == 0.0) {
+                getIncrement()
+            } else {
+                temp.rem(getIncrement())
+            }
+            heating.targetTemp.setGlobal(temp)
             update(heating)
         }
         plus.setOnClickListener {
-            heating.targetTemp.setGlobal(heating.targetTemp.getGlobal() + getIncrement())
+            var temp = heating.targetTemp.getGlobal()
+            temp += getIncrement() - temp.rem(getIncrement())
+            heating.targetTemp.setGlobal(temp)
             update(heating)
         }
     }
 
     fun update(heating: Heating) {
         name.text = heating.name
-        actualTemp.text = heating.actualTemp.formatGlobal()
-        targetTemp.text = heating.targetTemp.formatGlobal()
-        detailedViewTargetTemp.text = heating.targetTemp.formatGlobal()
+        actualTemp.text = heating.actualTemp.formatGlobal(true)
+        targetTemp.text = heating.targetTemp.formatGlobal(true)
+        detailedViewTargetTemp.text = heating.targetTemp.formatGlobal(true)
     }
 
     fun showInputDialog() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
         val input = EditText(context)
-        input.setText(heating.targetTemp.getGlobal().toString())
+        input.setText(heating.targetTemp.formatGlobal(false))
         input.inputType = InputType.TYPE_CLASS_PHONE
         builder.setView(input)
         builder.setPositiveButton(android.R.string.ok) { _, _ ->
@@ -90,8 +98,8 @@ class HeatingViewHolder(
     fun expand(duration: Long) {
         heating.extended = true
         extendView.duration = duration
-        extendView.updateInitialHeight()
         detailedView.visibility = View.VISIBLE
+        extendView.updateInitialHeight()
         detailedView.startAnimation(extendView)
         targetTemp.animate().alpha(0f).setDuration(duration).start()
         arrow.animate().rotation(180f).setDuration(duration).start()
