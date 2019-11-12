@@ -85,7 +85,7 @@ class HeatingViewHolder(
         input.inputType = InputType.TYPE_CLASS_PHONE
         builder.setView(input)
         builder.setPositiveButton(android.R.string.ok) { _, _ ->
-            heating.targetTemp.setGlobal(input.text.toString().toDouble())
+            heating.targetTemp.setGlobal(input.text.toString().replace(',', '.').toDouble())
             update(heating)
         }
         builder.setNegativeButton(android.R.string.cancel) { dialog, _ ->

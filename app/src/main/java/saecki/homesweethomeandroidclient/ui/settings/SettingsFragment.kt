@@ -14,11 +14,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val key: String = MainActivity.res.getString(R.string.pref_animation_duration_key)
         val animationDurationPreference = findPreference<SeekBarPreference>(key)!!
-        animationDurationPreference.summary = animationDurationPreference.value.toString() + "ms"
+        animationDurationPreference.summary = when (animationDurationPreference.value) {
+            0 -> "Off"
+            else -> animationDurationPreference.value.toString() + "ms"
+        }
         animationDurationPreference.updatesContinuously = true
         animationDurationPreference.setOnPreferenceChangeListener { preference, newValue ->
             val roundedValue = (newValue as Int / 10.0).roundToInt() * 10
-            preference.summary = roundedValue.toString() + "ms"
+            preference.summary = when (roundedValue) {
+                0 -> "Off"
+                else -> roundedValue.toString() + "ms"
+            }
             animationDurationPreference.value = roundedValue
             false
         }
