@@ -24,8 +24,7 @@ class RulesFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context)
         val root = inflater.inflate(R.layout.fragment_rules, container, false)
         val rules: RecyclerView = root.findViewById(R.id.rules)
-        val ruleListAdapter: RuleListAdapter =
-            RuleListAdapter(rulesViewModel.rules)
+        val ruleListAdapter = RuleListAdapter(rulesViewModel.rules)
 
         rules.layoutManager = linearLayoutManager
         rules.adapter = ruleListAdapter

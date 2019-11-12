@@ -2,6 +2,26 @@ package saecki.homesweethomeandroidclient.datatypes.rules
 
 class WeeklyTime {
 
+    var day = 0
+        set(day) {
+            field = clamp(day, 0, 6)
+        }
+
+    var hour = 0
+        set(hour) {
+            field = clamp(hour, 0, 24)
+        }
+
+    var minute = 0
+        set(minute) {
+            field = clamp(minute, 0, 59)
+        }
+
+    var second: Int = 0
+        set(second) {
+            field = clamp(second, 0, 59)
+        }
+
     companion object {
         fun seconds(seconds: Int): WeeklyTime {
             return WeeklyTime(
@@ -21,26 +41,6 @@ class WeeklyTime {
     }
 
     constructor()
-
-    private var day = 0
-        set(day: Int) {
-            field = clamp(day, 0, 6)
-        }
-
-    private var hour = 0
-        set(hour: Int) {
-            field = clamp(hour, 0, 24)
-        }
-
-    private var minute = 0
-        set(minute: Int) {
-            field = clamp(minute, 0, 59)
-        }
-
-    private var second: Int = 0
-        set(second: Int) {
-            field = clamp(second, 0, 59)
-        }
 
     fun inDays(): Double {
         return day + hour / 60.0 + minute / (24.0 * 60.0) + second / (24.0 * 60.0 * 60.0)

@@ -26,7 +26,7 @@
 
     </LinearLayout>
 
-    <GridView
+    <GridLayout
         android:id="@+id/time_spans"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
