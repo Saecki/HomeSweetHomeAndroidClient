@@ -18,7 +18,7 @@ class DeviceListAdapter(var devices: List<Device>) :
         return when (viewType) {
             Heating.type -> {
                 val heatingView = inflater.inflate(R.layout.device_heating, parent, false)
-                HeatingViewHolder(heatingView, parent.context)
+                HeatingViewHolder(heatingView, parent.context, parent)
             }
             Lamp.type -> {
                 val lampView = inflater.inflate(R.layout.device_lamp, parent, false)

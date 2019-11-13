@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.displayMetrics)
                 .toInt()
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

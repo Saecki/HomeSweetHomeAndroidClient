@@ -3,13 +3,16 @@ package saecki.homesweethomeandroidclient.ui.device
 import android.app.AlertDialog
 import android.content.Context
 import android.text.InputType
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import saecki.homesweethomeandroidclient.MainActivity
 import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.devices.Heating
@@ -18,7 +21,8 @@ import saecki.homesweethomeandroidclient.ui.animation.ExpandAnimation
 
 class HeatingViewHolder(
     val view: View,
-    val context: Context
+    val context: Context,
+    val parent: View
 ) : RecyclerView.ViewHolder(view) {
 
     lateinit var heating: Heating
@@ -43,30 +47,16 @@ class HeatingViewHolder(
             collapse()
         }
         arrow.setOnClickListener {
-            if (heating.extended) {
-                collapse(getDuration())
-            } else {
-                expand(getDuration())
-            }
+            toggleDetailedView()
         }
         detailedViewTargetTemp.setOnClickListener {
-            showInputDialog()
+            showInputDialog(heating.targetTemp.formatGlobal(false))
         }
         minus.setOnClickListener {
-            var temp = heating.targetTemp.getGlobal()
-            temp -= if (temp.rem(getIncrement()) == 0.0) {
-                getIncrement()
-            } else {
-                temp.rem(getIncrement())
-            }
-            heating.targetTemp.setGlobal(temp)
-            update(heating)
+            decrementTemp()
         }
         plus.setOnClickListener {
-            var temp = heating.targetTemp.getGlobal()
-            temp += getIncrement() - temp.rem(getIncrement())
-            heating.targetTemp.setGlobal(temp)
-            update(heating)
+            incrementTemp()
         }
     }
 
@@ -77,22 +67,30 @@ class HeatingViewHolder(
         detailedViewTargetTemp.text = heating.targetTemp.formatGlobal(true)
     }
 
-    fun showInputDialog() {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
-        val input = EditText(context)
-        input.setText(heating.targetTemp.formatGlobal(false))
-        input.inputType = InputType.TYPE_CLASS_PHONE
-        builder.setView(input)
-        builder.setPositiveButton(android.R.string.ok) { _, _ ->
-            heating.targetTemp.setGlobal(input.text.toString().replace(',', '.').toDouble())
-            update(heating)
+    fun toggleDetailedView() {
+        if (heating.extended) {
+            collapse(getDuration())
+        } else {
+            expand(getDuration())
         }
-        builder.setNegativeButton(android.R.string.cancel) { dialog, _ ->
-            dialog.cancel()
+    }
+
+    fun decrementTemp() {
+        var temp = heating.targetTemp.getGlobal()
+        temp -= if (temp.rem(getIncrement()) == 0.0) {
+            getIncrement()
+        } else {
+            temp.rem(getIncrement())
         }
-        builder.show()
-        input.requestFocusFromTouch()
+        heating.targetTemp.setGlobal(temp)
+        update(heating)
+    }
+
+    fun incrementTemp() {
+        var temp = heating.targetTemp.getGlobal()
+        temp += getIncrement() - temp.rem(getIncrement())
+        heating.targetTemp.setGlobal(temp)
+        update(heating)
     }
 
     fun expand(duration: Long) {
@@ -132,6 +130,39 @@ class HeatingViewHolder(
         arrow.rotation = 0f
         detailedView.requestLayout()
         detailedView.visibility = View.GONE
+    }
+
+    fun showInputDialog(text: String) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
+        val input = EditText(context)
+        input.setText(text)
+        input.inputType = InputType.TYPE_CLASS_PHONE
+        builder.setView(input)
+        builder.setPositiveButton(android.R.string.ok) { _, _ ->
+            try {
+                heating.targetTemp.setGlobal(input.text.toString().replace(',', '.').toDouble())
+                update(heating)
+            } catch (e: Exception) {
+                Log.d("INPUT", "error parsing double from string")
+                val snack = Snackbar.make(parent, "Couldn't parse number", Snackbar.LENGTH_LONG)
+                snack.setAction("Edit", View.OnClickListener {
+                    showInputDialog(input.text.toString())
+                })
+                snack.show()
+            }
+
+        }
+        builder.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
+        input.requestFocusFromTouch()
+        input.postDelayed(Runnable {
+            val keyboard: InputMethodManager =
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            keyboard.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
+        }, 0)
     }
 
     fun getIncrement(): Double {
