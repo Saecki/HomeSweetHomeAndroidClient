@@ -77,10 +77,18 @@ class HeatingViewHolder(
 
     fun decrementTemp() {
         var temp = heating.targetTemp.getGlobal()
-        temp -= if (temp.rem(getIncrement()) == 0.0) {
-            getIncrement()
+        temp -= if (MainActivity.preferences.getBoolean(
+                MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key),
+                true
+            )
+        ) {
+            if (temp.rem(getIncrement()) == 0.0) {
+                getIncrement()
+            } else {
+                temp.rem(getIncrement())
+            }
         } else {
-            temp.rem(getIncrement())
+            getIncrement()
         }
         heating.targetTemp.setGlobal(temp)
         update(heating)
@@ -88,7 +96,15 @@ class HeatingViewHolder(
 
     fun incrementTemp() {
         var temp = heating.targetTemp.getGlobal()
-        temp += getIncrement() - temp.rem(getIncrement())
+        temp += if (MainActivity.preferences.getBoolean(
+                MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key),
+                true
+            )
+        ) {
+            getIncrement() - temp.rem(getIncrement())
+        } else {
+            getIncrement()
+        }
         heating.targetTemp.setGlobal(temp)
         update(heating)
     }
@@ -145,10 +161,16 @@ class HeatingViewHolder(
                 update(heating)
             } catch (e: Exception) {
                 Log.d("INPUT", "error parsing double from string")
-                val snack = Snackbar.make(parent, "Couldn't parse number", Snackbar.LENGTH_LONG)
-                snack.setAction("Edit", View.OnClickListener {
-                    showInputDialog(input.text.toString())
-                })
+                val snack = Snackbar.make(
+                    parent,
+                    MainActivity.res.getString(R.string.heating_snackbar_edit_text),
+                    Snackbar.LENGTH_LONG
+                )
+                snack.setAction(
+                    MainActivity.res.getString(R.string.heating_snackbar_edit),
+                    View.OnClickListener {
+                        showInputDialog(input.text.toString())
+                    })
                 snack.show()
             }
 

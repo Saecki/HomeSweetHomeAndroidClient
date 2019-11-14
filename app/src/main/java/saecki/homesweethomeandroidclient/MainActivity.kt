@@ -1,8 +1,6 @@
 package saecki.homesweethomeandroidclient
 
-import android.app.UiModeManager
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -53,11 +51,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
                 defaultValue
             }
-        }
-
-        fun convertDpToPx(dp: Float): Int {
-            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.displayMetrics)
-                .toInt()
         }
 
     }

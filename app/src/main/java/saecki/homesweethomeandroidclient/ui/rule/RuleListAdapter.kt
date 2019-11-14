@@ -17,9 +17,7 @@ class RuleListAdapter(var rules: List<Rule>) : RecyclerView.Adapter<RecyclerView
         when (viewType) {
             WeeklyRule.type -> {
                 val weeklyRuleView = inflater.inflate(R.layout.rule_weekly_rule, parent, false)
-                return WeeklyRuleViewHolder(
-                    weeklyRuleView
-                )
+                return WeeklyRuleViewHolder(weeklyRuleView, parent.context)
             }
             else -> {
                 val dummyView = inflater.inflate(R.layout.dummy, parent, false)

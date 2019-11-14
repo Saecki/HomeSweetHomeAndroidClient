@@ -9,7 +9,7 @@
     <dimen name="icon_margin">16dp</dimen>
     <dimen name="control_margin">8dp</dimen>
 
-    <dimen name="card_view_elvation">4dp</dimen>
+    <dimen name="card_view_elevation">4dp</dimen>
     <dimen name="card_view_radius">8dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
 

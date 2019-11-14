@@ -18,6 +18,10 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_share">Share</string>
 
+    <!-- Heating !-->
+    <string name="heating_snackbar_edit_text">Couldn\'t parse number</string>
+    <string name="heating_snackbar_edit">Edit</string>
+
     <!-- Settings !-->
     <!-- View !-->
     <string name="pref_view_category_title">View</string>
@@ -38,6 +42,9 @@
 
     <string name="pref_temperature_increment_title">Temperature increment</string>
     <string name="pref_temperature_increment_key">temperature_increment</string>
+
+    <string name="pref_temperature_round_to_next_increment_title">Round to next increment</string>
+    <string name="pref_temperature_round_to_next_increment_key">temperature_round_to_next_increment</string>
 
     <!-- User Interface !-->
     <string name="pref_ui_category_title">User Interface</string>

@@ -44,6 +44,11 @@
             android:summary="%s"
             android:title="@string/pref_temperature_increment_title" />
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/pref_temperature_round_to_next_increment_key"
+            android:title="@string/pref_temperature_round_to_next_increment_title" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

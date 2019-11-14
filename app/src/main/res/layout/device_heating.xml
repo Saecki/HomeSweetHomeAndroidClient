@@ -6,7 +6,7 @@
     android:layout_marginTop="@dimen/card_view_margin"
     android:layout_marginEnd="@dimen/card_view_margin"
     android:background="@drawable/card_view"
-    android:elevation="@dimen/card_view_elvation"
+    android:elevation="@dimen/card_view_elevation"
     android:orientation="vertical">
 
     <LinearLayout
