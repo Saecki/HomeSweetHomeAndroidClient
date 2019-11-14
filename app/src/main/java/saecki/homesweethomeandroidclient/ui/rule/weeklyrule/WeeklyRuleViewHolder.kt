@@ -3,13 +3,13 @@ package saecki.homesweethomeandroidclient.ui.rule.weeklyrule
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.rules.WeeklyRule
 
 class WeeklyRuleViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
 
+    lateinit var weeklyRule: WeeklyRule
     val name: TextView = view.findViewById(R.id.name)
 
     fun update(weeklyRule: WeeklyRule) {
@@ -17,6 +17,7 @@ class WeeklyRuleViewHolder(val view: View, val context: Context) : RecyclerView.
     }
 
     fun bindView(weeklyRule: WeeklyRule) {
+        this.weeklyRule = weeklyRule
         update(weeklyRule)
         view.setOnClickListener {
             showWeeklyRuleFragment()
@@ -24,10 +25,6 @@ class WeeklyRuleViewHolder(val view: View, val context: Context) : RecyclerView.
     }
 
     fun showWeeklyRuleFragment() {
-        val activity = context as FragmentActivity
-        val fragmentTransaction = activity.supportFragmentManager.beginTransaction()
-        val weeklyRuleFragment = WeeklyRuleFragment()
-        fragmentTransaction.add(R.id.nav_host_fragment, weeklyRuleFragment, "test")
-        fragmentTransaction.show(weeklyRuleFragment).commit()
+        TODO("show weeklyrule fragment")
     }
 }

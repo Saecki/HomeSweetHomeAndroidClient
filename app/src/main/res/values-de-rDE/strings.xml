@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Names and Titles !-->
+    <string name="nav_header_subtitle">Ein Smart Home System</string>
+    <string name="nav_header_desc">Navigationsüberschrift</string>
+
+    <!-- Action Bar Menu !-->
+    <string name="action_refresh">Aktualisieren</string>
+    <string name="action_edit">Bearbeiten</string>
+    <string name="action_sort_by">Sortieren</string>
+    <string name="action_filter_by">Filtern</string>
+    <string name="action_share">Teilen</string>
+
+    <!-- Menu !-->
+    <string name="menu_home">Start</string>
+    <string name="menu_rules">Regeln</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_share">Teilen</string>
+
+    <!-- Heating !-->
+    <string name="heating_snackbar_edit_text">Nummer nicht erkannt</string>
+    <string name="heating_snackbar_edit">Bearbeiten</string>
+
+    <!-- Settings !-->
+    <!-- View !-->
+    <string name="pref_view_category_title">Ansicht</string>
+    <string name="pref_sort_type_title">Sortieren nach</string>
+
+    <!-- Temperature !-->
+    <string name="pref_temperature_category_title">Temperatur</string>
+    <string name="pref_temperature_unit_title">Einheit</string>
+    <string name="pref_temperature_decimals_title">Nachkommastellen</string>
+    <string name="pref_temperature_increment_title">Inkrement</string>
+    <string name="pref_temperature_round_to_next_increment_title">Runde zum nächsten Inkrement</string>
+
+    <!-- User Interface !-->
+    <string name="pref_ui_category_title">Benutzeroberfäche</string>
+    <string name="pref_dark_mode_title">Dunkler Modus</string>
+    <string name="pref_animation_duration_title">Animationsdauer</string>
+</resources>

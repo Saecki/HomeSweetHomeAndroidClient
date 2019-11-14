@@ -3,7 +3,7 @@
 
     <!-- View !-->
     <string-array name="pref_sort_type_entries">
-        <item>None</item>
+        <item>Nothing</item>
         <item>Type</item>
         <item>Room</item>
         <item>Name</item>

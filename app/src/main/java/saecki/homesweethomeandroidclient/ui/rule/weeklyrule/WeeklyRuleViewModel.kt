@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 import saecki.homesweethomeandroidclient.datatypes.rules.WeeklyRule
 
 class WeeklyRuleViewModel() : ViewModel() {
-    val weeklyRule: WeeklyRule = WeeklyRule("lkasjf", "lasjf")
+    var weeklyRule: WeeklyRule = WeeklyRule("lkasjf", "lasjf")
 }

@@ -60,7 +60,7 @@
             android:entries="@array/pref_dark_mode_entries"
             android:entryValues="@array/pref_dark_mode_entry_values"
             android:key="@string/pref_dark_mode_key"
-            android:summary="Use %s mode"
+            android:summary="%s"
             android:title="@string/pref_dark_mode_title" />
 
         <SeekBarPreference

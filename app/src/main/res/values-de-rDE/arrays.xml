@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- View !-->
+    <string-array name="pref_sort_type_entries">
+        <item>Nichts</item>
+        <item>Typ</item>
+        <item>Room</item>
+        <item>Name</item>
+    </string-array>
+
+    <!-- Temperature !-->
+    <string-array name="pref_temperature_decimals_entries">
+        <item>Keine</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- User Interface !-->
+    <string-array name="pref_dark_mode_entries">
+        <item>Dunkel</item>
+        <item>Hell</item>
+        <item>System</item>
+    </string-array>
+
+</resources>
