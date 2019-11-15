@@ -15,7 +15,15 @@
         android:id="@+id/nav_rules"
         android:name="saecki.homesweethomeandroidclient.ui.rules.RulesFragment"
         android:label="@string/menu_rules"
-        tools:layout="@layout/fragment_rules" />
+        tools:layout="@layout/fragment_rules">
+        <action
+            android:id="@+id/action_nav_rules_to_nav_weekly_rule"
+            app:destination="@id/nav_weekly_rule"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/nav_rules" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_settings"
@@ -28,5 +36,11 @@
         android:name="saecki.homesweethomeandroidclient.ui.share.ShareFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_weekly_rule"
+        android:name="saecki.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleFragment"
+        android:label="@string/menu_weekly_rule"
+        tools:layout="@layout/fragment_rule_weekly_rule" />
 
 </navigation>

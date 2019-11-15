@@ -3,6 +3,7 @@ package saecki.homesweethomeandroidclient.ui.rule.weeklyrule
 import android.content.Context
 import android.view.View
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.rules.WeeklyRule
@@ -25,6 +26,6 @@ class WeeklyRuleViewHolder(val view: View, val context: Context) : RecyclerView.
     }
 
     fun showWeeklyRuleFragment() {
-        TODO("show weeklyrule fragment")
+        view.findNavController().navigate(R.id.action_nav_rules_to_nav_weekly_rule)
     }
 }
