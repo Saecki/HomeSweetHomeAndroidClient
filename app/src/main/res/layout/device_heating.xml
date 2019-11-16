@@ -12,7 +12,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/device_end_margin"
         android:orientation="horizontal">
 
         <ImageView
@@ -71,7 +70,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/device_detailed_view_start_margin"
-        android:layout_marginEnd="@dimen/device_end_margin"
         android:orientation="horizontal"
         android:visibility="gone">
 

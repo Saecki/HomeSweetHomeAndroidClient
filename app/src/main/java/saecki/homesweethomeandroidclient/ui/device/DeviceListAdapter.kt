@@ -7,6 +7,8 @@ import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.devices.Device
 import saecki.homesweethomeandroidclient.datatypes.devices.Heating
 import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
+import saecki.homesweethomeandroidclient.ui.device.heating.HeatingViewHolder
+import saecki.homesweethomeandroidclient.ui.device.lamp.LampViewHolder
 import saecki.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 
 class DeviceListAdapter(var devices: List<Device>) :
@@ -18,7 +20,11 @@ class DeviceListAdapter(var devices: List<Device>) :
         return when (viewType) {
             Heating.type -> {
                 val heatingView = inflater.inflate(R.layout.device_heating, parent, false)
-                HeatingViewHolder(heatingView, parent.context, parent)
+                HeatingViewHolder(
+                    heatingView,
+                    parent.context,
+                    parent
+                )
             }
             Lamp.type -> {
                 val lampView = inflater.inflate(R.layout.device_lamp, parent, false)

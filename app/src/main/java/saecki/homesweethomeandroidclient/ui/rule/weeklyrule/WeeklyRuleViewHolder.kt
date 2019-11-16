@@ -21,11 +21,8 @@ class WeeklyRuleViewHolder(val view: View, val context: Context) : RecyclerView.
         this.weeklyRule = weeklyRule
         update(weeklyRule)
         view.setOnClickListener {
-            showWeeklyRuleFragment()
+            view.findNavController().navigate(R.id.action_nav_rules_to_nav_weekly_rule)
         }
     }
 
-    fun showWeeklyRuleFragment() {
-        view.findNavController().navigate(R.id.action_nav_rules_to_nav_weekly_rule)
-    }
 }

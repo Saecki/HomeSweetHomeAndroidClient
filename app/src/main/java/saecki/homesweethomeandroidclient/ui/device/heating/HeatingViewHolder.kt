@@ -1,4 +1,4 @@
-package saecki.homesweethomeandroidclient.ui.device
+package saecki.homesweethomeandroidclient.ui.device.heating
 
 import android.app.AlertDialog
 import android.content.Context
@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import saecki.homesweethomeandroidclient.MainActivity
@@ -19,11 +20,8 @@ import saecki.homesweethomeandroidclient.datatypes.devices.Heating
 import saecki.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import saecki.homesweethomeandroidclient.ui.animation.ExpandAnimation
 
-class HeatingViewHolder(
-    val view: View,
-    val context: Context,
-    val parent: View
-) : RecyclerView.ViewHolder(view) {
+class HeatingViewHolder(val view: View, val context: Context, val parent: View) :
+    RecyclerView.ViewHolder(view) {
 
     lateinit var heating: Heating
     val name: TextView = view.findViewById(R.id.name)
@@ -58,6 +56,9 @@ class HeatingViewHolder(
         plus.setOnClickListener {
             incrementTemp()
         }
+        view.setOnClickListener {
+            view.findNavController().navigate(R.id.action_nav_home_to_nav_heating)
+        }
     }
 
     fun update(heating: Heating) {
@@ -69,9 +70,9 @@ class HeatingViewHolder(
 
     fun toggleDetailedView() {
         if (heating.extended) {
-            collapse(getDuration())
+            collapse(getAnimationDuration())
         } else {
-            expand(getDuration())
+            expand(getAnimationDuration())
         }
     }
 
@@ -167,10 +168,10 @@ class HeatingViewHolder(
                     Snackbar.LENGTH_LONG
                 )
                 snack.setAction(
-                    MainActivity.res.getString(R.string.heating_snackbar_edit),
-                    View.OnClickListener {
-                        showInputDialog(input.text.toString())
-                    })
+                    MainActivity.res.getString(R.string.heating_snackbar_edit)
+                ) {
+                    showInputDialog(input.text.toString())
+                }
                 snack.show()
             }
 
@@ -192,7 +193,7 @@ class HeatingViewHolder(
         return MainActivity.getPrefStringAsDouble(key, 0.5)
     }
 
-    private fun getDuration(): Long {
+    private fun getAnimationDuration(): Long {
         val key: String = MainActivity.res.getString(R.string.pref_animation_duration_key)
         return MainActivity.getPrefInt(key, 250).toLong()
     }
