@@ -1,6 +1,7 @@
 package saecki.homesweethomeandroidclient.ui.rules
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,9 +22,9 @@ class RulesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         rulesViewModel = ViewModelProviders.of(this).get(RulesViewModel::class.java)
-        val linearLayoutManager = LinearLayoutManager(context)
         val root = inflater.inflate(R.layout.fragment_rules, container, false)
         val rules: RecyclerView = root.findViewById(R.id.rules)
+        val linearLayoutManager = LinearLayoutManager(context)
         val ruleListAdapter = RuleListAdapter(rulesViewModel.rules)
 
         rules.layoutManager = linearLayoutManager
