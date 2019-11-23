@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import saecki.homesweethomeandroidclient.R
 import saecki.homesweethomeandroidclient.datatypes.devices.Device
 import saecki.homesweethomeandroidclient.datatypes.devices.Heating
-import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
+import saecki.homesweethomeandroidclient.datatypes.devices.Light
 import saecki.homesweethomeandroidclient.ui.device.heating.HeatingViewHolder
-import saecki.homesweethomeandroidclient.ui.device.lamp.LampViewHolder
+import saecki.homesweethomeandroidclient.ui.device.light.LightViewHolder
 import saecki.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 
 class DeviceListAdapter(var devices: List<Device>) :
@@ -18,7 +18,7 @@ class DeviceListAdapter(var devices: List<Device>) :
         val inflater = LayoutInflater.from(parent.context)
 
         return when (viewType) {
-            Heating.type -> {
+            Heating.TYPE -> {
                 val heatingView = inflater.inflate(R.layout.device_heating, parent, false)
                 HeatingViewHolder(
                     heatingView,
@@ -26,9 +26,9 @@ class DeviceListAdapter(var devices: List<Device>) :
                     parent
                 )
             }
-            Lamp.type -> {
-                val lampView = inflater.inflate(R.layout.device_lamp, parent, false)
-                LampViewHolder(lampView)
+            Light.TYPE -> {
+                val lightView = inflater.inflate(R.layout.device_light, parent, false)
+                LightViewHolder(lightView)
             }
             else -> {
                 val dummyView = inflater.inflate(R.layout.dummy, parent, false)
@@ -49,15 +49,15 @@ class DeviceListAdapter(var devices: List<Device>) :
         val device = devices[position]
 
         when (device.type) {
-            Heating.type -> {
+            Heating.TYPE -> {
                 val heatingViewHolder = holder as HeatingViewHolder
                 val heating = device as Heating
                 heatingViewHolder.bindView(heating)
             }
-            Lamp.type -> {
-                val lampViewHolder = holder as LampViewHolder
-                val lamp = device as Lamp
-                lampViewHolder.bindView(lamp)
+            Light.TYPE -> {
+                val lightViewHolder = holder as LightViewHolder
+                val light = device as Light
+                lightViewHolder.bindView(light)
             }
         }
     }

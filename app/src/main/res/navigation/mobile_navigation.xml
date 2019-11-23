@@ -15,8 +15,8 @@
             app:destination="@id/nav_heating"
             app:popUpTo="@+id/nav_home" />
         <action
-            android:id="@+id/action_nav_home_to_nav_lamp"
-            app:destination="@id/nav_lamp"
+            android:id="@+id/action_nav_home_to_nav_light"
+            app:destination="@id/nav_light"
             app:popUpTo="@+id/nav_home" />
     </fragment>
 
@@ -44,10 +44,10 @@
         tools:layout="@layout/fragment_heating" />
 
     <fragment
-        android:id="@+id/nav_lamp"
-        android:name="saecki.homesweethomeandroidclient.ui.device.lamp.LampFragment"
-        android:label="@string/menu_lamp"
-        tools:layout="@layout/fragment_lamp" />
+        android:id="@+id/nav_light"
+        android:name="saecki.homesweethomeandroidclient.ui.device.light.LightFragment"
+        android:label="@string/menu_light"
+        tools:layout="@layout/fragment_light" />
 
     <fragment
         android:id="@+id/nav_weekly_rule"

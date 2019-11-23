@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import saecki.homesweethomeandroidclient.datatypes.Temperature
 import saecki.homesweethomeandroidclient.datatypes.devices.Device
 import saecki.homesweethomeandroidclient.datatypes.devices.Heating
-import saecki.homesweethomeandroidclient.datatypes.devices.Lamp
+import saecki.homesweethomeandroidclient.datatypes.devices.Light
 
 class HomeViewModel : ViewModel() {
 
@@ -23,7 +23,7 @@ class HomeViewModel : ViewModel() {
             Temperature(24.2342, Temperature.Unit.CELSIUS),
             Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
-        Lamp("lkjf", "lamp", "Kitchen", true),
+        Light("lkjf", "light", "Kitchen", true),
         Heating(
             "lkfjasjl",
             "Heating",
@@ -31,7 +31,7 @@ class HomeViewModel : ViewModel() {
             Temperature(23.6324432, Temperature.Unit.CELSIUS),
             Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
-        Lamp("oijaisomf", "lamp", "Office", false),
+        Light("oijaisomf", "light", "Office", false),
         Heating(
             "lkfjsdfl",
             "Heating",
@@ -39,8 +39,8 @@ class HomeViewModel : ViewModel() {
             Temperature(23.82432, Temperature.Unit.CELSIUS),
             Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
-        Lamp("oijaisomf", "lamp", "Bathroom", true),
-        Lamp("oijaisomf", "lamp", "Office", false),
+        Light("oijaisomf", "light", "Bathroom", true),
+        Light("oijaisomf", "light", "Office", false),
         Heating(
             "lkfjsdfl",
             "Heating",
@@ -48,8 +48,8 @@ class HomeViewModel : ViewModel() {
             Temperature(23.82432, Temperature.Unit.CELSIUS),
             Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
-        Lamp("oijaisomf", "lamp", "Bathroom", true),
-        Lamp("oijaisomf", "lamp", "Office", false),
+        Light("oijaisomf", "light", "Bathroom", true),
+        Light("oijaisomf", "light", "Office", false),
         Heating(
             "lkfjsdfl",
             "Heating",
@@ -57,8 +57,8 @@ class HomeViewModel : ViewModel() {
             Temperature(23.82432, Temperature.Unit.CELSIUS),
             Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
-        Lamp("oijaisomf", "lamp", "Bathroom", true),
-        Lamp("oijaisomf", "lamp", "Office", false),
+        Light("oijaisomf", "light", "Bathroom", true),
+        Light("oijaisomf", "light", "Office", false),
         Heating(
             "lkfjsdfl",
             "Heating",
@@ -66,6 +66,6 @@ class HomeViewModel : ViewModel() {
             Temperature(23.82432, Temperature.Unit.CELSIUS),
             Temperature(24.0, Temperature.Unit.CELSIUS)
         ),
-        Lamp("oijaisomf", "lamp", "Bathroom", true)
+        Light("oijaisomf", "light", "Bathroom", true)
     )
 }

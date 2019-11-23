@@ -1,11 +1,14 @@
 package saecki.homesweethomeandroidclient.datatypes
 
-import saecki.homesweethomeandroidclient.MainActivity
-import saecki.homesweethomeandroidclient.R
+import saecki.homesweethomeandroidclient.Tools
+import java.lang.Exception
 
 class Temperature {
 
     private var temp: Double = 273.0
+        private set(temp) {
+            field = Tools.clamp(temp, 0.0, Double.MAX_VALUE)
+        }
 
     constructor(temp: Double, unit: Unit) {
         set(temp, unit)
@@ -14,29 +17,13 @@ class Temperature {
     constructor()
 
     companion object {
+        val MIN = Temperature(0.0, Unit.KELVIN)
+        val DEFAULT_UNIT = Unit.CELSIUS
+        val DEFAULT_DECIMALS = 1
 
-        fun globalUnit(): Unit {
-            val key: String = MainActivity.res.getString(R.string.pref_temperature_unit_key)
-            val index = MainActivity.getPrefStringAsInt(key, 1)
+        var globalUnit = DEFAULT_UNIT
+        var globalDecimals = DEFAULT_DECIMALS
 
-            for (u in Unit.values()) {
-                if (index == u.index) {
-                    return u
-                }
-            }
-
-            return Unit.CELSIUS
-        }
-
-        fun globalDecimals(): Int {
-            val key: String = MainActivity.res.getString(R.string.pref_temperature_decimals_key)
-            val decimals: Int = MainActivity.getPrefStringAsInt(key, 1)
-            return if (decimals == -1) {
-                1
-            } else {
-                decimals
-            }
-        }
     }
 
     enum class Unit(val unit: String, val index: Int) {
@@ -46,15 +33,15 @@ class Temperature {
     }
 
     fun getGlobal(): Double {
-        return get(globalUnit())
+        return get(globalUnit)
     }
 
     fun setGlobal(temp: Double) {
-        set(temp, globalUnit())
+        set(temp, globalUnit)
     }
 
     fun formatGlobal(appendUnit: Boolean): String {
-        return format(globalUnit(), globalDecimals(), appendUnit)
+        return format(globalUnit, globalDecimals, appendUnit)
     }
 
     fun get(unit: Unit): Double {
@@ -74,7 +61,7 @@ class Temperature {
     }
 
     fun format(unit: Unit, decimals: Int, appendUnit: Boolean): String {
-        return roundToDecimals(get(unit), decimals) + when (appendUnit) {
+        return roundTo(get(unit), decimals) + when (appendUnit) {
             true -> unit.unit
             false -> ""
         }
@@ -104,7 +91,24 @@ class Temperature {
         this.temp = (5.0 / 9) * (temp - 32) + 273
     }
 
-    private fun roundToDecimals(value: Double, decimals: Int): String {
+    fun warmer(temp: Temperature): Boolean {
+        return getKelvin() > temp.getKelvin()
+    }
+
+    fun colder(temp: Temperature): Boolean {
+        return getKelvin() < temp.getKelvin()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return try {
+            val otherTemp = other as Temperature
+            getKelvin() == otherTemp.getKelvin()
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun roundTo(value: Double, decimals: Int): String {
         val format: String = "%." + decimals + "f"
         return format.format(value)
     }

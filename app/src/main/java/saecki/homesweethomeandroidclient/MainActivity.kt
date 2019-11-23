@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -16,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
+import saecki.homesweethomeandroidclient.datatypes.rules.WeeklyTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             return try {
                 preferences.getInt(key, defaultValue)
             } catch (e: Exception) {
-                Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
+                Log.d("PREF", "couldn't retrieve shared preference with key: $key")
                 defaultValue
             }
         }
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             return try {
                 preferences.getString(key, defaultValue.toString())!!.toInt()
             } catch (e: Exception) {
-                Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
+                Log.d("PREF", "couldn't retrieve shared preference with key: $key")
                 defaultValue
             }
         }
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             return try {
                 preferences.getString(key, defaultValue.toString())!!.toDouble()
             } catch (e: Exception) {
-                Log.d("PREF", "couldn't retrieve shared preference with key %s".format(key))
+                Log.d("PREF", "couldn't retrieve shared preference with key: $key")
                 defaultValue
             }
         }
@@ -60,30 +60,6 @@ class MainActivity : AppCompatActivity() {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         res = resources
-
-        val currentNightMode = AppCompatDelegate.getDefaultNightMode()
-
-        Log.d("UI", "currentNightMode: $currentNightMode")
-        Log.d("UI", "AppCompatDelegate.MODE_NIGHT_YES: ${AppCompatDelegate.MODE_NIGHT_YES}")
-        Log.d("UI", "AppCompatDelegate.MODE_NIGHT_NO: ${AppCompatDelegate.MODE_NIGHT_NO}")
-        Log.d(
-            "UI",
-            "AppCompatDelegate.MODE_NIGHT_UNSPECIFIED: ${AppCompatDelegate.MODE_NIGHT_UNSPECIFIED}"
-        )
-
-        when (currentNightMode) {
-            AppCompatDelegate.MODE_NIGHT_YES -> {
-                Log.d("UI", "UI_MODE_NIGHT_YES")
-                TODO()
-            }
-            AppCompatDelegate.MODE_NIGHT_NO -> {
-                Log.d("UI", "UI_MODE_NIGHT_NO")
-                TODO()
-            }
-            else -> {
-                Log.d("UI", "UI_MODE_NIGHT_UNDEFINED")
-            }
-        }
 
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -101,6 +77,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val a = WeeklyTime(0)
+        val b = WeeklyTime(0)
+        val c = a.equals(b)
+        Log.d("TEST", "a.equals(b): $c")
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

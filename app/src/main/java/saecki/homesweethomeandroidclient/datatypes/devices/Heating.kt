@@ -8,11 +8,11 @@ class Heating(
     room: String,
     var actualTemp: Temperature,
     var targetTemp: Temperature
-) : Device(id, type, name, room) {
+) : Device(id, TYPE, name, room) {
 
     var extended = false
 
     companion object {
-        const val type = 1
+        const val TYPE = 1
     }
 }
