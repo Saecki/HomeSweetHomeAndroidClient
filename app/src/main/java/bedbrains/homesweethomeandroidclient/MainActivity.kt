@@ -15,7 +15,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
-import bedbrains.shared.datatypes.rules.WeeklyTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -77,12 +76,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val a = WeeklyTime(0)
-        val b = WeeklyTime(0)
-        val c = a.equals(b)
-        Log.d("TEST", "a.equals(b): $c")
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
