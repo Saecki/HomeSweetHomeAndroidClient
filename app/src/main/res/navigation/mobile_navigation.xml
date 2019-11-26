@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="saecki.homesweethomeandroidclient.ui.home.HomeFragment"
+        android:name="bedbrains.homesweethomeandroidclient.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/nav_rules"
-        android:name="saecki.homesweethomeandroidclient.ui.rules.RulesFragment"
+        android:name="bedbrains.homesweethomeandroidclient.ui.rules.RulesFragment"
         android:label="@string/menu_rules"
         tools:layout="@layout/fragment_rules">
         <action
@@ -33,25 +33,25 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="saecki.homesweethomeandroidclient.ui.settings.SettingsFragment"
+        android:name="bedbrains.homesweethomeandroidclient.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@xml/preferences" />
 
     <fragment
         android:id="@+id/nav_heating"
-        android:name="saecki.homesweethomeandroidclient.ui.device.heating.HeatingFragment"
+        android:name="bedbrains.homesweethomeandroidclient.ui.device.heating.HeatingFragment"
         android:label="@string/menu_heating"
         tools:layout="@layout/fragment_heating" />
 
     <fragment
         android:id="@+id/nav_light"
-        android:name="saecki.homesweethomeandroidclient.ui.device.light.LightFragment"
+        android:name="bedbrains.homesweethomeandroidclient.ui.device.light.LightFragment"
         android:label="@string/menu_light"
         tools:layout="@layout/fragment_light" />
 
     <fragment
         android:id="@+id/nav_weekly_rule"
-        android:name="saecki.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleFragment"
+        android:name="bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleFragment"
         android:label="@string/menu_weekly_rule"
         tools:layout="@layout/fragment_weekly_rule" />
 

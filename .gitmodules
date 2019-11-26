@@ -1,0 +1,3 @@
+[submodule "app/src/main/java/bedbrains/shared/datatypes"]
+	path = app/src/main/java/bedbrains/shared/datatypes
+	url = https://bitbucket.org/bedbrains/datatypes
