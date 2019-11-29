@@ -6,10 +6,8 @@ import android.view.animation.Transformation
 
 class ExpandAnimation(var view: View) : Animation() {
 
-    private val matchParentMeasureSpec =
-        View.MeasureSpec.makeMeasureSpec((view.getParent() as View).width, View.MeasureSpec.EXACTLY)
-    private val wrapContentMeasureSpec =
-        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+    private val matchParentMeasureSpec = View.MeasureSpec.makeMeasureSpec((view.getParent() as View).width, View.MeasureSpec.EXACTLY)
+    private val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
 
     init {
         view.measure(matchParentMeasureSpec, wrapContentMeasureSpec)

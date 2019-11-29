@@ -11,12 +11,16 @@
     <dimen name="control_margin">8dp</dimen>
     <dimen name="control_icon_padding">16dp</dimen>
 
+    <dimen name="header_padding">8dp</dimen>
+    <dimen name="grid_margin">8dp</dimen>
+
     <dimen name="card_view_elevation">4dp</dimen>
     <dimen name="card_view_radius">8dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
 
     <!-- icon-width(24dp) + 2 * icon_margin + !-->
     <dimen name="device_detailed_view_start_margin">56dp</dimen>
-    
-    <dimen name="weekly_rule_hour_offset">30dp</dimen>
+
+    <dimen name="weekly_rule_hour_height">40dp</dimen>
+    <dimen name="weekly_rule_time_span_margin">2dp</dimen>
 </resources>

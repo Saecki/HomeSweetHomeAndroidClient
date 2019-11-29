@@ -17,7 +17,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
         //temperature unit
-        val tempUnitKey = MainActivity.res.getString(R.string.pref_temperature_unit_key)
+        val tempUnitKey = resources.getString(R.string.pref_temperature_unit_key)
         val tempUnitPreference = findPreference<ListPreference>(tempUnitKey)!!
         tempUnitPreference.setOnPreferenceChangeListener { _, newValue ->
             setTempUnit(newValue)
@@ -26,7 +26,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setTempUnit(tempUnitPreference.value)
 
         //temperature decimals
-        val tempDecimalsKey = MainActivity.res.getString(R.string.pref_temperature_decimals_key)
+        val tempDecimalsKey = resources.getString(R.string.pref_temperature_decimals_key)
         val tempDecimalsPreference = findPreference<ListPreference>(tempDecimalsKey)!!
         tempDecimalsPreference.setOnPreferenceChangeListener { _, newValue ->
             setTempDecimals(newValue)
@@ -35,7 +35,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setTempDecimals(tempDecimalsPreference.value)
 
         //animation duration
-        val animationDurationKey = MainActivity.res.getString(R.string.pref_animation_duration_key)
+        val animationDurationKey = resources.getString(R.string.pref_animation_duration_key)
         val animationDurationPreference = findPreference<SeekBarPreference>(animationDurationKey)!!
         animationDurationPreference.updatesContinuously = true
         animationDurationPreference.setOnPreferenceChangeListener { preference, newValue ->
