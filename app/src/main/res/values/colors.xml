@@ -3,6 +3,4 @@
     <color name="color_primary">#222222</color>
     <color name="color_primary_dark">#111111</color>
     <color name="color_accent">#aa44cc</color>
-    <color name="color_icon_bright">#ff303030</color>
-    <color name="color_icon_dark">#ffc0c0c0</color>
 </resources>

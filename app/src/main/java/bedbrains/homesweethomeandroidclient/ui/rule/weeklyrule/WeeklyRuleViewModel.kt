@@ -6,11 +6,12 @@ import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 
 class WeeklyRuleViewModel : ViewModel() {
-    var weeklyRule: WeeklyRule = WeeklyRule("lkasjf", "lasjf")
+    var rule: WeeklyRule = WeeklyRule("lkasjf", "cool rule")
+    var initialCreation = true
 
     init {
 
-        weeklyRule.timeSpans.add(
+        rule.timeSpans.add(
             WeeklyTimeSpan(
                 WeeklyTime(3, 5, 0, 0, 0),
                 WeeklyTime(3, 9, 15, 0, 0)

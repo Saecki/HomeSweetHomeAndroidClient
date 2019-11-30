@@ -20,8 +20,7 @@ import bedbrains.shared.datatypes.devices.Heating
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 
-class HeatingViewHolder(val view: View, val context: Context, val parent: View) :
-    RecyclerView.ViewHolder(view) {
+class HeatingViewHolder(val view: View, val context: Context, val parent: View) : RecyclerView.ViewHolder(view) {
 
     lateinit var heating: Heating
     val name: TextView = view.findViewById(R.id.name)
@@ -78,11 +77,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
 
     fun decrementTemp() {
         var temp = heating.targetTemp.getGlobal()
-        temp -= if (MainActivity.preferences.getBoolean(
-                MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key),
-                true
-            )
-        ) {
+        temp -= if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             if (temp.rem(getIncrement()) == 0.0) {
                 getIncrement()
             } else {
@@ -97,11 +92,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
 
     fun incrementTemp() {
         var temp = heating.targetTemp.getGlobal()
-        temp += if (MainActivity.preferences.getBoolean(
-                MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key),
-                true
-            )
-        ) {
+        temp += if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             getIncrement() - temp.rem(getIncrement())
         } else {
             getIncrement()
