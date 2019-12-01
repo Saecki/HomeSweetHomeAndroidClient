@@ -20,7 +20,7 @@ class EditTimeSpan(context: Context) : ConstraintLayout(context) {
     val constraintSet = ConstraintSet()
     val card = View(context).apply {
         id = View.generateViewId()
-        background = ContextCompat.getDrawable(context, R.drawable.card_view_border)
+        background = ContextCompat.getDrawable(context, R.drawable.border_card_view)
     }
     val upperHandle = View(context).apply {
         id = View.generateViewId()
@@ -36,14 +36,14 @@ class EditTimeSpan(context: Context) : ConstraintLayout(context) {
     init {
         id = View.generateViewId()
 
-        upperHandle.setOnTouchListener { v, event ->
+        upperHandle.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN)
-                vibrator.vibrate(VibrationEffect.createOneShot(100L, VibrationEffect.DEFAULT_AMPLITUDE))
+                vibrator.vibrate(VibrationEffect.createOneShot(50L, VibrationEffect.DEFAULT_AMPLITUDE))
             true
         }
-        lowerHandle.setOnTouchListener { v, event ->
+        lowerHandle.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN)
-                vibrator.vibrate(VibrationEffect.createOneShot(100L, VibrationEffect.DEFAULT_AMPLITUDE))
+                vibrator.vibrate(VibrationEffect.createOneShot(50L, VibrationEffect.DEFAULT_AMPLITUDE))
             true
         }
 
