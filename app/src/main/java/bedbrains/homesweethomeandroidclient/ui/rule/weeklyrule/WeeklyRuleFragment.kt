@@ -2,6 +2,8 @@ package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -66,16 +68,16 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet = ConstraintSet()
         dayHeader = root.findViewById(R.id.day_header) as LinearLayout
         daySpace = View(context)
-        days = mutableListOf<TextView>()
+        days = mutableListOf()
         timeLayout = root.findViewById(R.id.time_layout) as ConstraintLayout
         timeSpanAnchor = Space(context)
         timeLine = LinearLayout(context)
-        times = mutableListOf<TextView>()
-        horizontalGuideLines = mutableListOf<View>()
-        verticalGuideLines = mutableListOf<View>()
+        times = mutableListOf()
+        horizontalGuideLines = mutableListOf()
+        verticalGuideLines = mutableListOf()
         timeIndicatorHead = View(context)
         timeIndicatorLine = View(context)
-        weekdayStrings = arrayListOf<String>()
+        weekdayStrings = arrayListOf()
         locale = Locale.getDefault()
         wf = WeekFields.of(locale)
         firstDayOfWeek = wf.firstDayOfWeek
@@ -226,8 +228,7 @@ class WeeklyRuleFragment : Fragment() {
             ConstraintSet.CHAIN_SPREAD_INSIDE
         )
 
-        displayTimespans()
-        updateTimeIndicator(WeeklyTime.now())
+        displayTimeSpans()
 
         constraintSet.applyTo(timeLayout)
 
@@ -235,10 +236,12 @@ class WeeklyRuleFragment : Fragment() {
         timeLine.measure(wrapContentMeasureSpec, wrapContentMeasureSpec)
         daySpace.layoutParams.width = timeLine.measuredWidth
 
+        startUpdatingTimeIndicator()
+
         return root
     }
 
-    fun displayTimespans() {
+    fun displayTimeSpans() {
         timeSpans.forEach { view -> timeLayout.removeView(view) }
 
         for (t in weeklyRuleViewModel.rule.timeSpans) {
@@ -257,7 +260,13 @@ class WeeklyRuleFragment : Fragment() {
                 if (i > t.start.day) {
                     constraintSet.connect(card.id, ConstraintSet.TOP, timeSpanAnchor.id, ConstraintSet.TOP)
                 } else {
-                    constraintSet.connect(card.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, (hourHeight * t.start.inDailyHours()).toInt())
+                    constraintSet.connect(
+                        card.id,
+                        ConstraintSet.TOP,
+                        ConstraintSet.PARENT_ID,
+                        ConstraintSet.TOP,
+                        (hourHeight * t.start.inDailyHours()).toInt()
+                    )
                 }
 
                 if (i < t.end.day) {
@@ -275,7 +284,13 @@ class WeeklyRuleFragment : Fragment() {
                 if (i > t.start.day) {
                     constraintSet.connect(card.id, ConstraintSet.TOP, timeSpanAnchor.id, ConstraintSet.TOP)
                 } else {
-                    constraintSet.connect(card.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, (hourHeight * t.start.inDailyHours()).toInt())
+                    constraintSet.connect(
+                        card.id,
+                        ConstraintSet.TOP,
+                        ConstraintSet.PARENT_ID,
+                        ConstraintSet.TOP,
+                        (hourHeight * t.start.inDailyHours()).toInt()
+                    )
                 }
 
                 constraintSet.constrainHeight(card.id, hourHeight * 25)
@@ -322,6 +337,17 @@ class WeeklyRuleFragment : Fragment() {
         return card
     }
 
+    fun startUpdatingTimeIndicator() {
+        val mainHandler = Handler(Looper.myLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                updateTimeIndicator(WeeklyTime.now())
+                mainHandler.postDelayed(this, 60000)
+            }
+        })
+    }
+
     fun updateTimeIndicator(time: WeeklyTime) {
         constraintSet.clear(timeIndicatorHead.id)
         constraintSet.clear(timeIndicatorLine.id)
@@ -336,5 +362,7 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet.connect(timeIndicatorLine.id, ConstraintSet.LEFT, timeIndicatorHead.id, ConstraintSet.RIGHT)
         constraintSet.connect(timeIndicatorLine.id, ConstraintSet.TOP, timeLayout.id, ConstraintSet.TOP, (hourHeight * time.inDailyHours()).toInt())
         constraintSet.constrainHeight(timeIndicatorLine.id, indicatorLineWidth)
+
+        constraintSet.applyTo(timeLayout)
     }
 }

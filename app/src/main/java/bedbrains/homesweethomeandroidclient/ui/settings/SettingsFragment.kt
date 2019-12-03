@@ -5,10 +5,8 @@ import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SeekBarPreference
-import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.shared.datatypes.Temperature
-import java.lang.Exception
 import kotlin.math.roundToInt
 
 class SettingsFragment : PreferenceFragmentCompat() {
