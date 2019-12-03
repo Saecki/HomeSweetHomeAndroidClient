@@ -172,7 +172,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         }
         builder.show()
         input.requestFocusFromTouch()
-        input.postDelayed(Runnable {
+        input.postDelayed({
             val keyboard: InputMethodManager =
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyboard.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)

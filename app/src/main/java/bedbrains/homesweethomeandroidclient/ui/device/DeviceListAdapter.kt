@@ -38,7 +38,7 @@ class DeviceListAdapter(var devices: List<Device>) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return devices.get(position).type
+        return devices[position].type
     }
 
     override fun getItemCount(): Int {

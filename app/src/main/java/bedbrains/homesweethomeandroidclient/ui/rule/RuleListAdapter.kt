@@ -14,14 +14,14 @@ class RuleListAdapter(var rules: List<Rule>) : RecyclerView.Adapter<RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
-        when (viewType) {
+        return when (viewType) {
             WeeklyRule.TYPE -> {
                 val weeklyRuleView = inflater.inflate(R.layout.rule_weekly_rule, parent, false)
-                return WeeklyRuleViewHolder(weeklyRuleView, parent.context)
+                WeeklyRuleViewHolder(weeklyRuleView, parent.context)
             }
             else -> {
                 val dummyView = inflater.inflate(R.layout.dummy, parent, false)
-                return DummyViewHolder(dummyView)
+                DummyViewHolder(dummyView)
             }
         }
     }
