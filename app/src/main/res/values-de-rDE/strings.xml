@@ -9,8 +9,10 @@
     <string name="action_refresh">Aktualisieren</string>
     <string name="action_edit">Bearbeiten</string>
     <string name="action_sort_by">Sortieren</string>
+    <string name="action_group_by">Gruppieren</string>
     <string name="action_filter_by">Filtern</string>
     <string name="action_share">Teilen</string>
+    <string name="action_clear">Alle Entfernen</string>
 
     <!-- Menu !-->
     <string name="menu_home">Start</string>

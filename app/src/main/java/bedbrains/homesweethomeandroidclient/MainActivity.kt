@@ -14,6 +14,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var preferences: SharedPreferences
         lateinit var res: Resources
+        lateinit var appBarLayout: AppBarLayout
 
         fun getPrefInt(key: String, defaultValue: Int): Int {
             return try {
@@ -54,14 +56,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         res = resources
 
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+
+        appBarLayout = findViewById(R.id.app_bar_layout)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -76,11 +80,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {

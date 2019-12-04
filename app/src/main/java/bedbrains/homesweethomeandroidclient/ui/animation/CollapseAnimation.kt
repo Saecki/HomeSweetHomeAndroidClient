@@ -12,7 +12,6 @@ class CollapseAnimation(var view: View) : Animation() {
         if (interpolatedTime == 1f) {
             view.visibility = View.GONE
         } else {
-            view.alpha = 1 - interpolatedTime
             view.layoutParams.height = (initialHeight * (1 - interpolatedTime)).toInt()
         }
         view.requestLayout()
