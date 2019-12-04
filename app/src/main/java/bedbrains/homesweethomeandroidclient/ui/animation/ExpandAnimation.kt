@@ -18,7 +18,6 @@ class ExpandAnimation(var view: View) : Animation() {
 
     override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
         val difference: Int = targetHeight - initialHeight
-        view.alpha = interpolatedTime
         view.layoutParams.height = initialHeight + (difference * interpolatedTime).toInt()
         view.requestLayout()
     }

@@ -1,9 +1,7 @@
 package bedbrains.homesweethomeandroidclient.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +18,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val linearLayoutManager = LinearLayoutManager(context)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
@@ -30,5 +30,9 @@ class HomeFragment : Fragment() {
         devices.adapter = deviceListAdapter
 
         return root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home, menu)
     }
 }

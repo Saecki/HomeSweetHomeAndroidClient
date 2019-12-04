@@ -107,6 +107,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         detailedView.visibility = View.VISIBLE
         extendView.updateInitialHeight()
         detailedView.startAnimation(extendView)
+        detailedView.animate().alpha(1f).setDuration(duration).start()
         targetTemp.animate().alpha(0f).setDuration(duration).start()
         arrow.animate().rotation(180f).setDuration(duration).start()
     }
@@ -126,6 +127,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         collapseView.duration = duration
         collapseView.updateInitialHeight()
         detailedView.startAnimation(collapseView)
+        detailedView.animate().alpha(0f).setDuration(duration).start()
         targetTemp.animate().alpha(1f).setDuration(duration).start()
         arrow.animate().rotation(0f).setDuration(duration).start()
     }
@@ -142,11 +144,13 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
 
     fun showInputDialog(text: String) {
         val builder = AlertDialog.Builder(context)
-        builder.setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
         val input = EditText(context)
+
+        builder.setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
         input.setText(text)
         input.inputType = InputType.TYPE_CLASS_PHONE
         builder.setView(input)
+
         builder.setPositiveButton(android.R.string.ok) { _, _ ->
             try {
                 heating.targetTemp.setGlobal(input.text.toString().replace(',', '.').toDouble())
@@ -167,11 +171,14 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
             }
 
         }
+
         builder.setNegativeButton(android.R.string.cancel) { dialog, _ ->
             dialog.cancel()
         }
+
         builder.show()
         input.requestFocusFromTouch()
+
         input.postDelayed({
             val keyboard: InputMethodManager =
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -9,8 +9,10 @@
     <string name="action_refresh">Refresh</string>
     <string name="action_edit">Edit</string>
     <string name="action_sort_by">Sort</string>
+    <string name="action_group_by">Group</string>
     <string name="action_filter_by">Filter</string>
     <string name="action_share">Share</string>
+    <string name="action_clear">Clear all</string>
 
     <!-- Menu !-->
     <string name="menu_home">Home</string>
@@ -29,26 +31,34 @@
     <!-- View !-->
     <string name="pref_view_category_title">View</string>
     <string name="pref_view_category_key" translatable="false">view</string>
+
     <string name="pref_sort_type_title">Sort By</string>
     <string name="pref_sort_type_key" translatable="false">sort_type</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperature</string>
     <string name="pref_temperature_category_key" translatable="false">temperature</string>
+
     <string name="pref_temperature_unit_title">Unit</string>
     <string name="pref_temperature_unit_key" translatable="false">temperature_unit</string>
+
     <string name="pref_temperature_decimals_title">Decimal digits</string>
     <string name="pref_temperature_decimals_key" translatable="false">temperature_decimals</string>
+
     <string name="pref_temperature_increment_title">Increment</string>
     <string name="pref_temperature_increment_key" translatable="false">temperature_increment</string>
+
     <string name="pref_temperature_round_to_next_increment_title">Round to next increment</string>
     <string name="pref_temperature_round_to_next_increment_key" translatable="false">temperature_round_to_next_increment</string>
 
     <!-- User Interface !-->
     <string name="pref_ui_category_title">User Interface</string>
     <string name="pref_ui_category_key" translatable="false">user_interface</string>
+
     <string name="pref_dark_mode_title">Dark mode</string>
     <string name="pref_dark_mode_key" translatable="false">dark_mode</string>
+
     <string name="pref_animation_duration_title">Animation Duration</string>
     <string name="pref_animation_duration_key" translatable="false">animation_duration</string>
+
 </resources>
