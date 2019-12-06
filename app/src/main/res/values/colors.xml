@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ _     ___ ____ _   _ _____
+| |   |_ _/ ___| | | |_   _|
+| |    | | |  _| |_| | | |
+| |___ | | |_| |  _  | | |
+|_____|___\____|_| |_| |_|
+!-->
+
 <resources>
-    <color name="color_primary">#222222</color>
-    <color name="color_primary_dark">#111111</color>
+    <color name="color_primary">#444444</color>
+    <color name="color_primary_dark">#222222</color>
     <color name="color_accent">#aa44cc</color>
+    <color name="color_drawer_selected_item">#22aa44cc</color>
+    <color name="weekly_rule_line_color">#ddd</color>
 </resources>
