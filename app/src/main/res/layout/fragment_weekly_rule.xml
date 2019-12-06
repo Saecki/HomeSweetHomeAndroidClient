@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -12,8 +12,474 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/time_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:isScrollContainer="true" />
+            android:layout_height="@dimen/weekly_rule_time_layout_height"
+            android:isScrollContainer="true"
+            android:maxHeight="@dimen/weekly_rule_time_layout_height"
+            android:minHeight="@dimen/weekly_rule_time_layout_height">
+
+            <LinearLayout
+                android:id="@+id/time_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/weekly_rule_quarter_hour_height"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/weekly_rule_half_hour_height" />
+
+                <include
+                    android:id="@+id/time_1"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_2"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_3"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_4"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_5"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_6"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_7"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_8"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_9"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_10"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_11"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_12"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_13"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_14"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_15"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_16"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_17"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_18"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_19"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_20"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_21"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_22"
+                    layout="@layout/weekly_rule_time" />
+
+                <include
+                    android:id="@+id/time_23"
+                    layout="@layout/weekly_rule_time" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/weekly_rule_half_hour_height" />
+
+            </LinearLayout>
+
+            <Space
+                android:id="@+id/time_line_space"
+                android:layout_width="@dimen/weekly_rule_grid_margin"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="@id/time_line"
+                app:layout_constraintLeft_toRightOf="@+id/time_line"
+                app:layout_constraintTop_toTopOf="@id/time_line" />
+
+            <include
+                android:id="@+id/vertical_line_0"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toRightOf="@id/time_line_space"
+                app:layout_constraintRight_toLeftOf="@+id/vertical_line_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/vertical_line_1"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/vertical_line_0"
+                app:layout_constraintRight_toLeftOf="@id/vertical_line_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/vertical_line_2"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/vertical_line_1"
+                app:layout_constraintRight_toLeftOf="@id/vertical_line_3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/vertical_line_3"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/vertical_line_2"
+                app:layout_constraintRight_toLeftOf="@id/vertical_line_4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/vertical_line_4"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/vertical_line_3"
+                app:layout_constraintRight_toLeftOf="@id/vertical_line_5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/vertical_line_5"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/vertical_line_4"
+                app:layout_constraintRight_toLeftOf="@id/vertical_line_6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/vertical_line_6"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/vertical_line_5"
+                app:layout_constraintRight_toLeftOf="@id/vertical_line_7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/vertical_line_7"
+                layout="@layout/weekly_rule_vertical_line"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/vertical_line_6"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="490dp" />
+
+            <!-- horizontal lines !-->
+
+            <include
+                android:id="@+id/horizontal_line_1"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_2"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/time_line"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <include
+                android:id="@+id/horizontal_line_2"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_3"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_1" />
+
+            <include
+                android:id="@+id/horizontal_line_3"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_4"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_2" />
+
+            <include
+                android:id="@+id/horizontal_line_4"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_5"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_3" />
+
+            <include
+                android:id="@+id/horizontal_line_5"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_6"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_4" />
+
+            <include
+                android:id="@+id/horizontal_line_6"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_7"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_5" />
+
+            <include
+                android:id="@+id/horizontal_line_7"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_8"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_6" />
+
+            <include
+                android:id="@+id/horizontal_line_8"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_9"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_7" />
+
+            <include
+                android:id="@+id/horizontal_line_9"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_10"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_8" />
+
+            <include
+                android:id="@+id/horizontal_line_10"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_11"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_9" />
+
+            <include
+                android:id="@+id/horizontal_line_11"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_12"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_10" />
+
+            <include
+                android:id="@+id/horizontal_line_12"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_13"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_11" />
+
+            <include
+                android:id="@+id/horizontal_line_13"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_14"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_12" />
+
+            <include
+                android:id="@+id/horizontal_line_14"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_15"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_13" />
+
+            <include
+                android:id="@+id/horizontal_line_15"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_16"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_14" />
+
+            <include
+                android:id="@+id/horizontal_line_16"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_17"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_15" />
+
+            <include
+                android:id="@+id/horizontal_line_17"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_18"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_16" />
+
+            <include
+                android:id="@+id/horizontal_line_18"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_19"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_17" />
+
+            <include
+                android:id="@+id/horizontal_line_19"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_20"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_18" />
+
+            <include
+                android:id="@+id/horizontal_line_20"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_21"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_19" />
+
+            <include
+                android:id="@+id/horizontal_line_21"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_22"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_20" />
+
+            <include
+                android:id="@+id/horizontal_line_22"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_23"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_21" />
+
+            <include
+                android:id="@+id/horizontal_line_23"
+                layout="@layout/weekly_rule_horizontal_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                app:layout_constraintBottom_toBottomOf="@id/time_line"
+                app:layout_constraintLeft_toRightOf="@id/time_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_22" />
+
+            <Space
+                android:id="@+id/top_time_span_anchor"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/weekly_rule_hour_height"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <Space
+                android:id="@+id/bottom_time_span_anchor"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/weekly_rule_hour_height"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <View
+                android:id="@+id/time_indicator_head"
+                android:layout_width="@dimen/time_indicator_head_diameter"
+                android:layout_height="@dimen/time_indicator_head_diameter"
+                android:background="@drawable/time_indicator_head"
+                android:elevation="@dimen/time_indicator_elevation" />
+
+            <View
+                android:id="@+id/time_indicator_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/time_indicaotr_line_width"
+                android:background="@drawable/time_indicator_line"
+                android:elevation="@dimen/time_indicator_elevation" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 

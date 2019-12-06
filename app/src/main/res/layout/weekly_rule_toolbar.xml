@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingVertical="@dimen/weekly_rule_toolbar_margin">
+
+    <Space
+        android:id="@+id/day_space"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/weekly_rule_grid_margin" />
+
+    <include
+        android:id="@+id/day_0"
+        layout="@layout/weekly_rule_day" />
+
+    <include
+        android:id="@+id/day_1"
+        layout="@layout/weekly_rule_day" />
+
+    <include
+        android:id="@+id/day_2"
+        layout="@layout/weekly_rule_day" />
+
+    <include
+        android:id="@+id/day_3"
+        layout="@layout/weekly_rule_day" />
+
+    <include
+        android:id="@+id/day_4"
+        layout="@layout/weekly_rule_day" />
+
+    <include
+        android:id="@+id/day_5"
+        layout="@layout/weekly_rule_day" />
+
+    <include
+        android:id="@+id/day_6"
+        layout="@layout/weekly_rule_day" />
+
+</LinearLayout>
