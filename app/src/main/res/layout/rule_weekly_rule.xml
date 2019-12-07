@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_view"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/card_view_margin"
     android:layout_marginTop="@dimen/card_view_margin"
     android:layout_marginEnd="@dimen/card_view_margin"
-    android:background="@drawable/card_view"
-    android:elevation="@dimen/card_view_elevation"
-    android:orientation="horizontal">
+    app:cardCornerRadius="@dimen/card_view_radius"
+    app:cardElevation="@dimen/card_view_elevation">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/icon_margin"
-        android:src="@drawable/ic_schedule_black_24dp"
-        android:tint="@color/color_accent" />
-
-    <TextView
-        android:id="@+id/name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/text_margin"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/icon_margin"
+            android:src="@drawable/ic_schedule_black_24dp"
+            android:tint="?android:colorAccent" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

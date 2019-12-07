@@ -8,6 +8,6 @@
 
     <stroke
         android:width="@dimen/card_view_border_width"
-        android:color="@color/color_accent" />
+        android:color="?android:colorAccent" />
 
 </shape>
