@@ -1,10 +1,10 @@
 package bedbrains.homesweethomeandroidclient
 
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,6 +14,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import bedbrains.homesweethomeandroidclient.ui.DarkMode
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     companion object {
+        lateinit var activity: MainActivity
         lateinit var preferences: SharedPreferences
         lateinit var res: Resources
         lateinit var appBarLayout: AppBarLayout
@@ -58,9 +60,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        activity = this
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         res = resources
 
+        setDarkMode(getPrefStringAsInt(getString(R.string.pref_dark_mode_key), DarkMode.LIGHT))
         setContentView(R.layout.activity_main)
 
         appBarLayout = findViewById(R.id.app_bar_layout)
@@ -85,5 +89,40 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        val darkMode = MainActivity.getPrefStringAsInt(resources.getString(R.string.pref_dark_mode_key), 0)
+        if (darkMode == DarkMode.SYSTEM) {
+            setSystemDarkMode(newConfig)
+            recreate()
+        }
+    }
+
+    fun setDarkMode(mode: Int) {
+        when (mode) {
+            DarkMode.LIGHT -> {
+                setTheme(R.style.Theme_App)
+            }
+            DarkMode.DARK -> {
+                setTheme(R.style.Theme_App_Dark)
+            }
+            DarkMode.SYSTEM -> {
+                setSystemDarkMode(Configuration())
+            }
+        }
+    }
+
+    fun setSystemDarkMode(configuration: Configuration) {
+        val systemDarkMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+        when (systemDarkMode) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                setTheme(R.style.Theme_App_Dark)
+            }
+            else -> {
+                setTheme(R.style.Theme_App)
+            }
+        }
     }
 }

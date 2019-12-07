@@ -136,316 +136,315 @@
                 app:layout_constraintLeft_toRightOf="@+id/time_line"
                 app:layout_constraintTop_toTopOf="@id/time_line" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_0"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintLeft_toRightOf="@id/time_line_space"
                 app:layout_constraintRight_toLeftOf="@+id/vertical_line_1"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_1"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/vertical_line_0"
                 app:layout_constraintRight_toLeftOf="@id/vertical_line_2"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_2"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/vertical_line_1"
                 app:layout_constraintRight_toLeftOf="@id/vertical_line_3"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_3"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/vertical_line_2"
                 app:layout_constraintRight_toLeftOf="@id/vertical_line_4"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_4"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/vertical_line_3"
                 app:layout_constraintRight_toLeftOf="@id/vertical_line_5"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_5"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/vertical_line_4"
                 app:layout_constraintRight_toLeftOf="@id/vertical_line_6"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_6"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/vertical_line_5"
                 app:layout_constraintRight_toLeftOf="@id/vertical_line_7"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include
+            <View
                 android:id="@+id/vertical_line_7"
-                layout="@layout/weekly_rule_vertical_line"
                 android:layout_width="@dimen/separator_line_width"
                 android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/vertical_line_6"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteY="490dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- horizontal lines !-->
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_1"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_2"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/time_line"
                 app:layout_constraintVertical_chainStyle="spread" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_2"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_3"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_1" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_3"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_4"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_2" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_4"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_5"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_3" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_5"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_6"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_4" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_6"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_7"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_5" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_7"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_8"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_6" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_8"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_9"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_7" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_9"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_10"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_8" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_10"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_11"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_9" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_11"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_12"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_10" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_12"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_13"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_11" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_13"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_14"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_12" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_14"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_15"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_13" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_15"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_16"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_14" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_16"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_17"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_15" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_17"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_18"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_16" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_18"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_19"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_17" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_19"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_20"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_18" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_20"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_21"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_19" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_21"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_22"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_20" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_22"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toTopOf="@id/horizontal_line_23"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/horizontal_line_21" />
 
-            <include
+            <View
                 android:id="@+id/horizontal_line_23"
-                layout="@layout/weekly_rule_horizontal_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
                 app:layout_constraintBottom_toBottomOf="@id/time_line"
                 app:layout_constraintLeft_toRightOf="@id/time_line"
                 app:layout_constraintRight_toRightOf="parent"
@@ -489,7 +488,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="?android:colorBackground"
         android:src="@drawable/ic_add_black_24dp"
-        android:tint="@color/color_accent"
+        android:tint="?android:colorAccent"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

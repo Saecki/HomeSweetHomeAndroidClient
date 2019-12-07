@@ -62,8 +62,8 @@
     <!-- User Interface !-->
     <string-array name="pref_dark_mode_entries">
         <item>Dark</item>
-        <item>Bright</item>
-        <item>System</item>
+        <item>Light</item>
+        <item>System (Android 10)</item>
     </string-array>
 
     <string-array name="pref_dark_mode_entry_values">

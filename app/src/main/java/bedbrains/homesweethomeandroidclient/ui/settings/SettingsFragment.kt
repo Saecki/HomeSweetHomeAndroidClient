@@ -5,8 +5,11 @@ import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SeekBarPreference
+import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.ui.DarkMode
 import bedbrains.shared.datatypes.Temperature
+import java.lang.ClassCastException
 import kotlin.math.roundToInt
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -32,6 +35,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         setTempDecimals(tempDecimalsPreference.value)
 
+        //dark mode
+        val darkModeKey = resources.getString(R.string.pref_dark_mode_key)
+        val darkModePreference = findPreference<ListPreference>(darkModeKey)!!
+        darkModePreference.setOnPreferenceChangeListener { _, newValue ->
+            setDarkMode(newValue)
+            true
+        }
+
         //animation duration
         val animationDurationKey = resources.getString(R.string.pref_animation_duration_key)
         val animationDurationPreference = findPreference<SeekBarPreference>(animationDurationKey)!!
@@ -54,8 +65,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     fun setTempDecimals(value: Any) {
         Temperature.globalDecimals = try {
             value.toString().toInt()
-        } catch (e: Exception) {
-            Log.e("PREF", "Couldn't cat value: '$value'")
+        } catch (e: ClassCastException) {
+            Log.e("PREF", "Couldn't cast value: '$value'")
             Temperature.DEFAULT_DECIMALS
         }
     }
@@ -63,9 +74,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     fun setTempUnit(value: Any) {
         val index = try {
             value.toString().toInt()
-        } catch (e: Exception) {
-            Log.e("PREF", "Couldn't cat value: '$value'")
-            Temperature.Unit.CELSIUS.index
+        } catch (e: ClassCastException) {
+            Log.e("PREF", "Couldn't cast value: '$value'")
+            Temperature.DEFAULT_UNIT.index
         }
         Temperature.globalUnit = when (index) {
             Temperature.Unit.KELVIN.index -> Temperature.Unit.KELVIN
@@ -73,5 +84,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Temperature.Unit.FAHRENHEIT.index -> Temperature.Unit.FAHRENHEIT
             else -> Temperature.DEFAULT_UNIT
         }
+    }
+
+    fun setDarkMode(value: Any) {
+        val mode = try {
+            value.toString().toInt()
+        } catch (e: ClassCastException) {
+            Log.e("PREF", "Couldn't cast value: '$value'")
+            DarkMode.LIGHT
+        }
+        MainActivity.activity.setDarkMode(mode)
+        MainActivity.activity.recreate()
     }
 }

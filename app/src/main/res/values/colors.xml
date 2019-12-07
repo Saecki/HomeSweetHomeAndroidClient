@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
- _     ___ ____ _   _ _____
-| |   |_ _/ ___| | | |_   _|
-| |    | | |  _| |_| | | |
-| |___ | | |_| |  _  | | |
-|_____|___\____|_| |_| |_|
-!-->
-
 <resources>
-    <color name="color_primary">#444444</color>
-    <color name="color_primary_dark">#222222</color>
-    <color name="color_accent">#aa44cc</color>
-    <color name="color_drawer_selected_item">#22aa44cc</color>
-    <color name="weekly_rule_line_color">#ddd</color>
+    <!--
+     _     ___ ____ _   _ _____
+    | |   |_ _/ ___| | | |_   _|
+    | |    | | |  _| |_| | | |
+    | |___ | | |_| |  _  | | |
+    |_____|___\____|_| |_| |_|
+    !-->
+    <color name="background">#ffffff</color>
+    <color name="foreground">#555555</color>
+    <color name="primary">#777777</color>
+    <color name="primary_variant">#888888</color>
+    <color name="accent">#f48618</color>
+    <color name="grid_line">#d0d0d0</color>
+
+
+    <!--
+     ____    _    ____  _  __
+    |  _ \  / \  |  _ \| |/ /
+    | | | |/ _ \ | |_) | ' /
+    | |_| / ___ \|  _ <| . \
+    |____/_/   \_\_| \_\_|\_\
+    !-->
+    <color name="background_dark">#222222</color>
+    <color name="foreground_dark">#cccccc</color>
+    <color name="primary_dark">#999999</color>
+    <color name="primary_variant_dark">#888888</color>
+    <color name="accent_dark">#ffa54c</color>
+    <color name="grid_line_dark">#404040</color>
+
 </resources>
