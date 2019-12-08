@@ -7,6 +7,7 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="item_margin">8dp</dimen>
     <dimen name="text_margin">8dp</dimen>
     <dimen name="icon_margin">16dp</dimen>
     <dimen name="control_margin">8dp</dimen>
@@ -17,8 +18,8 @@
     <dimen name="card_view_radius">6dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
     <dimen name="card_view_border_width">2dp</dimen>
-    <dimen name="card_view_elevation">1dp</dimen>
-    <dimen name="card_view_high_elevation">3dp</dimen>
+    <dimen name="card_view_elevation">3dp</dimen>
+    <dimen name="card_view_high_elevation">5dp</dimen>
     <dimen name="card_view_handle_diameter">20dp</dimen>
     <dimen name="card_view_handle_elevation">1dp</dimen>
     <dimen name="card_view_handle_border_width">6dp</dimen>

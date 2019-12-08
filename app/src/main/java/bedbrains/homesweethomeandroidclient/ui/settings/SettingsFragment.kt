@@ -93,7 +93,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Log.e("PREF", "Couldn't cast value: '$value'")
             DarkMode.LIGHT
         }
-        MainActivity.activity.setDarkMode(mode)
-        MainActivity.activity.recreate()
+        DarkMode.setMode(mode)
     }
 }

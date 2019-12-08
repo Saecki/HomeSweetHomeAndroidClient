@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ ____    _    ____  _  __
+|  _ \  / \  |  _ \| |/ /
+| | | |/ _ \ | |_) | ' /
+| |_| / ___ \|  _ <| . \
+|____/_/   \_\_| \_\_|\_\
+!-->
+
+<resources>
+
+    <color name="background">#000000</color>
+    <color name="primary">#999999</color>
+    <color name="primary_variant">#888888</color>
+    <color name="accent">#ffa54c</color>
+    <color name="grid_line">#404040</color>
+
+</resources>

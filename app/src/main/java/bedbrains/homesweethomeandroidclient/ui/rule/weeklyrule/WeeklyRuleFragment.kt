@@ -1,8 +1,12 @@
 package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 
+import android.annotation.TargetApi
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.service.autofill.DateValueSanitizer
+import android.text.format.DateFormat
 import android.view.*
 import android.view.animation.Animation
 import android.widget.LinearLayout
@@ -22,7 +26,7 @@ import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 import com.google.android.material.appbar.AppBarLayout
-import java.time.DayOfWeek
+import java.text.DateFormatSymbols
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -37,8 +41,7 @@ class WeeklyRuleFragment : Fragment() {
     lateinit var daySpace: View
     lateinit var days: List<TextView>
     lateinit var locale: Locale
-    lateinit var wf: WeekFields
-    lateinit var firstDayOfWeek: DayOfWeek
+    var weekDayStrings = Array<String>(7) { "" }
 
     lateinit var constraintSet: ConstraintSet
     lateinit var timeLayout: ConstraintLayout
@@ -78,8 +81,19 @@ class WeeklyRuleFragment : Fragment() {
         )
         daySpace = dayToolBar.findViewById(R.id.day_space)
         locale = Locale.getDefault()
-        wf = WeekFields.of(locale)
-        firstDayOfWeek = wf.firstDayOfWeek
+
+        val sdkVersion = Build.VERSION.SDK_INT
+        if (sdkVersion < Build.VERSION_CODES.O) {
+            val dfs = DateFormatSymbols.getInstance(locale)
+            weekDayStrings = dfs.shortWeekdays
+        } else @TargetApi(Build.VERSION_CODES.O) {
+            val wf = WeekFields.of(locale)
+            val firstDayOfWeek = wf.firstDayOfWeek
+
+            for (i in weekDayStrings.indices) {
+                weekDayStrings[i] = firstDayOfWeek.plus(i.toLong()).getDisplayName(TextStyle.NARROW, locale)
+            }
+        }
 
         val root = inflater.inflate(R.layout.fragment_weekly_rule, container, false) as ConstraintLayout
         constraintSet = ConstraintSet()
@@ -135,7 +149,7 @@ class WeeklyRuleFragment : Fragment() {
 
         //toolbar
         for (i in days.indices) {
-            days[i].text = firstDayOfWeek.plus(i.toLong()).getDisplayName(TextStyle.NARROW, locale)
+            days[i].text = weekDayStrings[i]
         }
 
         val dayHeaderParams: AppBarLayout.LayoutParams = if (weeklyRuleViewModel.initialCreation) {
@@ -160,9 +174,22 @@ class WeeklyRuleFragment : Fragment() {
         //times
         constraintSet.clone(timeLayout)
 
-        for (i in times.indices) {
-            val localTime = LocalTime.of(i + 1, 0)
-            times[i].text = localTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT))
+        if (sdkVersion < Build.VERSION_CODES.O) {
+            for (i in times.indices) {
+                val cal = Calendar.getInstance(locale)
+                cal.set(Calendar.HOUR_OF_DAY, i + 1)
+                cal.set(Calendar.MINUTE, 0)
+                val date = Date(cal.timeInMillis)
+                val df = DateFormat.getTimeFormat(context)
+
+                times[i].text = df.format(date)
+            }
+        } else @TargetApi(Build.VERSION_CODES.O) {
+            for (i in times.indices) {
+                val dtf = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
+                val localTime = LocalTime.of(i + 1, 0)
+                times[i].text = localTime.format(dtf)
+            }
         }
 
         val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
