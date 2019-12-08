@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.service.autofill.DateValueSanitizer
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.widget.LinearLayout
@@ -85,7 +86,12 @@ class WeeklyRuleFragment : Fragment() {
         val sdkVersion = Build.VERSION.SDK_INT
         if (sdkVersion < Build.VERSION_CODES.O) {
             val dfs = DateFormatSymbols.getInstance(locale)
-            weekDayStrings = dfs.shortWeekdays
+            val dfsStrings = dfs.shortWeekdays
+            val firstDayOfWeek = Calendar.getInstance(locale).firstDayOfWeek
+
+            for (i in weekDayStrings.indices) {
+                weekDayStrings[i] = dfsStrings[(firstDayOfWeek + i - 1) % weekDayStrings.size + 1][0].toString()
+            }
         } else @TargetApi(Build.VERSION_CODES.O) {
             val wf = WeekFields.of(locale)
             val firstDayOfWeek = wf.firstDayOfWeek
