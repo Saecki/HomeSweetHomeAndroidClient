@@ -1,114 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/card_view_margin"
-    android:layout_marginTop="@dimen/card_view_margin"
-    android:layout_marginEnd="@dimen/card_view_margin"
-    app:cardCornerRadius="@dimen/card_view_radius"
-    app:cardElevation="@dimen/card_view_elevation">
+    android:layout_margin="@dimen/item_margin"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/icon_margin"
+            android:src="@drawable/ic_heating_black_24dp"
+            android:tint="?android:colorAccent" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/icon_margin"
-                android:src="@drawable/ic_heating_black_24dp"
-                android:tint="?android:colorAccent" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_weight="6"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_weight="6"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/actualTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_weight="1"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/actualTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_weight="1"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/targetTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/targetTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_weight="1" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2" />
-
-            <ImageView
-                android:id="@+id/arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:padding="@dimen/control_icon_padding"
-                android:src="@drawable/ic_expand_more_black_24dp"
-                android:tint="?android:colorForeground" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/detailedView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/device_detailed_view_start_margin"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/detailedViewTargetTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/text_margin"
-                android:minHeight="0dp"
-                android:textColor="?android:colorAccent" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/minus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/control_icon_padding"
-                android:src="@drawable/ic_remove_black_24dp"
-                android:tint="?android:colorForeground" />
-
-            <ImageView
-                android:id="@+id/plus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/control_icon_padding"
-                android:src="@drawable/ic_add_black_24dp"
-                android:tint="?android:colorForeground" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/control_icon_padding"
+            android:src="@drawable/ic_expand_more_black_24dp"
+            android:tint="?android:colorForeground" />
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:id="@+id/detailedView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/device_detailed_view_start_margin"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/detailedViewTargetTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/text_margin"
+            android:minHeight="0dp"
+            android:textColor="?android:colorAccent" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_icon_padding"
+            android:src="@drawable/ic_remove_black_24dp"
+            android:tint="?android:colorForeground" />
+
+        <ImageView
+            android:id="@+id/plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_icon_padding"
+            android:src="@drawable/ic_add_black_24dp"
+            android:tint="?android:colorForeground" />
+
+    </LinearLayout>
+
+</LinearLayout>
