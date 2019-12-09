@@ -57,14 +57,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        activity = this
+        preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        res = resources
+
         setTheme(R.style.Theme_App)
         DarkMode.setMode(getPrefStringAsInt(getString(R.string.pref_dark_mode_key), DarkMode.DEFAULT))
 
         super.onCreate(savedInstanceState)
-
-        activity = this
-        preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        res = resources
 
         setContentView(R.layout.activity_main)
 
