@@ -21,7 +21,7 @@
     <string-array name="pref_dark_mode_entries">
         <item>Dunkel</item>
         <item>Hell</item>
-        <item>System (Android 10)</item>
+        <item>Energie sparen</item>
     </string-array>
 
 </resources>

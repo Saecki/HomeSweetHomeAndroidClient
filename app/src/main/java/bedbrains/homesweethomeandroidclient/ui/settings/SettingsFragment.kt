@@ -50,14 +50,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         animationDurationPreference.setOnPreferenceChangeListener { preference, newValue ->
             val roundedValue = (newValue as Int / 10.0).roundToInt() * 10
             preference.summary = when (roundedValue) {
-                0 -> "Off"
+                0 -> resources.getString(R.string.state_off)
                 else -> roundedValue.toString() + "ms"
             }
             animationDurationPreference.value = roundedValue
             false
         }
         animationDurationPreference.summary = when (animationDurationPreference.value) {
-            0 -> "Off"
+            0 -> resources.getString(R.string.state_off)
             else -> animationDurationPreference.value.toString() + "ms"
         }
     }
@@ -91,7 +91,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             value.toString().toInt()
         } catch (e: ClassCastException) {
             Log.e("PREF", "Couldn't cast value: '$value'")
-            DarkMode.LIGHT
+            DarkMode.DEFAULT
         }
         DarkMode.setMode(mode)
     }

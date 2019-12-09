@@ -56,16 +56,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_App)
+        DarkMode.setMode(getPrefStringAsInt(getString(R.string.pref_dark_mode_key), DarkMode.DEFAULT))
+
         super.onCreate(savedInstanceState)
 
         activity = this
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         res = resources
 
-        DarkMode.setMode(getPrefStringAsInt(getString(R.string.pref_dark_mode_key), DarkMode.LIGHT))
         setContentView(R.layout.activity_main)
 
         appBarLayout = findViewById(R.id.app_bar_layout)
