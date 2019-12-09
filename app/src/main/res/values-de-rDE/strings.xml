@@ -23,6 +23,9 @@
     <string name="menu_light">Licht</string>
     <string name="menu_weekly_rule">Wöchentliche Regel</string>
 
+    <!--State!-->
+    <string name="state_off">aus</string>
+
     <!-- Heating !-->
     <string name="heating_snackbar_edit_text">Nummer nicht erkannt</string>
     <string name="heating_snackbar_edit">Bearbeiten</string>

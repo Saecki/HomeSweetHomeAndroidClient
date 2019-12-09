@@ -23,6 +23,9 @@
     <string name="menu_light">Light</string>
     <string name="menu_weekly_rule">Weekly Rule</string>
 
+    <!--State!-->
+    <string name="state_off">off</string>
+
     <!-- Heating !-->
     <string name="heating_snackbar_edit_text">No number recognized</string>
     <string name="heating_snackbar_edit">Edit</string>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- User Interface !-->
+    <string-array name="pref_dark_mode_entries">
+        <item>Dunkel</item>
+        <item>Hell</item>
+        <item>System</item>
+    </string-array>
+
+    <string-array name="pref_dark_mode_entry_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources>

@@ -55,7 +55,7 @@
         android:title="@string/pref_ui_category_title">
 
         <ListPreference
-            android:defaultValue="2"
+            android:defaultValue="0"
             android:entries="@array/pref_dark_mode_entries"
             android:entryValues="@array/pref_dark_mode_entry_values"
             android:key="@string/pref_dark_mode_key"
