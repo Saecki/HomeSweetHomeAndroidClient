@@ -29,7 +29,7 @@ fun testWeeklyTimeMax() {
 }
 
 fun testWeeklyTimeNow() {
-    val time = WeeklyTime.now()
+    val time = WeeklyTime.now
     println("now()")
     println("time.day: ${time.day}")
     println("time.hour: ${time.hour}")

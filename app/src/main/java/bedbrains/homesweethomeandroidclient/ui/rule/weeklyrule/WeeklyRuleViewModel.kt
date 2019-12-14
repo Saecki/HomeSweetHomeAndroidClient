@@ -12,7 +12,7 @@ class WeeklyRuleViewModel : ViewModel() {
     init {
         rule.timeSpans.add(
             WeeklyTimeSpan(
-                WeeklyTime(0, 13, 0, 0, 0),
+                WeeklyTime(0, 15, 0, 0, 0),
                 WeeklyTime(1, 0, 0, 0, 0)
             )
         )
@@ -37,19 +37,19 @@ class WeeklyRuleViewModel : ViewModel() {
         rule.timeSpans.add(
             WeeklyTimeSpan(
                 WeeklyTime(4, 13, 0, 0, 0),
-                WeeklyTime(5, 2, 0, 0, 0)
+                WeeklyTime(5, 0, 0, 0, 0)
             )
         )
         rule.timeSpans.add(
             WeeklyTimeSpan(
-                WeeklyTime(5, 15, 0, 0, 0),
+                WeeklyTime(5, 13, 0, 0, 0),
                 WeeklyTime(6, 2, 0, 0, 0)
             )
         )
         rule.timeSpans.add(
             WeeklyTimeSpan(
                 WeeklyTime(6, 15, 0, 0, 0),
-                WeeklyTime(0, 0, 0, 0, 0)
+                WeeklyTime(0, 2, 0, 0, 0)
             )
         )
     }

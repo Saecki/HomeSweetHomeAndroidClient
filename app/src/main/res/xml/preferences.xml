@@ -56,11 +56,11 @@
 
         <ListPreference
             android:defaultValue="0"
-            android:entries="@array/pref_dark_mode_entries"
-            android:entryValues="@array/pref_dark_mode_entry_values"
-            android:key="@string/pref_dark_mode_key"
+            android:entries="@array/pref_theme_entries"
+            android:entryValues="@array/pref_theme_entry_values"
+            android:key="@string/pref_theme_key"
             android:summary="%s"
-            android:title="@string/pref_dark_mode_title" />
+            android:title="@string/pref_theme_title" />
 
         <SeekBarPreference
             android:defaultValue="250"

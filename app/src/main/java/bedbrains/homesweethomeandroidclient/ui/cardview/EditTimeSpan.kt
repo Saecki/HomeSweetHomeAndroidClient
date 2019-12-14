@@ -15,7 +15,7 @@ class EditTimeSpan(context: Context) : ConstraintLayout(context) {
     val handleDiameter = resources.getDimensionPixelSize(R.dimen.card_view_handle_diameter)
     val handleElevation = resources.getDimension(R.dimen.card_view_handle_elevation)
     val borderWidth = resources.getDimensionPixelSize(R.dimen.card_view_border_width)
-    val cardRadius = resources.getDimensionPixelSize(R.dimen.card_view_radius)
+    val cardRadius = resources.getDimensionPixelSize(R.dimen.card_view_corner_radius)
     val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     val constraintSet = ConstraintSet()
     val card = View(context).apply {

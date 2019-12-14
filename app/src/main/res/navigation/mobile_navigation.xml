@@ -59,6 +59,16 @@
     <fragment
         android:id="@+id/nav_weekly_rule"
         android:name="bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleFragment"
-        tools:layout="@layout/fragment_weekly_rule" />
+        tools:layout="@layout/fragment_weekly_rule" >
+        <action
+            android:id="@+id/action_nav_weekly_rule_to_nav_weekly_time_span"
+            app:destination="@id/nav_weekly_time_span" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_weekly_time_span"
+        android:label="nice"
+        android:name="bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyTimeSpanFragment"
+        tools:layout="@layout/fragment_weekly_time_span" />
 
 </navigation>

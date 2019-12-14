@@ -1,13 +1,8 @@
 package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 
-import android.annotation.TargetApi
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.service.autofill.DateValueSanitizer
-import android.text.format.DateFormat
-import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.widget.LinearLayout
@@ -20,23 +15,21 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
+import bedbrains.platform.Tools
 import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 import com.google.android.material.appbar.AppBarLayout
-import java.text.DateFormatSymbols
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
-import java.time.format.TextStyle
-import java.time.temporal.WeekFields
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 class WeeklyRuleFragment : Fragment() {
 
+    lateinit var root: ConstraintLayout
     lateinit var weeklyRuleViewModel: WeeklyRuleViewModel
     lateinit var dayToolBar: LinearLayout
     lateinit var daySpace: View
@@ -53,8 +46,9 @@ class WeeklyRuleFragment : Fragment() {
     lateinit var bottomTimeSpanAnchor: Space
     lateinit var timeIndicatorHead: View
     lateinit var timeIndicatorLine: View
-
     var timeSpans = mutableListOf<View>()
+
+    lateinit var addButton: FloatingActionButton
 
     var hourHeight = 0
     var indicatorLineWidth = 0
@@ -83,25 +77,11 @@ class WeeklyRuleFragment : Fragment() {
         daySpace = dayToolBar.findViewById(R.id.day_space)
         locale = Locale.getDefault()
 
-        val sdkVersion = Build.VERSION.SDK_INT
-        if (sdkVersion < Build.VERSION_CODES.O) {
-            val dfs = DateFormatSymbols.getInstance(locale)
-            val dfsStrings = dfs.shortWeekdays
-            val firstDayOfWeek = Calendar.getInstance(locale).firstDayOfWeek
-
-            for (i in weekDayStrings.indices) {
-                weekDayStrings[i] = dfsStrings[(firstDayOfWeek + i - 1) % weekDayStrings.size + 1][0].toString()
-            }
-        } else @TargetApi(Build.VERSION_CODES.O) {
-            val wf = WeekFields.of(locale)
-            val firstDayOfWeek = wf.firstDayOfWeek
-
-            for (i in weekDayStrings.indices) {
-                weekDayStrings[i] = firstDayOfWeek.plus(i.toLong()).getDisplayName(TextStyle.NARROW, locale)
-            }
+        for (i in weekDayStrings.indices) {
+            weekDayStrings[i] = Tools.formatWeekdayNarrow(i, locale)
         }
 
-        val root = inflater.inflate(R.layout.fragment_weekly_rule, container, false) as ConstraintLayout
+        root = inflater.inflate(R.layout.fragment_weekly_rule, container, false) as ConstraintLayout
         constraintSet = ConstraintSet()
         timeLayout = root.findViewById(R.id.time_layout) as ConstraintLayout
         timeLine = timeLayout.findViewById(R.id.time_line)
@@ -145,6 +125,8 @@ class WeeklyRuleFragment : Fragment() {
         timeIndicatorHead = timeLayout.findViewById(R.id.time_indicator_head)
         timeIndicatorLine = timeLayout.findViewById(R.id.time_indicator_line)
 
+        addButton = root.findViewById(R.id.add_button)
+
         hourHeight = resources.getDimensionPixelSize(R.dimen.weekly_rule_hour_height)
         indicatorLineWidth = resources.getDimensionPixelSize(R.dimen.time_indicaotr_line_width)
         indicatorHeadDiameter = resources.getDimensionPixelSize(R.dimen.time_indicator_head_diameter)
@@ -165,37 +147,19 @@ class WeeklyRuleFragment : Fragment() {
         }
 
         dayToolBar.layoutParams = dayHeaderParams
+        dayToolBar.visibility = View.VISIBLE
         MainActivity.appBarLayout.addView(dayToolBar)
-
-        if (weeklyRuleViewModel.initialCreation) {
-            val duration = getAnimationDuration()
-            val expandAnimation = ExpandAnimation(dayToolBar)
-            expandAnimation.duration = duration
-            expandAnimation.startOffset = duration / 2
-            dayToolBar.layoutParams = dayHeaderParams
-            dayToolBar.startAnimation(expandAnimation)
-            weeklyRuleViewModel.initialCreation = false
-        }
 
         //times
         constraintSet.clone(timeLayout)
 
-        if (sdkVersion < Build.VERSION_CODES.O) {
-            for (i in times.indices) {
-                val cal = Calendar.getInstance(locale)
-                cal.set(Calendar.HOUR_OF_DAY, i + 1)
-                cal.set(Calendar.MINUTE, 0)
-                val date = Date(cal.timeInMillis)
-                val df = DateFormat.getTimeFormat(context)
+        for (i in times.indices) {
+            times[i].text = Tools.formatTime(i + 1, 0, locale, context)
+        }
 
-                times[i].text = df.format(date)
-            }
-        } else @TargetApi(Build.VERSION_CODES.O) {
-            for (i in times.indices) {
-                val dtf = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
-                val localTime = LocalTime.of(i + 1, 0)
-                times[i].text = localTime.format(dtf)
-            }
+        //add button
+        addButton.setOnClickListener {
+            root.findNavController().navigate(R.id.action_nav_weekly_rule_to_nav_weekly_time_span)
         }
 
         val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
@@ -210,11 +174,20 @@ class WeeklyRuleFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        updateTimeIndicator(WeeklyTime.now())
+        updateTimeIndicator(WeeklyTime.now)
+
+        if (weeklyRuleViewModel.initialCreation) {
+            dayToolBar.visibility = View.VISIBLE
+            val duration = getAnimationDuration()
+            val expandAnimation = ExpandAnimation(dayToolBar)
+            expandAnimation.duration = duration
+            dayToolBar.startAnimation(expandAnimation)
+            weeklyRuleViewModel.initialCreation = false
+        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
 
         val collapseAnimation = CollapseAnimation(dayToolBar)
         collapseAnimation.duration = getAnimationDuration()
@@ -229,54 +202,54 @@ class WeeklyRuleFragment : Fragment() {
 
         })
         dayToolBar.startAnimation(collapseAnimation)
+
+        weeklyRuleViewModel.initialCreation = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.weekly_rule, menu)
     }
 
-    fun displayTimeSpans() {
+    private fun displayTimeSpans() {
         timeSpans.forEach { view -> timeLayout.removeView(view) }
 
-        for (t in weeklyRuleViewModel.rule.timeSpans) {
-            displayTimeSpan(t)
-        }
+        weeklyRuleViewModel.rule.timeSpans.forEach { displayTimeSpan(it) }
 
         constraintSet.applyTo(timeLayout)
     }
 
-    fun displayTimeSpan(t: WeeklyTimeSpan) {
+    private fun displayTimeSpan(t: WeeklyTimeSpan) {
 
-        var endDay = t.end.day
+        var endDay = t.end.localizedDay
 
-        if (t.start.after(t.end))
+        if (t.start.localizedAfter(t.end))
             endDay += 7
 
-        if (t.end.inDailyMillis() == 0)
+        if (t.end.inDailyMillis == 0)
             endDay--
 
-        for (i in t.start.day until endDay + 1) {
+        for (i in t.start.localizedDay until endDay + 1) {
             val day = i % 7
 
             val card = createTimeSpan(day)
 
-            if (i > t.start.day) {
+            if (i > t.start.localizedDay) {
                 constraintSet.connect(card.id, ConstraintSet.TOP, topTimeSpanAnchor.id, ConstraintSet.TOP)
             } else {
-                constraintSet.connect(card.id, ConstraintSet.TOP, timeLine.id, ConstraintSet.TOP, (hourHeight * t.start.inDailyHours()).toInt())
+                constraintSet.connect(card.id, ConstraintSet.TOP, timeLine.id, ConstraintSet.TOP, (hourHeight * t.start.inDailyHours).toInt())
             }
 
-            if (i == endDay && t.end.inDailyMillis() == 0) {
+            if (i == endDay && t.end.inDailyMillis == 0) {
                 constraintSet.connect(card.id, ConstraintSet.BOTTOM, timeLine.id, ConstraintSet.BOTTOM)
             } else if (i < endDay) {
                 constraintSet.connect(card.id, ConstraintSet.BOTTOM, bottomTimeSpanAnchor.id, ConstraintSet.BOTTOM)
             } else {
-                constraintSet.connect(card.id, ConstraintSet.BOTTOM, timeLine.id, ConstraintSet.BOTTOM, (hourHeight * (24 - t.end.inDailyHours())).toInt())
+                constraintSet.connect(card.id, ConstraintSet.BOTTOM, timeLine.id, ConstraintSet.BOTTOM, (hourHeight * (24 - t.end.inDailyHours)).toInt())
             }
         }
     }
 
-    fun createTimeSpan(day: Int): View {
+    private fun createTimeSpan(day: Int): View {
         val card = View(context)
         card.id = View.generateViewId()
         card.background = ContextCompat.getDrawable(context!!, R.drawable.background_card_view)
@@ -284,36 +257,40 @@ class WeeklyRuleFragment : Fragment() {
         timeLayout.addView(card)
         timeSpans.add(card)
 
+        card.setOnClickListener {
+            root.findNavController().navigate(R.id.action_nav_weekly_rule_to_nav_weekly_time_span)
+        }
+
         constraintSet.connect(card.id, ConstraintSet.LEFT, verticalGuideLines[day].id, ConstraintSet.RIGHT, timeSpanMargin)
         constraintSet.connect(card.id, ConstraintSet.RIGHT, verticalGuideLines[day + 1].id, ConstraintSet.LEFT, timeSpanBigMargin)
 
         return card
     }
 
-    fun startUpdatingTimeIndicator() {
+    private fun startUpdatingTimeIndicator() {
         val mainHandler = Handler(Looper.myLooper()!!)
 
         mainHandler.post(object : Runnable {
             override fun run() {
-                updateTimeIndicator(WeeklyTime.now())
+                updateTimeIndicator(WeeklyTime.now)
                 mainHandler.postDelayed(this, 60000)
             }
         })
     }
 
-    fun updateTimeIndicator(time: WeeklyTime) {
+    private fun updateTimeIndicator(time: WeeklyTime) {
         constraintSet.clear(timeIndicatorHead.id)
         constraintSet.clear(timeIndicatorLine.id)
 
-        constraintSet.connect(timeIndicatorHead.id, ConstraintSet.RIGHT, verticalGuideLines[time.day].id, ConstraintSet.RIGHT)
+        constraintSet.connect(timeIndicatorHead.id, ConstraintSet.RIGHT, verticalGuideLines[time.localizedDay].id, ConstraintSet.RIGHT)
         constraintSet.connect(timeIndicatorHead.id, ConstraintSet.TOP, timeIndicatorLine.id, ConstraintSet.TOP)
         constraintSet.connect(timeIndicatorHead.id, ConstraintSet.BOTTOM, timeIndicatorLine.id, ConstraintSet.BOTTOM)
         constraintSet.constrainWidth(timeIndicatorHead.id, indicatorHeadDiameter)
         constraintSet.constrainHeight(timeIndicatorHead.id, indicatorHeadDiameter)
 
-        constraintSet.connect(timeIndicatorLine.id, ConstraintSet.RIGHT, verticalGuideLines[time.day + 1].id, ConstraintSet.LEFT)
+        constraintSet.connect(timeIndicatorLine.id, ConstraintSet.RIGHT, verticalGuideLines[time.localizedDay + 1].id, ConstraintSet.LEFT)
         constraintSet.connect(timeIndicatorLine.id, ConstraintSet.LEFT, timeIndicatorHead.id, ConstraintSet.RIGHT)
-        constraintSet.connect(timeIndicatorLine.id, ConstraintSet.TOP, timeLayout.id, ConstraintSet.TOP, (hourHeight * time.inDailyHours()).toInt())
+        constraintSet.connect(timeIndicatorLine.id, ConstraintSet.TOP, timeLine.id, ConstraintSet.TOP, (hourHeight * time.inDailyHours).toInt())
         constraintSet.constrainHeight(timeIndicatorLine.id, indicatorLineWidth)
 
         constraintSet.applyTo(timeLayout)

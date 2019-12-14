@@ -8,6 +8,25 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorGridLine">@color/grid_line</item>
         <item name="android:windowLightStatusBar">@bool/light_status_bar</item>
+        <item name="android:alertDialogTheme">@style/Theme.App.Dialog.Alert</item>
+        <item name="android:dialogTheme">@style/Theme.App.Dialog</item>
+        <item name="android:timePickerDialogTheme">@style/Theme.App.Dialog</item>
+        <item name="android:datePickerDialogTheme">@style/Theme.App.Dialog</item>
+        <item name="alertDialogTheme">@style/Theme.App.Dialog.Alert</item>
+    </style>
+
+    <style name="Theme.App.Dialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="android:windowBackground">@drawable/background_alert_dialog</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_variant</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <style name="Theme.App.Dialog.Alert" parent="Theme.AppCompat.DayNight.Dialog.MinWidth">
+        <item name="android:windowBackground">@drawable/background_alert_dialog</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_variant</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
     <style name="Theme.SplashScreen" parent="Theme.AppCompat.DayNight.NoActionBar">

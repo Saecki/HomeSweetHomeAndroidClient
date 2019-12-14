@@ -4,6 +4,6 @@
 
     <solid android:color="?android:colorAccent" />
 
-    <corners android:radius="@dimen/card_view_radius" />
+    <corners android:radius="@dimen/card_view_corner_radius" />
 
 </shape>

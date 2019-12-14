@@ -5,9 +5,8 @@ import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SeekBarPreference
-import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
-import bedbrains.homesweethomeandroidclient.ui.DarkMode
+import bedbrains.homesweethomeandroidclient.ui.Theme
 import bedbrains.shared.datatypes.Temperature
 import java.lang.ClassCastException
 import kotlin.math.roundToInt
@@ -36,7 +35,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setTempDecimals(tempDecimalsPreference.value)
 
         //dark mode
-        val darkModeKey = resources.getString(R.string.pref_dark_mode_key)
+        val darkModeKey = resources.getString(R.string.pref_theme_key)
         val darkModePreference = findPreference<ListPreference>(darkModeKey)!!
         darkModePreference.setOnPreferenceChangeListener { _, newValue ->
             setDarkMode(newValue)
@@ -91,8 +90,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             value.toString().toInt()
         } catch (e: ClassCastException) {
             Log.e("PREF", "Couldn't cast value: '$value'")
-            DarkMode.DEFAULT
+            Theme.DEFAULT
         }
-        DarkMode.setMode(mode)
+        Theme.setMode(mode)
     }
 }
