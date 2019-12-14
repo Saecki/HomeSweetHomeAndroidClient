@@ -15,7 +15,7 @@
     <dimen name="device_detailed_view_start_margin">56dp</dimen>
     <dimen name="control_icon_padding">16dp</dimen>
 
-    <dimen name="card_view_radius">6dp</dimen>
+    <dimen name="card_view_corner_radius">8dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
     <dimen name="card_view_border_width">2dp</dimen>
     <dimen name="card_view_elevation">3dp</dimen>
@@ -31,7 +31,8 @@
     <dimen name="weekly_rule_half_hour_height">20dp</dimen>
     <dimen name="weekly_rule_quarter_hour_height">10dp</dimen>
     <dimen name="weekly_rule_time_span_margin">2dp</dimen>
-    <dimen name="weekly_rule_time_span_big_margin">6dp</dimen>
+    <dimen name="weekly_rule_time_span_big_margin">12dp</dimen>
+    <dimen name="weekly_time_span_big_text">16sp</dimen>
 
     <dimen name="separator_line_width">0.8dp</dimen>
 

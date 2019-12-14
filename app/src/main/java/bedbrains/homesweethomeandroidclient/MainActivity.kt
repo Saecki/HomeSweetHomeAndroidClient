@@ -13,7 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
-import bedbrains.homesweethomeandroidclient.ui.DarkMode
+import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         res = resources
 
         setTheme(R.style.Theme_App)
-        DarkMode.setMode(getPrefStringAsInt(getString(R.string.pref_dark_mode_key), DarkMode.DEFAULT))
+        Theme.setMode(getPrefStringAsInt(getString(R.string.pref_theme_key), Theme.DEFAULT))
 
         super.onCreate(savedInstanceState)
 

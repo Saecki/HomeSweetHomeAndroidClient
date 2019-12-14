@@ -4,7 +4,7 @@
 
     <solid android:color="?android:colorBackground" />
 
-    <corners android:radius="@dimen/card_view_radius" />
+    <corners android:radius="@dimen/card_view_corner_radius" />
 
     <stroke
         android:width="@dimen/card_view_border_width"

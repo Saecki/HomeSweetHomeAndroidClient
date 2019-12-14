@@ -2,7 +2,7 @@ package bedbrains.homesweethomeandroidclient.ui
 
 import androidx.appcompat.app.AppCompatDelegate
 
-object DarkMode {
+object Theme {
     const val DARK = 0
     const val LIGHT = 1
     const val SYSTEM = 2
