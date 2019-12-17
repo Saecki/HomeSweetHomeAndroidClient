@@ -1,80 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/item_margin"
-    android:orientation="vertical">
+    android:layout_margin="@dimen/item_margin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginStart="@dimen/icon_margin"
+        android:layout_marginTop="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/icon_margin"
+        android:layout_marginBottom="@dimen/icon_margin"
+        android:src="@drawable/ic_heating_black_24dp"
+        android:tint="?android:colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/icon_margin"
-            android:src="@drawable/ic_heating_black_24dp"
-            android:tint="?android:colorAccent" />
+    <Space
+        android:id="@+id/start_space"
+        android:layout_width="@dimen/icon_margin"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_weight="6"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/room"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/name"
+        app:layout_constraintStart_toEndOf="@id/start_space"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/actualTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_weight="1"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/actual_temp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/detailed_view_barrier"
+        app:layout_constraintEnd_toStartOf="@id/target_temp"
+        app:layout_constraintStart_toEndOf="@id/start_space"
+        app:layout_constraintTop_toBottomOf="@id/room" />
 
-        <TextView
-            android:id="@+id/targetTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_weight="1" />
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        app:layout_constraintEnd_toStartOf="@id/arrow"
+        app:layout_constraintStart_toEndOf="@id/room"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2" />
+    <TextView
+        android:id="@+id/target_temp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        app:layout_constraintBottom_toTopOf="@id/detailed_view_barrier"
+        app:layout_constraintEnd_toStartOf="@id/arrow"
+        app:layout_constraintStart_toEndOf="@id/actual_temp"
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
-        <ImageView
-            android:id="@+id/arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:padding="@dimen/control_icon_padding"
-            android:src="@drawable/ic_expand_more_black_24dp"
-            android:tint="?android:colorForeground" />
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="@dimen/control_icon_padding"
+        android:src="@drawable/ic_expand_more_black_24dp"
+        android:tint="?android:colorForeground"
+        app:layout_constraintBottom_toBottomOf="@id/detailed_view_barrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/detailed_view_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="detailed_view" />
 
     <LinearLayout
-        android:id="@+id/detailedView"
-        android:layout_width="match_parent"
+        android:id="@+id/detailed_view"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/device_detailed_view_start_margin"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/start_space"
+        app:layout_constraintTop_toBottomOf="@id/detailed_view_barrier">
 
         <TextView
-            android:id="@+id/detailedViewTargetTemp"
+            android:id="@+id/detailed_view_target_temp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/text_margin"
-            android:minHeight="0dp"
+            android:gravity="center_vertical"
             android:textColor="?android:colorAccent" />
 
         <Space
@@ -100,4 +126,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,7 +39,6 @@
     <fragment
         android:id="@+id/nav_heating"
         android:name="bedbrains.homesweethomeandroidclient.ui.device.heating.HeatingFragment"
-        android:label="@string/menu_heating"
         tools:layout="@layout/fragment_heating">
         <action
             android:id="@+id/action_nav_heating_to_nav_weekly_rule"
@@ -49,7 +48,6 @@
     <fragment
         android:id="@+id/nav_light"
         android:name="bedbrains.homesweethomeandroidclient.ui.device.light.LightFragment"
-        android:label="@string/menu_light"
         tools:layout="@layout/fragment_light">
         <action
             android:id="@+id/action_nav_light_to_nav_weekly_rule"
@@ -67,7 +65,6 @@
 
     <fragment
         android:id="@+id/nav_weekly_time_span"
-        android:label="nice"
         android:name="bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyTimeSpanFragment"
         tools:layout="@layout/fragment_weekly_time_span" />
 

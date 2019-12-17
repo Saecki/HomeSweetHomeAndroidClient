@@ -17,6 +17,11 @@
             android:icon="@drawable/ic_schedule_black_24dp"
             android:title="@string/menu_rules" />
 
+        <item
+            android:id="@+id/nav_values"
+            android:icon="@drawable/ic_label_black_24dp"
+            android:title="@string/menu_values" />
+
     </group>
 
     <group

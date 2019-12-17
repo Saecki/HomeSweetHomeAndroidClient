@@ -7,12 +7,16 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="menu_margin_horizontal">60dp</dimen>
+    <dimen name="menu_margin_vertical">40dp</dimen>
+
     <dimen name="item_margin">8dp</dimen>
     <dimen name="text_margin">8dp</dimen>
     <dimen name="icon_margin">16dp</dimen>
     <dimen name="control_margin">8dp</dimen>
     <!-- icon-width(24dp) + 2 * icon_margin + !-->
     <dimen name="device_detailed_view_start_margin">56dp</dimen>
+    <dimen name="control_padding">8dp</dimen>
     <dimen name="control_icon_padding">16dp</dimen>
 
     <dimen name="card_view_corner_radius">8dp</dimen>
@@ -32,7 +36,6 @@
     <dimen name="weekly_rule_quarter_hour_height">10dp</dimen>
     <dimen name="weekly_rule_time_span_margin">2dp</dimen>
     <dimen name="weekly_rule_time_span_big_margin">12dp</dimen>
-    <dimen name="weekly_time_span_big_text">16sp</dimen>
 
     <dimen name="separator_line_width">0.8dp</dimen>
 

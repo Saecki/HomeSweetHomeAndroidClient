@@ -3,7 +3,6 @@
 
     <!-- Names and Titles !-->
     <string name="nav_header_subtitle">Ein Smart Home System</string>
-    <string name="nav_header_desc">Navigationsüberschrift</string>
 
     <!-- Action Bar Menu !-->
     <string name="action_refresh">Aktualisieren</string>
@@ -11,17 +10,23 @@
     <string name="action_sort_by">Sortieren</string>
     <string name="action_group_by">Gruppieren</string>
     <string name="action_filter_by">Filtern</string>
-    <string name="action_share">Teilen</string>
     <string name="action_clear">Alle Entfernen</string>
+    <string name="action_apply_to_all">Auf alle anwenden</string>
 
     <!-- Menu !-->
     <string name="menu_home">Start</string>
     <string name="menu_rules">Regeln</string>
+    <string name="menu_values">Werte</string>
     <string name="menu_settings">Einstellungen</string>
-    <string name="menu_share">Teilen</string>
-    <string name="menu_heating">Heizung</string>
-    <string name="menu_light">Licht</string>
-    <string name="menu_weekly_rule">Wöchentliche Regel</string>
+
+    <!-- Rule !-->
+    <!-- Weekly Time Span !-->
+    <string name="rule_time_title">Zeit</string>
+    <string name="rule_value_title">Werte</string>
+
+    <!-- Rule Value !-->
+    <string name="value_heating">Heizung</string>
+    <string name="value_light">Licht</string>
 
     <!--State!-->
     <string name="state_off">aus</string>
@@ -46,4 +51,5 @@
     <string name="pref_ui_category_title">Benutzeroberfäche</string>
     <string name="pref_theme_title">Thema</string>
     <string name="pref_animation_duration_title">Animationsdauer</string>
+
 </resources>

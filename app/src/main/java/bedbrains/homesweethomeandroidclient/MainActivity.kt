@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -73,6 +74,8 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -85,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        bottomNav.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
