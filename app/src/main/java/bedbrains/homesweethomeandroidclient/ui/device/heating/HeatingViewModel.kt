@@ -8,8 +8,8 @@ class HeatingViewModel : ViewModel() {
     val heating =
         Heating(
             "lkjfds",
-            "nice",
-            "löskajfdösdl",
+            "My Room",
+            "My Heating",
             Temperature(23.0, Temperature.Unit.CELSIUS),
             Temperature(23.0, Temperature.Unit.CELSIUS)
         )

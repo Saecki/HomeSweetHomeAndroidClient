@@ -12,6 +12,6 @@
     <color name="background">#000000</color>
     <color name="primary">#999999</color>
     <color name="primary_variant">#888888</color>
-    <color name="accent">#ffa54c</color>
+    <color name="accent">#FFAD66</color>
     <color name="grid_line">#404040</color>
 </resources>

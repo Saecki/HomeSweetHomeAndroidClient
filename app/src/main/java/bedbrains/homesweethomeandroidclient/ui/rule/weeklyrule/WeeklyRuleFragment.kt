@@ -59,9 +59,9 @@ class WeeklyRuleFragment : Fragment() {
     var cardViewHighElevation = 0f
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        weeklyRuleViewModel = ViewModelProviders.of(this).get(WeeklyRuleViewModel::class.java)
-
         setHasOptionsMenu(true)
+
+        weeklyRuleViewModel = ViewModelProviders.of(this).get(WeeklyRuleViewModel::class.java)
         MainActivity.appBarLayout.findViewById<Toolbar>(R.id.toolbar).title = weeklyRuleViewModel.rule.name
 
         dayToolBar = inflater.inflate(R.layout.weekly_rule_toolbar, MainActivity.appBarLayout, false) as LinearLayout
@@ -181,6 +181,7 @@ class WeeklyRuleFragment : Fragment() {
             val duration = getAnimationDuration()
             val expandAnimation = ExpandAnimation(dayToolBar)
             expandAnimation.duration = duration
+            expandAnimation.startOffset = duration / 4
             dayToolBar.startAnimation(expandAnimation)
             weeklyRuleViewModel.initialCreation = false
         }
@@ -189,8 +190,10 @@ class WeeklyRuleFragment : Fragment() {
     override fun onPause() {
         super.onPause()
 
+        val duration = getAnimationDuration()
         val collapseAnimation = CollapseAnimation(dayToolBar)
-        collapseAnimation.duration = getAnimationDuration()
+        collapseAnimation.duration = duration
+        collapseAnimation.startOffset = duration / 4
         collapseAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 

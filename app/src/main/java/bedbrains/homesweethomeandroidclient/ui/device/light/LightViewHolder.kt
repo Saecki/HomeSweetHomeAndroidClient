@@ -11,10 +11,12 @@ import bedbrains.shared.datatypes.devices.Light
 class LightViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     lateinit var light: Light
+    val room: TextView = view.findViewById(R.id.room)
     val name: TextView = view.findViewById(R.id.name)
     val state: Switch = view.findViewById(R.id.state)
 
     fun update(light: Light) {
+        room.text = light.room
         name.text = light.name
         state.isChecked = light.state
     }

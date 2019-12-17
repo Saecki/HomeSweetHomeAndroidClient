@@ -1,9 +1,9 @@
 <resources>
+
     <!-- Names and Titles !-->
     <string name="app_name" translatable="false">HomeSweetHome</string>
     <string name="nav_header_title" translatable="false">HomeSweetHome</string>
     <string name="nav_header_subtitle">A smart home system</string>
-    <string name="nav_header_desc">Navigation header</string>
 
     <!-- Action Bar Menu !-->
     <string name="action_refresh">Refresh</string>
@@ -11,17 +11,23 @@
     <string name="action_sort_by">Sort</string>
     <string name="action_group_by">Group</string>
     <string name="action_filter_by">Filter</string>
-    <string name="action_share">Share</string>
     <string name="action_clear">Clear all</string>
+    <string name="action_apply_to_all">Apply to all</string>
 
     <!-- Menu !-->
     <string name="menu_home">Home</string>
     <string name="menu_rules">Rules</string>
+    <string name="menu_values">Values</string>
     <string name="menu_settings">Settings</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_heating">Heating</string>
-    <string name="menu_light">Light</string>
-    <string name="menu_weekly_rule">Weekly Rule</string>
+
+    <!-- Rule !-->
+    <!-- Weekly Time Span !-->
+    <string name="rule_time_title">Time</string>
+    <string name="rule_value_title">Values</string>
+
+    <!-- Rule Value !-->
+    <string name="value_heating">Heating</string>
+    <string name="value_light">Light</string>
 
     <!--State!-->
     <string name="state_off">off</string>

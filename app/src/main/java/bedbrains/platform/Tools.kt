@@ -4,7 +4,6 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import android.text.format.DateFormat
-import android.util.Log
 import bedbrains.shared.datatypes.rules.WeeklyTime
 import java.text.DateFormatSymbols
 import java.time.LocalDateTime

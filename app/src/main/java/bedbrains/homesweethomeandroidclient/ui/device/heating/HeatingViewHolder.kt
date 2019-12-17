@@ -23,12 +23,13 @@ import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 class HeatingViewHolder(val view: View, val context: Context, val parent: View) : RecyclerView.ViewHolder(view) {
 
     lateinit var heating: Heating
+    val room: TextView = view.findViewById(R.id.room)
     val name: TextView = view.findViewById(R.id.name)
-    val actualTemp: TextView = view.findViewById(R.id.actualTemp)
-    val targetTemp: TextView = view.findViewById(R.id.targetTemp)
+    val actualTemp: TextView = view.findViewById(R.id.actual_temp)
+    val targetTemp: TextView = view.findViewById(R.id.target_temp)
     val arrow: ImageView = view.findViewById(R.id.arrow)
-    val detailedView: LinearLayout = view.findViewById(R.id.detailedView)
-    val detailedViewTargetTemp: TextView = view.findViewById(R.id.detailedViewTargetTemp)
+    val detailedView: LinearLayout = view.findViewById(R.id.detailed_view)
+    val detailedViewTargetTemp: TextView = view.findViewById(R.id.detailed_view_target_temp)
     val minus: ImageView = view.findViewById(R.id.minus)
     val plus: ImageView = view.findViewById(R.id.plus)
 
@@ -61,6 +62,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
     }
 
     fun update(heating: Heating) {
+        room.text = heating.room
         name.text = heating.name
         actualTemp.text = heating.actualTemp.formatGlobal(true)
         targetTemp.text = heating.targetTemp.formatGlobal(true)
@@ -107,7 +109,6 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         detailedView.visibility = View.VISIBLE
         extendView.updateInitialHeight()
         detailedView.startAnimation(extendView)
-        detailedView.animate().alpha(1f).setDuration(duration).start()
         targetTemp.animate().alpha(0f).setDuration(duration).start()
         arrow.animate().rotation(180f).setDuration(duration).start()
     }
@@ -116,7 +117,6 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         heating.extended = true
         detailedView.visibility = View.VISIBLE
         detailedView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        detailedView.alpha = 1f
         targetTemp.alpha = 0f
         arrow.rotation = 180f
         detailedView.requestLayout()
@@ -127,7 +127,6 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         collapseView.duration = duration
         collapseView.updateInitialHeight()
         detailedView.startAnimation(collapseView)
-        detailedView.animate().alpha(0f).setDuration(duration).start()
         targetTemp.animate().alpha(1f).setDuration(duration).start()
         arrow.animate().rotation(0f).setDuration(duration).start()
     }
@@ -135,7 +134,6 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
     fun collapse() {
         heating.extended = false
         detailedView.layoutParams.height = 0
-        detailedView.alpha = 0f
         targetTemp.alpha = 1f
         arrow.rotation = 0f
         detailedView.requestLayout()
