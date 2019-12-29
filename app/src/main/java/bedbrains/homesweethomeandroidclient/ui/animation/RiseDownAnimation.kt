@@ -4,16 +4,14 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.Transformation
 
-class RiseDownAnimation(var view: View) : Animation() {
+class RiseDownAnimation(private vararg val views: View) : Animation() {
 
-    var initialElevation = view.elevation
+    val initialElevations = views.map { it.elevation }
 
     override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-        view.elevation = initialElevation * (1 - interpolatedTime)
-    }
-
-    fun updateInitialElevation() {
-        initialElevation = view.elevation
+        views.forEachIndexed { index, view ->
+            view.elevation = initialElevations[index] * (1 - interpolatedTime)
+        }
     }
 
 }

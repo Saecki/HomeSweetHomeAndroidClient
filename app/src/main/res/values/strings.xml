@@ -12,6 +12,7 @@
     <string name="action_group_by">Group</string>
     <string name="action_filter_by">Filter</string>
     <string name="action_clear">Clear all</string>
+    <string name="action_delete">Delete</string>
     <string name="action_apply_to_all">Apply to all</string>
 
     <!-- Menu !-->

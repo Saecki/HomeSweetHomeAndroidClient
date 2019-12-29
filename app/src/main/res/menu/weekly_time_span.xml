@@ -4,7 +4,12 @@
 
     <item
         android:id="@+id/action_apply_to_all"
-        app:showAsAction="never"
-        android:title="@string/action_apply_to_all" />
+        android:title="@string/action_apply_to_all"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:title="@string/action_delete"
+        app:showAsAction="never" />
 
 </menu>

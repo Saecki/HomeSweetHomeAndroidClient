@@ -11,7 +11,7 @@ import bedbrains.shared.datatypes.rules.WeeklyRule
 class WeeklyRuleViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
 
     lateinit var weeklyRule: WeeklyRule
-    val name: TextView = view.findViewById(R.id.actual_temp)
+    val name: TextView = view.findViewById(R.id.name)
 
     fun update(weeklyRule: WeeklyRule) {
         name.text = weeklyRule.name

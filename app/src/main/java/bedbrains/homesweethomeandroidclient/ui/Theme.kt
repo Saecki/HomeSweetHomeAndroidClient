@@ -3,6 +3,7 @@ package bedbrains.homesweethomeandroidclient.ui
 import androidx.appcompat.app.AppCompatDelegate
 
 object Theme {
+
     const val DARK = 0
     const val LIGHT = 1
     const val SYSTEM = 2

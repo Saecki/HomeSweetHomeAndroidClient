@@ -19,6 +19,14 @@ class RuleValueFragment() : Fragment() {
         val heating = root.findViewById<TextView>(R.id.heating)
         val light = root.findViewById<TextView>(R.id.light)
 
+        heating.setOnClickListener {
+            //TODO
+        }
+
+        light.setOnClickListener {
+            //TODO
+        }
+
         return root
     }
 }

@@ -9,32 +9,29 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
-import bedbrains.shared.datatypes.devices.Heating
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
+import bedbrains.shared.datatypes.devices.Heating
+import com.google.android.material.snackbar.Snackbar
 
-class HeatingViewHolder(val view: View, val context: Context, val parent: View) : RecyclerView.ViewHolder(view) {
+class HeatingViewHolder(private val view: View, private val context: Context, private val parent: View) : RecyclerView.ViewHolder(view) {
 
-    lateinit var heating: Heating
-    val room: TextView = view.findViewById(R.id.room)
-    val name: TextView = view.findViewById(R.id.name)
-    val actualTemp: TextView = view.findViewById(R.id.actual_temp)
-    val targetTemp: TextView = view.findViewById(R.id.target_temp)
-    val arrow: ImageView = view.findViewById(R.id.arrow)
-    val detailedView: LinearLayout = view.findViewById(R.id.detailed_view)
-    val detailedViewTargetTemp: TextView = view.findViewById(R.id.detailed_view_target_temp)
-    val minus: ImageView = view.findViewById(R.id.minus)
-    val plus: ImageView = view.findViewById(R.id.plus)
-
-    val extendView: ExpandAnimation = ExpandAnimation(detailedView)
-    val collapseView: CollapseAnimation = CollapseAnimation(detailedView)
+    private lateinit var heating: Heating
+    private val room: TextView = view.findViewById(R.id.room)
+    private val name: TextView = view.findViewById(R.id.name)
+    private val actualTemp: TextView = view.findViewById(R.id.actual_temp)
+    private val targetTemp: TextView = view.findViewById(R.id.target_temp)
+    private val arrow: ImageView = view.findViewById(R.id.arrow)
+    private val detailedView: Group = view.findViewById(R.id.detailed_view)
+    private val detailedViewTargetTemp: TextView = view.findViewById(R.id.detailed_view_target_temp)
+    private val minus: ImageView = view.findViewById(R.id.minus)
+    private val plus: ImageView = view.findViewById(R.id.plus)
 
     fun bindView(heating: Heating) {
         this.heating = heating
@@ -61,7 +58,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         }
     }
 
-    fun update(heating: Heating) {
+    private fun update(heating: Heating) {
         room.text = heating.room
         name.text = heating.name
         actualTemp.text = heating.actualTemp.formatGlobal(true)
@@ -69,7 +66,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         detailedViewTargetTemp.text = heating.targetTemp.formatGlobal(true)
     }
 
-    fun toggleDetailedView() {
+    private fun toggleDetailedView() {
         if (heating.extended) {
             collapse(getAnimationDuration())
         } else {
@@ -77,7 +74,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         }
     }
 
-    fun decrementTemp() {
+    private fun decrementTemp() {
         var temp = heating.targetTemp.getGlobal()
         temp -= if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             if (temp.rem(getIncrement()) == 0.0) {
@@ -92,7 +89,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         update(heating)
     }
 
-    fun incrementTemp() {
+    private fun incrementTemp() {
         var temp = heating.targetTemp.getGlobal()
         temp += if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             getIncrement() - temp.rem(getIncrement())
@@ -103,44 +100,54 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         update(heating)
     }
 
-    fun expand(duration: Long) {
-        heating.extended = true
+    private fun expand(duration: Long) {
+        val extendView = ExpandAnimation(detailedViewTargetTemp, minus, plus)
         extendView.duration = duration
         detailedView.visibility = View.VISIBLE
-        extendView.updateInitialHeight()
         detailedView.startAnimation(extendView)
         targetTemp.animate().alpha(0f).setDuration(duration).start()
         arrow.animate().rotation(180f).setDuration(duration).start()
+        heating.extended = true
     }
 
-    fun expand() {
-        heating.extended = true
-        detailedView.visibility = View.VISIBLE
-        detailedView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+    private fun expand() {
+        detailedViewTargetTemp.visibility = View.VISIBLE
+        minus.visibility = View.VISIBLE
+        plus.visibility = View.VISIBLE
+        detailedViewTargetTemp.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        minus.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        plus.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         targetTemp.alpha = 0f
         arrow.rotation = 180f
         detailedView.requestLayout()
+        heating.extended = true
     }
 
-    fun collapse(duration: Long) {
-        heating.extended = false
+    private fun collapse(duration: Long) {
+        val collapseView = CollapseAnimation(detailedViewTargetTemp, minus, plus)
         collapseView.duration = duration
-        collapseView.updateInitialHeight()
         detailedView.startAnimation(collapseView)
         targetTemp.animate().alpha(1f).setDuration(duration).start()
         arrow.animate().rotation(0f).setDuration(duration).start()
+        heating.extended = false
     }
 
-    fun collapse() {
-        heating.extended = false
-        detailedView.layoutParams.height = 0
+    private fun collapse() {
+        detailedViewTargetTemp.layoutParams.height = 0
+        minus.layoutParams.height = 0
+        plus.layoutParams.height = 0
         targetTemp.alpha = 1f
         arrow.rotation = 0f
-        detailedView.requestLayout()
-        detailedView.visibility = View.GONE
+        detailedViewTargetTemp.requestLayout()
+        minus.requestLayout()
+        plus.requestLayout()
+        detailedViewTargetTemp.visibility = View.GONE
+        minus.visibility = View.GONE
+        plus.visibility = View.GONE
+        heating.extended = false
     }
 
-    fun showInputDialog(text: String) {
+    private fun showInputDialog(text: String) {
         val builder = AlertDialog.Builder(context)
         val input = EditText(context)
 
@@ -184,7 +191,7 @@ class HeatingViewHolder(val view: View, val context: Context, val parent: View) 
         }, 0)
     }
 
-    fun getIncrement(): Double {
+    private fun getIncrement(): Double {
         val key = MainActivity.res.getString(R.string.pref_temperature_increment_key)
         return MainActivity.getPrefStringAsDouble(key, 0.5)
     }

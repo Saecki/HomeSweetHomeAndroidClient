@@ -11,6 +11,7 @@
     <string name="action_group_by">Gruppieren</string>
     <string name="action_filter_by">Filtern</string>
     <string name="action_clear">Alle Entfernen</string>
+    <string name="action_delete">Löschen</string>
     <string name="action_apply_to_all">Auf alle anwenden</string>
 
     <!-- Menu !-->

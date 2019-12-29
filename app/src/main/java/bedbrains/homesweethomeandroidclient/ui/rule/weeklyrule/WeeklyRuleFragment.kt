@@ -35,7 +35,7 @@ class WeeklyRuleFragment : Fragment() {
     lateinit var daySpace: View
     lateinit var days: List<TextView>
     lateinit var locale: Locale
-    var weekDayStrings = Array<String>(7) { "" }
+    var weekDayStrings = List(7) { "" }
 
     lateinit var constraintSet: ConstraintSet
     lateinit var timeLayout: ConstraintLayout
@@ -77,9 +77,7 @@ class WeeklyRuleFragment : Fragment() {
         daySpace = dayToolBar.findViewById(R.id.day_space)
         locale = Locale.getDefault()
 
-        for (i in weekDayStrings.indices) {
-            weekDayStrings[i] = Tools.formatWeekdayNarrow(i, locale)
-        }
+        weekDayStrings = weekDayStrings.mapIndexed { index, _ -> Tools.formatWeekdayNarrow(index, locale) }
 
         root = inflater.inflate(R.layout.fragment_weekly_rule, container, false) as ConstraintLayout
         constraintSet = ConstraintSet()
@@ -128,7 +126,7 @@ class WeeklyRuleFragment : Fragment() {
         addButton = root.findViewById(R.id.add_button)
 
         hourHeight = resources.getDimensionPixelSize(R.dimen.weekly_rule_hour_height)
-        indicatorLineWidth = resources.getDimensionPixelSize(R.dimen.time_indicaotr_line_width)
+        indicatorLineWidth = resources.getDimensionPixelSize(R.dimen.time_indicator_line_width)
         indicatorHeadDiameter = resources.getDimensionPixelSize(R.dimen.time_indicator_head_diameter)
         timeSpanMargin = resources.getDimensionPixelSize(R.dimen.weekly_rule_time_span_margin)
         timeSpanBigMargin = resources.getDimensionPixelSize(R.dimen.weekly_rule_time_span_big_margin)
@@ -136,25 +134,25 @@ class WeeklyRuleFragment : Fragment() {
         cardViewHighElevation = resources.getDimension(R.dimen.card_view_high_elevation)
 
         //toolbar
-        for (i in days.indices) {
-            days[i].text = weekDayStrings[i]
+        days.forEachIndexed { index, textView ->
+            textView.text = weekDayStrings[index]
         }
 
-        val dayHeaderParams: AppBarLayout.LayoutParams = if (weeklyRuleViewModel.initialCreation) {
-            AppBarLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, 0)
+        val dayParams: AppBarLayout.LayoutParams = if (weeklyRuleViewModel.initialCreation) {
+            AppBarLayout.LayoutParams(0, 0)
         } else {
             AppBarLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, AppBarLayout.LayoutParams.WRAP_CONTENT)
         }
-
-        dayToolBar.layoutParams = dayHeaderParams
+        dayParams.weight = 1f
+        days.forEach { it.layoutParams = dayParams }
         dayToolBar.visibility = View.VISIBLE
         MainActivity.appBarLayout.addView(dayToolBar)
 
         //times
         constraintSet.clone(timeLayout)
 
-        for (i in times.indices) {
-            times[i].text = Tools.formatTime(i + 1, 0, locale, context)
+        times.forEachIndexed { index, textView ->
+            textView.text = Tools.formatTime(index + 1, 0, locale, context)
         }
 
         //add button
@@ -179,7 +177,7 @@ class WeeklyRuleFragment : Fragment() {
         if (weeklyRuleViewModel.initialCreation) {
             dayToolBar.visibility = View.VISIBLE
             val duration = getAnimationDuration()
-            val expandAnimation = ExpandAnimation(dayToolBar)
+            val expandAnimation = ExpandAnimation(*days.toTypedArray())
             expandAnimation.duration = duration
             expandAnimation.startOffset = duration / 4
             dayToolBar.startAnimation(expandAnimation)

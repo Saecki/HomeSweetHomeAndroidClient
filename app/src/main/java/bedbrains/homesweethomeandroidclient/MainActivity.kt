@@ -74,16 +74,15 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
-
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home,
                 R.id.nav_rules,
-                R.id.nav_settings
+                R.id.nav_values
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
