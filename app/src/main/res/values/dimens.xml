@@ -15,15 +15,16 @@
     <dimen name="icon_margin">16dp</dimen>
     <dimen name="control_margin">8dp</dimen>
     <!-- icon-width(24dp) + 2 * icon_margin + !-->
-    <dimen name="device_detailed_view_start_margin">56dp</dimen>
+    <dimen name="device_start_guide_line_margin">56dp</dimen>
+    <dimen name="device_end_guide_line_margin">64dp</dimen>
     <dimen name="control_padding">8dp</dimen>
-    <dimen name="control_icon_padding">16dp</dimen>
+    <dimen name="control_icon_padding">12dp</dimen>
 
     <dimen name="card_view_corner_radius">8dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
     <dimen name="card_view_border_width">2dp</dimen>
-    <dimen name="card_view_elevation">3dp</dimen>
-    <dimen name="card_view_high_elevation">5dp</dimen>
+    <dimen name="card_view_elevation">4dp</dimen>
+    <dimen name="card_view_high_elevation">6dp</dimen>
     <dimen name="card_view_handle_diameter">20dp</dimen>
     <dimen name="card_view_handle_elevation">1dp</dimen>
     <dimen name="card_view_handle_border_width">6dp</dimen>
@@ -40,7 +41,7 @@
     <dimen name="separator_line_width">0.8dp</dimen>
 
     <dimen name="time_indicator_head_diameter">8dp</dimen>
-    <dimen name="time_indicaotr_line_width">1dp</dimen>
+    <dimen name="time_indicator_line_width">1dp</dimen>
     <dimen name="time_indicator_elevation">6dp</dimen>
 
 </resources>

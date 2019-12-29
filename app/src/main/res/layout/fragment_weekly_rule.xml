@@ -474,7 +474,7 @@
             <View
                 android:id="@+id/time_indicator_line"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/time_indicaotr_line_width"
+                android:layout_height="@dimen/time_indicator_line_width"
                 android:background="@drawable/time_indicator_line"
                 android:elevation="@dimen/time_indicator_elevation" />
 

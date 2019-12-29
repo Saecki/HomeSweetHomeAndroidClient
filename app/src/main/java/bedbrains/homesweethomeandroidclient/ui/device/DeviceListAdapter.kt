@@ -12,9 +12,9 @@ import bedbrains.homesweethomeandroidclient.ui.device.heating.HeatingViewHolder
 import bedbrains.homesweethomeandroidclient.ui.device.light.LightViewHolder
 import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 
-class DeviceListAdapter(var devices: List<Device>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class DeviceListDiffUtilCallback(val old: List<Device>, val new: List<Device>) : DiffUtil.Callback() {
+    class DeviceListDiffUtilCallback(private val old: List<Device>, private val new: List<Device>) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int {
             return old.size
@@ -31,7 +31,6 @@ class DeviceListAdapter(var devices: List<Device>) : RecyclerView.Adapter<Recycl
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return old[oldItemPosition] == new[newItemPosition]
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

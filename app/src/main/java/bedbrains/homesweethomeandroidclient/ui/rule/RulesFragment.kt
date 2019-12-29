@@ -1,4 +1,4 @@
-package bedbrains.homesweethomeandroidclient.ui.rules
+package bedbrains.homesweethomeandroidclient.ui.rule
 
 import android.os.Bundle
 import android.view.*
@@ -7,17 +7,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
-import bedbrains.homesweethomeandroidclient.ui.rule.RuleListAdapter
 
 class RulesFragment : Fragment() {
 
     lateinit var rulesViewModel: RulesViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
 
         rulesViewModel = ViewModelProviders.of(this).get(RulesViewModel::class.java)

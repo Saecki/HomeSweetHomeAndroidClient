@@ -1,4 +1,4 @@
-package bedbrains.homesweethomeandroidclient.ui.rules
+package bedbrains.homesweethomeandroidclient.ui.rule
 
 import androidx.lifecycle.ViewModel
 import bedbrains.shared.datatypes.rules.Rule
