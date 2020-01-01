@@ -34,7 +34,11 @@
         android:id="@+id/nav_values"
         android:name="bedbrains.homesweethomeandroidclient.ui.value.ValuesFragment"
         android:label="@string/menu_values"
-        tools:layout="@layout/fragment_values" />
+        tools:layout="@layout/fragment_values" >
+        <action
+            android:id="@+id/action_nav_values_to_nav_rule_value"
+            app:destination="@id/nav_rule_value" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_settings"
@@ -73,5 +77,10 @@
         android:id="@+id/nav_weekly_time_span"
         android:name="bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyTimeSpanFragment"
         tools:layout="@layout/fragment_weekly_time_span" />
+
+    <fragment
+        android:id="@+id/nav_rule_value"
+        android:name="bedbrains.homesweethomeandroidclient.ui.rule.rulevalue.RuleValueFragment"
+        tools:layout="@layout/fragment_rule_value" />
 
 </navigation>

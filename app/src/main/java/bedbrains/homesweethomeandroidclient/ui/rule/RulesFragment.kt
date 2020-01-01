@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RulesFragment : Fragment() {
 
@@ -20,9 +22,14 @@ class RulesFragment : Fragment() {
         val rules: RecyclerView = root.findViewById(R.id.rules)
         val linearLayoutManager = LinearLayoutManager(context)
         val ruleListAdapter = RuleListAdapter(rulesViewModel.rules)
+        val addButton = root.findViewById<FloatingActionButton>(R.id.add_button)
 
         rules.layoutManager = linearLayoutManager
         rules.adapter = ruleListAdapter
+
+        addButton.setOnClickListener {
+            root.findNavController().navigate(R.id.action_nav_rules_to_nav_weekly_rule)
+        }
 
         return root
     }

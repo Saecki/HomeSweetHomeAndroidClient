@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- View !-->
-    <string-array name="pref_sort_type_entries">
-        <item>Nichts</item>
-        <item>Typ</item>
-        <item>Room</item>
-        <item>Name</item>
-    </string-array>
-
     <!-- Temperature !-->
     <string-array name="pref_temperature_decimals_entries">
         <item>Keine</item>

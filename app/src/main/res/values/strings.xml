@@ -6,14 +6,15 @@
     <string name="nav_header_subtitle">A smart home system</string>
 
     <!-- Action Bar Menu !-->
-    <string name="action_refresh">Refresh</string>
-    <string name="action_edit">Edit</string>
-    <string name="action_sort_by">Sort</string>
-    <string name="action_group_by">Group</string>
-    <string name="action_filter_by">Filter</string>
+    <string name="action_apply_to_all">Apply to all</string>
     <string name="action_clear">Clear all</string>
     <string name="action_delete">Delete</string>
-    <string name="action_apply_to_all">Apply to all</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_filter_by">Filter</string>
+    <string name="action_group_by">Group</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_rename">Rename</string>
+    <string name="action_sort_by">Sort</string>
 
     <!-- Menu !-->
     <string name="menu_home">Home</string>
