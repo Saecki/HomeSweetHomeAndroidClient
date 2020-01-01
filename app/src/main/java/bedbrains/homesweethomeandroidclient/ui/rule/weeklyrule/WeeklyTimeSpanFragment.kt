@@ -35,7 +35,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
         val startTimePickerDialog = TimePickerDialog(
             context,
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                startTime.text = Tools.formatTime(hourOfDay, minute, locale, context)
+                startTime.text = Tools.formatTime(hourOfDay, minute, locale)
             },
             weeklyTimeSpanViewModel.timeSpan.start.hour,
             weeklyTimeSpanViewModel.timeSpan.start.minute,
@@ -44,7 +44,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
         val endTimePickerDialog = TimePickerDialog(
             context,
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                endTime.text = Tools.formatTime(hourOfDay, minute, locale, context)
+                endTime.text = Tools.formatTime(hourOfDay, minute, locale)
             },
             weeklyTimeSpanViewModel.timeSpan.start.hour,
             weeklyTimeSpanViewModel.timeSpan.start.minute,
@@ -85,13 +85,13 @@ class WeeklyTimeSpanFragment() : Fragment() {
         }
 
         //start time
-        startTime.text = Tools.formatTime(weeklyTimeSpanViewModel.timeSpan.start.hour, weeklyTimeSpanViewModel.timeSpan.start.minute, locale, context)
+        startTime.text = Tools.formatTime(weeklyTimeSpanViewModel.timeSpan.start.hour, weeklyTimeSpanViewModel.timeSpan.start.minute, locale)
         startTime.setOnClickListener {
             startTimePickerDialog.show()
         }
 
         //end time
-        endTime.text = Tools.formatTime(weeklyTimeSpanViewModel.timeSpan.end.hour, weeklyTimeSpanViewModel.timeSpan.end.minute, locale, context)
+        endTime.text = Tools.formatTime(weeklyTimeSpanViewModel.timeSpan.end.hour, weeklyTimeSpanViewModel.timeSpan.end.minute, locale)
         endTime.setOnClickListener {
             endTimePickerDialog.show()
         }

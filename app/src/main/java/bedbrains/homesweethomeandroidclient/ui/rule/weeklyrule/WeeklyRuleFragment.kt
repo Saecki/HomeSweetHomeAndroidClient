@@ -152,7 +152,7 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet.clone(timeLayout)
 
         times.forEachIndexed { index, textView ->
-            textView.text = Tools.formatTime(index + 1, 0, locale, context)
+            textView.text = Tools.formatTime(index + 1, 0, locale)
         }
 
         //add button
