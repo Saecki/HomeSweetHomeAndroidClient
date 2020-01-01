@@ -1,10 +1,9 @@
 package bedbrains.platform
 
 import android.annotation.TargetApi
-import android.content.Context
 import android.os.Build
-import android.text.format.DateFormat
 import bedbrains.shared.datatypes.rules.WeeklyTime
+import java.text.DateFormat
 import java.text.DateFormatSymbols
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -32,7 +31,7 @@ object Tools {
         }
     }
 
-    fun formatTime(hour: Int, minute: Int, locale: Locale, context: Context?): String {
+    fun formatTime(hour: Int, minute: Int, locale: Locale): String {
         val sdkVersion = Build.VERSION.SDK_INT
 
         if (sdkVersion < Build.VERSION_CODES.O) {
@@ -40,7 +39,7 @@ object Tools {
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
             val date = Date(cal.timeInMillis)
-            val df = DateFormat.getTimeFormat(context)
+            val df = DateFormat.getDateInstance()
 
             return df.format(date)
         } else @TargetApi(Build.VERSION_CODES.O) {
