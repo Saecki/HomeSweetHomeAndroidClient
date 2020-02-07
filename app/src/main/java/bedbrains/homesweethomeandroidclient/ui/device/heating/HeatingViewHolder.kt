@@ -75,7 +75,7 @@ class HeatingViewHolder(private val view: View, private val context: Context, pr
     }
 
     private fun decrementTemp() {
-        var temp = heating.targetTemp.getGlobal()
+        var temp = heating.targetTemp.global
         temp -= if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             if (temp.rem(getIncrement()) == 0.0) {
                 getIncrement()
@@ -85,18 +85,18 @@ class HeatingViewHolder(private val view: View, private val context: Context, pr
         } else {
             getIncrement()
         }
-        heating.targetTemp.setGlobal(temp)
+        heating.targetTemp.global = temp
         update(heating)
     }
 
     private fun incrementTemp() {
-        var temp = heating.targetTemp.getGlobal()
+        var temp = heating.targetTemp.global
         temp += if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             getIncrement() - temp.rem(getIncrement())
         } else {
             getIncrement()
         }
-        heating.targetTemp.setGlobal(temp)
+        heating.targetTemp.global = temp
         update(heating)
     }
 
@@ -158,7 +158,7 @@ class HeatingViewHolder(private val view: View, private val context: Context, pr
 
         builder.setPositiveButton(android.R.string.ok) { _, _ ->
             try {
-                heating.targetTemp.setGlobal(input.text.toString().replace(',', '.').toDouble())
+                heating.targetTemp.global = input.text.toString().replace(',', '.').toDouble()
                 update(heating)
             } catch (e: Exception) {
                 Log.d("INPUT", "error parsing double from string")
