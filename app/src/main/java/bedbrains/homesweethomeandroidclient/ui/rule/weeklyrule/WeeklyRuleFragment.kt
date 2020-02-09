@@ -20,7 +20,7 @@ import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
-import bedbrains.platform.Tools
+import bedbrains.platform.Time
 import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 import com.google.android.material.appbar.AppBarLayout
@@ -77,7 +77,7 @@ class WeeklyRuleFragment : Fragment() {
         daySpace = dayToolBar.findViewById(R.id.day_space)
         locale = Locale.getDefault()
 
-        weekDayStrings = weekDayStrings.mapIndexed { index, _ -> Tools.formatWeekdayNarrow(index, locale) }
+        weekDayStrings = weekDayStrings.mapIndexed { index, _ -> Time.formatWeekdayNarrow(index, locale) }
 
         root = inflater.inflate(R.layout.fragment_weekly_rule, container, false) as ConstraintLayout
         constraintSet = ConstraintSet()
@@ -152,7 +152,7 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet.clone(timeLayout)
 
         times.forEachIndexed { index, textView ->
-            textView.text = Tools.formatTime(index + 1, 0, locale)
+            textView.text = Time.formatTime(index + 1, 0, locale)
         }
 
         //add button

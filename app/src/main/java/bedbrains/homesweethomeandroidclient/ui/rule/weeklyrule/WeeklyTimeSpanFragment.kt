@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import bedbrains.homesweethomeandroidclient.R
-import bedbrains.platform.Tools
+import bedbrains.platform.Time
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
@@ -35,7 +35,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
         val startTimePickerDialog = TimePickerDialog(
             context,
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                startTime.text = Tools.formatTime(hourOfDay, minute, locale)
+                startTime.text = Time.formatTime(hourOfDay, minute, locale)
             },
             weeklyTimeSpanViewModel.timeSpan.start.hour,
             weeklyTimeSpanViewModel.timeSpan.start.minute,
@@ -44,7 +44,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
         val endTimePickerDialog = TimePickerDialog(
             context,
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                endTime.text = Tools.formatTime(hourOfDay, minute, locale)
+                endTime.text = Time.formatTime(hourOfDay, minute, locale)
             },
             weeklyTimeSpanViewModel.timeSpan.start.hour,
             weeklyTimeSpanViewModel.timeSpan.start.minute,
@@ -53,11 +53,11 @@ class WeeklyTimeSpanFragment() : Fragment() {
 
         //day
         for (i in days.indices) {
-            days[i] = Tools.formatWeekDayFull(i, locale)
+            days[i] = Time.formatWeekDayFull(i, locale)
         }
 
         //start day
-        startDay.text = Tools.formatWeekDayFull(weeklyTimeSpanViewModel.timeSpan.start.localizedDay, locale)
+        startDay.text = Time.formatWeekDayFull(weeklyTimeSpanViewModel.timeSpan.start.localizedDay, locale)
         startDay.setOnClickListener {
 
             AlertDialog.Builder(context).apply {
@@ -71,7 +71,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
         }
 
         //end day
-        endDay.text = Tools.formatWeekDayFull(weeklyTimeSpanViewModel.timeSpan.end.localizedDay, locale)
+        endDay.text = Time.formatWeekDayFull(weeklyTimeSpanViewModel.timeSpan.end.localizedDay, locale)
         endDay.setOnClickListener {
 
             AlertDialog.Builder(context).apply {
@@ -85,13 +85,13 @@ class WeeklyTimeSpanFragment() : Fragment() {
         }
 
         //start time
-        startTime.text = Tools.formatTime(weeklyTimeSpanViewModel.timeSpan.start.hour, weeklyTimeSpanViewModel.timeSpan.start.minute, locale)
+        startTime.text = Time.formatTime(weeklyTimeSpanViewModel.timeSpan.start.hour, weeklyTimeSpanViewModel.timeSpan.start.minute, locale)
         startTime.setOnClickListener {
             startTimePickerDialog.show()
         }
 
         //end time
-        endTime.text = Tools.formatTime(weeklyTimeSpanViewModel.timeSpan.end.hour, weeklyTimeSpanViewModel.timeSpan.end.minute, locale)
+        endTime.text = Time.formatTime(weeklyTimeSpanViewModel.timeSpan.end.hour, weeklyTimeSpanViewModel.timeSpan.end.minute, locale)
         endTime.setOnClickListener {
             endTimePickerDialog.show()
         }
