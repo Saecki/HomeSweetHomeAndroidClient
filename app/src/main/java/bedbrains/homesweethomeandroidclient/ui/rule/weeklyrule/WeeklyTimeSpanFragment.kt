@@ -5,33 +5,32 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.*
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.databinding.FragmentWeeklyTimeSpanBinding
 import bedbrains.platform.Time
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 class WeeklyTimeSpanFragment() : Fragment() {
 
-    lateinit var weeklyTimeSpanViewModel: WeeklyTimeSpanViewModel
+    private val weeklyTimeSpanViewModel: WeeklyTimeSpanViewModel by viewModels()
+
     lateinit var locale: Locale
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
 
-        weeklyTimeSpanViewModel = ViewModelProviders.of(this).get(WeeklyTimeSpanViewModel::class.java)
         locale = Locale.getDefault()
 
-        val root = inflater.inflate(R.layout.fragment_weekly_time_span, container, false)
+        val binding = FragmentWeeklyTimeSpanBinding.inflate(inflater)
         val days = Array(7) { "" }
-        val startDay = root.findViewById<TextView>(R.id.start_day)
-        val endDay = root.findViewById<TextView>(R.id.end_day)
-        val startTime = root.findViewById<TextView>(R.id.start_time)
-        val endTime = root.findViewById<TextView>(R.id.end_time)
-        val doneButton = root.findViewById<FloatingActionButton>(R.id.done_button)
+        val startDay = binding.startDay
+        val endDay = binding.endDay
+        val startTime = binding.startTime
+        val endTime = binding.endTime
+        val doneButton = binding.doneButton
         val startTimePickerDialog = TimePickerDialog(
             context,
             TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
@@ -97,10 +96,10 @@ class WeeklyTimeSpanFragment() : Fragment() {
         }
 
         doneButton.setOnClickListener {
-            root.findNavController().popBackStack()
+            binding.root.findNavController().popBackStack()
         }
 
-        return root
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

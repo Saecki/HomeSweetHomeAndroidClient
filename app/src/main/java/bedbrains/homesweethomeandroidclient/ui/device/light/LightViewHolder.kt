@@ -1,19 +1,17 @@
 package bedbrains.homesweethomeandroidclient.ui.device.light
 
-import android.view.View
-import android.widget.Switch
-import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
 import bedbrains.shared.datatypes.devices.Light
 
-class LightViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class LightViewHolder(val viewBinding: DeviceLightBinding) : RecyclerView.ViewHolder(viewBinding.root) {
 
     lateinit var light: Light
-    val room: TextView = view.findViewById(R.id.room)
-    val name: TextView = view.findViewById(R.id.name)
-    val state: Switch = view.findViewById(R.id.state)
+    val room = viewBinding.room
+    val name = viewBinding.name
+    val state = viewBinding.state
 
     fun update(light: Light) {
         room.text = light.room
@@ -27,8 +25,8 @@ class LightViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         state.setOnCheckedChangeListener { _, isChecked ->
             light.state = isChecked
         }
-        view.setOnClickListener {
-            view.findNavController().navigate(R.id.action_nav_home_to_nav_light)
+        viewBinding.root.setOnClickListener {
+            viewBinding.root.findNavController().navigate(R.id.action_nav_home_to_nav_light)
         }
     }
 }

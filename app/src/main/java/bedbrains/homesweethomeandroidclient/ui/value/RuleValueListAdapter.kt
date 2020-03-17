@@ -3,15 +3,15 @@ package bedbrains.homesweethomeandroidclient.ui.value
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.databinding.ValueRuleValueBinding
 import bedbrains.shared.datatypes.rules.RuleValue
 
 class RuleValueListAdapter(private var values: List<RuleValue>) : RecyclerView.Adapter<RuleValueViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RuleValueViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.value_rule_value, parent, false)
-        return RuleValueViewHolder(view)
+        val viewBinding = ValueRuleValueBinding.inflate(inflater)
+        return RuleValueViewHolder(viewBinding)
     }
 
     override fun getItemCount(): Int {

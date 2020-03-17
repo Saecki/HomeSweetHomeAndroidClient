@@ -4,27 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import bedbrains.homesweethomeandroidclient.MainActivity
-import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.databinding.FragmentLightBinding
 
 class LightFragment : Fragment() {
 
-    lateinit var lightViewModel: LightViewModel
+    private val lightViewModel: LightViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        lightViewModel = ViewModelProviders.of(this).get(LightViewModel::class.java)
-        MainActivity.appBarLayout.findViewById<Toolbar>(R.id.toolbar).title = lightViewModel.light.name
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        MainActivity.toolbar.title = lightViewModel.light.name
 
-        val root = inflater.inflate(R.layout.fragment_light, container, false)
+        val binding = FragmentLightBinding.inflate(inflater)
 
-        return root
+        return binding.root
     }
 
 }
