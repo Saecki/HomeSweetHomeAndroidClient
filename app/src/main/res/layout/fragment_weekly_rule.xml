@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -469,14 +470,16 @@
                 android:layout_width="@dimen/time_indicator_head_diameter"
                 android:layout_height="@dimen/time_indicator_head_diameter"
                 android:background="@drawable/time_indicator_head"
-                android:elevation="@dimen/time_indicator_elevation" />
+                android:elevation="@dimen/time_indicator_elevation"
+                tools:ignore="MissingConstraints" />
 
             <View
                 android:id="@+id/time_indicator_line"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/time_indicator_line_width"
                 android:background="@drawable/time_indicator_line"
-                android:elevation="@dimen/time_indicator_elevation" />
+                android:elevation="@dimen/time_indicator_elevation"
+                tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,30 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.Group
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.shared.datatypes.devices.Heating
 import com.google.android.material.snackbar.Snackbar
 
-class HeatingViewHolder(private val view: View, private val context: Context, private val parent: View) : RecyclerView.ViewHolder(view) {
+class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private val context: Context, private val parent: View) : RecyclerView.ViewHolder(viewBinding.root) {
 
     private lateinit var heating: Heating
-    private val room: TextView = view.findViewById(R.id.room)
-    private val name: TextView = view.findViewById(R.id.name)
-    private val actualTemp: TextView = view.findViewById(R.id.actual_temp)
-    private val targetTemp: TextView = view.findViewById(R.id.target_temp)
-    private val arrow: ImageView = view.findViewById(R.id.arrow)
-    private val detailedView: Group = view.findViewById(R.id.detailed_view)
-    private val detailedViewTargetTemp: TextView = view.findViewById(R.id.detailed_view_target_temp)
-    private val minus: ImageView = view.findViewById(R.id.minus)
-    private val plus: ImageView = view.findViewById(R.id.plus)
+    private val room = viewBinding.room
+    private val name = viewBinding.name
+    private val actualTemp = viewBinding.actualTemp
+    private val targetTemp = viewBinding.targetTemp
+    private val arrow = viewBinding.arrow
+    private val detailedView = viewBinding.detailedView
+    private val detailedViewTargetTemp = viewBinding.detailedViewTargetTemp
+    private val minus = viewBinding.minus
+    private val plus = viewBinding.plus
 
     fun bindView(heating: Heating) {
         this.heating = heating
@@ -53,8 +51,8 @@ class HeatingViewHolder(private val view: View, private val context: Context, pr
         plus.setOnClickListener {
             incrementTemp()
         }
-        view.setOnClickListener {
-            view.findNavController().navigate(R.id.action_nav_home_to_nav_heating)
+        viewBinding.root.setOnClickListener {
+            viewBinding.root.findNavController().navigate(R.id.action_nav_home_to_nav_heating)
         }
     }
 
@@ -185,7 +183,7 @@ class HeatingViewHolder(private val view: View, private val context: Context, pr
         input.requestFocusFromTouch()
 
         input.postDelayed({
-            val keyboard: InputMethodManager =
+            val keyboard =
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyboard.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
         }, 0)

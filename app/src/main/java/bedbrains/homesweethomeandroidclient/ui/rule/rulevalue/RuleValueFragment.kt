@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import bedbrains.homesweethomeandroidclient.R
+import androidx.fragment.app.viewModels
+import bedbrains.homesweethomeandroidclient.databinding.FragmentRuleValueBinding
 
 class RuleValueFragment() : Fragment() {
-    private lateinit var ruleValueViewModel: RuleValueViewModel
+    private val ruleValueViewModel: RuleValueViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        ruleValueViewModel = ViewModelProviders.of(this).get(RuleValueViewModel::class.java)
 
-        val root = inflater.inflate(R.layout.fragment_rule_value, container, false)
-        val heating = root.findViewById<TextView>(R.id.heating)
-        val light = root.findViewById<TextView>(R.id.light)
+        val binding = FragmentRuleValueBinding.inflate(inflater)
+        val heating = binding.heating
+        val light = binding.light
 
         heating.setOnClickListener {
             //TODO
@@ -27,6 +25,6 @@ class RuleValueFragment() : Fragment() {
             //TODO
         }
 
-        return root
+        return binding.root
     }
 }

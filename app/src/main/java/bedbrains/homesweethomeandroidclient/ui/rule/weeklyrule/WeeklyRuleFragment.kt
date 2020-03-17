@@ -9,15 +9,16 @@ import android.widget.LinearLayout
 import android.widget.Space
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.databinding.FragmentWeeklyRuleBinding
+import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.platform.Time
@@ -29,9 +30,10 @@ import java.util.*
 
 class WeeklyRuleFragment : Fragment() {
 
+    private val weeklyRuleViewModel: WeeklyRuleViewModel by viewModels()
+
     lateinit var root: ConstraintLayout
-    lateinit var weeklyRuleViewModel: WeeklyRuleViewModel
-    lateinit var dayToolBar: LinearLayout
+    lateinit var dayToolbar: LinearLayout
     lateinit var daySpace: View
     lateinit var days: List<TextView>
     lateinit var locale: Locale
@@ -61,69 +63,70 @@ class WeeklyRuleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
 
-        weeklyRuleViewModel = ViewModelProviders.of(this).get(WeeklyRuleViewModel::class.java)
-        MainActivity.appBarLayout.findViewById<Toolbar>(R.id.toolbar).title = weeklyRuleViewModel.rule.name
+        MainActivity.toolbar.title = weeklyRuleViewModel.rule.name
 
-        dayToolBar = inflater.inflate(R.layout.weekly_rule_toolbar, MainActivity.appBarLayout, false) as LinearLayout
+        val dayToolbarBinding = WeeklyRuleToolbarBinding.inflate(inflater)
+        dayToolbar = dayToolbarBinding.root as LinearLayout
         days = listOf(
-            dayToolBar.findViewById(R.id.day_0),
-            dayToolBar.findViewById(R.id.day_1),
-            dayToolBar.findViewById(R.id.day_2),
-            dayToolBar.findViewById(R.id.day_3),
-            dayToolBar.findViewById(R.id.day_4),
-            dayToolBar.findViewById(R.id.day_5),
-            dayToolBar.findViewById(R.id.day_6)
+            dayToolbarBinding.day0.root as TextView,
+            dayToolbarBinding.day1.root as TextView,
+            dayToolbarBinding.day2.root as TextView,
+            dayToolbarBinding.day3.root as TextView,
+            dayToolbarBinding.day4.root as TextView,
+            dayToolbarBinding.day5.root as TextView,
+            dayToolbarBinding.day6.root as TextView
         )
-        daySpace = dayToolBar.findViewById(R.id.day_space)
+        daySpace = dayToolbarBinding.daySpace
         locale = Locale.getDefault()
 
         weekDayStrings = weekDayStrings.mapIndexed { index, _ -> Time.formatWeekdayNarrow(index, locale) }
 
-        root = inflater.inflate(R.layout.fragment_weekly_rule, container, false) as ConstraintLayout
+        val binding = FragmentWeeklyRuleBinding.inflate(inflater)
+        root = binding.root as ConstraintLayout
         constraintSet = ConstraintSet()
-        timeLayout = root.findViewById(R.id.time_layout) as ConstraintLayout
-        timeLine = timeLayout.findViewById(R.id.time_line)
+        timeLayout = binding.timeLayout
+        timeLine = binding.timeLine
         times = listOf(
-            timeLine.findViewById(R.id.time_1),
-            timeLine.findViewById(R.id.time_2),
-            timeLine.findViewById(R.id.time_3),
-            timeLine.findViewById(R.id.time_4),
-            timeLine.findViewById(R.id.time_5),
-            timeLine.findViewById(R.id.time_6),
-            timeLine.findViewById(R.id.time_7),
-            timeLine.findViewById(R.id.time_8),
-            timeLine.findViewById(R.id.time_9),
-            timeLine.findViewById(R.id.time_10),
-            timeLine.findViewById(R.id.time_11),
-            timeLine.findViewById(R.id.time_12),
-            timeLine.findViewById(R.id.time_13),
-            timeLine.findViewById(R.id.time_14),
-            timeLine.findViewById(R.id.time_15),
-            timeLine.findViewById(R.id.time_16),
-            timeLine.findViewById(R.id.time_17),
-            timeLine.findViewById(R.id.time_18),
-            timeLine.findViewById(R.id.time_19),
-            timeLine.findViewById(R.id.time_20),
-            timeLine.findViewById(R.id.time_21),
-            timeLine.findViewById(R.id.time_22),
-            timeLine.findViewById(R.id.time_23)
+            binding.time1.root as TextView,
+            binding.time2.root as TextView,
+            binding.time3.root as TextView,
+            binding.time4.root as TextView,
+            binding.time5.root as TextView,
+            binding.time6.root as TextView,
+            binding.time7.root as TextView,
+            binding.time8.root as TextView,
+            binding.time9.root as TextView,
+            binding.time10.root as TextView,
+            binding.time11.root as TextView,
+            binding.time12.root as TextView,
+            binding.time13.root as TextView,
+            binding.time14.root as TextView,
+            binding.time15.root as TextView,
+            binding.time16.root as TextView,
+            binding.time17.root as TextView,
+            binding.time18.root as TextView,
+            binding.time19.root as TextView,
+            binding.time20.root as TextView,
+            binding.time21.root as TextView,
+            binding.time22.root as TextView,
+            binding.time23.root as TextView
         )
         verticalGuideLines = listOf(
-            timeLayout.findViewById(R.id.vertical_line_0),
-            timeLayout.findViewById(R.id.vertical_line_1),
-            timeLayout.findViewById(R.id.vertical_line_2),
-            timeLayout.findViewById(R.id.vertical_line_3),
-            timeLayout.findViewById(R.id.vertical_line_4),
-            timeLayout.findViewById(R.id.vertical_line_5),
-            timeLayout.findViewById(R.id.vertical_line_6),
-            timeLayout.findViewById(R.id.vertical_line_7)
+            binding.verticalLine0,
+            binding.verticalLine1,
+            binding.verticalLine2,
+            binding.verticalLine3,
+            binding.verticalLine4,
+            binding.verticalLine5,
+            binding.verticalLine6,
+            binding.verticalLine7
         )
-        topTimeSpanAnchor = timeLayout.findViewById(R.id.top_time_span_anchor)
-        bottomTimeSpanAnchor = timeLayout.findViewById(R.id.bottom_time_span_anchor)
-        timeIndicatorHead = timeLayout.findViewById(R.id.time_indicator_head)
-        timeIndicatorLine = timeLayout.findViewById(R.id.time_indicator_line)
+        topTimeSpanAnchor = binding.topTimeSpanAnchor
+        bottomTimeSpanAnchor = binding.bottomTimeSpanAnchor
+        timeIndicatorHead = binding.timeIndicatorHead
+        timeIndicatorLine = binding.timeIndicatorLine
 
-        addButton = root.findViewById(R.id.add_button)
+        addButton = binding.addButton
 
         hourHeight = resources.getDimensionPixelSize(R.dimen.weekly_rule_hour_height)
         indicatorLineWidth = resources.getDimensionPixelSize(R.dimen.time_indicator_line_width)
@@ -145,8 +148,8 @@ class WeeklyRuleFragment : Fragment() {
         }
         dayParams.weight = 1f
         days.forEach { it.layoutParams = dayParams }
-        dayToolBar.visibility = View.VISIBLE
-        MainActivity.appBarLayout.addView(dayToolBar)
+        dayToolbar.visibility = View.VISIBLE
+        MainActivity.appBarLayout.addView(dayToolbar)
 
         //times
         constraintSet.clone(timeLayout)
@@ -175,12 +178,12 @@ class WeeklyRuleFragment : Fragment() {
         updateTimeIndicator(WeeklyTime.now)
 
         if (weeklyRuleViewModel.initialCreation) {
-            dayToolBar.visibility = View.VISIBLE
+            dayToolbar.visibility = View.VISIBLE
             val duration = getAnimationDuration()
             val expandAnimation = ExpandAnimation(*days.toTypedArray())
             expandAnimation.duration = duration
             expandAnimation.startOffset = duration / 4
-            dayToolBar.startAnimation(expandAnimation)
+            dayToolbar.startAnimation(expandAnimation)
             weeklyRuleViewModel.initialCreation = false
         }
     }
@@ -189,20 +192,20 @@ class WeeklyRuleFragment : Fragment() {
         super.onPause()
 
         val duration = getAnimationDuration()
-        val collapseAnimation = CollapseAnimation(dayToolBar)
+        val collapseAnimation = CollapseAnimation(dayToolbar)
         collapseAnimation.duration = duration
         collapseAnimation.startOffset = duration / 4
         collapseAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
-                MainActivity.appBarLayout.removeView(dayToolBar)
+                MainActivity.appBarLayout.removeView(dayToolbar)
             }
 
             override fun onAnimationStart(animation: Animation?) {}
 
         })
-        dayToolBar.startAnimation(collapseAnimation)
+        dayToolbar.startAnimation(collapseAnimation)
 
         weeklyRuleViewModel.initialCreation = true
     }

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding
 import bedbrains.shared.datatypes.rules.Rule
 import bedbrains.shared.datatypes.rules.WeeklyRule
 import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
@@ -16,11 +17,11 @@ class RuleListAdapter(var rules: List<Rule>) : RecyclerView.Adapter<RecyclerView
 
         return when (viewType) {
             WeeklyRule.TYPE -> {
-                val weeklyRuleView = inflater.inflate(R.layout.rule_weekly_rule, parent, false)
-                WeeklyRuleViewHolder(weeklyRuleView, parent.context)
+                val weeklyRuleViewBinding = RuleWeeklyRuleBinding.inflate(inflater)
+                WeeklyRuleViewHolder(weeklyRuleViewBinding)
             }
             else -> {
-                val dummyView = inflater.inflate(R.layout.dummy, parent, false)
+                val dummyView = inflater.inflate(R.layout.dummy, parent)
                 DummyViewHolder(dummyView)
             }
         }
