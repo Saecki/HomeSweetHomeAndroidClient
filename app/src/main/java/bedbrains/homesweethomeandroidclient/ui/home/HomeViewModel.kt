@@ -3,7 +3,7 @@ package bedbrains.homesweethomeandroidclient.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import bedbrains.shared.datatypes.Temperature
+import bedbrains.shared.datatypes.temperature.Temperature
 import bedbrains.shared.datatypes.devices.Device
 import bedbrains.shared.datatypes.devices.Heating
 import bedbrains.shared.datatypes.devices.Light
