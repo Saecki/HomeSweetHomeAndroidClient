@@ -7,7 +7,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SeekBarPreference
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.ui.Theme
-import bedbrains.shared.datatypes.Temperature
+import bedbrains.shared.datatypes.temperature.Temperature
 import java.lang.ClassCastException
 import kotlin.math.roundToInt
 
