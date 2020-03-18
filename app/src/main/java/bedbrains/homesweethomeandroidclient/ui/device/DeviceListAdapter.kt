@@ -40,11 +40,11 @@ class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapte
 
         return when (viewType) {
             Heating.TYPE -> {
-                val heatingViewBinding = DeviceHeatingBinding.inflate(inflater)
+                val heatingViewBinding = DeviceHeatingBinding.inflate(inflater, parent, false)
                 HeatingViewHolder(heatingViewBinding, parent.context, parent)
             }
             Light.TYPE -> {
-                val lightViewBinding = DeviceLightBinding.inflate(inflater)
+                val lightViewBinding = DeviceLightBinding.inflate(inflater, parent, false)
                 LightViewHolder(lightViewBinding)
             }
             else -> {

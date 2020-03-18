@@ -19,7 +19,6 @@ import com.google.android.material.appbar.AppBarLayout
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
 
     companion object {
         lateinit var activity: MainActivity

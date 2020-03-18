@@ -23,7 +23,7 @@ object Time {
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
             val date = Date(cal.timeInMillis)
-            val df = DateFormat.getDateInstance()
+            val df = DateFormat.getTimeInstance(DateFormat.SHORT, locale)
 
             return df.format(date)
         } else @TargetApi(Build.VERSION_CODES.O) {
