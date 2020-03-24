@@ -1,13 +1,8 @@
 package bedbrains.homesweethomeandroidclient.ui.value
 
 import androidx.lifecycle.ViewModel
-import bedbrains.shared.datatypes.temperature.Temperature
-import bedbrains.shared.datatypes.rules.RuleValue
+import bedbrains.homesweethomeandroidclient.DataRepository
 
 class ValuesViewModel : ViewModel() {
-    val values = listOf(
-        RuleValue.UNSPECIFIED,
-        RuleValue("lkdjlgjd", "nice",
-            Temperature(24.0, Temperature.Unit.CELSIUS), true)
-    )
+    val values = DataRepository.values
 }

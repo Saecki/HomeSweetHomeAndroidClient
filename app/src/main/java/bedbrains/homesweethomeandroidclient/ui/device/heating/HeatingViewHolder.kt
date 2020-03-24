@@ -159,7 +159,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
                 heating.targetTemp.global = input.text.toString().replace(',', '.').toDouble()
                 update(heating)
             } catch (e: Exception) {
-                Log.d("INPUT", "error parsing double from string")
+                Log.d("TESTING", "error parsing double from string")
                 val snack = Snackbar.make(
                     parent,
                     MainActivity.res.getString(R.string.heating_snackbar_edit_text),

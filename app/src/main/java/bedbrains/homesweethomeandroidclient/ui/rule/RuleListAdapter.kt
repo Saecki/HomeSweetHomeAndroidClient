@@ -2,15 +2,17 @@ package bedbrains.homesweethomeandroidclient.ui.rule
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding
-import bedbrains.shared.datatypes.rules.Rule
-import bedbrains.shared.datatypes.rules.WeeklyRule
+import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
 import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 import bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleViewHolder
+import bedbrains.shared.datatypes.rules.Rule
+import bedbrains.shared.datatypes.rules.WeeklyRule
 
-class RuleListAdapter(var rules: List<Rule>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RuleListAdapter(private var rules: List<Rule>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -47,4 +49,9 @@ class RuleListAdapter(var rules: List<Rule>) : RecyclerView.Adapter<RecyclerView
         }
     }
 
+    fun updateRules(new: List<Rule>) {
+        val diff = DiffUtil.calculateDiff(ListDiffUtilCallback(rules, new))
+        rules = new
+        diff.dispatchUpdatesTo(this)
+    }
 }

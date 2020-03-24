@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="bedbrains.homesweethomeandroidclient.ui.home.HomeFragment"
+        android:name="bedbrains.homesweethomeandroidclient.ui.device.DevicesFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_devices">
         <action
             android:id="@+id/action_nav_home_to_nav_heating"
             app:destination="@id/nav_heating"

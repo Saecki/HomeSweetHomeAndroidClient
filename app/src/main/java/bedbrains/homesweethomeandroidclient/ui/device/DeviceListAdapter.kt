@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
+import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
 import bedbrains.homesweethomeandroidclient.ui.device.heating.HeatingViewHolder
 import bedbrains.homesweethomeandroidclient.ui.device.light.LightViewHolder
 import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
@@ -15,25 +16,6 @@ import bedbrains.shared.datatypes.devices.Heating
 import bedbrains.shared.datatypes.devices.Light
 
 class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    class DeviceListDiffUtilCallback(private val old: List<Device>, private val new: List<Device>) : DiffUtil.Callback() {
-
-        override fun getOldListSize(): Int {
-            return old.size
-        }
-
-        override fun getNewListSize(): Int {
-            return new.size
-        }
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return old[oldItemPosition] === new[newItemPosition]
-        }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return old[oldItemPosition] == new[newItemPosition]
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -80,7 +62,8 @@ class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapte
     }
 
     fun updateDevices(new: List<Device>) {
-        val diff = DiffUtil.calculateDiff(DeviceListDiffUtilCallback(devices, new))
+        val diff = DiffUtil.calculateDiff(ListDiffUtilCallback(devices, new))
+        devices = new
         diff.dispatchUpdatesTo(this)
     }
 

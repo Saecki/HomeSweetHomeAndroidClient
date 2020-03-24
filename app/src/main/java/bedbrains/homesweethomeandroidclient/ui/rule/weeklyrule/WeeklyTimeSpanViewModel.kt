@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 
 class WeeklyTimeSpanViewModel : ViewModel() {
-    var timeSpan = WeeklyTimeSpan().apply {
+    var timeSpan = WeeklyTimeSpan.UNSPECIFIED.apply {
         start.localizedDay = 0
         end.localizedDay = 0
     }

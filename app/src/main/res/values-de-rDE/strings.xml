@@ -54,4 +54,7 @@
     <string name="pref_theme_title">Thema</string>
     <string name="pref_animation_duration_title">Animationsdauer</string>
 
+    <!-- Response !-->
+    <string name="resp_update_error">Beim Aktualisieren ist ein Fehler aufgetreten</string>
+
 </resources>
