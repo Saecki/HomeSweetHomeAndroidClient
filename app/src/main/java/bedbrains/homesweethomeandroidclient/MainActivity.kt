@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             return try {
                 preferences.getInt(key, defaultValue)
             } catch (e: Exception) {
-                Log.d("PREF", "couldn't retrieve shared preference with key: $key")
+                Log.d("TESTING", "couldn't retrieve shared preference with key: $key")
                 defaultValue
             }
         }
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             return try {
                 preferences.getString(key, defaultValue.toString())!!.toInt()
             } catch (e: Exception) {
-                Log.d("PREF", "couldn't retrieve shared preference with key: $key")
+                Log.d("TESTING", "couldn't retrieve shared preference with key: $key")
                 defaultValue
             }
         }
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             return try {
                 preferences.getString(key, defaultValue.toString())!!.toDouble()
             } catch (e: Exception) {
-                Log.d("PREF", "couldn't retrieve shared preference with key: $key")
+                Log.d("TESTING", "couldn't retrieve shared preference with key: $key")
                 defaultValue
             }
         }

@@ -32,33 +32,33 @@ class WeeklyRuleFragment : Fragment() {
 
     private val weeklyRuleViewModel: WeeklyRuleViewModel by viewModels()
 
-    lateinit var root: ConstraintLayout
-    lateinit var dayToolbar: LinearLayout
-    lateinit var daySpace: View
-    lateinit var days: List<TextView>
-    lateinit var locale: Locale
-    var weekDayStrings = List(7) { "" }
+    private lateinit var root: ConstraintLayout
+    private lateinit var dayToolbar: LinearLayout
+    private lateinit var daySpace: View
+    private lateinit var days: List<TextView>
+    private lateinit var locale: Locale
+    private var weekDayStrings = List(7) { "" }
 
-    lateinit var constraintSet: ConstraintSet
-    lateinit var timeLayout: ConstraintLayout
-    lateinit var timeLine: LinearLayout
-    lateinit var times: List<TextView>
-    lateinit var verticalGuideLines: List<View>
-    lateinit var topTimeSpanAnchor: Space
-    lateinit var bottomTimeSpanAnchor: Space
-    lateinit var timeIndicatorHead: View
-    lateinit var timeIndicatorLine: View
-    var timeSpans = mutableListOf<View>()
+    private lateinit var constraintSet: ConstraintSet
+    private lateinit var timeLayout: ConstraintLayout
+    private lateinit var timeLine: LinearLayout
+    private lateinit var times: List<TextView>
+    private lateinit var verticalGuideLines: List<View>
+    private lateinit var topTimeSpanAnchor: Space
+    private lateinit var bottomTimeSpanAnchor: Space
+    private lateinit var timeIndicatorHead: View
+    private lateinit var timeIndicatorLine: View
+    private var timeSpans = mutableListOf<View>()
 
-    lateinit var addButton: FloatingActionButton
+    private lateinit var addButton: FloatingActionButton
 
-    var hourHeight = 0
-    var indicatorLineWidth = 0
-    var indicatorHeadDiameter = 0
-    var timeSpanMargin = 0
-    var timeSpanBigMargin = 0
-    var cardViewElevation = 0f
-    var cardViewHighElevation = 0f
+    private var hourHeight = 0
+    private var indicatorLineWidth = 0
+    private var indicatorHeadDiameter = 0
+    private var timeSpanMargin = 0
+    private var timeSpanBigMargin = 0
+    private var cardViewElevation = 0f
+    private var cardViewHighElevation = 0f
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
