@@ -36,14 +36,6 @@ class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapte
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return devices[position].type
-    }
-
-    override fun getItemCount(): Int {
-        return devices.size
-    }
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val device = devices[position]
 
@@ -59,6 +51,14 @@ class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapte
                 lightViewHolder.bindView(light)
             }
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return devices[position].type
+    }
+
+    override fun getItemCount(): Int {
+        return devices.size
     }
 
     fun updateDevices(new: List<Device>) {

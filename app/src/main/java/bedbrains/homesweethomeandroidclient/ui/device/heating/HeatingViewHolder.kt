@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
@@ -31,6 +32,12 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
     private val minus = viewBinding.minus
     private val plus = viewBinding.plus
 
+    private val increment: Double
+        get() {
+            val key = MainActivity.res.getString(R.string.pref_temperature_increment_key)
+            return MainActivity.getPrefStringAsDouble(key, 0.5)
+        }
+
     fun bindView(heating: Heating) {
         this.heating = heating
         update(heating)
@@ -44,12 +51,15 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
         }
         detailedViewTargetTemp.setOnClickListener {
             showInputDialog(heating.targetTemp.formatGlobal(false))
+            DataRepository.upsertDevice(heating)
         }
         minus.setOnClickListener {
             decrementTemp()
+            DataRepository.upsertDevice(heating)
         }
         plus.setOnClickListener {
             incrementTemp()
+            DataRepository.upsertDevice(heating)
         }
         viewBinding.root.setOnClickListener {
             viewBinding.root.findNavController().navigate(R.id.action_nav_home_to_nav_heating)
@@ -65,23 +75,24 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
     }
 
     private fun toggleDetailedView() {
+        val duration = MainActivity.res.getInteger(android.R.integer.config_shortAnimTime).toLong()
         if (heating.extended) {
-            collapse(getAnimationDuration())
+            collapse(duration)
         } else {
-            expand(getAnimationDuration())
+            expand(duration)
         }
     }
 
     private fun decrementTemp() {
         var temp = heating.targetTemp.global
         temp -= if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
-            if (temp.rem(getIncrement()) == 0.0) {
-                getIncrement()
+            if (temp.rem(increment) == 0.0) {
+                increment
             } else {
-                temp.rem(getIncrement())
+                temp.rem(increment)
             }
         } else {
-            getIncrement()
+            increment
         }
         heating.targetTemp.global = temp
         update(heating)
@@ -90,9 +101,9 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
     private fun incrementTemp() {
         var temp = heating.targetTemp.global
         temp += if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
-            getIncrement() - temp.rem(getIncrement())
+            increment - temp.rem(increment)
         } else {
-            getIncrement()
+            increment
         }
         heating.targetTemp.global = temp
         update(heating)
@@ -159,7 +170,6 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
                 heating.targetTemp.global = input.text.toString().replace(',', '.').toDouble()
                 update(heating)
             } catch (e: Exception) {
-                Log.d("TESTING", "error parsing double from string")
                 val snack = Snackbar.make(
                     parent,
                     MainActivity.res.getString(R.string.heating_snackbar_edit_text),
@@ -187,15 +197,5 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyboard.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
         }, 0)
-    }
-
-    private fun getIncrement(): Double {
-        val key = MainActivity.res.getString(R.string.pref_temperature_increment_key)
-        return MainActivity.getPrefStringAsDouble(key, 0.5)
-    }
-
-    private fun getAnimationDuration(): Long {
-        val key: String = MainActivity.res.getString(R.string.pref_animation_duration_key)
-        return MainActivity.getPrefInt(key, 250).toLong()
     }
 }

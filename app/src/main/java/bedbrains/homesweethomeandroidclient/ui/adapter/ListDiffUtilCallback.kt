@@ -1,8 +1,9 @@
 package bedbrains.homesweethomeandroidclient.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import bedbrains.shared.datatypes.Unique
 
-class ListDiffUtilCallback<T>(private val old: List<T>, private val new: List<T>) : DiffUtil.Callback() {
+class ListDiffUtilCallback(private val old: List<Unique>, private val new: List<Unique>) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
         return old.size
@@ -13,7 +14,7 @@ class ListDiffUtilCallback<T>(private val old: List<T>, private val new: List<T>
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return old[oldItemPosition] == new[newItemPosition]
+        return old[oldItemPosition].uid.equals(new[newItemPosition].uid)
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

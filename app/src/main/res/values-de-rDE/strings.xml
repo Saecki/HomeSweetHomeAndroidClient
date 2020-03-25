@@ -30,17 +30,15 @@
     <string name="value_heating">Heizung</string>
     <string name="value_light">Licht</string>
 
-    <!--State!-->
-    <string name="state_off">aus</string>
-
     <!-- Heating !-->
     <string name="heating_snackbar_edit_text">Nummer nicht erkannt</string>
     <string name="heating_snackbar_edit">Bearbeiten</string>
 
     <!-- Settings !-->
-    <!-- View !-->
-    <string name="pref_view_category_title">Ansicht</string>
-    <string name="pref_sort_type_title">Sortieren nach</string>
+    <!-- Network !-->
+    <string name="pref_network_category_title">Netzwerk</string>
+    <string name="pref_network_update_automatically_title">Automatisch aktualisieren</string>
+    <string name="pref_network_update_delay_title">Aktualisierungsverzögerung</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperatur</string>
@@ -52,7 +50,6 @@
     <!-- User Interface !-->
     <string name="pref_ui_category_title">Benutzeroberfäche</string>
     <string name="pref_theme_title">Thema</string>
-    <string name="pref_animation_duration_title">Animationsdauer</string>
 
     <!-- Response !-->
     <string name="resp_update_error">Beim Aktualisieren ist ein Fehler aufgetreten</string>

@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:key="@string/pref_temperature_category_key"
-        android:title="@string/pref_temperature_category_title">
+    <PreferenceCategory android:title="@string/pref_network_category_title">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/pref_network_update_automatically_key"
+            android:title="@string/pref_network_update_automatically_title" />
+
+        <ListPreference
+            android:defaultValue="5000"
+            android:entries="@array/pref_network_update_delay_entries"
+            android:entryValues="@array/pref_network_update_delay_entry_values"
+            android:key="@string/pref_network_update_delay_key"
+            android:summary="%s"
+            android:title="@string/pref_network_update_delay_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_temperature_category_title">
 
         <ListPreference
             android:defaultValue="1"
@@ -36,9 +51,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="@string/pref_ui_category_key"
-        android:title="@string/pref_ui_category_title">
+    <PreferenceCategory android:title="@string/pref_ui_category_title">
 
         <ListPreference
             android:defaultValue="0"
@@ -47,12 +60,6 @@
             android:key="@string/pref_theme_key"
             android:summary="%s"
             android:title="@string/pref_theme_title" />
-
-        <SeekBarPreference
-            android:defaultValue="250"
-            android:key="@string/pref_animation_duration_key"
-            android:max="500"
-            android:title="@string/pref_animation_duration_title" />
 
     </PreferenceCategory>
 

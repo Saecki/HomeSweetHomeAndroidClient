@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Network !-->
+    <string-array name="pref_network_update_delay_entries">
+        <item>1s</item>
+        <item>5s</item>
+        <item>10s</item>
+        <item>30s</item>
+        <item>1m</item>
+    </string-array>
+
+    <string-array name="pref_network_update_delay_entry_values">
+        <item>1000</item>
+        <item>5000</item>
+        <item>10000</item>
+        <item>30000</item>
+        <item>60000</item>
+    </string-array>
+
     <!-- Temperature !-->
     <string-array name="pref_temperature_unit_entries">
         <item>Kelvin</item>
@@ -37,7 +54,7 @@
     </string-array>
 
     <string-array name="pref_temperature_increment_entry_values">
-        <item>0</item>
+        <item>0.1</item>
         <item>0.2</item>
         <item>0.25</item>
         <item>0.5</item>

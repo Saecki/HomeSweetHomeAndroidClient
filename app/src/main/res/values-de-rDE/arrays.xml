@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Network !-->
+    <string-array name="pref_network_update_delay_entries">
+        <item>1s</item>
+        <item>5s</item>
+        <item>10s</item>
+        <item>30s</item>
+        <item>1m</item>
+    </string-array>
+
     <!-- Temperature !-->
     <string-array name="pref_temperature_decimals_entries">
         <item>Keine</item>

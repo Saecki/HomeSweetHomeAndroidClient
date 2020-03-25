@@ -8,7 +8,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 
 object Controller {
 
-    fun buildClient(baseUrl: String) = Retrofit.Builder()
+    fun buildClient(baseUrl: String): APIService = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(
             JacksonConverterFactory.create(
@@ -26,4 +26,5 @@ object Controller {
             )
         )
         .build()
+        .create(APIService::class.java)
 }
