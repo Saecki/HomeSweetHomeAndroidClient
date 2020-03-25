@@ -31,20 +31,19 @@
     <string name="value_heating">Heating</string>
     <string name="value_light">Light</string>
 
-    <!--State!-->
-    <string name="state_off">off</string>
-
     <!-- Heating !-->
     <string name="heating_snackbar_edit_text">No number recognized</string>
     <string name="heating_snackbar_edit">Edit</string>
 
     <!-- Settings !-->
-    <!-- View !-->
-    <string name="pref_view_category_title">View</string>
-    <string name="pref_view_category_key" translatable="false">view</string>
+    <!-- Network !-->
+    <string name="pref_network_category_title">Network</string>
 
-    <string name="pref_sort_type_title">Sort By</string>
-    <string name="pref_sort_type_key" translatable="false">sort_type</string>
+    <string name="pref_network_update_automatically_title">Update automatically</string>
+    <string name="pref_network_update_automatically_key" translatable="false">network_update_automatically</string>
+
+    <string name="pref_network_update_delay_title">Update delay</string>
+    <string name="pref_network_update_delay_key" translatable="false">network_update_delay</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperature</string>
@@ -64,15 +63,14 @@
 
     <!-- User Interface !-->
     <string name="pref_ui_category_title">User Interface</string>
-    <string name="pref_ui_category_key" translatable="false">user_interface</string>
 
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_key" translatable="false">dark_mode</string>
 
-    <string name="pref_animation_duration_title">Animation Duration</string>
-    <string name="pref_animation_duration_key" translatable="false">animation_duration</string>
-
     <!-- Response !-->
-    <string name="resp_update_error">An error accrued while updating</string>
+    <string name="resp_update_error">An error occurred while updating</string>
+
+    <!-- UID !-->
+    <string name="uid" translatable="false">uid</string>
 
 </resources>

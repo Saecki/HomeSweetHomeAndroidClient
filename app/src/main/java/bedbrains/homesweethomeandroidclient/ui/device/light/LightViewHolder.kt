@@ -2,6 +2,7 @@ package bedbrains.homesweethomeandroidclient.ui.device.light
 
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
 import bedbrains.shared.datatypes.devices.Light
@@ -24,6 +25,7 @@ class LightViewHolder(val viewBinding: DeviceLightBinding) : RecyclerView.ViewHo
         update(light)
         state.setOnCheckedChangeListener { _, isChecked ->
             light.state = isChecked
+            DataRepository.upsertDevice(light)
         }
         viewBinding.root.setOnClickListener {
             viewBinding.root.findNavController().navigate(R.id.action_nav_home_to_nav_light)

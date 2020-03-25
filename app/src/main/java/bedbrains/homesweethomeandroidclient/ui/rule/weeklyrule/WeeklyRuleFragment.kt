@@ -3,6 +3,7 @@ package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.widget.LinearLayout
@@ -15,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentWeeklyRuleBinding
@@ -22,6 +25,8 @@ import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.platform.Time
+import bedbrains.shared.datatypes.rules.Rule
+import bedbrains.shared.datatypes.rules.WeeklyRule
 import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 import com.google.android.material.appbar.AppBarLayout
@@ -62,6 +67,16 @@ class WeeklyRuleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
+
+        if (weeklyRuleViewModel.initialCreation) {
+            val uid = arguments?.getString(resources.getString(R.string.uid))
+            val rule = DataRepository.rules.value?.find { it.uid == uid }
+
+            when (rule) {
+                is WeeklyRule -> weeklyRuleViewModel.rule = rule
+                else -> Log.d("TESTING", "no weeklyRule $rule")
+            }
+        }
 
         MainActivity.toolbar.title = weeklyRuleViewModel.rule.name
 
@@ -178,9 +193,10 @@ class WeeklyRuleFragment : Fragment() {
         updateTimeIndicator(WeeklyTime.now)
 
         if (weeklyRuleViewModel.initialCreation) {
-            dayToolbar.visibility = View.VISIBLE
-            val duration = getAnimationDuration()
+            val duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
             val expandAnimation = ExpandAnimation(*days.toTypedArray())
+
+            dayToolbar.visibility = View.VISIBLE
             expandAnimation.duration = duration
             expandAnimation.startOffset = duration / 4
             dayToolbar.startAnimation(expandAnimation)
@@ -191,8 +207,9 @@ class WeeklyRuleFragment : Fragment() {
     override fun onPause() {
         super.onPause()
 
-        val duration = getAnimationDuration()
+        val duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
         val collapseAnimation = CollapseAnimation(dayToolbar)
+
         collapseAnimation.duration = duration
         collapseAnimation.startOffset = duration / 4
         collapseAnimation.setAnimationListener(object : Animation.AnimationListener {
@@ -205,8 +222,8 @@ class WeeklyRuleFragment : Fragment() {
             override fun onAnimationStart(animation: Animation?) {}
 
         })
-        dayToolbar.startAnimation(collapseAnimation)
 
+        dayToolbar.startAnimation(collapseAnimation)
         weeklyRuleViewModel.initialCreation = true
     }
 
@@ -298,10 +315,5 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet.constrainHeight(timeIndicatorLine.id, indicatorLineWidth)
 
         constraintSet.applyTo(timeLayout)
-    }
-
-    private fun getAnimationDuration(): Long {
-        val key: String = MainActivity.res.getString(R.string.pref_animation_duration_key)
-        return MainActivity.getPrefInt(key, 250).toLong()
     }
 }

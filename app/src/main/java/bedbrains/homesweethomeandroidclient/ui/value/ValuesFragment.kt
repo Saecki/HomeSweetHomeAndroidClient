@@ -40,12 +40,7 @@ class ValuesFragment : Fragment() {
         })
 
         swipeRefreshLayout.setOnRefreshListener {
-            DataRepository.updateValues().observe(viewLifecycleOwner, Observer {
-                if (it == Resp.FAILURE) {
-                    Toast.makeText(context, R.string.resp_update_error, Toast.LENGTH_SHORT).show()
-                }
-                swipeRefreshLayout.isRefreshing = false
-            })
+            refresh()
         }
 
         addButton.setOnClickListener {
@@ -61,24 +56,33 @@ class ValuesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_refresh -> {
-                swipeRefreshLayout.isRefreshing = true
-                DataRepository.updateValues().observe(viewLifecycleOwner, Observer {
-                    if (it == Resp.FAILURE) {
-                        Toast.makeText(context, R.string.resp_update_error, Toast.LENGTH_SHORT).show()
-                    }
-                    swipeRefreshLayout.isRefreshing = false
-                })
-            }
-            R.id.action_edit -> {
-                //TODO
-            }
-            R.id.action_sort_by -> {
-                //TODO
-            }
+            R.id.action_refresh -> refresh()
+            R.id.action_edit -> Unit//TODO
+            R.id.action_sort_by -> Unit//TODO
             else -> return super.onOptionsItemSelected(item)
         }
 
         return false
+    }
+
+    fun refresh() {
+        swipeRefreshLayout.isRefreshing = true
+
+        val resp = DataRepository.fetchUpdates()
+
+        resp.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                Resp.AWAITING -> Unit
+                Resp.SUCCESS -> {
+                    swipeRefreshLayout.isRefreshing = false
+                    resp.removeObservers(viewLifecycleOwner)
+                }
+                Resp.FAILURE -> {
+                    Toast.makeText(context, R.string.resp_update_error, Toast.LENGTH_LONG).show()
+                    swipeRefreshLayout.isRefreshing = false
+                    resp.removeObservers(viewLifecycleOwner)
+                }
+            }
+        })
     }
 }

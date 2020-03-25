@@ -6,6 +6,7 @@ import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 
 class WeeklyRuleViewModel : ViewModel() {
+
     var rule: WeeklyRule = WeeklyRule("lkasjf", "My Weekly Rule")
     var initialCreation = true
 
