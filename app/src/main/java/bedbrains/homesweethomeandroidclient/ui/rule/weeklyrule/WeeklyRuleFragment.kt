@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
@@ -25,7 +24,6 @@ import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.platform.Time
-import bedbrains.shared.datatypes.rules.Rule
 import bedbrains.shared.datatypes.rules.WeeklyRule
 import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
@@ -246,7 +244,7 @@ class WeeklyRuleFragment : Fragment() {
         if (t.start.localizedAfter(t.end))
             endDay += 7
 
-        if (t.end.inDailyMillis == 0)
+        if (t.end.inDailyMilliseconds == 0)
             endDay--
 
         for (i in t.start.localizedDay until endDay + 1) {
@@ -260,7 +258,7 @@ class WeeklyRuleFragment : Fragment() {
                 constraintSet.connect(card.id, ConstraintSet.TOP, timeLine.id, ConstraintSet.TOP, (hourHeight * t.start.inDailyHours).toInt())
             }
 
-            if (i == endDay && t.end.inDailyMillis == 0) {
+            if (i == endDay && t.end.inDailyMilliseconds == 0) {
                 constraintSet.connect(card.id, ConstraintSet.BOTTOM, timeLine.id, ConstraintSet.BOTTOM)
             } else if (i < endDay) {
                 constraintSet.connect(card.id, ConstraintSet.BOTTOM, bottomTimeSpanAnchor.id, ConstraintSet.BOTTOM)
