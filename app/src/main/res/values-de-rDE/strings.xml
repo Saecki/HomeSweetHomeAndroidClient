@@ -53,5 +53,6 @@
 
     <!-- Response !-->
     <string name="resp_update_error">Beim Aktualisieren ist ein Fehler aufgetreten</string>
+    <string name="resp_item_no_longer_exists">Das Element, das sie angeschaut haben existiert nicht mehr</string>
 
 </resources>

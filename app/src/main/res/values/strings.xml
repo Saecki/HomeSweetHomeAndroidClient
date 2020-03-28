@@ -69,6 +69,7 @@
 
     <!-- Response !-->
     <string name="resp_update_error">An error occurred while updating</string>
+    <string name="resp_item_no_longer_exists">The item you were viewing no longer exists</string>
 
     <!-- UID !-->
     <string name="uid" translatable="false">uid</string>
