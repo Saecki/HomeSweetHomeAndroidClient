@@ -1,5 +1,6 @@
 package bedbrains.homesweethomeandroidclient
 
+import android.util.Log
 import androidx.lifecycle.*
 import bedbrains.homesweethomeandroidclient.rest.Controller
 import bedbrains.homesweethomeandroidclient.rest.Resp
@@ -12,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object DataRepository {
-    val restClient = Controller.buildClient("http://192.168.178.55:8080")
+    val restClient = Controller.buildClient("http://192.168.178.28:8080")
 
     val devices: MutableLiveData<MutableList<Device>> = MutableLiveData(mutableListOf())
     val rules: MutableLiveData<MutableList<Rule>> = MutableLiveData(mutableListOf())
@@ -48,7 +49,7 @@ object DataRepository {
     }
 
     fun upsertDevice(device: Device) {
-        devices.value?.upsert(device) { it.uid == device.uid }
+        devices.value = devices.value.also { it?.upsert(device) { it.uid == device.uid } }
         restClient.postDevice(device).enqueue(object : Callback<Unit> {
             override fun onFailure(call: Call<Unit>, t: Throwable) {}
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
@@ -77,7 +78,7 @@ object DataRepository {
     }
 
     fun upsertRule(rule: Rule) {
-        rules.value?.upsert(rule) { it.uid == rule.uid }
+        rules.value = rules.value.also { it?.upsert(rule) { it.uid == rule.uid } }
         restClient.postRule(rule).enqueue(object : Callback<Unit> {
             override fun onFailure(call: Call<Unit>, t: Throwable) {}
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
@@ -106,7 +107,7 @@ object DataRepository {
     }
 
     fun upsertValue(value: RuleValue) {
-        values.value?.upsert(value) { it.uid == value.uid }
+        values.value = values.value.also { it?.upsert(value) { it.uid == value.uid } }
         restClient.postValue(value).enqueue(object : Callback<Unit> {
             override fun onFailure(call: Call<Unit>, t: Throwable) {}
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
