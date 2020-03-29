@@ -1,7 +1,9 @@
 package bedbrains.homesweethomeandroidclient
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import bedbrains.homesweethomeandroidclient.rest.APIService
 import bedbrains.homesweethomeandroidclient.rest.Controller
 import bedbrains.homesweethomeandroidclient.rest.Resp
 import bedbrains.shared.datatypes.devices.Device
@@ -13,13 +15,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object DataRepository {
-    val restClient = Controller.buildClient("http://192.168.178.28:8080")
+    var restClient: APIService? = null
 
     val devices: MutableLiveData<MutableList<Device>> = MutableLiveData(mutableListOf())
     val rules: MutableLiveData<MutableList<Rule>> = MutableLiveData(mutableListOf())
     val values: MutableLiveData<MutableList<RuleValue>> = MutableLiveData(mutableListOf())
 
     init {
+        buildNewRestClient()
         fetchUpdates()
     }
 
@@ -30,7 +33,7 @@ object DataRepository {
     fun fetchDevices(): LiveData<Resp> {
         val responded = MutableLiveData(Resp.AWAITING)
 
-        restClient.devices().enqueue(object : Callback<List<Device>> {
+        restClient?.devices()?.enqueue(object : Callback<List<Device>> {
             override fun onFailure(call: Call<List<Device>>, t: Throwable) {
                 responded.value = Resp.FAILURE
             }
@@ -50,7 +53,7 @@ object DataRepository {
 
     fun upsertDevice(device: Device) {
         devices.value = devices.value.also { it?.upsert(device) { it.uid == device.uid } }
-        restClient.postDevice(device).enqueue(object : Callback<Unit> {
+        restClient?.postDevice(device)?.enqueue(object : Callback<Unit> {
             override fun onFailure(call: Call<Unit>, t: Throwable) {}
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
         })
@@ -59,7 +62,7 @@ object DataRepository {
     fun fetchRules(): LiveData<Resp> {
         val responded = MutableLiveData(Resp.AWAITING)
 
-        restClient.rules().enqueue(object : Callback<List<Rule>> {
+        restClient?.rules()?.enqueue(object : Callback<List<Rule>> {
             override fun onFailure(call: Call<List<Rule>>, t: Throwable) {
                 responded.value = Resp.FAILURE
             }
@@ -79,7 +82,7 @@ object DataRepository {
 
     fun upsertRule(rule: Rule) {
         rules.value = rules.value.also { it?.upsert(rule) { it.uid == rule.uid } }
-        restClient.postRule(rule).enqueue(object : Callback<Unit> {
+        restClient?.postRule(rule)?.enqueue(object : Callback<Unit> {
             override fun onFailure(call: Call<Unit>, t: Throwable) {}
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
         })
@@ -88,7 +91,7 @@ object DataRepository {
     fun fetchValues(): LiveData<Resp> {
         val responded = MutableLiveData(Resp.AWAITING)
 
-        restClient.values().enqueue(object : Callback<List<RuleValue>> {
+        restClient?.values()?.enqueue(object : Callback<List<RuleValue>> {
             override fun onFailure(call: Call<List<RuleValue>>, t: Throwable) {
                 responded.value = Resp.FAILURE
             }
@@ -108,7 +111,7 @@ object DataRepository {
 
     fun upsertValue(value: RuleValue) {
         values.value = values.value.also { it?.upsert(value) { it.uid == value.uid } }
-        restClient.postValue(value).enqueue(object : Callback<Unit> {
+        restClient?.postValue(value)?.enqueue(object : Callback<Unit> {
             override fun onFailure(call: Call<Unit>, t: Throwable) {}
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
         })
@@ -136,5 +139,20 @@ object DataRepository {
         }
 
         return responded
+    }
+
+    fun buildNewRestClient() {
+        val host = MainActivity.preferences.getString(
+            MainActivity.res.getString(R.string.pref_network_host_key), ""
+        )?.trim()
+        val port = MainActivity.preferences.getString(
+            MainActivity.res.getString(R.string.pref_network_port_key), ""
+        )?.trim()
+
+        restClient = try {
+            Controller.buildClient("http://$host:$port")
+        } catch (e: Exception) {
+            null
+        }
     }
 }

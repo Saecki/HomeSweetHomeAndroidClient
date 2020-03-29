@@ -59,28 +59,26 @@ class WeeklyTimeSpanFragment() : Fragment() {
         startDay.text = Time.formatWeekDayFull(weeklyTimeSpanViewModel.timeSpan.start.localizedDay, locale)
         startDay.setOnClickListener {
 
-            AlertDialog.Builder(context).apply {
-                setNegativeButton(android.R.string.cancel, null)
-                setSingleChoiceItems(days, weeklyTimeSpanViewModel.timeSpan.start.localizedDay) { dialog, which ->
+            AlertDialog.Builder(context)
+                .setSingleChoiceItems(days, weeklyTimeSpanViewModel.timeSpan.start.localizedDay) { dialog, which ->
                     startDay.text = days[which]
                     weeklyTimeSpanViewModel.timeSpan.start.localizedDay = which
                     dialog.cancel()
                 }
-            }.show()
+                .show()
         }
 
         //end day
         endDay.text = Time.formatWeekDayFull(weeklyTimeSpanViewModel.timeSpan.end.localizedDay, locale)
         endDay.setOnClickListener {
 
-            AlertDialog.Builder(context).apply {
-                setNegativeButton(android.R.string.cancel, null)
-                setSingleChoiceItems(days, weeklyTimeSpanViewModel.timeSpan.end.localizedDay) { dialog, which ->
+            AlertDialog.Builder(context)
+                .setSingleChoiceItems(days, weeklyTimeSpanViewModel.timeSpan.end.localizedDay) { dialog, which ->
                     endDay.text = days[which]
                     weeklyTimeSpanViewModel.timeSpan.end.localizedDay = which
                     dialog.cancel()
                 }
-            }.show()
+                .show()
         }
 
         //start time

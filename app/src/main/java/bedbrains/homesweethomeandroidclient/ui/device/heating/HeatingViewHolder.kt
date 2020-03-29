@@ -157,41 +157,35 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
     }
 
     private fun showInputDialog(text: String) {
-        val builder = AlertDialog.Builder(context)
         val input = EditText(context)
-
-        builder.setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
         input.setText(text)
         input.inputType = InputType.TYPE_CLASS_PHONE
-        builder.setView(input)
 
-        builder.setPositiveButton(android.R.string.ok) { _, _ ->
-            try {
-                heating.targetTemp.global = input.text.toString().replace(',', '.').toDouble()
-                update(heating)
-            } catch (e: Exception) {
-                val snack = Snackbar.make(
-                    parent,
-                    MainActivity.res.getString(R.string.heating_snackbar_edit_text),
-                    Snackbar.LENGTH_LONG
-                )
-                snack.setAction(
-                    MainActivity.res.getString(R.string.heating_snackbar_edit)
-                ) {
-                    showInputDialog(input.text.toString())
+        AlertDialog.Builder(context)
+            .setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
+            .setView(input)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                try {
+                    heating.targetTemp.global = input.text.toString().replace(',', '.').toDouble()
+                    update(heating)
+                } catch (e: Exception) {
+                    val snack = Snackbar.make(
+                        parent,
+                        MainActivity.res.getString(R.string.heating_snackbar_edit_text),
+                        Snackbar.LENGTH_LONG
+                    )
+                    snack.setAction(
+                        MainActivity.res.getString(R.string.heating_snackbar_edit)
+                    ) {
+                        showInputDialog(input.text.toString())
+                    }
+                    snack.show()
                 }
-                snack.show()
+
             }
+            .show()
 
-        }
-
-        builder.setNegativeButton(android.R.string.cancel) { dialog, _ ->
-            dialog.cancel()
-        }
-
-        builder.show()
         input.requestFocusFromTouch()
-
         input.postDelayed({
             val keyboard =
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
