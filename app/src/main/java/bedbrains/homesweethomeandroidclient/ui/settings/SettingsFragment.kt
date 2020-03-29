@@ -1,8 +1,10 @@
 package bedbrains.homesweethomeandroidclient.ui.settings
 
 import android.os.Bundle
+import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.ui.Theme
 import bedbrains.shared.datatypes.temperature.Temperature
@@ -12,10 +14,27 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
+        //network ip address
+        val netHostKey = resources.getString(R.string.pref_network_host_key)
+        val netHostPreference = findPreference<EditTextPreference>(netHostKey)!!
+        netHostPreference.setOnPreferenceChangeListener { _, _ ->
+            DataRepository.buildNewRestClient()
+            true
+        }
+
+        //network port
+        val netPortKey = resources.getString(R.string.pref_network_port_key)
+        val netPortPreference = findPreference<EditTextPreference>(netPortKey)!!
+        netPortPreference.setOnPreferenceChangeListener { _, _ ->
+            DataRepository.buildNewRestClient()
+            true
+        }
+
         //network update delay
         val netUpdateDelayKey = resources.getString(R.string.pref_network_update_delay_key)
         val netUpdateDelayPreference = findPreference<ListPreference>(netUpdateDelayKey)!!
         netUpdateDelayPreference.setOnPreferenceChangeListener { _, newValue ->
+            //TODO
             true
         }
 

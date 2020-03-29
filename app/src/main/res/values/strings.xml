@@ -10,11 +10,11 @@
     <string name="action_clear">Clear all</string>
     <string name="action_delete">Delete</string>
     <string name="action_edit">Edit</string>
-    <string name="action_filter_by">Filter</string>
+    <string name="action_sort_by">Sort</string>
     <string name="action_group_by">Group</string>
+    <string name="action_filter_by">Filter</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_rename">Rename</string>
-    <string name="action_sort_by">Sort</string>
 
     <!-- Menu !-->
     <string name="menu_home">Home</string>
@@ -22,10 +22,11 @@
     <string name="menu_values">Values</string>
     <string name="menu_settings">Settings</string>
 
-    <!-- Rule !-->
+    <!-- Items !-->
+    <string name="item_untitled">Untitled</string>
+
     <!-- Weekly Time Span !-->
-    <string name="rule_time_title">Time</string>
-    <string name="rule_value_title">Values</string>
+    <string name="weekly_time_span_clear_all_confirmation">Clear all time spans?</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heating</string>
@@ -38,6 +39,12 @@
     <!-- Settings !-->
     <!-- Network !-->
     <string name="pref_network_category_title">Network</string>
+
+    <string name="pref_network_host_title">Host</string>
+    <string name="pref_network_host_key" translatable="false">host</string>
+
+    <string name="pref_network_port_title">Port</string>
+    <string name="pref_network_port_key" translatable="false">port</string>
 
     <string name="pref_network_update_automatically_title">Update automatically</string>
     <string name="pref_network_update_automatically_key" translatable="false">network_update_automatically</string>

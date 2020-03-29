@@ -1,7 +1,6 @@
 package bedbrains.homesweethomeandroidclient.ui.device
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment

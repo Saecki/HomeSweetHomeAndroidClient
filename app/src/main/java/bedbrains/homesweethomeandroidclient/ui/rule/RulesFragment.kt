@@ -10,9 +10,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
+import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentRulesBinding
 import bedbrains.homesweethomeandroidclient.rest.Resp
+import bedbrains.platform.UIDProvider
+import bedbrains.shared.datatypes.rules.WeeklyRule
 
 class RulesFragment : Fragment() {
 
@@ -43,7 +46,18 @@ class RulesFragment : Fragment() {
         }
 
         addButton.setOnClickListener {
-            binding.root.findNavController().navigate(R.id.action_nav_rules_to_nav_weekly_rule)
+            val bundle = Bundle()
+            val newRule = WeeklyRule(
+                UIDProvider.newUID,
+                resources.getString(R.string.item_untitled)
+            )
+
+            DataRepository.upsertRule(newRule)
+            bundle.putString(MainActivity.res.getString(R.string.uid), newRule.uid)
+            binding.root.findNavController().navigate(
+                R.id.action_nav_rules_to_nav_weekly_rule,
+                bundle
+            )
         }
 
         return binding.root

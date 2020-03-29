@@ -5,8 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.InputType
-import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.view.inputmethod.InputMethodManager
@@ -34,7 +32,6 @@ import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 class WeeklyRuleFragment : Fragment() {
@@ -196,7 +193,6 @@ class WeeklyRuleFragment : Fragment() {
                 MainActivity.toolbar.title = it.name
                 displayTimeSpans(it.timeSpans)
             }
-            Log.d("TESTING", "rule fragment livedata updated")
         })
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -252,9 +248,7 @@ class WeeklyRuleFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_refresh -> refresh()
-            R.id.action_clear -> DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
-                it.timeSpans.clear()
-            })
+            R.id.action_clear -> showClearAllDialog()
             R.id.action_rename -> showRenameDialog(weeklyRuleViewModel.rule.value!!.name)
             else -> return super.onOptionsItemSelected(item)
         }
@@ -366,30 +360,35 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        val builder = AlertDialog.Builder(context)
         val input = EditText(context)
-
-        builder.setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
         input.setText(text)
-        builder.setView(input)
 
-        builder.setPositiveButton(android.R.string.ok) { _, _ ->
-            DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
-                it.name = input.text.toString()
-            })
-        }
+        AlertDialog.Builder(context)
+            .setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
+            .setView(input)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
+                    it.name = input.text.toString()
+                })
+            }
+            .show()
 
-        builder.setNegativeButton(android.R.string.cancel) { dialog, _ ->
-            dialog.cancel()
-        }
-
-        builder.show()
         input.requestFocusFromTouch()
-
         input.postDelayed({
             val keyboard =
                 context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyboard.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
         }, 0)
+    }
+
+    private fun showClearAllDialog() {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.weekly_time_span_clear_all_confirmation)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
+                    it.timeSpans.clear()
+                })
+            }
+            .show()
     }
 }
