@@ -48,15 +48,15 @@ class RulesFragment : Fragment() {
         addButton.setOnClickListener {
             val bundle = Bundle()
             val newRule = WeeklyRule(
-                UIDProvider.newUID,
-                resources.getString(R.string.item_untitled)
+                    UIDProvider.newUID,
+                    resources.getString(R.string.item_untitled)
             )
 
             DataRepository.upsertRule(newRule)
             bundle.putString(MainActivity.res.getString(R.string.uid), newRule.uid)
             binding.root.findNavController().navigate(
-                R.id.action_nav_rules_to_nav_weekly_rule,
-                bundle
+                    R.id.action_nav_rules_to_nav_weekly_rule,
+                    bundle
             )
         }
 

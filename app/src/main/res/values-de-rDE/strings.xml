@@ -41,7 +41,7 @@
     <string name="pref_network_port_title">Port</string>
     <string name="pref_network_category_title">Netzwerk</string>
     <string name="pref_network_update_automatically_title">Automatisch aktualisieren</string>
-    <string name="pref_network_update_delay_title">Aktualisierungsverzögerung</string>
+    <string name="pref_network_automatic_update_delay_title">Aktualisierungsverzögerung</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperatur</string>

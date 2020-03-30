@@ -2,7 +2,8 @@
 <resources>
 
     <!-- Network !-->
-    <string-array name="pref_network_update_delay_entries">
+    <string-array name="pref_network_automatic_update_delay_entries">
+        <item>Nicht aktualisieren</item>
         <item>1s</item>
         <item>5s</item>
         <item>10s</item>

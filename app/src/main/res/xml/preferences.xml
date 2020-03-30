@@ -4,25 +4,22 @@
     <PreferenceCategory android:title="@string/pref_network_category_title">
 
         <EditTextPreference
+            android:defaultValue=" "
             android:key="@string/pref_network_host_key"
             android:title="@string/pref_network_host_title" />
 
         <EditTextPreference
+            android:defaultValue=" "
             android:key="@string/pref_network_port_key"
             android:title="@string/pref_network_port_title" />
 
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="@string/pref_network_update_automatically_key"
-            android:title="@string/pref_network_update_automatically_title" />
-
         <ListPreference
-            android:defaultValue="5000"
-            android:entries="@array/pref_network_update_delay_entries"
-            android:entryValues="@array/pref_network_update_delay_entry_values"
-            android:key="@string/pref_network_update_delay_key"
+            android:defaultValue="5"
+            android:entries="@array/pref_network_automatic_update_delay_entries"
+            android:entryValues="@array/pref_network_automatic_update_delay_entry_values"
+            android:key="@string/pref_network_automatic_update_delay_key"
             android:summary="%s"
-            android:title="@string/pref_network_update_delay_title" />
+            android:title="@string/pref_network_automatic_update_delay_title" />
 
     </PreferenceCategory>
 
@@ -62,7 +59,7 @@
     <PreferenceCategory android:title="@string/pref_ui_category_title">
 
         <ListPreference
-            android:defaultValue="0"
+            android:defaultValue="@string/pref_default_theme"
             android:entries="@array/pref_theme_entries"
             android:entryValues="@array/pref_theme_entry_values"
             android:key="@string/pref_theme_key"

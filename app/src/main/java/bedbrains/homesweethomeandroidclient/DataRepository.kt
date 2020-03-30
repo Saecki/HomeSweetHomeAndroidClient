@@ -1,21 +1,20 @@
 package bedbrains.homesweethomeandroidclient
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import bedbrains.homesweethomeandroidclient.rest.APIService
-import bedbrains.homesweethomeandroidclient.rest.Controller
-import bedbrains.homesweethomeandroidclient.rest.Resp
+import bedbrains.homesweethomeandroidclient.rest.*
 import bedbrains.shared.datatypes.devices.Device
 import bedbrains.shared.datatypes.rules.Rule
 import bedbrains.shared.datatypes.rules.RuleValue
 import bedbrains.shared.datatypes.upsert
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 object DataRepository {
     var restClient: APIService? = null
+
+    val handler = Handler(Looper.getMainLooper())
+    var updateRunnable = buildUpdateRunnable(5000)
 
     val devices: MutableLiveData<MutableList<Device>> = MutableLiveData(mutableListOf())
     val rules: MutableLiveData<MutableList<Rule>> = MutableLiveData(mutableListOf())
@@ -30,115 +29,53 @@ object DataRepository {
         return resultOf(fetchDevices(), fetchRules(), fetchValues())
     }
 
-    fun fetchDevices(): LiveData<Resp> {
-        val responded = MutableLiveData(Resp.AWAITING)
-
-        restClient?.devices()?.enqueue(object : Callback<List<Device>> {
-            override fun onFailure(call: Call<List<Device>>, t: Throwable) {
-                responded.value = Resp.FAILURE
-            }
-
-            override fun onResponse(call: Call<List<Device>>, response: Response<List<Device>>) {
-                devices.value = response.body()?.toMutableList() ?: mutableListOf()
-                responded.value = when (response.body()) {
-                    null -> Resp.FAILURE
-                    else -> Resp.SUCCESS
-                }
-            }
-
-        })
-
-        return responded
+    fun fetchDevices() = RespCallback<List<Device>>().enqueue(restClient?.devices()) {
+        devices.value = it?.toMutableList() ?: mutableListOf()
     }
 
-    fun upsertDevice(device: Device) {
-        devices.value = devices.value.also { it?.upsert(device) { it.uid == device.uid } }
-        restClient?.postDevice(device)?.enqueue(object : Callback<Unit> {
-            override fun onFailure(call: Call<Unit>, t: Throwable) {}
-            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
-        })
+    fun upsertDevice(device: Device): LiveData<Resp> {
+        devices.value = devices.value.apply { this?.upsert(device) { it.uid == device.uid } }
+        return RespCallback<Unit>().enqueue(restClient?.postDevice(device), null)
     }
 
-    fun fetchRules(): LiveData<Resp> {
-        val responded = MutableLiveData(Resp.AWAITING)
-
-        restClient?.rules()?.enqueue(object : Callback<List<Rule>> {
-            override fun onFailure(call: Call<List<Rule>>, t: Throwable) {
-                responded.value = Resp.FAILURE
-            }
-
-            override fun onResponse(call: Call<List<Rule>>, response: Response<List<Rule>>) {
-                rules.value = response.body()?.toMutableList() ?: mutableListOf()
-                responded.value = when (response.body()) {
-                    null -> Resp.FAILURE
-                    else -> Resp.SUCCESS
-                }
-            }
-
-        })
-
-        return responded
+    fun removeDevice(device: Device): LiveData<Resp> {
+        devices.value = devices.value.apply { this?.remove(device) }
+        return RespCallback<Unit>().enqueue(restClient?.deleteDevice(device.uid), null)
     }
 
-    fun upsertRule(rule: Rule) {
-        rules.value = rules.value.also { it?.upsert(rule) { it.uid == rule.uid } }
-        restClient?.postRule(rule)?.enqueue(object : Callback<Unit> {
-            override fun onFailure(call: Call<Unit>, t: Throwable) {}
-            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
-        })
+    fun fetchRules() = RespCallback<List<Rule>>().enqueue(restClient?.rules()) {
+        rules.value = it?.toMutableList() ?: mutableListOf()
     }
 
-    fun fetchValues(): LiveData<Resp> {
-        val responded = MutableLiveData(Resp.AWAITING)
-
-        restClient?.values()?.enqueue(object : Callback<List<RuleValue>> {
-            override fun onFailure(call: Call<List<RuleValue>>, t: Throwable) {
-                responded.value = Resp.FAILURE
-            }
-
-            override fun onResponse(call: Call<List<RuleValue>>, response: Response<List<RuleValue>>) {
-                values.value = response.body()?.toMutableList() ?: mutableListOf()
-                responded.value = when (response.body()) {
-                    null -> Resp.FAILURE
-                    else -> Resp.SUCCESS
-                }
-            }
-
-        })
-
-        return responded
+    fun upsertRule(rule: Rule): LiveData<Resp> {
+        rules.value = rules.value.apply { this?.upsert(rule) { it.uid == rule.uid } }
+        return RespCallback<Unit>().enqueue(restClient?.postRule(rule), null)
     }
 
-    fun upsertValue(value: RuleValue) {
-        values.value = values.value.also { it?.upsert(value) { it.uid == value.uid } }
-        restClient?.postValue(value)?.enqueue(object : Callback<Unit> {
-            override fun onFailure(call: Call<Unit>, t: Throwable) {}
-            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {}
-        })
+    fun fetchValues() = RespCallback<List<RuleValue>>().enqueue(restClient?.values()) {
+        values.value = it?.toMutableList() ?: mutableListOf()
     }
 
-    fun resultOf(vararg responses: LiveData<Resp>): LiveData<Resp> {
-        val responded = MutableLiveData(Resp.AWAITING)
+    fun upsertValue(value: RuleValue): LiveData<Resp> {
+        values.value = values.value.apply { this?.upsert(value) { it.uid == value.uid } }
+        return RespCallback<Unit>().enqueue(restClient?.postValue(value), null)
+    }
 
-        for (r in responses) {
-            r.observe(MainActivity.activity, Observer { it ->
-                when (it) {
-                    Resp.AWAITING -> Unit
-                    Resp.FAILURE -> {
-                        responded.value = Resp.FAILURE
-                        responses.forEach { resp -> resp.removeObservers(MainActivity.activity) }
-                    }
-                    Resp.SUCCESS -> {
-                        if (responses.indexOfFirst { resp -> resp.value != Resp.SUCCESS } == -1) {
-                            responded.value = Resp.SUCCESS
-                        }
-                        r.removeObservers(MainActivity.activity)
-                    }
-                }
-            })
+    fun startAutomaticUpdate(delay: Long) {
+        handler.removeCallbacks(updateRunnable)
+        updateRunnable = buildUpdateRunnable(delay * 1000)
+        handler.post(updateRunnable)
+    }
+
+    fun stopAutomaticUpdate() {
+        handler.removeCallbacks(updateRunnable)
+    }
+
+    fun buildUpdateRunnable(delayMillis: Long) = object : Runnable {
+        override fun run() {
+            fetchUpdates()
+            handler.postDelayed(this, delayMillis)
         }
-
-        return responded
     }
 
     fun buildNewRestClient() {

@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/nav_values"
-        android:icon="@drawable/ic_label_black_24dp"
+        android:icon="@drawable/ic_label_outline_black_24dp"
         android:title="@string/menu_values" />
 
 </menu>
