@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/text_margin"
         android:layout_marginEnd="@dimen/icon_margin"
         android:layout_marginBottom="@dimen/icon_margin"
-        android:src="@drawable/ic_schedule_black_24dp"
+        android:src="@drawable/ic_label_outline_black_24dp"
         android:tint="?android:colorAccent" />
 
     <TextView

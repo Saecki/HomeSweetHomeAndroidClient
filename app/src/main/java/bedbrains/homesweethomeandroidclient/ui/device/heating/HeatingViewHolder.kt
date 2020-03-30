@@ -51,7 +51,6 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
         }
         detailedViewTargetTemp.setOnClickListener {
             showInputDialog(heating.targetTemp.formatGlobal(false))
-            DataRepository.upsertDevice(heating)
         }
         minus.setOnClickListener {
             decrementTemp()
@@ -168,6 +167,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
                 try {
                     heating.targetTemp.global = input.text.toString().replace(',', '.').toDouble()
                     update(heating)
+                    DataRepository.upsertDevice(heating)
                 } catch (e: Exception) {
                     val snack = Snackbar.make(
                         parent,
@@ -181,7 +181,6 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
                     }
                     snack.show()
                 }
-
             }
             .show()
 

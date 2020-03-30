@@ -1,9 +1,13 @@
 <resources>
 
+    <!-- Work !-->
+    <string name="network_update_work_request_identifier" translatable="false">network_update</string>
+
     <!-- Names and Titles !-->
     <string name="app_name" translatable="false">HomeSweetHome</string>
     <string name="nav_header_title" translatable="false">HomeSweetHome</string>
     <string name="nav_header_subtitle">A smart home system</string>
+
 
     <!-- Action Bar Menu !-->
     <string name="action_apply_to_all">Apply to all</string>
@@ -49,8 +53,8 @@
     <string name="pref_network_update_automatically_title">Update automatically</string>
     <string name="pref_network_update_automatically_key" translatable="false">network_update_automatically</string>
 
-    <string name="pref_network_update_delay_title">Update delay</string>
-    <string name="pref_network_update_delay_key" translatable="false">network_update_delay</string>
+    <string name="pref_network_automatic_update_delay_title">Update delay</string>
+    <string name="pref_network_automatic_update_delay_key" translatable="false">network_update_delay</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperature</string>
@@ -73,6 +77,7 @@
 
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_key" translatable="false">dark_mode</string>
+    <string name="pref_default_theme" translatable="false">3</string>
 
     <!-- Response !-->
     <string name="resp_update_error">An error occurred while updating</string>

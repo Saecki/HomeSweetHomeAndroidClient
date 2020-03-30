@@ -1,6 +1,7 @@
 package bedbrains.homesweethomeandroidclient.ui.settings
 
 import android.os.Bundle
+import android.util.Log
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
@@ -30,13 +31,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        //network update delay
-        val netUpdateDelayKey = resources.getString(R.string.pref_network_update_delay_key)
-        val netUpdateDelayPreference = findPreference<ListPreference>(netUpdateDelayKey)!!
-        netUpdateDelayPreference.setOnPreferenceChangeListener { _, newValue ->
-            //TODO
+        //network automatic update delay
+        val netAutomaticUpdateDelayKey = resources.getString(R.string.pref_network_automatic_update_delay_key)
+        val netAutomaticUpdateDelayPreference = findPreference<ListPreference>(netAutomaticUpdateDelayKey)!!
+        netAutomaticUpdateDelayPreference.setOnPreferenceChangeListener { _, newValue ->
+            setNetworkUpdate(newValue)
             true
         }
+        setNetworkUpdate(netAutomaticUpdateDelayPreference.value)
 
         //temperature unit
         val tempUnitKey = resources.getString(R.string.pref_temperature_unit_key)
@@ -94,5 +96,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Theme.DEFAULT
         }
         Theme.setMode(mode)
+    }
+
+    fun setNetworkUpdate(value: Any) {
+        val delay = try {
+            value.toString().toLong()
+        } catch (e: Exception) {
+            5L
+        }
+
+        if (delay == -1L) {
+            DataRepository.stopAutomaticUpdate()
+        } else {
+            DataRepository.startAutomaticUpdate(delay)
+        }
     }
 }
