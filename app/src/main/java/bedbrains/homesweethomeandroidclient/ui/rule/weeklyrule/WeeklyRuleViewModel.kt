@@ -8,7 +8,6 @@ import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.shared.datatypes.rules.WeeklyRule
 
 class WeeklyRuleViewModel : ViewModel() {
-
     val rule: MutableLiveData<WeeklyRule?> = MutableLiveData(null)
     var initialCreation = true
 

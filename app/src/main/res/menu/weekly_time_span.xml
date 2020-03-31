@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_refresh"
+        android:title="@string/action_refresh"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_apply_to_all"
         android:title="@string/action_apply_to_all"
         app:showAsAction="never" />

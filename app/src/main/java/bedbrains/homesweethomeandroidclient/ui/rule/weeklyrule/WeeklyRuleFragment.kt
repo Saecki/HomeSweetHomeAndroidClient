@@ -24,9 +24,9 @@ import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentWeeklyRuleBinding
 import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
-import bedbrains.homesweethomeandroidclient.rest.Resp
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
+import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.platform.Time
 import bedbrains.shared.datatypes.rules.WeeklyTime
 import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
@@ -72,6 +72,7 @@ class WeeklyRuleFragment : Fragment() {
 
         if (weeklyRuleViewModel.initialCreation) {
             val uid = arguments?.getString(resources.getString(R.string.uid))
+
             if (uid == null) {
                 findNavController().popBackStack()
                 Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
@@ -176,7 +177,20 @@ class WeeklyRuleFragment : Fragment() {
 
         //add button
         addButton.setOnClickListener {
-            root.findNavController().navigate(R.id.action_nav_weekly_rule_to_nav_weekly_time_span)
+            val bundle = Bundle()
+            val newTimeSpan = WeeklyTimeSpan.UNSPECIFIED.apply {
+                value.name = resources.getString(R.string.item_untitled)
+            }
+
+            bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
+            bundle.putString(resources.getString(R.string.time_span_uid), newTimeSpan.uid)
+            DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
+                it.timeSpans.add(newTimeSpan)
+            })
+            root.findNavController().navigate(
+                R.id.action_nav_weekly_rule_to_nav_weekly_time_span,
+                bundle
+            )
         }
 
         val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
@@ -196,7 +210,7 @@ class WeeklyRuleFragment : Fragment() {
         })
 
         swipeRefreshLayout.setOnRefreshListener {
-            refresh()
+            swipeRefreshLayout.refresh(viewLifecycleOwner, context)
         }
 
         return root
@@ -247,33 +261,13 @@ class WeeklyRuleFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_refresh -> refresh()
+            R.id.action_refresh -> swipeRefreshLayout.refresh(viewLifecycleOwner, context)
             R.id.action_clear -> showClearAllDialog()
             R.id.action_rename -> showRenameDialog(weeklyRuleViewModel.rule.value!!.name)
             else -> return super.onOptionsItemSelected(item)
         }
+
         return false
-    }
-
-    private fun refresh() {
-        swipeRefreshLayout.isRefreshing = true
-
-        val resp = DataRepository.fetchUpdates()
-
-        resp.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                Resp.AWAITING -> Unit
-                Resp.SUCCESS -> {
-                    swipeRefreshLayout.isRefreshing = false
-                    resp.removeObservers(viewLifecycleOwner)
-                }
-                Resp.FAILURE -> {
-                    Toast.makeText(context, R.string.resp_update_error, Toast.LENGTH_LONG).show()
-                    swipeRefreshLayout.isRefreshing = false
-                    resp.removeObservers(viewLifecycleOwner)
-                }
-            }
-        })
     }
 
     private fun displayTimeSpans(timeSpans: List<WeeklyTimeSpan>) {
@@ -294,7 +288,7 @@ class WeeklyRuleFragment : Fragment() {
         for (i in t.start.localizedDay until endDay + 1) {
             val day = i % 7
 
-            val card = createTimeSpan(day)
+            val card = createTimeSpan(day, t)
 
             if (i > t.start.localizedDay) {
                 constraintSet.connect(card.id, ConstraintSet.TOP, topTimeSpanAnchor.id, ConstraintSet.TOP)
@@ -312,7 +306,7 @@ class WeeklyRuleFragment : Fragment() {
         }
     }
 
-    private fun createTimeSpan(day: Int): View {
+    private fun createTimeSpan(day: Int, timeSpan: WeeklyTimeSpan): View {
         val card = View(context)
         card.id = View.generateViewId()
         card.background = ContextCompat.getDrawable(context!!, R.drawable.background_card_view)
@@ -321,7 +315,14 @@ class WeeklyRuleFragment : Fragment() {
         timeSpans.add(card)
 
         card.setOnClickListener {
-            root.findNavController().navigate(R.id.action_nav_weekly_rule_to_nav_weekly_time_span)
+            val bundle = Bundle()
+
+            bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
+            bundle.putString(resources.getString(R.string.time_span_uid), timeSpan.uid)
+            root.findNavController().navigate(
+                R.id.action_nav_weekly_rule_to_nav_weekly_time_span,
+                bundle
+            )
         }
 
         constraintSet.connect(card.id, ConstraintSet.LEFT, verticalGuideLines[day].id, ConstraintSet.RIGHT, timeSpanMargin)

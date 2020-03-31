@@ -12,6 +12,7 @@ import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentDevicesBinding
 import bedbrains.homesweethomeandroidclient.rest.Resp
+import bedbrains.homesweethomeandroidclient.ui.component.refresh
 
 class DevicesFragment : Fragment() {
 
@@ -19,7 +20,11 @@ class DevicesFragment : Fragment() {
     private lateinit var binding: FragmentDevicesBinding
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
 
         binding = FragmentDevicesBinding.inflate(inflater)
@@ -37,7 +42,7 @@ class DevicesFragment : Fragment() {
         })
 
         swipeRefreshLayout.setOnRefreshListener {
-            refresh()
+            swipeRefreshLayout.refresh(viewLifecycleOwner, context)
         }
 
         return binding.root
@@ -49,7 +54,7 @@ class DevicesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_refresh -> refresh()
+            R.id.action_refresh -> swipeRefreshLayout.refresh(viewLifecycleOwner, context)
             R.id.action_edit -> Unit//TODO
             R.id.action_sort_by -> Unit//TODO
             R.id.action_group_by -> Unit//TODO
@@ -58,26 +63,5 @@ class DevicesFragment : Fragment() {
         }
 
         return false
-    }
-
-    fun refresh() {
-        swipeRefreshLayout.isRefreshing = true
-
-        val resp = DataRepository.fetchUpdates()
-
-        resp.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                Resp.AWAITING -> Unit
-                Resp.SUCCESS -> {
-                    swipeRefreshLayout.isRefreshing = false
-                    resp.removeObservers(viewLifecycleOwner)
-                }
-                Resp.FAILURE -> {
-                    Toast.makeText(context, R.string.resp_update_error, Toast.LENGTH_LONG).show()
-                    swipeRefreshLayout.isRefreshing = false
-                    resp.removeObservers(viewLifecycleOwner)
-                }
-            }
-        })
     }
 }

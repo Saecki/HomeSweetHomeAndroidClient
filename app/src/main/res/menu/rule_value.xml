@@ -8,11 +8,6 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_clear"
-        android:title="@string/action_clear"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_rename"
         android:title="@string/action_rename"
         app:showAsAction="never" />

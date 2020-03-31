@@ -19,7 +19,8 @@ import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.shared.datatypes.devices.Heating
 import com.google.android.material.snackbar.Snackbar
 
-class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private val context: Context, private val parent: View) : RecyclerView.ViewHolder(viewBinding.root) {
+class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private val context: Context, private val parent: View) :
+    RecyclerView.ViewHolder(viewBinding.root) {
 
     private lateinit var heating: Heating
     private val room = viewBinding.room
@@ -34,8 +35,10 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private val increment: Double
         get() {
-            val key = MainActivity.res.getString(R.string.pref_temperature_increment_key)
-            return MainActivity.getPrefStringAsDouble(key, 0.5)
+            return MainActivity.getPrefStringAsDouble(
+                R.string.pref_temperature_increment_key,
+                0.5
+            )
         }
 
     fun bindView(heating: Heating) {
