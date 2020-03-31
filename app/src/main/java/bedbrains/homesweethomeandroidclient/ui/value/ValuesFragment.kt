@@ -2,7 +2,6 @@ package bedbrains.homesweethomeandroidclient.ui.value
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -10,9 +9,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
+import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentValuesBinding
-import bedbrains.homesweethomeandroidclient.rest.Resp
+import bedbrains.homesweethomeandroidclient.ui.component.refresh
+import bedbrains.shared.datatypes.rules.RuleValue
 
 class ValuesFragment : Fragment() {
 
@@ -21,7 +22,11 @@ class ValuesFragment : Fragment() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
 
         binding = FragmentValuesBinding.inflate(inflater)
@@ -40,11 +45,21 @@ class ValuesFragment : Fragment() {
         })
 
         swipeRefreshLayout.setOnRefreshListener {
-            refresh()
+            swipeRefreshLayout.refresh(viewLifecycleOwner, context)
         }
 
         addButton.setOnClickListener {
-            addButton.findNavController().navigate(R.id.action_nav_values_to_nav_rule_value)
+            val bundle = Bundle()
+            val newValue = RuleValue.UNSPECIFIED.apply {
+                name = resources.getString(R.string.item_untitled)
+            }
+
+            DataRepository.upsertValue(newValue)
+            bundle.putString(MainActivity.res.getString(R.string.uid), newValue.uid)
+            binding.root.findNavController().navigate(
+                R.id.action_nav_values_to_nav_rule_value,
+                bundle
+            )
         }
 
         return binding.root
@@ -56,33 +71,12 @@ class ValuesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_refresh -> refresh()
+            R.id.action_refresh -> swipeRefreshLayout.refresh(viewLifecycleOwner, context)
             R.id.action_edit -> Unit//TODO
             R.id.action_sort_by -> Unit//TODO
             else -> return super.onOptionsItemSelected(item)
         }
 
         return false
-    }
-
-    fun refresh() {
-        swipeRefreshLayout.isRefreshing = true
-
-        val resp = DataRepository.fetchUpdates()
-
-        resp.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                Resp.AWAITING -> Unit
-                Resp.SUCCESS -> {
-                    swipeRefreshLayout.isRefreshing = false
-                    resp.removeObservers(viewLifecycleOwner)
-                }
-                Resp.FAILURE -> {
-                    Toast.makeText(context, R.string.resp_update_error, Toast.LENGTH_LONG).show()
-                    swipeRefreshLayout.isRefreshing = false
-                    resp.removeObservers(viewLifecycleOwner)
-                }
-            }
-        })
     }
 }

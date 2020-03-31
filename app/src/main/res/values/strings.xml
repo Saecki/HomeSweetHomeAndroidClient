@@ -85,5 +85,7 @@
 
     <!-- UID !-->
     <string name="uid" translatable="false">uid</string>
+    <string name="rule_uid" translatable="false">rule_uid</string>
+    <string name="time_span_uid" translatable="false">time_span_uid</string>
 
 </resources>

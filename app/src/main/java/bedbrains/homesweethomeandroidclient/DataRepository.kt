@@ -11,7 +11,7 @@ import bedbrains.shared.datatypes.rules.RuleValue
 import bedbrains.shared.datatypes.upsert
 
 object DataRepository {
-    var restClient: APIService? = null
+    var restClient: APIService? = buildRestClient()
 
     val handler = Handler(Looper.getMainLooper())
     var updateRunnable = buildUpdateRunnable(5000)
@@ -21,7 +21,6 @@ object DataRepository {
     val values: MutableLiveData<MutableList<RuleValue>> = MutableLiveData(mutableListOf())
 
     init {
-        buildNewRestClient()
         fetchUpdates()
     }
 
@@ -71,6 +70,10 @@ object DataRepository {
         handler.removeCallbacks(updateRunnable)
     }
 
+    fun updateRestClient() {
+        restClient = buildRestClient()
+    }
+
     fun buildUpdateRunnable(delayMillis: Long) = object : Runnable {
         override fun run() {
             fetchUpdates()
@@ -78,7 +81,7 @@ object DataRepository {
         }
     }
 
-    fun buildNewRestClient() {
+    fun buildRestClient(): APIService? {
         val host = MainActivity.preferences.getString(
             MainActivity.res.getString(R.string.pref_network_host_key), ""
         )?.trim()
@@ -86,7 +89,7 @@ object DataRepository {
             MainActivity.res.getString(R.string.pref_network_port_key), ""
         )?.trim()
 
-        restClient = try {
+        return try {
             Controller.buildClient("http://$host:$port")
         } catch (e: Exception) {
             null

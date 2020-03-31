@@ -27,25 +27,33 @@ class MainActivity : AppCompatActivity() {
         lateinit var appBarLayout: AppBarLayout
         lateinit var toolbar: Toolbar
 
-        fun getPrefInt(key: String, defaultValue: Int): Int {
+        fun getPrefString(key: Int, defaultValue: String): String {
             return try {
-                preferences.getInt(key, defaultValue)
+                preferences.getString(res.getString(key), defaultValue)!!
             } catch (e: Exception) {
                 defaultValue
             }
         }
 
-        fun getPrefStringAsInt(key: String, defaultValue: Int): Int {
+        fun getPrefInt(key: Int, defaultValue: Int): Int {
             return try {
-                preferences.getString(key, defaultValue.toString())!!.toInt()
+                preferences.getInt(res.getString(key), defaultValue)
             } catch (e: Exception) {
                 defaultValue
             }
         }
 
-        fun getPrefStringAsDouble(key: String, defaultValue: Double): Double {
+        fun getPrefStringAsInt(key: Int, defaultValue: Int): Int {
             return try {
-                preferences.getString(key, defaultValue.toString())!!.toDouble()
+                preferences.getString(res.getString(key), defaultValue.toString())!!.toInt()
+            } catch (e: Exception) {
+                defaultValue
+            }
+        }
+
+        fun getPrefStringAsDouble(key: Int, defaultValue: Double): Double {
+            return try {
+                preferences.getString(res.getString(key), defaultValue.toString())!!.toDouble()
             } catch (e: Exception) {
                 defaultValue
             }
@@ -59,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         res = resources
 
         setTheme(R.style.Theme_App)
-        Theme.setMode(getPrefStringAsInt(getString(R.string.pref_theme_key), Theme.DEFAULT))
+        Theme.setMode(getPrefStringAsInt(R.string.pref_theme_key, Theme.DEFAULT))
 
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)

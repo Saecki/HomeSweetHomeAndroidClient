@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.databinding.ValueRuleValueBinding
 import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
+import bedbrains.homesweethomeandroidclient.ui.value.rulevalue.RuleValueViewHolder
 import bedbrains.shared.datatypes.rules.RuleValue
 
 class RuleValueListAdapter(private var values: List<RuleValue>) : RecyclerView.Adapter<RuleValueViewHolder>() {
@@ -13,7 +14,9 @@ class RuleValueListAdapter(private var values: List<RuleValue>) : RecyclerView.A
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RuleValueViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val viewBinding = ValueRuleValueBinding.inflate(inflater, parent, false)
-        return RuleValueViewHolder(viewBinding)
+        return RuleValueViewHolder(
+            viewBinding
+        )
     }
 
     override fun getItemCount(): Int {
