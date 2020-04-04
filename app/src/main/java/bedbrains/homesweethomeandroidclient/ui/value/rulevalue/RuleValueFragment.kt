@@ -45,7 +45,7 @@ class RuleValueFragment() : Fragment() {
 
         val binding = FragmentRuleValueBinding.inflate(inflater)
         swipeRefreshLayout = binding.swipeRefreshLayout
-        ruleValueView = RuleValueView(binding.ruleValue)
+        ruleValueView = RuleValueView(binding.ruleValue, context)
 
         ruleValueViewModel.value.observe(viewLifecycleOwner, Observer {
             if (it == null) {

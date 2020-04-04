@@ -2,7 +2,7 @@ package bedbrains.platform
 
 import android.annotation.TargetApi
 import android.os.Build
-import bedbrains.shared.datatypes.rules.WeeklyTime
+import bedbrains.shared.datatypes.time.WeeklyTime
 import java.text.DateFormat
 import java.text.DateFormatSymbols
 import java.time.LocalDateTime

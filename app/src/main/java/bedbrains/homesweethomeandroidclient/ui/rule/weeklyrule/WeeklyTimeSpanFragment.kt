@@ -5,10 +5,10 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -19,52 +19,39 @@ import bedbrains.homesweethomeandroidclient.databinding.FragmentWeeklyTimeSpanBi
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.homesweethomeandroidclient.ui.value.rulevalue.RuleValueView
 import bedbrains.platform.Time
+import bedbrains.shared.datatypes.time.WeeklyTimeSpan
+import bedbrains.shared.datatypes.upsert
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 class WeeklyTimeSpanFragment() : Fragment() {
 
     private val weeklyTimeSpanViewModel: WeeklyTimeSpanViewModel by viewModels()
+    private lateinit var locale: Locale
+    private lateinit var days: Array<String>
+
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var ruleValueView: RuleValueView
-    private lateinit var locale: Locale
+    private lateinit var startDay: TextView
+    private lateinit var endDay: TextView
+    private lateinit var startTime: TextView
+    private lateinit var endTime: TextView
+    private lateinit var doneButton: FloatingActionButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
 
         locale = Locale.getDefault()
+        days = Array(7) { i -> Time.formatWeekDayFull(i, locale) }
 
         val binding = FragmentWeeklyTimeSpanBinding.inflate(inflater)
         swipeRefreshLayout = binding.swipeRefreshLayout
-        ruleValueView = RuleValueView(binding.ruleValue)
-
-        val days = Array(7) { "" }
-        val startDay = binding.startDay
-        val endDay = binding.endDay
-        val startTime = binding.startTime
-        val endTime = binding.endTime
-        val doneButton = binding.doneButton
-        val startTimePickerDialog = TimePickerDialog(
-            context,
-            TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                startTime.text = Time.formatTime(hourOfDay, minute, locale)
-            },
-            0,
-            0,
-            DateFormat.is24HourFormat(context)
-        )
-        val endTimePickerDialog = TimePickerDialog(
-            context,
-            TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                endTime.text = Time.formatTime(hourOfDay, minute, locale)
-            },
-            0,
-            0,
-            DateFormat.is24HourFormat(context)
-        )
-
-        for (i in days.indices) {
-            days[i] = Time.formatWeekDayFull(i, locale)
-        }
+        ruleValueView = RuleValueView(binding.ruleValue, context)
+        startDay = binding.startDay
+        endDay = binding.endDay
+        startTime = binding.startTime
+        endTime = binding.endTime
+        doneButton = binding.doneButton
 
         if (weeklyTimeSpanViewModel.initialCreation) {
             val ruleUid = arguments?.getString(resources.getString(R.string.rule_uid))
@@ -85,45 +72,30 @@ class WeeklyTimeSpanFragment() : Fragment() {
             } else {
                 startDay.text = Time.formatWeekDayFull(it.start.localizedDay, locale)
                 endDay.text = Time.formatWeekDayFull(it.end.localizedDay, locale)
-
                 startTime.text = Time.formatTime(it.start.hour, it.start.minute, locale)
                 endTime.text = Time.formatTime(it.end.hour, it.end.minute, locale)
 
-                startTimePickerDialog.updateTime(it.start.hour, it.start.minute)
-                endTimePickerDialog.updateTime(it.end.hour, it.end.minute)
+                ruleValueView.bind(it.value) { value ->
+                    val timeSpan = weeklyTimeSpanViewModel.timeSpan.value!!
 
-                ruleValueView.bind(it.value) { }
+                    timeSpan.value = value
+
+                    updateRule(timeSpan)
+                }
             }
         })
 
         startDay.setOnClickListener {
-            with(weeklyTimeSpanViewModel.timeSpan.value!!) {
-                AlertDialog.Builder(context)
-                    .setSingleChoiceItems(days, this.start.localizedDay) { dialog, which ->
-                        startDay.text = days[which]
-                        this.start.localizedDay = which
-                        dialog.cancel()
-                    }
-                    .show()
-            }
+            showStartDayDialog()
         }
         endDay.setOnClickListener {
-            with(weeklyTimeSpanViewModel.timeSpan.value!!) {
-                AlertDialog.Builder(context)
-                    .setSingleChoiceItems(days, this.end.localizedDay) { dialog, which ->
-                        endDay.text = days[which]
-                        this.end.localizedDay = which
-                        dialog.cancel()
-                    }
-                    .show()
-            }
+            showEndDayDialog()
         }
-
         startTime.setOnClickListener {
-            startTimePickerDialog.show()
+            showStartTimeDialog()
         }
         endTime.setOnClickListener {
-            endTimePickerDialog.show()
+            showEndTimeDialog()
         }
 
         doneButton.setOnClickListener {
@@ -144,11 +116,125 @@ class WeeklyTimeSpanFragment() : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_refresh -> swipeRefreshLayout.refresh(viewLifecycleOwner, context)
-            R.id.action_apply_to_all -> Unit//TODO
-            R.id.action_delete -> Unit//TODO
+            R.id.action_apply_to_all -> showApplyToAllDialog()
+            R.id.action_delete -> showDeleteDialog()
             else -> return super.onOptionsItemSelected(item)
         }
 
         return false
+    }
+
+    private fun updateRule(timeSpan: WeeklyTimeSpan) {
+        DataRepository.upsertRule(weeklyTimeSpanViewModel.rule.value!!.apply {
+            timeSpans.upsert(timeSpan) { it.uid == timeSpan.uid }
+        })
+    }
+
+    private fun applyToAll() {
+        val rule = weeklyTimeSpanViewModel.rule.value!!
+        val value = weeklyTimeSpanViewModel.timeSpan.value!!.value
+
+        rule.applyValueToAllTimeSpans(value)
+
+        DataRepository.upsertRule(rule)
+    }
+
+    private fun delete() {
+        val rule = weeklyTimeSpanViewModel.rule.value!!
+        val timeSpan = weeklyTimeSpanViewModel.timeSpan.value!!
+
+        rule.timeSpans.remove(timeSpan)
+
+        weeklyTimeSpanViewModel.timeSpan.removeObservers(viewLifecycleOwner)
+        findNavController().popBackStack()
+
+        DataRepository.upsertRule(rule)
+    }
+
+    private fun showStartDayDialog() {
+        val timeSpan = weeklyTimeSpanViewModel.timeSpan.value!!
+
+        AlertDialog.Builder(context)
+            .setSingleChoiceItems(days, timeSpan.start.localizedDay) { dialog, which ->
+                startDay.text = days[which]
+
+                timeSpan.start.localizedDay = which
+                updateRule(timeSpan)
+
+                dialog.cancel()
+            }
+            .show()
+    }
+
+    private fun showEndDayDialog() {
+        val timeSpan = weeklyTimeSpanViewModel.timeSpan.value!!
+
+        AlertDialog.Builder(context)
+            .setSingleChoiceItems(days, timeSpan.end.localizedDay) { dialog, which ->
+                endDay.text = days[which]
+
+                timeSpan.end.localizedDay = which
+                updateRule(timeSpan)
+
+                dialog.cancel()
+            }
+            .show()
+    }
+
+    private fun showStartTimeDialog() {
+        val timespan = weeklyTimeSpanViewModel.timeSpan.value!!
+
+        TimePickerDialog(
+            context,
+            TimePickerDialog.OnTimeSetListener
+            { _, hourOfDay, minute ->
+                startTime.text = Time.formatTime(hourOfDay, minute, locale)
+
+                timespan.start.hour = hourOfDay
+                timespan.start.minute = hourOfDay
+
+                updateRule(timespan)
+            },
+            timespan.start.hour,
+            timespan.start.minute,
+            DateFormat.is24HourFormat(context)
+        ).show()
+    }
+
+    private fun showEndTimeDialog() {
+        val timespan = weeklyTimeSpanViewModel.timeSpan.value!!
+
+        TimePickerDialog(
+            context,
+            TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                endTime.text = Time.formatTime(hourOfDay, minute, locale)
+
+                timespan.end.hour = hourOfDay
+                timespan.end.minute = minute
+
+                updateRule(timespan)
+            },
+            timespan.end.hour,
+            timespan.end.minute,
+            DateFormat.is24HourFormat(context)
+        ).show()
+    }
+
+    private fun showApplyToAllDialog() {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.weekly_time_span_apply_to_all_confirmation)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                applyToAll()
+            }
+            .show()
+    }
+
+    private fun showDeleteDialog() {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.weekly_time_span_delete_confirmation)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                delete()
+            }
+            .show()
     }
 }
