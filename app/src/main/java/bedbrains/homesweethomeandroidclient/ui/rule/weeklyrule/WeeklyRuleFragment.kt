@@ -28,8 +28,10 @@ import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.platform.Time
-import bedbrains.shared.datatypes.rules.WeeklyTime
-import bedbrains.shared.datatypes.rules.WeeklyTimeSpan
+import bedbrains.shared.datatypes.time.WeeklyTime
+import bedbrains.shared.datatypes.time.WeeklyTimeSpan
+import bedbrains.shared.datatypes.time.hours
+import bedbrains.shared.datatypes.time.minutes
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
@@ -180,6 +182,7 @@ class WeeklyRuleFragment : Fragment() {
             val bundle = Bundle()
             val newTimeSpan = WeeklyTimeSpan.UNSPECIFIED.apply {
                 value.name = resources.getString(R.string.item_untitled)
+                end += 1.hours
             }
 
             bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
@@ -205,7 +208,7 @@ class WeeklyRuleFragment : Fragment() {
                 Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
             } else {
                 MainActivity.toolbar.title = it.name
-                displayTimeSpans(it.timeSpans)
+                displayTimeSpans(it.timeSpans.toList())
             }
         })
 

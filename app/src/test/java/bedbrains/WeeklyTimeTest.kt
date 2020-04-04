@@ -1,6 +1,6 @@
 package bedbrains
 
-import bedbrains.shared.datatypes.rules.WeeklyTime
+import bedbrains.shared.datatypes.time.WeeklyTime
 import kotlin.test.assertEquals
 
 fun main() {

@@ -26,6 +26,8 @@
 
     <!-- Weekly Time Span !-->
     <string name="weekly_time_span_clear_all_confirmation">Alle Zeitspannen löschen?</string>
+    <string name="weekly_time_span_apply_to_all_confirmation">Diesen Wert auf alle Zeispannen anwenden?</string>
+    <string name="weekly_time_span_delete_confirmation">Diese Zeitspanne löschen?</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heizung</string>
@@ -40,8 +42,7 @@
     <string name="pref_network_host_title">Host</string>
     <string name="pref_network_port_title">Port</string>
     <string name="pref_network_category_title">Netzwerk</string>
-    <string name="pref_network_update_automatically_title">Automatisch aktualisieren</string>
-    <string name="pref_network_automatic_update_delay_title">Aktualisierungsverzögerung</string>
+    <string name="pref_network_automatic_update_delay_title">Verzögerung der automatischen Aktualisierung</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperatur</string>

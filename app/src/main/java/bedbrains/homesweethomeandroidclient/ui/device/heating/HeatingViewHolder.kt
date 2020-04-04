@@ -3,11 +3,11 @@ package bedbrains.homesweethomeandroidclient.ui.device.heating
 import android.app.AlertDialog
 import android.content.Context
 import android.text.InputType
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.view.postDelayed
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
@@ -164,7 +164,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
         input.inputType = InputType.TYPE_CLASS_PHONE
 
         AlertDialog.Builder(context)
-            .setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
+            .setTitle(R.string.pref_temperature_category_title)
             .setView(input)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 try {
@@ -172,26 +172,23 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
                     update(heating)
                     DataRepository.upsertDevice(heating)
                 } catch (e: Exception) {
-                    val snack = Snackbar.make(
+                    Snackbar.make(
                         parent,
-                        MainActivity.res.getString(R.string.heating_snackbar_edit_text),
+                        R.string.heating_snackbar_edit_text,
                         Snackbar.LENGTH_LONG
                     )
-                    snack.setAction(
-                        MainActivity.res.getString(R.string.heating_snackbar_edit)
-                    ) {
-                        showInputDialog(input.text.toString())
-                    }
-                    snack.show()
+                        .setAction(R.string.heating_snackbar_edit) {
+                            showInputDialog(input.text.toString())
+                        }
+                        .show()
                 }
             }
             .show()
 
         input.requestFocusFromTouch()
-        input.postDelayed({
-            val keyboard =
-                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyboard.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
-        }, 0)
+        input.postDelayed(MainActivity.res.getInteger(R.integer.keyboard_show_delay).toLong()) {
+            (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                .showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
+        }
     }
 }
