@@ -1,6 +1,6 @@
 package bedbrains.homesweethomeandroidclient.ui.value.rulevalue
 
-import android.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.text.InputType
 import android.view.inputmethod.InputMethodManager
@@ -37,7 +37,7 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
         input.setText(text)
         input.inputType = InputType.TYPE_CLASS_PHONE
 
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
             .setView(input)
             .setPositiveButton(android.R.string.ok) { _, _ ->

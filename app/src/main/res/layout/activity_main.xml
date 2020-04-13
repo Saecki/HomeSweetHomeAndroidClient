@@ -8,29 +8,11 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        android:id="@+id/app_bar_main"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/app_bar_main"
-            layout="@layout/app_bar_main"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            app:itemIconTint="@drawable/bottom_nav_colors"
-            app:itemTextColor="@drawable/bottom_nav_colors"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/nav_bottom" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -39,9 +21,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:itemBackground="@drawable/drawer_item_background"
-        app:itemIconTint="?android:colorForeground"
-        app:itemTextColor="?android:colorForeground"
         app:menu="@menu/nav_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

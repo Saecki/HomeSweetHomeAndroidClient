@@ -10,8 +10,10 @@
 
 <resources>
     <color name="background">#ffffff</color>
-    <color name="primary">#777777</color>
-    <color name="primary_variant">#888888</color>
-    <color name="accent">#FF9A42</color>
+    <color name="background_elevated">#ffffff</color>
+    <color name="primary">#FF9A42</color>
+    <color name="primary_variant">#FF9A42</color>
+    <color name="secondary">#FF9A42</color>
+    <color name="secondary_variant">#FF9A42</color>
     <color name="grid_line">#d0d0d0</color>
 </resources>

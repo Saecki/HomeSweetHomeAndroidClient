@@ -44,4 +44,7 @@
     <dimen name="time_indicator_line_width">1dp</dimen>
     <dimen name="time_indicator_elevation">6dp</dimen>
 
+    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="dialog_corner_radius">8dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
 </resources>

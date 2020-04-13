@@ -3,10 +3,10 @@ package bedbrains.homesweethomeandroidclient
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -17,8 +17,6 @@ import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     companion object {
         lateinit var activity: MainActivity
@@ -58,8 +56,10 @@ class MainActivity : AppCompatActivity() {
                 defaultValue
             }
         }
-
     }
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         activity = this
@@ -78,7 +78,9 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home,
@@ -88,12 +90,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
-        binding.bottomNav.setupWithNavController(navController)
-
+        binding.appBarMain.contentMain.bottomNav.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
