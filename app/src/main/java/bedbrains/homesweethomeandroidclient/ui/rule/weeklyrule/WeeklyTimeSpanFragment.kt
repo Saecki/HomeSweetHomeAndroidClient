@@ -1,12 +1,12 @@
 package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 
-import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -154,7 +154,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     private fun showStartDayDialog() {
         val timeSpan = weeklyTimeSpanViewModel.timeSpan.value!!
 
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setSingleChoiceItems(days, timeSpan.start.localizedDay) { dialog, which ->
                 startDay.text = days[which]
 
@@ -169,7 +169,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     private fun showEndDayDialog() {
         val timeSpan = weeklyTimeSpanViewModel.timeSpan.value!!
 
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setSingleChoiceItems(days, timeSpan.end.localizedDay) { dialog, which ->
                 endDay.text = days[which]
 
@@ -221,7 +221,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     }
 
     private fun showApplyToAllDialog() {
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setTitle(R.string.weekly_time_span_apply_to_all_confirmation)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 applyToAll()
@@ -230,7 +230,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     }
 
     private fun showDeleteDialog() {
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setTitle(R.string.weekly_time_span_delete_confirmation)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 delete()

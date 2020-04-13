@@ -1,6 +1,5 @@
 package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +9,7 @@ import android.view.animation.Animation
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
@@ -31,7 +31,6 @@ import bedbrains.platform.Time
 import bedbrains.shared.datatypes.time.WeeklyTime
 import bedbrains.shared.datatypes.time.WeeklyTimeSpan
 import bedbrains.shared.datatypes.time.hours
-import bedbrains.shared.datatypes.time.minutes
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
@@ -275,11 +274,12 @@ class WeeklyRuleFragment : Fragment() {
 
     private fun displayTimeSpans(timeSpans: List<WeeklyTimeSpan>) {
         this.timeSpans.forEach { view -> timeLayout.removeView(view) }
-        timeSpans.forEach { displayTimeSpan(it) }
+        timeSpans.forEach { this.timeSpans.addAll(displayTimeSpan(it)) }
         constraintSet.applyTo(timeLayout)
     }
 
-    private fun displayTimeSpan(t: WeeklyTimeSpan) {
+    private fun displayTimeSpan(t: WeeklyTimeSpan): List<View> {
+        val timeSpans = mutableListOf<View>()
         var endDay = t.end.localizedDay
 
         if (t.start.localizedAfter(t.end))
@@ -290,8 +290,9 @@ class WeeklyRuleFragment : Fragment() {
 
         for (i in t.start.localizedDay until endDay + 1) {
             val day = i % 7
-
             val card = createTimeSpan(day, t)
+
+            timeSpans.add(card)
 
             if (i > t.start.localizedDay) {
                 constraintSet.connect(card.id, ConstraintSet.TOP, topTimeSpanAnchor.id, ConstraintSet.TOP)
@@ -307,6 +308,8 @@ class WeeklyRuleFragment : Fragment() {
                 constraintSet.connect(card.id, ConstraintSet.BOTTOM, timeLine.id, ConstraintSet.BOTTOM, (hourHeight * (24 - t.end.inDailyHours)).toInt())
             }
         }
+
+        return timeSpans
     }
 
     private fun createTimeSpan(day: Int, timeSpan: WeeklyTimeSpan): View {
@@ -315,7 +318,6 @@ class WeeklyRuleFragment : Fragment() {
         card.background = ContextCompat.getDrawable(context!!, R.drawable.background_card_view)
         card.elevation = cardViewElevation
         timeLayout.addView(card)
-        timeSpans.add(card)
 
         card.setOnClickListener {
             val bundle = Bundle()
@@ -367,7 +369,7 @@ class WeeklyRuleFragment : Fragment() {
         val input = EditText(context)
         input.setText(text)
 
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
             .setView(input)
             .setPositiveButton(android.R.string.ok) { _, _ ->
@@ -386,7 +388,7 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun showClearAllDialog() {
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setTitle(R.string.weekly_time_span_clear_all_confirmation)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
