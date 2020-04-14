@@ -10,13 +10,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
@@ -32,6 +32,7 @@ import bedbrains.shared.datatypes.time.WeeklyTime
 import bedbrains.shared.datatypes.time.WeeklyTimeSpan
 import bedbrains.shared.datatypes.time.hours
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
@@ -65,8 +66,6 @@ class WeeklyRuleFragment : Fragment() {
     private var indicatorHeadDiameter = 0
     private var timeSpanMargin = 0
     private var timeSpanBigMargin = 0
-    private var cardViewElevation = 0f
-    private var cardViewHighElevation = 0f
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
@@ -151,8 +150,6 @@ class WeeklyRuleFragment : Fragment() {
         indicatorHeadDiameter = resources.getDimensionPixelSize(R.dimen.time_indicator_head_diameter)
         timeSpanMargin = resources.getDimensionPixelSize(R.dimen.weekly_rule_time_span_margin)
         timeSpanBigMargin = resources.getDimensionPixelSize(R.dimen.weekly_rule_time_span_big_margin)
-        cardViewElevation = resources.getDimension(R.dimen.card_view_elevation)
-        cardViewHighElevation = resources.getDimension(R.dimen.card_view_high_elevation)
 
         //toolbar
         days.forEachIndexed { index, textView ->
@@ -178,21 +175,15 @@ class WeeklyRuleFragment : Fragment() {
 
         //add button
         addButton.setOnClickListener {
-            val bundle = Bundle()
             val newTimeSpan = WeeklyTimeSpan.UNSPECIFIED.apply {
                 value.name = resources.getString(R.string.item_untitled)
                 end += 1.hours
             }
 
-            bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
-            bundle.putString(resources.getString(R.string.time_span_uid), newTimeSpan.uid)
             DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
                 it.timeSpans.add(newTimeSpan)
             })
-            root.findNavController().navigate(
-                R.id.action_nav_weekly_rule_to_nav_weekly_time_span,
-                bundle
-            )
+            showTimeSpanDialog(newTimeSpan.uid)
         }
 
         val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
@@ -223,7 +214,7 @@ class WeeklyRuleFragment : Fragment() {
         updateTimeIndicator(WeeklyTime.now)
 
         if (weeklyRuleViewModel.initialCreation) {
-            val duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+            val duration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
             val expandAnimation = ExpandAnimation(*days.toTypedArray())
 
             dayToolbar.visibility = View.VISIBLE
@@ -237,7 +228,7 @@ class WeeklyRuleFragment : Fragment() {
     override fun onPause() {
         super.onPause()
 
-        val duration = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+        val duration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
         val collapseAnimation = CollapseAnimation(dayToolbar)
 
         collapseAnimation.duration = duration
@@ -250,7 +241,6 @@ class WeeklyRuleFragment : Fragment() {
             }
 
             override fun onAnimationStart(animation: Animation?) {}
-
         })
 
         dayToolbar.startAnimation(collapseAnimation)
@@ -313,21 +303,13 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun createTimeSpan(day: Int, timeSpan: WeeklyTimeSpan): View {
-        val card = View(context)
+        val card = CardView(context!!)
+        card.background = ContextCompat.getDrawable(context!!, R.drawable.time_span_background)
         card.id = View.generateViewId()
-        card.background = ContextCompat.getDrawable(context!!, R.drawable.background_card_view)
-        card.elevation = cardViewElevation
         timeLayout.addView(card)
 
         card.setOnClickListener {
-            val bundle = Bundle()
-
-            bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
-            bundle.putString(resources.getString(R.string.time_span_uid), timeSpan.uid)
-            root.findNavController().navigate(
-                R.id.action_nav_weekly_rule_to_nav_weekly_time_span,
-                bundle
-            )
+            showTimeSpanDialog(timeSpan.uid)
         }
 
         constraintSet.connect(card.id, ConstraintSet.LEFT, verticalGuideLines[day].id, ConstraintSet.RIGHT, timeSpanMargin)
@@ -363,6 +345,25 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet.constrainHeight(timeIndicatorLine.id, indicatorLineWidth)
 
         constraintSet.applyTo(timeLayout)
+    }
+
+    private fun showTimeSpanDialog(timeSpanUid: String) {
+        val bundle = Bundle()
+
+        bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
+        bundle.putString(resources.getString(R.string.time_span_uid), timeSpanUid)
+
+        MainActivity.bottomSheetBehavior.peekHeight = 240
+        MainActivity.bottomSheetBehavior.halfExpandedRatio = 0.5f
+        MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        MainActivity.activity.supportFragmentManager.beginTransaction()
+            .add(R.id.bottom_sheet_content, WeeklyTimeSpanFragment::class.java, bundle)
+            .commit()
+
+        // root.findNavController().navigate(
+        //     R.id.action_nav_weekly_rule_to_nav_weekly_time_span,
+        //     bundle
+        // )
     }
 
     private fun showRenameDialog(text: String) {

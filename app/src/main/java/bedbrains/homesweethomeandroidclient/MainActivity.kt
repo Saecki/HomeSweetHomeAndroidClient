@@ -3,8 +3,10 @@ package bedbrains.homesweethomeandroidclient
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,6 +17,7 @@ import androidx.preference.PreferenceManager
 import bedbrains.homesweethomeandroidclient.databinding.ActivityMainBinding
 import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         lateinit var res: Resources
         lateinit var appBarLayout: AppBarLayout
         lateinit var toolbar: Toolbar
+        lateinit var bottomSheet: LinearLayout
+        lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
         fun getPrefString(key: Int, defaultValue: String): String {
             return try {
@@ -75,6 +80,8 @@ class MainActivity : AppCompatActivity() {
 
         appBarLayout = binding.appBarMain.appBarLayout
         toolbar = binding.appBarMain.toolbar
+        bottomSheet = binding.appBarMain.bottomSheet
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
 
         setSupportActionBar(toolbar)
 

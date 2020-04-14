@@ -22,10 +22,19 @@
         android:id="@+id/content_main"
         layout="@layout/content_main" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <LinearLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_background"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/bottom_sheet_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

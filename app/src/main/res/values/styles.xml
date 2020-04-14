@@ -4,8 +4,10 @@
         <!-- Colors !-->
         <item name="colorSurface">@color/background</item>
         <item name="colorPrimarySurface">@color/background</item>
-        <item name="android:colorBackground">@color/background</item>
         <item name="backgroundColor">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorBackgroundFloating">@color/background_floating</item>
+        <item name="android:colorBackgroundFloating">@color/background_floating</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_variant</item>
         <item name="colorPrimaryDark">@color/primary_variant</item>
@@ -22,6 +24,7 @@
         <item name="appBarLayoutStyle">@style/AppbarLayout</item>
         <item name="navigationViewStyle">@style/NavigationView</item>
         <item name="bottomNavigationStyle">@style/BottomNavigationView</item>
+        <item name="floatingActionButtonStyle">@style/FloatingActionButton</item>
 
         <item name="dialogCornerRadius">@dimen/dialog_corner_radius</item>
         <item name="cornerRadius">@dimen/corner_radius</item>
@@ -40,12 +43,17 @@
     <style name="NavigationView" parent="Widget.Design.NavigationView">
         <item name="android:backgroundTint">@color/background_elevated</item>
         <item name="itemBackground">@drawable/drawer_item_background</item>
-        <item name="itemIconTint">?android:colorForeground</item>
-        <item name="itemTextColor">?android:colorForeground</item>
+        <item name="itemIconTint">?colorOnBackground</item>
+        <item name="itemTextColor">?colorOnBackground</item>
     </style>
 
     <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="android:background">@color/background_elevated</item>
+    </style>
+
+    <style name="FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/primary</item>
+        <item name="backgroundTint">@color/background_floating</item>
     </style>
 
     <!-- Custom Component Themes !-->

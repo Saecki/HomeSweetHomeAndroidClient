@@ -11,6 +11,7 @@
 <resources>
     <color name="background">#ffffff</color>
     <color name="background_elevated">#ffffff</color>
+    <color name="background_floating">#ffffff</color>
     <color name="primary">#FF9A42</color>
     <color name="primary_variant">#FF9A42</color>
     <color name="secondary">#FF9A42</color>

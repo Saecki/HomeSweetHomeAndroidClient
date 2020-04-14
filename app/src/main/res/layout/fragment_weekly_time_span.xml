@@ -1,106 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipe_refresh_layout"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/menu_margin_vertical"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/control_icon_padding"
+        android:src="@drawable/ic_close_black_24dp"
+        android:tint="?colorOnBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/top_barrier"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/menu_margin_vertical"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="cancel_button" />
 
-        <TextView
-            android:id="@+id/start_day"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/menu_margin_horizontal"
-            android:layout_marginTop="@dimen/text_margin"
-            android:layout_marginEnd="@dimen/menu_margin_horizontal"
-            android:layout_marginBottom="@dimen/text_margin"
-            app:layout_constraintEnd_toStartOf="@+id/start_time"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/start_day"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/menu_margin_horizontal"
+        android:layout_marginTop="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/menu_margin_horizontal"
+        android:layout_marginBottom="@dimen/text_margin"
+        app:layout_constraintEnd_toStartOf="@+id/start_time"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_barrier" />
 
-        <TextView
-            android:id="@+id/start_time"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/menu_margin_horizontal"
-            android:layout_marginTop="@dimen/text_margin"
-            android:layout_marginEnd="@dimen/menu_margin_horizontal"
-            android:layout_marginBottom="@dimen/text_margin"
-            app:layout_constraintBaseline_toBaselineOf="@id/start_day"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/start_day" />
+    <TextView
+        android:id="@+id/start_time"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/menu_margin_horizontal"
+        android:layout_marginTop="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/menu_margin_horizontal"
+        android:layout_marginBottom="@dimen/text_margin"
+        app:layout_constraintBaseline_toBaselineOf="@id/start_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/start_day" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/start_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="start_day,start_time" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/start_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="start_day,start_time" />
 
-        <TextView
-            android:id="@+id/end_day"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/menu_margin_horizontal"
-            android:layout_marginTop="@dimen/text_margin"
-            android:layout_marginEnd="@dimen/menu_margin_horizontal"
-            android:layout_marginBottom="@dimen/text_margin"
-            app:layout_constraintEnd_toStartOf="@+id/end_time"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_barrier" />
+    <TextView
+        android:id="@+id/end_day"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/menu_margin_horizontal"
+        android:layout_marginTop="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/menu_margin_horizontal"
+        android:layout_marginBottom="@dimen/text_margin"
+        app:layout_constraintEnd_toStartOf="@+id/end_time"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_barrier" />
 
-        <TextView
-            android:id="@+id/end_time"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/menu_margin_horizontal"
-            android:layout_marginTop="@dimen/text_margin"
-            android:layout_marginEnd="@dimen/menu_margin_horizontal"
-            android:layout_marginBottom="@dimen/text_margin"
-            app:layout_constraintBaseline_toBaselineOf="@id/end_day"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/end_day" />
+    <TextView
+        android:id="@+id/end_time"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/menu_margin_horizontal"
+        android:layout_marginTop="@dimen/text_margin"
+        android:layout_marginEnd="@dimen/menu_margin_horizontal"
+        android:layout_marginBottom="@dimen/text_margin"
+        app:layout_constraintBaseline_toBaselineOf="@id/end_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/end_day" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/end_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="end_day,end_time" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/end_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="end_day,end_time" />
 
-        <include
-            android:id="@+id/rule_value"
-            layout="@layout/rule_value_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/menu_margin_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/end_barrier" />
+    <include
+        android:id="@+id/rule_value"
+        layout="@layout/rule_value_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/menu_margin_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/end_barrier" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/done_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_done_black_24dp"
-            android:tint="?android:colorBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
