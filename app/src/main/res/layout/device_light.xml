@@ -14,7 +14,7 @@
         android:layout_marginEnd="@dimen/icon_margin"
         android:layout_marginBottom="@dimen/icon_margin"
         android:src="@drawable/ic_light_bulb_outline_black_24dp"
-        android:tint="?android:colorAccent"
+        android:tint="?colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

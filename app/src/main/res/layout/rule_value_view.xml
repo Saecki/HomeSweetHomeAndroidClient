@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/icon_margin"
             android:src="@drawable/ic_heating_black_24dp"
-            android:tint="?android:colorAccent"
+            android:tint="?colorSecondary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:textColor="?android:colorAccent"
+            android:textColor="?colorSecondary"
             app:layout_constraintBottom_toBottomOf="@id/heating_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/heating_label"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/icon_margin"
             android:src="@drawable/ic_light_bulb_outline_black_24dp"
-            android:tint="?android:colorAccent"
+            android:tint="?colorSecondary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/heating_barrier" />
 

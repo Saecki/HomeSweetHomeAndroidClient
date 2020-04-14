@@ -20,15 +20,6 @@
     <dimen name="control_padding">8dp</dimen>
     <dimen name="control_icon_padding">12dp</dimen>
 
-    <dimen name="card_view_corner_radius">8dp</dimen>
-    <dimen name="card_view_margin">8dp</dimen>
-    <dimen name="card_view_border_width">2dp</dimen>
-    <dimen name="card_view_elevation">4dp</dimen>
-    <dimen name="card_view_high_elevation">6dp</dimen>
-    <dimen name="card_view_handle_diameter">20dp</dimen>
-    <dimen name="card_view_handle_elevation">1dp</dimen>
-    <dimen name="card_view_handle_border_width">6dp</dimen>
-
     <dimen name="weekly_rule_toolbar_margin">8dp</dimen>
     <dimen name="weekly_rule_grid_margin">8dp</dimen>
     <dimen name="weekly_rule_time_layout_height">980dp</dimen>
@@ -42,9 +33,12 @@
 
     <dimen name="time_indicator_head_diameter">8dp</dimen>
     <dimen name="time_indicator_line_width">1dp</dimen>
-    <dimen name="time_indicator_elevation">6dp</dimen>
+    <dimen name="time_indicator_elevation">2.5dp</dimen>
 
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="dialog_corner_radius">8dp</dimen>
     <dimen name="card_corner_radius">8dp</dimen>
+
+    <dimen name="bottom_sheet_begin_margin">32dp</dimen>
+    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
 </resources>
