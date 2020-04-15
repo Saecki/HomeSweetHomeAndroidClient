@@ -48,10 +48,10 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
                 } catch (e: Exception) {
                     Snackbar.make(
                         binding.root,
-                        R.string.heating_snackbar_edit_text,
+                        R.string.notification_no_number_recognized,
                         Snackbar.LENGTH_LONG
                     )
-                        .setAction(R.string.heating_snackbar_edit) {
+                        .setAction(R.string.action_edit) {
                             showInputDialog(input.text.toString())
                         }
                         .show()

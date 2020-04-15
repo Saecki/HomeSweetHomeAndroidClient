@@ -174,10 +174,10 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
                 } catch (e: Exception) {
                     Snackbar.make(
                         parent,
-                        R.string.heating_snackbar_edit_text,
+                        R.string.notification_no_number_recognized,
                         Snackbar.LENGTH_LONG
                     )
-                        .setAction(R.string.heating_snackbar_edit) {
+                        .setAction(R.string.action_edit) {
                             showInputDialog(input.text.toString())
                         }
                         .show()

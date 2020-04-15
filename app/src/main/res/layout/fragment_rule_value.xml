@@ -8,6 +8,7 @@
         android:id="@+id/rule_value"
         layout="@layout/rule_value_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/item_margin" />
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -353,17 +353,13 @@ class WeeklyRuleFragment : Fragment() {
         bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
         bundle.putString(resources.getString(R.string.time_span_uid), timeSpanUid)
 
-        MainActivity.bottomSheetBehavior.peekHeight = 240
-        MainActivity.bottomSheetBehavior.halfExpandedRatio = 0.5f
-        MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         MainActivity.activity.supportFragmentManager.beginTransaction()
-            .add(R.id.bottom_sheet_content, WeeklyTimeSpanFragment::class.java, bundle)
+            .replace(R.id.bottom_sheet_content, WeeklyTimeSpanFragment::class.java, bundle)
             .commit()
 
-        // root.findNavController().navigate(
-        //     R.id.action_nav_weekly_rule_to_nav_weekly_time_span,
-        //     bundle
-        // )
+        MainActivity.bottomSheetBehavior.isHideable = false
+        MainActivity.bottomSheetBehavior.peekHeight = 320
+        MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     private fun showRenameDialog(text: String) {

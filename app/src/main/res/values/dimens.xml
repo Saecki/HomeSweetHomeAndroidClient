@@ -7,18 +7,21 @@
 
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="drag_bar_height">4dp</dimen>
+    <dimen name="drag_bar_width">120dp</dimen>
+    <dimen name="drag_bar_margin">8dp</dimen>
+
     <dimen name="menu_margin_horizontal">60dp</dimen>
     <dimen name="menu_margin_vertical">40dp</dimen>
 
     <dimen name="item_margin">8dp</dimen>
-    <dimen name="text_margin">8dp</dimen>
-    <dimen name="icon_margin">16dp</dimen>
-    <dimen name="control_margin">8dp</dimen>
-    <!-- icon-width(24dp) + 2 * icon_margin + !-->
-    <dimen name="device_start_guide_line_margin">56dp</dimen>
-    <dimen name="device_end_guide_line_margin">64dp</dimen>
+    <dimen name="item_end_guide_line_margin">64dp</dimen>
+
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="control_margin">12dp</dimen>
+
     <dimen name="control_padding">8dp</dimen>
-    <dimen name="control_icon_padding">12dp</dimen>
+    <dimen name="icon_padding">12dp</dimen>
 
     <dimen name="weekly_rule_toolbar_margin">8dp</dimen>
     <dimen name="weekly_rule_grid_margin">8dp</dimen>
@@ -38,6 +41,7 @@
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="dialog_corner_radius">8dp</dimen>
     <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="button_corner_radius">4dp</dimen>
 
     <dimen name="bottom_sheet_begin_margin">32dp</dimen>
     <dimen name="bottom_sheet_corner_radius">16dp</dimen>

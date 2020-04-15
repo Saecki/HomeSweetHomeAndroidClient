@@ -3,23 +3,29 @@ package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import bedbrains.homesweethomeandroidclient.DataRepository
+import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentWeeklyTimeSpanBinding
 import bedbrains.homesweethomeandroidclient.ui.value.rulevalue.RuleValueView
 import bedbrains.platform.Time
 import bedbrains.shared.datatypes.time.WeeklyTimeSpan
 import bedbrains.shared.datatypes.upsert
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.button.MaterialButton
 import java.util.*
 
 class WeeklyTimeSpanFragment() : Fragment() {
@@ -28,11 +34,13 @@ class WeeklyTimeSpanFragment() : Fragment() {
     private lateinit var locale: Locale
     private lateinit var days: Array<String>
 
-    private lateinit var ruleValueView: RuleValueView
+    private lateinit var cancelButton: ImageView
+    private lateinit var doneButton: MaterialButton
     private lateinit var startDay: TextView
     private lateinit var endDay: TextView
     private lateinit var startTime: TextView
     private lateinit var endTime: TextView
+    private lateinit var ruleValueView: RuleValueView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         locale = Locale.getDefault()
@@ -40,11 +48,13 @@ class WeeklyTimeSpanFragment() : Fragment() {
 
         val binding = FragmentWeeklyTimeSpanBinding.inflate(inflater)
 
-        ruleValueView = RuleValueView(binding.ruleValue, context)
+        cancelButton = binding.cancelButton
+        doneButton = binding.doneButton
         startDay = binding.startDay
         endDay = binding.endDay
         startTime = binding.startTime
         endTime = binding.endTime
+        ruleValueView = RuleValueView(binding.ruleValue, context)
 
         if (weeklyTimeSpanViewModel.initialCreation) {
             val ruleUid = arguments?.getString(resources.getString(R.string.rule_uid))
@@ -72,11 +82,19 @@ class WeeklyTimeSpanFragment() : Fragment() {
                     val timeSpan = weeklyTimeSpanViewModel.timeSpan.value!!
 
                     timeSpan.value = value
-
-                    updateRule(timeSpan)
                 }
             }
         })
+
+        cancelButton.setOnClickListener {
+            MainActivity.bottomSheetBehavior.isHideable = true
+            MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+        doneButton.setOnClickListener {
+            MainActivity.bottomSheetBehavior.isHideable = true
+            MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            updateRule(weeklyTimeSpanViewModel.timeSpan.value!!)
+        }
 
         startDay.setOnClickListener {
             showStartDayDialog()
@@ -129,7 +147,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
                 startDay.text = days[which]
 
                 timeSpan.start.localizedDay = which
-                updateRule(timeSpan)
+                //TODO preview changes
 
                 dialog.cancel()
             }
@@ -144,7 +162,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
                 endDay.text = days[which]
 
                 timeSpan.end.localizedDay = which
-                updateRule(timeSpan)
+                //TODO preview changes
 
                 dialog.cancel()
             }
@@ -163,7 +181,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
                 timespan.start.hour = hourOfDay
                 timespan.start.minute = hourOfDay
 
-                updateRule(timespan)
+                //TODO preview changes
             },
             timespan.start.hour,
             timespan.start.minute,
@@ -182,7 +200,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
                 timespan.end.hour = hourOfDay
                 timespan.end.minute = minute
 
-                updateRule(timespan)
+                //TODO preview changes
             },
             timespan.end.hour,
             timespan.end.minute,
