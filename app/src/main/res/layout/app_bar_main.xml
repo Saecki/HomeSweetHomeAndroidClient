@@ -28,12 +28,15 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_sheet_background"
         android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/bottom_sheet_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_margin" />
 
     </LinearLayout>
 

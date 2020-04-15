@@ -1,24 +1,9 @@
 <resources>
 
-    <!-- Work !-->
-    <string name="network_update_work_request_identifier" translatable="false">network_update</string>
-
     <!-- Names and Titles !-->
     <string name="app_name" translatable="false">HomeSweetHome</string>
     <string name="nav_header_title" translatable="false">HomeSweetHome</string>
     <string name="nav_header_subtitle">A smart home system</string>
-
-
-    <!-- Action Bar Menu !-->
-    <string name="action_apply_to_all">Apply to all</string>
-    <string name="action_clear">Clear all</string>
-    <string name="action_delete">Delete</string>
-    <string name="action_edit">Edit</string>
-    <string name="action_sort_by">Sort</string>
-    <string name="action_group_by">Group</string>
-    <string name="action_filter_by">Filter</string>
-    <string name="action_refresh">Refresh</string>
-    <string name="action_rename">Rename</string>
 
     <!-- Menu !-->
     <string name="menu_home">Home</string>
@@ -29,6 +14,21 @@
     <!-- Items !-->
     <string name="item_untitled">Untitled</string>
 
+    <!-- Actions !-->
+    <string name="action_apply_to_all">Apply to all</string>
+    <string name="action_clear">Clear all</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_sort_by">Sort</string>
+    <string name="action_group_by">Group</string>
+    <string name="action_filter_by">Filter</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_rename">Rename</string>
+    <string name="action_done">Done</string>
+
+    <!-- Notifications !-->
+    <string name="notification_no_number_recognized">No number recognized</string>
+
     <!-- Weekly Time Span !-->
     <string name="weekly_time_span_clear_all_confirmation">Clear all time spans?</string>
     <string name="weekly_time_span_apply_to_all_confirmation">Apply this value to all time spans?</string>
@@ -37,10 +37,6 @@
     <!-- Rule Value !-->
     <string name="value_heating">Heating</string>
     <string name="value_light">Light</string>
-
-    <!-- Heating !-->
-    <string name="heating_snackbar_edit_text">No number recognized</string>
-    <string name="heating_snackbar_edit">Edit</string>
 
     <!-- Settings !-->
     <!-- Network !-->

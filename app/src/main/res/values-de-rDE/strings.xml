@@ -4,17 +4,6 @@
     <!-- Names and Titles !-->
     <string name="nav_header_subtitle">Ein Smart Home System</string>
 
-    <!-- Action Bar Menu !-->
-    <string name="action_apply_to_all">Auf alle anwenden</string>
-    <string name="action_clear">Alle Entfernen</string>
-    <string name="action_delete">Löschen</string>
-    <string name="action_edit">Bearbeiten</string>
-    <string name="action_sort_by">Sortieren</string>
-    <string name="action_group_by">Gruppieren</string>
-    <string name="action_filter_by">Filtern</string>
-    <string name="action_refresh">Aktualisieren</string>
-    <string name="action_rename">Umbenennen</string>
-
     <!-- Menu !-->
     <string name="menu_home">Start</string>
     <string name="menu_rules">Regeln</string>
@@ -24,6 +13,21 @@
     <!-- Items !-->
     <string name="item_untitled">Unbenannt</string>
 
+    <!-- Actions !-->
+    <string name="action_apply_to_all">Auf alle anwenden</string>
+    <string name="action_clear">Alle Entfernen</string>
+    <string name="action_delete">Löschen</string>
+    <string name="action_edit">Bearbeiten</string>
+    <string name="action_sort_by">Sortieren</string>
+    <string name="action_group_by">Gruppieren</string>
+    <string name="action_filter_by">Filtern</string>
+    <string name="action_refresh">Aktualisieren</string>
+    <string name="action_rename">Umbenennen</string>
+    <string name="action_done">Fertig</string>
+
+    <!-- Notifications !-->
+    <string name="notification_no_number_recognized">Nummer nicht erkannt</string>
+
     <!-- Weekly Time Span !-->
     <string name="weekly_time_span_clear_all_confirmation">Alle Zeitspannen löschen?</string>
     <string name="weekly_time_span_apply_to_all_confirmation">Diesen Wert auf alle Zeispannen anwenden?</string>
@@ -32,10 +36,6 @@
     <!-- Rule Value !-->
     <string name="value_heating">Heizung</string>
     <string name="value_light">Licht</string>
-
-    <!-- Heating !-->
-    <string name="heating_snackbar_edit_text">Nummer nicht erkannt</string>
-    <string name="heating_snackbar_edit">Bearbeiten</string>
 
     <!-- Settings !-->
     <!-- Network !-->

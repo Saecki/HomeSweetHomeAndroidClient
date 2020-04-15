@@ -25,6 +25,7 @@
         <item name="navigationViewStyle">@style/NavigationView</item>
         <item name="bottomNavigationStyle">@style/BottomNavigationView</item>
         <item name="floatingActionButtonStyle">@style/FloatingActionButton</item>
+        <item name="materialButtonStyle">@style/Button</item>
 
         <item name="dialogCornerRadius">@dimen/dialog_corner_radius</item>
         <item name="cornerRadius">@dimen/corner_radius</item>
@@ -54,6 +55,12 @@
     <style name="FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@color/primary</item>
         <item name="backgroundTint">@color/background_floating</item>
+    </style>
+
+    <style name="Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:minWidth">0dp</item>
     </style>
 
     <!-- Custom Component Themes !-->

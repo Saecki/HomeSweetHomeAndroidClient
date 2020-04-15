@@ -14,17 +14,19 @@
             android:id="@+id/heating_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/icon_margin"
+            android:padding="@dimen/icon_padding"
             android:src="@drawable/ic_heating_black_24dp"
-            android:tint="?colorSecondary"
+            android:tint="?colorOnBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/heating_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:enabled="false"
             android:text="@string/value_heating"
             app:layout_constraintBottom_toBottomOf="@id/heating_icon"
             app:layout_constraintStart_toEndOf="@id/heating_icon"
@@ -32,37 +34,38 @@
 
         <TextView
             android:id="@+id/heating"
+            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:textColor="?colorSecondary"
-            app:layout_constraintBottom_toBottomOf="@id/heating_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/heating_label"
-            app:layout_constraintTop_toTopOf="@id/heating_icon" />
+            app:layout_constraintBaseline_toBaselineOf="@id/heating_label"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/heating_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="heating_label,heating_icon" />
+            app:constraint_referenced_ids="heating_label,heating_icon, heating" />
 
         <ImageView
             android:id="@+id/light_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/icon_margin"
+            android:padding="@dimen/icon_padding"
             android:src="@drawable/ic_light_bulb_outline_black_24dp"
-            android:tint="?colorSecondary"
+            android:tint="?colorOnBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/heating_barrier" />
 
         <TextView
             android:id="@+id/light_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:enabled="false"
             android:text="@string/value_light"
             app:layout_constraintBottom_toBottomOf="@id/light_icon"
             app:layout_constraintStart_toEndOf="@id/light_icon"
@@ -73,10 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/control_margin"
-            app:layout_constraintBottom_toBottomOf="@id/light_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/light_label"
-            app:layout_constraintTop_toTopOf="@id/light_icon" />
+            app:layout_constraintBaseline_toBaselineOf="@id/light_label"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
