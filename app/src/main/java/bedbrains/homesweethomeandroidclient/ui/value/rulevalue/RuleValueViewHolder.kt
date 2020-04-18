@@ -5,6 +5,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.ValueRuleValueBinding
 import bedbrains.shared.datatypes.rules.RuleValue
 
@@ -21,7 +22,7 @@ class RuleValueViewHolder(private val viewBinding: ValueRuleValueBinding) :
         viewBinding.root.setOnClickListener {
             val bundle = Bundle()
 
-            bundle.putString(MainActivity.res.getString(R.string.uid), value.uid)
+            bundle.putString(Res.resources.getString(R.string.uid), value.uid)
             viewBinding.root.findNavController().navigate(
                 R.id.action_nav_values_to_nav_rule_value,
                 bundle

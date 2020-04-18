@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.FragmentRulesBinding
 import bedbrains.homesweethomeandroidclient.rest.Resp
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
@@ -58,7 +59,7 @@ class RulesFragment : Fragment() {
             )
 
             DataRepository.upsertRule(newRule)
-            bundle.putString(MainActivity.res.getString(R.string.uid), newRule.uid)
+            bundle.putString(Res.resources.getString(R.string.uid), newRule.uid)
             binding.root.findNavController().navigate(
                 R.id.action_nav_rules_to_nav_weekly_rule,
                 bundle

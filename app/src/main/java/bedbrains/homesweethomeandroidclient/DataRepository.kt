@@ -82,11 +82,11 @@ object DataRepository {
     }
 
     fun buildRestClient(): APIService? {
-        val host = MainActivity.preferences.getString(
-            MainActivity.res.getString(R.string.pref_network_host_key), ""
+        val host = Res.preferences.getString(
+            Res.resources.getString(R.string.pref_network_host_key), ""
         )?.trim()
-        val port = MainActivity.preferences.getString(
-            MainActivity.res.getString(R.string.pref_network_port_key), ""
+        val port = Res.preferences.getString(
+            Res.resources.getString(R.string.pref_network_port_key), ""
         )?.trim()
 
         return try {
