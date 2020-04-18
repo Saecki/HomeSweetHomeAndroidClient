@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
@@ -35,7 +36,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private val increment: Double
         get() {
-            return MainActivity.getPrefStringAsDouble(
+            return Res.getPrefStringAsDouble(
                 R.string.pref_temperature_increment_key,
                 0.5
             )
@@ -77,7 +78,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
     }
 
     private fun toggleDetailedView() {
-        val duration = MainActivity.res.getInteger(android.R.integer.config_shortAnimTime).toLong()
+        val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
         if (heating.extended) {
             collapse(duration)
         } else {
@@ -87,7 +88,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private fun decrementTemp() {
         var temp = heating.targetTemp.global
-        temp -= if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
+        temp -= if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             if (temp.rem(increment) == 0.0) {
                 increment
             } else {
@@ -102,7 +103,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private fun incrementTemp() {
         var temp = heating.targetTemp.global
-        temp += if (MainActivity.preferences.getBoolean(MainActivity.res.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
+        temp += if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
             increment - temp.rem(increment)
         } else {
             increment
@@ -186,7 +187,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
             .show()
 
         input.requestFocusFromTouch()
-        input.postDelayed(MainActivity.res.getInteger(R.integer.keyboard_show_delay).toLong()) {
+        input.postDelayed(Res.resources.getInteger(R.integer.keyboard_show_delay).toLong()) {
             (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
                 .showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
         }

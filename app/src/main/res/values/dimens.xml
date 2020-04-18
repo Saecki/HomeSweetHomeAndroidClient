@@ -8,8 +8,16 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="drag_bar_height">4dp</dimen>
-    <dimen name="drag_bar_width">120dp</dimen>
+    <dimen name="drag_bar_width">60dp</dimen>
     <dimen name="drag_bar_margin">8dp</dimen>
+
+    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="dialog_corner_radius">8dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="button_corner_radius">4dp</dimen>
+
+    <dimen name="bottom_sheet_elevation">4dp</dimen>
+    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
 
     <dimen name="menu_margin_horizontal">60dp</dimen>
     <dimen name="menu_margin_vertical">40dp</dimen>
@@ -17,7 +25,7 @@
     <dimen name="item_margin">8dp</dimen>
     <dimen name="item_end_guide_line_margin">64dp</dimen>
 
-    <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_margin">12dp</dimen>
     <dimen name="control_margin">12dp</dimen>
 
     <dimen name="control_padding">8dp</dimen>
@@ -37,12 +45,4 @@
     <dimen name="time_indicator_head_diameter">8dp</dimen>
     <dimen name="time_indicator_line_width">1dp</dimen>
     <dimen name="time_indicator_elevation">2.5dp</dimen>
-
-    <dimen name="corner_radius">8dp</dimen>
-    <dimen name="dialog_corner_radius">8dp</dimen>
-    <dimen name="card_corner_radius">8dp</dimen>
-    <dimen name="button_corner_radius">4dp</dimen>
-
-    <dimen name="bottom_sheet_begin_margin">32dp</dimen>
-    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
 </resources>

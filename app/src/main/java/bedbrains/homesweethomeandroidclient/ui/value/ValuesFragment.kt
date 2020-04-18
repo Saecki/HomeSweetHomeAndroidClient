@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.FragmentValuesBinding
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.shared.datatypes.rules.RuleValue
@@ -55,7 +56,7 @@ class ValuesFragment : Fragment() {
             }
 
             DataRepository.upsertValue(newValue)
-            bundle.putString(MainActivity.res.getString(R.string.uid), newValue.uid)
+            bundle.putString(Res.resources.getString(R.string.uid), newValue.uid)
             binding.root.findNavController().navigate(
                 R.id.action_nav_values_to_nav_rule_value,
                 bundle

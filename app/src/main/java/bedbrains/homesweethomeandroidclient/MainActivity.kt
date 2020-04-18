@@ -1,12 +1,10 @@
 package bedbrains.homesweethomeandroidclient
 
-import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,50 +15,19 @@ import androidx.preference.PreferenceManager
 import bedbrains.homesweethomeandroidclient.databinding.ActivityMainBinding
 import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var activity: MainActivity
-        lateinit var preferences: SharedPreferences
-        lateinit var res: Resources
         lateinit var appBarLayout: AppBarLayout
         lateinit var toolbar: Toolbar
-        lateinit var bottomSheet: LinearLayout
+        lateinit var bottomNav: BottomNavigationView
         lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
-
-        fun getPrefString(key: Int, defaultValue: String): String {
-            return try {
-                preferences.getString(res.getString(key), defaultValue)!!
-            } catch (e: Exception) {
-                defaultValue
-            }
-        }
-
-        fun getPrefInt(key: Int, defaultValue: Int): Int {
-            return try {
-                preferences.getInt(res.getString(key), defaultValue)
-            } catch (e: Exception) {
-                defaultValue
-            }
-        }
-
-        fun getPrefStringAsInt(key: Int, defaultValue: Int): Int {
-            return try {
-                preferences.getString(res.getString(key), defaultValue.toString())!!.toInt()
-            } catch (e: Exception) {
-                defaultValue
-            }
-        }
-
-        fun getPrefStringAsDouble(key: Int, defaultValue: Double): Double {
-            return try {
-                preferences.getString(res.getString(key), defaultValue.toString())!!.toDouble()
-            } catch (e: Exception) {
-                defaultValue
-            }
-        }
+        lateinit var fab: FloatingActionButton
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -68,11 +35,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         activity = this
-        preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        res = resources
+        Res.preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        Res.resources = resources
 
         setTheme(R.style.Theme_App)
-        Theme.setMode(getPrefStringAsInt(R.string.pref_theme_key, Theme.DEFAULT))
+        Theme.setMode(Res.getPrefStringAsInt(R.string.pref_theme_key, Theme.DEFAULT))
 
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -80,8 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         appBarLayout = binding.appBarMain.appBarLayout
         toolbar = binding.appBarMain.toolbar
-        bottomSheet = binding.appBarMain.bottomSheet
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomNav = binding.appBarMain.bottomNav
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.appBarMain.bottomSheet)
 
         setSupportActionBar(toolbar)
 
@@ -97,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
-        binding.appBarMain.contentMain.bottomNav.setupWithNavController(navController)
+        bottomNav.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

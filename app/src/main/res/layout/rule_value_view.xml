@@ -28,9 +28,8 @@
             android:layout_margin="@dimen/text_margin"
             android:enabled="false"
             android:text="@string/value_heating"
-            app:layout_constraintBottom_toBottomOf="@id/heating_icon"
             app:layout_constraintStart_toEndOf="@id/heating_icon"
-            app:layout_constraintTop_toTopOf="@id/heating_icon" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/heating"
@@ -67,9 +66,8 @@
             android:layout_margin="@dimen/text_margin"
             android:enabled="false"
             android:text="@string/value_light"
-            app:layout_constraintBottom_toBottomOf="@id/light_icon"
             app:layout_constraintStart_toEndOf="@id/light_icon"
-            app:layout_constraintTop_toTopOf="@id/light_icon" />
+            app:layout_constraintTop_toBottomOf="@id/heating_barrier" />
 
         <Switch
             android:id="@+id/light"

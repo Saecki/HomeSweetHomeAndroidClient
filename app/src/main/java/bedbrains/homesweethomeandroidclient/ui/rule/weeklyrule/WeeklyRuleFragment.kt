@@ -22,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.FragmentWeeklyRuleBinding
 import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
@@ -30,7 +31,7 @@ import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.platform.Time
 import bedbrains.shared.datatypes.time.WeeklyTime
 import bedbrains.shared.datatypes.time.WeeklyTimeSpan
-import bedbrains.shared.datatypes.time.hours
+import bedbrains.shared.datatypes.upsert
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -175,15 +176,14 @@ class WeeklyRuleFragment : Fragment() {
 
         //add button
         addButton.setOnClickListener {
-            val newTimeSpan = WeeklyTimeSpan.UNSPECIFIED.apply {
+            val newTimeSpan = WeeklyTimeSpan.UNSPECIFIED
+
+            newTimeSpan.apply {
                 value.name = resources.getString(R.string.item_untitled)
-                end += 1.hours
+                end.apply { hour += 1 }
             }
 
-            DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
-                it.timeSpans.add(newTimeSpan)
-            })
-            showTimeSpanDialog(newTimeSpan.uid)
+            showTimeSpanDialog(newTimeSpan)
         }
 
         val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
@@ -198,7 +198,7 @@ class WeeklyRuleFragment : Fragment() {
                 Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
             } else {
                 MainActivity.toolbar.title = it.name
-                displayTimeSpans(it.timeSpans.toList())
+                displayTimeSpans(it.timeSpans)
             }
         })
 
@@ -229,11 +229,11 @@ class WeeklyRuleFragment : Fragment() {
         super.onPause()
 
         val duration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-        val collapseAnimation = CollapseAnimation(dayToolbar)
+        val hideDayToolbar = CollapseAnimation(dayToolbar)
 
-        collapseAnimation.duration = duration
-        collapseAnimation.startOffset = duration / 4
-        collapseAnimation.setAnimationListener(object : Animation.AnimationListener {
+        hideDayToolbar.duration = duration
+        hideDayToolbar.startOffset = duration / 4
+        hideDayToolbar.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
@@ -243,8 +243,10 @@ class WeeklyRuleFragment : Fragment() {
             override fun onAnimationStart(animation: Animation?) {}
         })
 
-        dayToolbar.startAnimation(collapseAnimation)
+        dayToolbar.startAnimation(hideDayToolbar)
         weeklyRuleViewModel.initialCreation = true
+
+        hideTimeSpanDialog()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -263,9 +265,8 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun displayTimeSpans(timeSpans: List<WeeklyTimeSpan>) {
-        this.timeSpans.forEach { view -> timeLayout.removeView(view) }
+        this.timeSpans.forEach { timeLayout.removeView(it) }
         timeSpans.forEach { this.timeSpans.addAll(displayTimeSpan(it)) }
-        constraintSet.applyTo(timeLayout)
     }
 
     private fun displayTimeSpan(t: WeeklyTimeSpan): List<View> {
@@ -299,6 +300,8 @@ class WeeklyRuleFragment : Fragment() {
             }
         }
 
+        constraintSet.applyTo(timeLayout)
+
         return timeSpans
     }
 
@@ -306,10 +309,11 @@ class WeeklyRuleFragment : Fragment() {
         val card = CardView(context!!)
         card.background = ContextCompat.getDrawable(context!!, R.drawable.time_span_background)
         card.id = View.generateViewId()
+        card.tag = timeSpan.uid
         timeLayout.addView(card)
 
         card.setOnClickListener {
-            showTimeSpanDialog(timeSpan.uid)
+            showTimeSpanDialog(timeSpan)
         }
 
         constraintSet.connect(card.id, ConstraintSet.LEFT, verticalGuideLines[day].id, ConstraintSet.RIGHT, timeSpanMargin)
@@ -347,19 +351,83 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet.applyTo(timeLayout)
     }
 
-    private fun showTimeSpanDialog(timeSpanUid: String) {
-        val bundle = Bundle()
+    private fun showTimeSpanDialog(timeSpan: WeeklyTimeSpan) {
+        val fragment = WeeklyTimeSpanFragment()
+        val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
-        bundle.putString(resources.getString(R.string.rule_uid), weeklyRuleViewModel.rule.value!!.uid)
-        bundle.putString(resources.getString(R.string.time_span_uid), timeSpanUid)
+        fragment.bind(timeSpan) { event ->
+            onTimeSpanEdited(event)
+        }
+        MainActivity.bottomNav.animate()
+            .translationY(MainActivity.bottomNav.height.toFloat())
+            .setDuration(duration)
+            .start()
+
+        Handler().postDelayed({
+            MainActivity.bottomNav.visibility = View.GONE
+        }, duration)
 
         MainActivity.activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.bottom_sheet_content, WeeklyTimeSpanFragment::class.java, bundle)
+            .replace(R.id.bottom_sheet_fragment, fragment)
             .commit()
 
-        MainActivity.bottomSheetBehavior.isHideable = false
-        MainActivity.bottomSheetBehavior.peekHeight = 320
-        MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        Handler().postDelayed({
+            MainActivity.bottomSheetBehavior.isHideable = false
+            MainActivity.bottomSheetBehavior.peekHeight = 320
+            MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }, duration / 2)
+    }
+
+    private fun hideTimeSpanDialog() {
+        val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+
+        MainActivity.bottomSheetBehavior.isHideable = true
+        MainActivity.bottomSheetBehavior.peekHeight = 0
+        MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        Handler().postDelayed({
+            MainActivity.bottomNav.visibility = View.VISIBLE
+            MainActivity.bottomNav.animate()
+                .translationY(0f)
+                .setDuration(duration)
+                .start()
+        }, duration / 2)
+    }
+
+    private fun onTimeSpanEdited(event: WeeklyTimeSpanEditEvent) {
+        when (event.action) {
+            WeeklyTimeSpanEditEvent.Action.EDITED -> {
+                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                    timeSpans.upsert(event.timeSpan) { event.timeSpan.uid == it.uid }
+                })
+                hideTimeSpanDialog()
+            }
+            WeeklyTimeSpanEditEvent.Action.DELETED -> {
+                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                    timeSpans.removeIf { event.timeSpan.uid == it.uid }
+                })
+                hideTimeSpanDialog()
+            }
+            WeeklyTimeSpanEditEvent.Action.CANCELED -> {
+                timeSpans.forEach { timeLayout.removeView(it) }
+                displayTimeSpans(weeklyRuleViewModel.rule.value!!.timeSpans)
+                hideTimeSpanDialog()
+            }
+            WeeklyTimeSpanEditEvent.Action.APPLIED_TO_ALL -> {
+                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                    timeSpans.applyToAll(event.timeSpan.value)
+                })
+            }
+            WeeklyTimeSpanEditEvent.Action.PREVIEW -> {
+                timeSpans.filter { event.timeSpan.uid == it.tag.toString() }
+                    .forEach {
+                        timeLayout.removeView(it)
+                        timeSpans.remove(it)
+                    }
+
+                timeSpans.addAll(displayTimeSpan(event.timeSpan))
+            }
+        }
     }
 
     private fun showRenameDialog(text: String) {
@@ -367,7 +435,7 @@ class WeeklyRuleFragment : Fragment() {
         input.setText(text)
 
         AlertDialog.Builder(context!!)
-            .setTitle(MainActivity.res.getString(R.string.pref_temperature_category_title))
+            .setTitle(Res.resources.getString(R.string.pref_temperature_category_title))
             .setView(input)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
