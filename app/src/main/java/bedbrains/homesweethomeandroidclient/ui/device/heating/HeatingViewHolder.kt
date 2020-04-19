@@ -1,17 +1,16 @@
 package bedbrains.homesweethomeandroidclient.ui.device.heating
 
-import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.text.InputType
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.postDelayed
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
-import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
@@ -37,7 +36,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
     private val increment: Double
         get() {
             return Res.getPrefStringAsDouble(
-                R.string.pref_temperature_increment_key,
+                R.string.pref_temperature_step_key,
                 0.5
             )
         }
@@ -88,7 +87,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private fun decrementTemp() {
         var temp = heating.targetTemp.global
-        temp -= if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
+        temp -= if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_step_key), true)) {
             if (temp.rem(increment) == 0.0) {
                 increment
             } else {
@@ -103,7 +102,7 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private fun incrementTemp() {
         var temp = heating.targetTemp.global
-        temp += if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_increment_key), true)) {
+        temp += if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_step_key), true)) {
             increment - temp.rem(increment)
         } else {
             increment

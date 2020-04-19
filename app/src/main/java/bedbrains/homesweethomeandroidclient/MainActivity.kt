@@ -1,6 +1,5 @@
 package bedbrains.homesweethomeandroidclient
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         lateinit var toolbar: Toolbar
         lateinit var bottomNav: BottomNavigationView
         lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
-        lateinit var fab: FloatingActionButton
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -42,7 +40,9 @@ class MainActivity : AppCompatActivity() {
         Theme.setMode(Res.getPrefStringAsInt(R.string.pref_theme_key, Theme.DEFAULT))
 
         super.onCreate(savedInstanceState)
+
         val binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         appBarLayout = binding.appBarMain.appBarLayout

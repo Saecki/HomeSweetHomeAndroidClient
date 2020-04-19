@@ -1,8 +1,8 @@
 package bedbrains.homesweethomeandroidclient.ui.device.heating
 
 import androidx.lifecycle.ViewModel
-import bedbrains.shared.datatypes.temperature.Temperature
 import bedbrains.shared.datatypes.devices.Heating
+import bedbrains.shared.datatypes.temperature.Temperature
 
 class HeatingViewModel : ViewModel() {
     val heating =

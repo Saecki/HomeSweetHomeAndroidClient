@@ -3,7 +3,6 @@ package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding

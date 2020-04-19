@@ -25,6 +25,7 @@
     <string name="action_refresh">Refresh</string>
     <string name="action_rename">Rename</string>
     <string name="action_done">Done</string>
+    <string name="action_new">New</string>
 
     <!-- Notifications !-->
     <string name="notification_no_number_recognized">No number recognized</string>
@@ -33,6 +34,8 @@
     <string name="weekly_time_span_clear_all_confirmation">Clear all time spans?</string>
     <string name="weekly_time_span_apply_to_all_confirmation">Apply this value to all time spans?</string>
     <string name="weekly_time_span_delete_confirmation">Delete this time span?</string>
+    <string name="weekly_time_span_overlaying_notice">Time spans cannot overlay each other</string>
+    <string name="weekly_time_span_no_length_notice">Time spans cannot end at the start time</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heating</string>
@@ -48,7 +51,7 @@
     <string name="pref_network_port_title">Port</string>
     <string name="pref_network_port_key" translatable="false">port</string>
 
-    <string name="pref_network_automatic_update_delay_title">Automatic update delay</string>
+    <string name="pref_network_automatic_update_delay_title">Update automatically</string>
     <string name="pref_network_automatic_update_delay_key" translatable="false">network_automatic_update_delay</string>
 
     <!-- Temperature !-->
@@ -61,11 +64,11 @@
     <string name="pref_temperature_decimals_title">Decimal digits</string>
     <string name="pref_temperature_decimals_key" translatable="false">temperature_decimals</string>
 
-    <string name="pref_temperature_increment_title">Increment</string>
-    <string name="pref_temperature_increment_key" translatable="false">temperature_increment</string>
+    <string name="pref_temperature_step_title">Step size</string>
+    <string name="pref_temperature_step_key" translatable="false">temperature_increment</string>
 
-    <string name="pref_temperature_round_to_next_increment_title">Round to next increment</string>
-    <string name="pref_temperature_round_to_next_increment_key" translatable="false">temperature_round_to_next_increment</string>
+    <string name="pref_temperature_round_to_next_step_title">Round to next step</string>
+    <string name="pref_temperature_round_to_next_step_key" translatable="false">temperature_round_to_next_increment</string>
 
     <!-- User Interface !-->
     <string name="pref_ui_category_title">User Interface</string>
@@ -82,5 +85,8 @@
     <string name="uid" translatable="false">uid</string>
     <string name="rule_uid" translatable="false">rule_uid</string>
     <string name="time_span_uid" translatable="false">time_span_uid</string>
+
+    <!-- Tag !-->
+    <string name="bottom_sheet_tag" translatable="false">bottom_sheet</string>
 
 </resources>

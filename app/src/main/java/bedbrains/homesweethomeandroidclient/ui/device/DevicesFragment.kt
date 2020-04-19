@@ -2,16 +2,13 @@ package bedbrains.homesweethomeandroidclient.ui.device
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentDevicesBinding
-import bedbrains.homesweethomeandroidclient.rest.Resp
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
 
 class DevicesFragment : Fragment() {

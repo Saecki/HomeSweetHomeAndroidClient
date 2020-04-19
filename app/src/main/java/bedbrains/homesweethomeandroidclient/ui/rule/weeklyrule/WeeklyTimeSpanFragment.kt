@@ -60,6 +60,13 @@ class WeeklyTimeSpanFragment : Fragment() {
 
         val timeSpan = weeklyTimeSpanViewModel.timeSpan
 
+        weeklyTimeSpanViewModel.onEdit(
+            WeeklyTimeSpanEditEvent(
+                WeeklyTimeSpanEditEvent.Action.PREVIEW,
+                timeSpan
+            )
+        )
+
         startDay.text = Time.formatWeekDayFull(timeSpan.start.localizedDay, locale)
         endDay.text = Time.formatWeekDayFull(timeSpan.end.localizedDay, locale)
         startTime.text = Time.formatTime(timeSpan.start.hour, timeSpan.start.minute, locale)
@@ -83,7 +90,7 @@ class WeeklyTimeSpanFragment : Fragment() {
         doneButton.setOnClickListener {
             weeklyTimeSpanViewModel.onEdit(
                 WeeklyTimeSpanEditEvent(
-                    WeeklyTimeSpanEditEvent.Action.EDITED,
+                    WeeklyTimeSpanEditEvent.Action.FINISHED,
                     weeklyTimeSpanViewModel.timeSpan
                 )
             )
@@ -110,6 +117,15 @@ class WeeklyTimeSpanFragment : Fragment() {
         tempOnEdit = onEdit
     }
 
+    private fun preview(timeSpan: WeeklyTimeSpan) {
+        weeklyTimeSpanViewModel.onEdit(
+            WeeklyTimeSpanEditEvent(
+                WeeklyTimeSpanEditEvent.Action.PREVIEW,
+                timeSpan
+            )
+        )
+    }
+
     private fun showStartDayDialog() {
         val timeSpan = weeklyTimeSpanViewModel.timeSpan
 
@@ -118,12 +134,7 @@ class WeeklyTimeSpanFragment : Fragment() {
                 startDay.text = days[which]
 
                 timeSpan.start.localizedDay = which
-                weeklyTimeSpanViewModel.onEdit(
-                    WeeklyTimeSpanEditEvent(
-                        WeeklyTimeSpanEditEvent.Action.PREVIEW,
-                        timeSpan
-                    )
-                )
+                preview(timeSpan)
 
                 dialog.cancel()
             }
@@ -138,12 +149,7 @@ class WeeklyTimeSpanFragment : Fragment() {
                 endDay.text = days[which]
 
                 timeSpan.end.localizedDay = which
-                weeklyTimeSpanViewModel.onEdit(
-                    WeeklyTimeSpanEditEvent(
-                        WeeklyTimeSpanEditEvent.Action.PREVIEW,
-                        timeSpan
-                    )
-                )
+                preview(timeSpan)
 
                 dialog.cancel()
             }
@@ -160,14 +166,11 @@ class WeeklyTimeSpanFragment : Fragment() {
                 startTime.text = Time.formatTime(hourOfDay, minute, locale)
 
                 timeSpan.start.hour = hourOfDay
-                timeSpan.start.minute = hourOfDay
+                timeSpan.start.minute = minute
+                timeSpan.start.second = 0
+                timeSpan.start.millisecond = 0
 
-                weeklyTimeSpanViewModel.onEdit(
-                    WeeklyTimeSpanEditEvent(
-                        WeeklyTimeSpanEditEvent.Action.PREVIEW,
-                        timeSpan
-                    )
-                )
+                preview(timeSpan)
             },
             timeSpan.start.hour,
             timeSpan.start.minute,
@@ -185,13 +188,10 @@ class WeeklyTimeSpanFragment : Fragment() {
 
                 timeSpan.end.hour = hourOfDay
                 timeSpan.end.minute = minute
+                timeSpan.start.second = 0
+                timeSpan.start.millisecond = 0
 
-                weeklyTimeSpanViewModel.onEdit(
-                    WeeklyTimeSpanEditEvent(
-                        WeeklyTimeSpanEditEvent.Action.PREVIEW,
-                        timeSpan
-                    )
-                )
+                preview(timeSpan)
             },
             timeSpan.end.hour,
             timeSpan.end.minute,
