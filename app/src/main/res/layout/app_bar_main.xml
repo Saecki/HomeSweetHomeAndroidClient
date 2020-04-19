@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:tag="@string/bottom_sheet_tag"
         app:layout_insetEdge="bottom"
         app:menu="@menu/nav_bottom" />
 

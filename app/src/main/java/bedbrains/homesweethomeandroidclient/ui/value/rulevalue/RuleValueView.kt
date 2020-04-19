@@ -1,12 +1,11 @@
 package bedbrains.homesweethomeandroidclient.ui.value.rulevalue
 
-import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.text.InputType
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.postDelayed
-import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.RuleValueViewBinding

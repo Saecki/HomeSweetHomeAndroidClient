@@ -216,7 +216,7 @@
                     android:id="@+id/vertical_line_7"
                     android:layout_width="@dimen/separator_line_width"
                     android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
+                    android:background="#0000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/vertical_line_6"
@@ -491,12 +491,13 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_black_24dp"
+        android:text="@string/action_new"
+        app:icon="@drawable/ic_add_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

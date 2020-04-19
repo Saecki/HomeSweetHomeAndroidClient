@@ -2,7 +2,6 @@ package bedbrains.homesweethomeandroidclient.ui.rule
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -10,11 +9,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
-import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.FragmentRulesBinding
-import bedbrains.homesweethomeandroidclient.rest.Resp
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.platform.UIDProvider
 import bedbrains.shared.datatypes.rules.WeeklyRule

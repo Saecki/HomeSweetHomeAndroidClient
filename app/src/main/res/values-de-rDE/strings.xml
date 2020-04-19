@@ -24,6 +24,7 @@
     <string name="action_refresh">Aktualisieren</string>
     <string name="action_rename">Umbenennen</string>
     <string name="action_done">Fertig</string>
+    <string name="action_new">Neu</string>
 
     <!-- Notifications !-->
     <string name="notification_no_number_recognized">Nummer nicht erkannt</string>
@@ -32,6 +33,8 @@
     <string name="weekly_time_span_clear_all_confirmation">Alle Zeitspannen löschen?</string>
     <string name="weekly_time_span_apply_to_all_confirmation">Diesen Wert auf alle Zeispannen anwenden?</string>
     <string name="weekly_time_span_delete_confirmation">Diese Zeitspanne löschen?</string>
+    <string name="weekly_time_span_overlaying_notice">Zeitspannen dürfen sich nicht überlagern</string>
+    <string name="weekly_time_span_no_length_notice">Zeitspannen können nicht zur Startzeit enden</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heizung</string>
@@ -42,14 +45,14 @@
     <string name="pref_network_host_title">Host</string>
     <string name="pref_network_port_title">Port</string>
     <string name="pref_network_category_title">Netzwerk</string>
-    <string name="pref_network_automatic_update_delay_title">Verzögerung der automatischen Aktualisierung</string>
+    <string name="pref_network_automatic_update_delay_title">Automatisch aktualisieren</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperatur</string>
     <string name="pref_temperature_unit_title">Einheit</string>
     <string name="pref_temperature_decimals_title">Nachkommastellen</string>
-    <string name="pref_temperature_increment_title">Inkrement</string>
-    <string name="pref_temperature_round_to_next_increment_title">Runde zum nächsten Inkrement</string>
+    <string name="pref_temperature_step_title">Verstellstufengröße</string>
+    <string name="pref_temperature_round_to_next_step_title">Zur nächsten Stufe runden</string>
 
     <!-- User Interface !-->
     <string name="pref_ui_category_title">Benutzeroberfäche</string>
