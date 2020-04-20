@@ -16,7 +16,6 @@ import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var appBarLayout: AppBarLayout
         lateinit var toolbar: Toolbar
         lateinit var bottomNav: BottomNavigationView
+        lateinit var bottomSheet: LinearLayout
         lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     }
 
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         appBarLayout = binding.appBarMain.appBarLayout
         toolbar = binding.appBarMain.toolbar
         bottomNav = binding.appBarMain.bottomNav
+        bottomSheet = binding.appBarMain.bottomSheet
         bottomSheetBehavior = BottomSheetBehavior.from(binding.appBarMain.bottomSheet)
 
         setSupportActionBar(toolbar)

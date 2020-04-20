@@ -19,7 +19,7 @@ import bedbrains.shared.datatypes.time.WeeklyTimeSpan
 import com.google.android.material.button.MaterialButton
 import java.util.*
 
-class WeeklyTimeSpanFragment : Fragment() {
+class WeeklyTimeSpanFragment() : Fragment() {
     private val weeklyTimeSpanViewModel: WeeklyTimeSpanViewModel by viewModels()
 
     private lateinit var locale: Locale
