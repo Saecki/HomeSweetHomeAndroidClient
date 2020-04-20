@@ -17,18 +17,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
         //network ip address
         val netHostKey = resources.getString(R.string.pref_network_host_key)
         val netHostPreference = findPreference<EditTextPreference>(netHostKey)!!
-        netHostPreference.setOnPreferenceChangeListener { _, _ ->
+        netHostPreference.setOnPreferenceChangeListener { _, newValue ->
+            netHostPreference.summary = newValue.toString()
+
             DataRepository.updateRestClient()
             true
         }
+        netHostPreference.summary = netHostPreference.text
 
         //network port
         val netPortKey = resources.getString(R.string.pref_network_port_key)
         val netPortPreference = findPreference<EditTextPreference>(netPortKey)!!
-        netPortPreference.setOnPreferenceChangeListener { _, _ ->
+        netPortPreference.setOnPreferenceChangeListener { _, newValue ->
+            netPortPreference.summary = newValue.toString()
+
             DataRepository.updateRestClient()
             true
         }
+        netPortPreference.summary = netPortPreference.text
 
         //network automatic update delay
         val netAutomaticUpdateDelayKey =

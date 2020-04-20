@@ -6,9 +6,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.shared.datatypes.rules.WeeklyRule
+import bedbrains.shared.datatypes.time.WeeklyTimeSpan
 
 class WeeklyRuleViewModel : ViewModel() {
     val rule: MutableLiveData<WeeklyRule?> = MutableLiveData(null)
+    var previewTimeSpan: WeeklyTimeSpan? = null
     var initialCreation = true
 
     fun observe(lifecycleOwner: LifecycleOwner, uid: String) {

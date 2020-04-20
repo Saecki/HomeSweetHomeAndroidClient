@@ -34,9 +34,6 @@ class WeeklyTimeSpanFragment() : Fragment() {
     private lateinit var endTime: TextView
     private lateinit var ruleValueView: RuleValueView
 
-    private lateinit var tempTimeSpan: WeeklyTimeSpan
-    private lateinit var tempOnEdit: (WeeklyTimeSpanEditEvent) -> Unit
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         locale = Locale.getDefault()
         days = Array(7) { i -> Time.formatWeekDayFull(i, locale) }
@@ -52,15 +49,14 @@ class WeeklyTimeSpanFragment() : Fragment() {
         endTime = binding.endTime
         ruleValueView = RuleValueView(binding.ruleValue, context)
 
-        if (weeklyTimeSpanViewModel.initialCreation) {
-            weeklyTimeSpanViewModel.timeSpan = tempTimeSpan
-            weeklyTimeSpanViewModel.onEdit = tempOnEdit
-            weeklyTimeSpanViewModel.initialCreation = false
-        }
+        return binding.root
+    }
 
-        val timeSpan = weeklyTimeSpanViewModel.timeSpan
+    fun bind(timeSpan: WeeklyTimeSpan, onEdit: (WeeklyTimeSpanEditEvent) -> Unit) {
+        weeklyTimeSpanViewModel.timeSpan = timeSpan
+        weeklyTimeSpanViewModel.onEdit = onEdit
 
-        weeklyTimeSpanViewModel.onEdit(
+        onEdit(
             WeeklyTimeSpanEditEvent(
                 WeeklyTimeSpanEditEvent.Action.PREVIEW,
                 timeSpan
@@ -73,14 +69,14 @@ class WeeklyTimeSpanFragment() : Fragment() {
         endTime.text = Time.formatTime(timeSpan.end.hour, timeSpan.end.minute, locale)
 
         ruleValueView.bind(timeSpan.value) {
-            weeklyTimeSpanViewModel.timeSpan.value = it
+            timeSpan.value = it
         }
 
         cancelButton.setOnClickListener {
-            weeklyTimeSpanViewModel.onEdit(
+            onEdit(
                 WeeklyTimeSpanEditEvent(
                     WeeklyTimeSpanEditEvent.Action.CANCELED,
-                    weeklyTimeSpanViewModel.timeSpan
+                    timeSpan
                 )
             )
         }
@@ -88,10 +84,10 @@ class WeeklyTimeSpanFragment() : Fragment() {
             showDeleteDialog()
         }
         doneButton.setOnClickListener {
-            weeklyTimeSpanViewModel.onEdit(
+            onEdit(
                 WeeklyTimeSpanEditEvent(
                     WeeklyTimeSpanEditEvent.Action.FINISHED,
-                    weeklyTimeSpanViewModel.timeSpan
+                    timeSpan
                 )
             )
         }
@@ -108,13 +104,6 @@ class WeeklyTimeSpanFragment() : Fragment() {
         endTime.setOnClickListener {
             showEndTimeDialog()
         }
-
-        return binding.root
-    }
-
-    fun bind(timeSpan: WeeklyTimeSpan, onEdit: (WeeklyTimeSpanEditEvent) -> Unit) {
-        tempTimeSpan = timeSpan
-        tempOnEdit = onEdit
     }
 
     private fun preview(timeSpan: WeeklyTimeSpan) {
