@@ -6,5 +6,4 @@ import bedbrains.shared.datatypes.time.WeeklyTimeSpan
 class WeeklyTimeSpanViewModel : ViewModel() {
     lateinit var timeSpan: WeeklyTimeSpan
     lateinit var onEdit: (WeeklyTimeSpanEditEvent) -> Unit
-    var initialCreation = true
 }
