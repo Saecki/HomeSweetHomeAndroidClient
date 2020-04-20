@@ -6,4 +6,5 @@
     android:paddingTop="@dimen/weekly_rule_toolbar_margin"
     android:paddingBottom="@dimen/weekly_rule_toolbar_margin"
     android:textAlignment="center"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
     android:textStyle="bold" />

@@ -70,6 +70,7 @@ class WeeklyRuleFragment : Fragment() {
     private var previewTimeSpans = mutableListOf<View>()
 
     private lateinit var addButton: ExtendedFloatingActionButton
+    private lateinit var timeSpanFragment: WeeklyTimeSpanFragment
 
     private var hourHeight = 0
     private var indicatorLineWidth = 0
@@ -286,6 +287,7 @@ class WeeklyRuleFragment : Fragment() {
 
     private fun createTimeSpan(day: Int, timeSpan: WeeklyTimeSpan): View {
         val card = CardView(context!!)
+
         card.background = ContextCompat.getDrawable(context!!, R.drawable.time_span_background)
         card.id = View.generateViewId()
         card.tag = timeSpan.uid
@@ -382,6 +384,8 @@ class WeeklyRuleFragment : Fragment() {
         val fragment = WeeklyTimeSpanFragment()
         val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
+        timeSpanFragment = fragment
+
         fragment.bind(timeSpan) { event ->
             onTimeSpanEdited(event)
         }
@@ -407,8 +411,10 @@ class WeeklyRuleFragment : Fragment() {
         }, duration)
 
         Handler().postDelayed({
+            val height = MainActivity.bottomSheet.findViewById<ConstraintLayout>(R.id.rule_value).y.toInt()
+
             MainActivity.bottomSheetBehavior.isHideable = false
-            MainActivity.bottomSheetBehavior.peekHeight = 320
+            MainActivity.bottomSheetBehavior.peekHeight = height
             MainActivity.bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }, (duration * 0.8).toLong())
     }
@@ -442,6 +448,9 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun onTimeSpanEdited(event: WeeklyTimeSpanEditEvent) {
+        if (context == null)
+            return
+
         when (event.action) {
             WeeklyTimeSpanEditEvent.Action.FINISHED -> {
                 if (weeklyRuleViewModel.rule.value!!.timeSpans.overlays(event.timeSpan)) {

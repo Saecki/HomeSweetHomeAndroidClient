@@ -17,4 +17,5 @@
     <color name="secondary">#FF9A42</color>
     <color name="secondary_variant">#FF9A42</color>
     <color name="grid_line">#d0d0d0</color>
+    <color name="label">#808080</color>
 </resources>

@@ -17,4 +17,5 @@
     <color name="secondary">#FFAD66</color>
     <color name="secondary_variant">#FFAD66</color>
     <color name="grid_line">#404040</color>
+    <color name="label">#a0a0a0</color>
 </resources>

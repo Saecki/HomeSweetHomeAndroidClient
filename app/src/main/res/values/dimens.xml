@@ -16,7 +16,7 @@
     <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="button_corner_radius">4dp</dimen>
 
-    <dimen name="bottom_sheet_elevation">4dp</dimen>
+    <dimen name="bottom_sheet_elevation">16dp</dimen>
     <dimen name="bottom_sheet_corner_radius">16dp</dimen>
 
     <dimen name="menu_margin_horizontal">60dp</dimen>
