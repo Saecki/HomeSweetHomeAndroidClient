@@ -20,7 +20,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         netHostPreference.setOnPreferenceChangeListener { _, newValue ->
             netHostPreference.summary = newValue.toString()
 
-            DataRepository.updateRestClient()
+            DataRepository.restClient = DataRepository.buildRestClient(host = newValue.toString())
             true
         }
         netHostPreference.summary = netHostPreference.text
@@ -31,7 +31,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         netPortPreference.setOnPreferenceChangeListener { _, newValue ->
             netPortPreference.summary = newValue.toString()
 
-            DataRepository.updateRestClient()
+            DataRepository.restClient = DataRepository.buildRestClient(port = newValue.toString())
             true
         }
         netPortPreference.summary = netPortPreference.text
