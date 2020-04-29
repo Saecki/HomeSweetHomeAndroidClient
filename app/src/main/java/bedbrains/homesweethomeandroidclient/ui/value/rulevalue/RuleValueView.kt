@@ -20,6 +20,7 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
     fun bind(value: RuleValue, onChange: (RuleValue) -> Unit) {
         this.value = value
         this.onChange = onChange
+
         binding.heating.text = value.heating.formatGlobal(true)
         binding.light.isChecked = value.light
 
@@ -45,6 +46,8 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
                     onChange(value.apply {
                         heating.global = input.text.toString().replace(',', '.').toDouble()
                     })
+
+                    binding.heating.text = value.heating.formatGlobal(true)
                 } catch (e: Exception) {
                     Snackbar.make(
                         binding.root,

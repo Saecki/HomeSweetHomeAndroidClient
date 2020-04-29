@@ -70,10 +70,6 @@ object DataRepository {
         handler.removeCallbacks(updateRunnable)
     }
 
-    fun updateRestClient() {
-        restClient = buildRestClient()
-    }
-
     fun buildUpdateRunnable(delayMillis: Long) = object : Runnable {
         override fun run() {
             fetchUpdates()
@@ -81,16 +77,25 @@ object DataRepository {
         }
     }
 
-    fun buildRestClient(): APIService? {
-        val host = Res.preferences.getString(
-            Res.resources.getString(R.string.pref_network_host_key), ""
-        )?.trim()
-        val port = Res.preferences.getString(
-            Res.resources.getString(R.string.pref_network_port_key), ""
-        )?.trim()
+    fun buildRestClient(host: String = "", port: String = ""): APIService? {
+        val h = if (host.length == 0) {
+            Res.preferences.getString(
+                Res.resources.getString(R.string.pref_network_host_key), ""
+            )?.trim()
+        } else {
+            host
+        }
+
+        val p = if (port.length == 0) {
+            Res.preferences.getString(
+                Res.resources.getString(R.string.pref_network_port_key), ""
+            )?.trim()
+        } else {
+            port
+        }
 
         return try {
-            Controller.buildClient("http://$host:$port")
+            Controller.buildClient("http://$h:$p")
         } catch (e: Exception) {
             null
         }
