@@ -11,8 +11,8 @@ import bedbrains.shared.datatypes.rules.WeeklyRule
 class WeeklyRuleViewHolder(private val viewBinding: RuleWeeklyRuleBinding) :
     RecyclerView.ViewHolder(viewBinding.root) {
 
-    lateinit var weeklyRule: WeeklyRule
-    val name = viewBinding.name
+    private lateinit var weeklyRule: WeeklyRule
+    private val name = viewBinding.name
 
     fun bindView(weeklyRule: WeeklyRule) {
         this.weeklyRule = weeklyRule

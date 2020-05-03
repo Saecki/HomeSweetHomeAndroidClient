@@ -4,6 +4,8 @@
     <string name="app_name" translatable="false">HomeSweetHome</string>
     <string name="nav_header_title" translatable="false">HomeSweetHome</string>
     <string name="nav_header_subtitle">A smart home system</string>
+    <string name="room">Room</string>
+    <string name="temperature">Temperature</string>
 
     <!-- Menu !-->
     <string name="menu_home">Home</string>
@@ -14,7 +16,7 @@
     <!-- Items !-->
     <string name="item_untitled">Untitled</string>
 
-    <!-- Actions !-->
+    <!-- General Actions !-->
     <string name="action_apply_to_all">Apply to all</string>
     <string name="action_clear">Clear all</string>
     <string name="action_delete">Delete</string>
@@ -27,19 +29,27 @@
     <string name="action_done">Done</string>
     <string name="action_new">New</string>
 
-    <!-- Notifications !-->
-    <string name="notification_no_number_recognized">No number recognized</string>
+    <!-- Tag !-->
+    <string name="action_tag_new">New tag</string>
+    <string name="confirmation_tag_delete">Delete tag \'$1\'?</string>
 
     <!-- Weekly Time Span !-->
-    <string name="weekly_time_span_clear_all_confirmation">Clear all time spans?</string>
-    <string name="weekly_time_span_apply_to_all_confirmation">Apply this value to all time spans?</string>
-    <string name="weekly_time_span_delete_confirmation">Delete this time span?</string>
-    <string name="weekly_time_span_overlaying_notice">Time spans cannot overlay each other</string>
-    <string name="weekly_time_span_no_length_notice">Time spans cannot end at the start time</string>
+    <string name="confirmation_weekly_time_span_clear_all">Clear all time spans?</string>
+    <string name="confirmation_weekly_time_span_apply_to_all">Apply this value to all time spans?</string>
+    <string name="confirmation_weekly_time_span_delete">Delete this time span?</string>
+    <string name="notice_weekly_time_span_overlaying">Time spans cannot overlay each other</string>
+    <string name="notice_weekly_time_span_no_length">Time spans cannot end at the start time</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heating</string>
     <string name="value_light">Light</string>
+
+    <!-- Response !-->
+    <string name="resp_update_error">An error occurred while updating</string>
+    <string name="resp_item_no_longer_exists">The item you were viewing no longer exists</string>
+
+    <!-- UID !-->
+    <string name="uid" translatable="false">uid</string>
 
     <!-- Settings !-->
     <!-- Network !-->
@@ -51,8 +61,8 @@
     <string name="pref_network_port_title">Port</string>
     <string name="pref_network_port_key" translatable="false">port</string>
 
-    <string name="pref_network_automatic_update_delay_title">Update automatically</string>
-    <string name="pref_network_automatic_update_delay_key" translatable="false">network_automatic_update_delay</string>
+    <string name="pref_network_automatic_update_title">Update automatically</string>
+    <string name="pref_network_automatic_update_key" translatable="false">network_automatic_update_delay</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperature</string>
@@ -76,17 +86,5 @@
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_key" translatable="false">dark_mode</string>
     <string name="pref_default_theme" translatable="false">3</string>
-
-    <!-- Response !-->
-    <string name="resp_update_error">An error occurred while updating</string>
-    <string name="resp_item_no_longer_exists">The item you were viewing no longer exists</string>
-
-    <!-- UID !-->
-    <string name="uid" translatable="false">uid</string>
-    <string name="rule_uid" translatable="false">rule_uid</string>
-    <string name="time_span_uid" translatable="false">time_span_uid</string>
-
-    <!-- Tag !-->
-    <string name="bottom_sheet_tag" translatable="false">bottom_sheet</string>
 
 </resources>

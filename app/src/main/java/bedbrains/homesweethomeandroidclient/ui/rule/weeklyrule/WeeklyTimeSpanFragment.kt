@@ -190,7 +190,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
 
     private fun showApplyToAllDialog() {
         AlertDialog.Builder(context!!)
-            .setTitle(R.string.weekly_time_span_apply_to_all_confirmation)
+            .setTitle(R.string.confirmation_weekly_time_span_apply_to_all)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 weeklyTimeSpanViewModel.onEdit(
                     WeeklyTimeSpanEditEvent(
@@ -204,7 +204,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
 
     private fun showDeleteDialog() {
         AlertDialog.Builder(context!!)
-            .setTitle(R.string.weekly_time_span_delete_confirmation)
+            .setTitle(R.string.confirmation_weekly_time_span_delete)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 weeklyTimeSpanViewModel.onEdit(
                     WeeklyTimeSpanEditEvent(

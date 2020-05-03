@@ -17,9 +17,9 @@
             android:defaultValue="5"
             android:entries="@array/pref_network_automatic_update_delay_entries"
             android:entryValues="@array/pref_network_automatic_update_delay_entry_values"
-            android:key="@string/pref_network_automatic_update_delay_key"
+            android:key="@string/pref_network_automatic_update_key"
             android:summary="%s"
-            android:title="@string/pref_network_automatic_update_delay_title" />
+            android:title="@string/pref_network_automatic_update_title" />
 
     </PreferenceCategory>
 

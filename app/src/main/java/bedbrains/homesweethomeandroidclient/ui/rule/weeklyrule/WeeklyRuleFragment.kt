@@ -1,12 +1,10 @@
 package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
 import android.view.animation.Animation
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
@@ -28,6 +26,7 @@ import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
+import bedbrains.homesweethomeandroidclient.ui.dialog.InputDialog
 import bedbrains.platform.Time
 import bedbrains.shared.datatypes.deepCopy
 import bedbrains.shared.datatypes.time.WeeklyTime
@@ -458,10 +457,10 @@ class WeeklyRuleFragment : Fragment() {
         when (event.action) {
             WeeklyTimeSpanEditEvent.Action.FINISHED -> {
                 if (weeklyRuleViewModel.rule.value!!.timeSpans.overlays(event.timeSpan)) {
-                    Toast.makeText(context, R.string.weekly_time_span_overlaying_notice, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, R.string.notice_weekly_time_span_overlaying, Toast.LENGTH_LONG).show()
                     return
                 } else if (event.timeSpan.length == WeeklyTime.MIN) {
-                    Toast.makeText(context, R.string.weekly_time_span_no_length_notice, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, R.string.notice_weekly_time_span_no_length, Toast.LENGTH_LONG).show()
                     return
                 }
 
@@ -511,30 +510,16 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        val input = EditText(context)
-        input.setText(text)
-
-        AlertDialog.Builder(context!!)
-            .setTitle(Res.resources.getString(R.string.pref_temperature_category_title))
-            .setView(input)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
-                    it.name = input.text.toString()
-                })
-            }
-            .show()
-
-        input.requestFocusFromTouch()
-        input.postDelayed({
-            val keyboard =
-                context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyboard.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
-        }, 0)
+        InputDialog.show(context!!, R.string.action_rename, text, invalidOptions = setOf(text)) {
+            DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                name = it
+            })
+        }
     }
 
     private fun showClearAllDialog() {
         AlertDialog.Builder(context!!)
-            .setTitle(R.string.weekly_time_span_clear_all_confirmation)
+            .setTitle(R.string.confirmation_weekly_time_span_clear_all)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
                     it.timeSpans.clear()

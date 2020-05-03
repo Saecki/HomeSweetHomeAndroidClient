@@ -51,6 +51,11 @@ object DataRepository {
         return RespCallback<Unit>().enqueue(restClient?.postRule(rule), null)
     }
 
+    fun removeRule(rule: Rule): LiveData<Resp> {
+        rules.value = rules.value.apply { this?.remove(rule) }
+        return RespCallback<Unit>().enqueue(restClient?.deleteRule(rule.uid), null)
+    }
+
     fun fetchValues() = RespCallback<List<RuleValue>>().enqueue(restClient?.values()) {
         values.value = it?.toMutableList() ?: mutableListOf()
     }
@@ -58,6 +63,11 @@ object DataRepository {
     fun upsertValue(value: RuleValue): LiveData<Resp> {
         values.value = values.value.apply { this?.upsert(value) { it.uid == value.uid } }
         return RespCallback<Unit>().enqueue(restClient?.postValue(value), null)
+    }
+
+    fun removeValue(value: RuleValue): LiveData<Resp> {
+        values.value = values.value.apply { this?.remove(value) }
+        return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid), null)
     }
 
     fun startAutomaticUpdate(delay: Long) {
