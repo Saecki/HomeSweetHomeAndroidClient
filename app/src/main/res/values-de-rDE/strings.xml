@@ -3,6 +3,8 @@
 
     <!-- Names and Titles !-->
     <string name="nav_header_subtitle">Ein Smart Home System</string>
+    <string name="room">Room</string>
+    <string name="temperature">Temperatur</string>
 
     <!-- Menu !-->
     <string name="menu_home">Start</string>
@@ -13,7 +15,7 @@
     <!-- Items !-->
     <string name="item_untitled">Unbenannt</string>
 
-    <!-- Actions !-->
+    <!-- General Actions !-->
     <string name="action_apply_to_all">Auf alle anwenden</string>
     <string name="action_clear">Alle Entfernen</string>
     <string name="action_delete">Löschen</string>
@@ -26,26 +28,31 @@
     <string name="action_done">Fertig</string>
     <string name="action_new">Neu</string>
 
-    <!-- Notifications !-->
-    <string name="notification_no_number_recognized">Nummer nicht erkannt</string>
+    <!-- Tag !-->
+    <string name="action_tag_new">Neuer Tag</string>
+    <string name="confirmation_tag_delete">Tag \'$1\' löschen?</string>
 
     <!-- Weekly Time Span !-->
-    <string name="weekly_time_span_clear_all_confirmation">Alle Zeitspannen löschen?</string>
-    <string name="weekly_time_span_apply_to_all_confirmation">Diesen Wert auf alle Zeispannen anwenden?</string>
-    <string name="weekly_time_span_delete_confirmation">Diese Zeitspanne löschen?</string>
-    <string name="weekly_time_span_overlaying_notice">Zeitspannen dürfen sich nicht überlagern</string>
-    <string name="weekly_time_span_no_length_notice">Zeitspannen können nicht zur Startzeit enden</string>
+    <string name="confirmation_weekly_time_span_clear_all">Alle Zeitspannen löschen?</string>
+    <string name="confirmation_weekly_time_span_apply_to_all">Diesen Wert auf alle Zeispannen anwenden?</string>
+    <string name="confirmation_weekly_time_span_delete">Diese Zeitspanne löschen?</string>
+    <string name="notice_weekly_time_span_overlaying">Zeitspannen dürfen sich nicht überlagern</string>
+    <string name="notice_weekly_time_span_no_length">Zeitspannen können nicht zur Startzeit enden</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heizung</string>
     <string name="value_light">Licht</string>
+
+    <!-- Response !-->
+    <string name="resp_update_error">Beim Aktualisieren ist ein Fehler aufgetreten</string>
+    <string name="resp_item_no_longer_exists">Das Element, das sie angeschaut haben existiert nicht mehr</string>
 
     <!-- Settings !-->
     <!-- Network !-->
     <string name="pref_network_host_title">Host</string>
     <string name="pref_network_port_title">Port</string>
     <string name="pref_network_category_title">Netzwerk</string>
-    <string name="pref_network_automatic_update_delay_title">Automatisch aktualisieren</string>
+    <string name="pref_network_automatic_update_title">Automatisch aktualisieren</string>
 
     <!-- Temperature !-->
     <string name="pref_temperature_category_title">Temperatur</string>
@@ -58,8 +65,5 @@
     <string name="pref_ui_category_title">Benutzeroberfäche</string>
     <string name="pref_theme_title">Thema</string>
 
-    <!-- Response !-->
-    <string name="resp_update_error">Beim Aktualisieren ist ein Fehler aufgetreten</string>
-    <string name="resp_item_no_longer_exists">Das Element, das sie angeschaut haben existiert nicht mehr</string>
 
 </resources>

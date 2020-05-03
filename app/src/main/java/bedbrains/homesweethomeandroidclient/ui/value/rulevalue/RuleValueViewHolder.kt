@@ -27,6 +27,8 @@ class RuleValueViewHolder(private val viewBinding: ValueRuleValueBinding) :
                 bundle
             )
         }
+        viewBinding.root.setOnLongClickListener {
+            true
+        }
     }
-
 }

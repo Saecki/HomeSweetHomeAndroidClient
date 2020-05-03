@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_App)
         Theme.setMode(Res.getPrefStringAsInt(R.string.pref_theme_key, Theme.DEFAULT))
 
+        Res.setNetworkUpdate(Res.getPrefString(R.string.pref_network_automatic_update_key, ""))
+        Res.setTempUnit(Res.getPrefString(R.string.pref_temperature_unit_key, ""))
+        Res.setTempDecimals(Res.getPrefString(R.string.pref_temperature_decimals_key, ""))
+
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -71,5 +75,4 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 }

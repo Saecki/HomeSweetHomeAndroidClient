@@ -7,7 +7,8 @@ import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
 import bedbrains.shared.datatypes.devices.Light
 
-class LightViewHolder(val viewBinding: DeviceLightBinding) : RecyclerView.ViewHolder(viewBinding.root) {
+class LightViewHolder(val viewBinding: DeviceLightBinding) :
+    RecyclerView.ViewHolder(viewBinding.root) {
 
     private lateinit var light: Light
     private val room = viewBinding.room

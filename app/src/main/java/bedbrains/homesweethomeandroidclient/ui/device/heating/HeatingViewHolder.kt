@@ -1,13 +1,10 @@
 package bedbrains.homesweethomeandroidclient.ui.device.heating
 
 import android.content.Context
+import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.postDelayed
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
@@ -16,8 +13,8 @@ import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
+import bedbrains.homesweethomeandroidclient.ui.dialog.InputDialog
 import bedbrains.shared.datatypes.devices.Heating
-import com.google.android.material.snackbar.Snackbar
 
 class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private val context: Context, private val parent: View) :
     RecyclerView.ViewHolder(viewBinding.root) {
@@ -63,8 +60,15 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
             incrementTemp()
             DataRepository.upsertDevice(heating)
         }
+
         viewBinding.root.setOnClickListener {
-            viewBinding.root.findNavController().navigate(R.id.action_nav_home_to_nav_heating)
+            val bundle = Bundle()
+
+            bundle.putString(Res.resources.getString(R.string.uid), heating.uid)
+            viewBinding.root.findNavController().navigate(
+                R.id.action_nav_home_to_nav_heating,
+                bundle
+            )
         }
     }
 
@@ -159,36 +163,16 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
     }
 
     private fun showInputDialog(text: String) {
-        val input = EditText(context)
-        input.setText(text)
-        input.inputType = InputType.TYPE_CLASS_PHONE
-
-        AlertDialog.Builder(context)
-            .setTitle(R.string.pref_temperature_category_title)
-            .setView(input)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                try {
-                    heating.targetTemp.global = input.text.toString().replace(',', '.').toDouble()
-                    update(heating)
-                    DataRepository.upsertDevice(heating)
-                } catch (e: Exception) {
-                    Snackbar.make(
-                        parent,
-                        R.string.notification_no_number_recognized,
-                        Snackbar.LENGTH_LONG
-                    )
-                        .setAction(R.string.action_edit) {
-                            showInputDialog(input.text.toString())
-                        }
-                        .show()
-                }
-            }
-            .show()
-
-        input.requestFocusFromTouch()
-        input.postDelayed(Res.resources.getInteger(R.integer.keyboard_show_delay).toLong()) {
-            (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-                .showSoftInput(input, InputMethodManager.SHOW_IMPLICIT)
+        InputDialog.show(
+            context,
+            R.string.temperature,
+            text = text,
+            inputType = InputType.TYPE_CLASS_PHONE,
+            validator = { it.replace(',', '.').toDoubleOrNull() != null }
+        ) {
+            heating.targetTemp.global = it.replace(',', '.').toDouble()
+            update(heating)
+            DataRepository.upsertDevice(heating)
         }
     }
 }
