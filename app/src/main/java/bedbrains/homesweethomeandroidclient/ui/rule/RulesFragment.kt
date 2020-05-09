@@ -52,7 +52,7 @@ class RulesFragment : Fragment() {
             val bundle = Bundle()
             val newRule = WeeklyRule(
                 UIDProvider.newUID,
-                resources.getString(R.string.item_untitled)
+                resources.getString(R.string.item_unnamed)
             )
 
             DataRepository.upsertRule(newRule)

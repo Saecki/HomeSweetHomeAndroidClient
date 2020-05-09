@@ -13,20 +13,20 @@ class LightViewHolder(val viewBinding: DeviceLightBinding) :
     private lateinit var light: Light
     private val room = viewBinding.room
     private val name = viewBinding.name
-    private val state = viewBinding.state
+    private val isOn = viewBinding.state
 
     fun update(light: Light) {
         room.text = light.room
         name.text = light.name
-        state.isChecked = light.state
+        isOn.isChecked = light.isOn
     }
 
     fun bindView(light: Light) {
         this.light = light
         update(light)
 
-        state.setOnCheckedChangeListener { _, isChecked ->
-            DataRepository.upsertDevice(light.also { it.state = isChecked })
+        isOn.setOnCheckedChangeListener { _, isChecked ->
+            DataRepository.updateDevice(light.apply { isOn = isChecked })
         }
 
         viewBinding.root.setOnClickListener {

@@ -8,6 +8,7 @@ import bedbrains.homesweethomeandroidclient.rest.*
 import bedbrains.shared.datatypes.devices.Device
 import bedbrains.shared.datatypes.rules.Rule
 import bedbrains.shared.datatypes.rules.RuleValue
+import bedbrains.shared.datatypes.update
 import bedbrains.shared.datatypes.upsert
 
 object DataRepository {
@@ -32,14 +33,9 @@ object DataRepository {
         devices.value = it?.toMutableList() ?: mutableListOf()
     }
 
-    fun upsertDevice(device: Device): LiveData<Resp> {
-        devices.value = devices.value.apply { this?.upsert(device) { it.uid == device.uid } }
-        return RespCallback<Unit>().enqueue(restClient?.postDevice(device), null)
-    }
-
-    fun removeDevice(device: Device): LiveData<Resp> {
-        devices.value = devices.value.apply { this?.remove(device) }
-        return RespCallback<Unit>().enqueue(restClient?.deleteDevice(device.uid), null)
+    fun updateDevice(device: Device): LiveData<Resp> {
+        devices.value = devices.value.apply { this?.update(device) { it.uid == device.uid } }
+        return RespCallback<Unit>().enqueue(restClient?.postDevice(device))
     }
 
     fun fetchRules() = RespCallback<List<Rule>>().enqueue(restClient?.rules()) {
@@ -48,12 +44,12 @@ object DataRepository {
 
     fun upsertRule(rule: Rule): LiveData<Resp> {
         rules.value = rules.value.apply { this?.upsert(rule) { it.uid == rule.uid } }
-        return RespCallback<Unit>().enqueue(restClient?.postRule(rule), null)
+        return RespCallback<Unit>().enqueue(restClient?.postRule(rule))
     }
 
     fun removeRule(rule: Rule): LiveData<Resp> {
         rules.value = rules.value.apply { this?.remove(rule) }
-        return RespCallback<Unit>().enqueue(restClient?.deleteRule(rule.uid), null)
+        return RespCallback<Unit>().enqueue(restClient?.deleteRule(rule.uid))
     }
 
     fun fetchValues() = RespCallback<List<RuleValue>>().enqueue(restClient?.values()) {
@@ -62,12 +58,12 @@ object DataRepository {
 
     fun upsertValue(value: RuleValue): LiveData<Resp> {
         values.value = values.value.apply { this?.upsert(value) { it.uid == value.uid } }
-        return RespCallback<Unit>().enqueue(restClient?.postValue(value), null)
+        return RespCallback<Unit>().enqueue(restClient?.postValue(value))
     }
 
     fun removeValue(value: RuleValue): LiveData<Resp> {
         values.value = values.value.apply { this?.remove(value) }
-        return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid), null)
+        return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid))
     }
 
     fun startAutomaticUpdate(delay: Long) {
@@ -88,7 +84,7 @@ object DataRepository {
     }
 
     fun buildRestClient(host: String = "", port: String = ""): APIService? {
-        val h = if (host.length == 0) {
+        val h = if (host.isEmpty()) {
             Res.preferences.getString(
                 Res.resources.getString(R.string.pref_network_host_key), ""
             )?.trim()
@@ -96,7 +92,7 @@ object DataRepository {
             host
         }
 
-        val p = if (port.length == 0) {
+        val p = if (port.isEmpty()) {
             Res.preferences.getString(
                 Res.resources.getString(R.string.pref_network_port_key), ""
             )?.trim()

@@ -45,4 +45,6 @@
     <dimen name="time_indicator_head_diameter">8dp</dimen>
     <dimen name="time_indicator_line_width">1dp</dimen>
     <dimen name="time_indicator_elevation">2.5dp</dimen>
+
+    <dimen name="input_dialog_horizontal_padding">22dp</dimen>
 </resources>

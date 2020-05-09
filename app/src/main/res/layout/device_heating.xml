@@ -25,7 +25,6 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?colorLabel"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/actual_temp"
         app:layout_constraintEnd_toStartOf="@id/name"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/icon"
@@ -39,6 +38,7 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?colorLabel"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/target_temp"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintTop_toBottomOf="@id/room" />
@@ -69,38 +69,10 @@
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="?colorLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/end_guideline"
         app:layout_constraintStart_toEndOf="@id/actual_temp"
         app:layout_constraintTop_toBottomOf="@id/name" />
-
-    <ImageView
-        android:id="@+id/arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:padding="@dimen/icon_padding"
-        android:src="@drawable/ic_expand_more_black_24dp"
-        android:tint="?colorOnBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/detailed_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="detailed_view_target_temp,plus,minus" />
-
-    <TextView
-        android:id="@+id/detailed_view_target_temp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/text_margin"
-        android:gravity="center_vertical"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/end_guideline"
-        app:layout_constraintStart_toEndOf="@id/icon"
-        app:layout_constraintTop_toBottomOf="@id/actual_temp" />
 
     <ImageView
         android:id="@+id/minus"
@@ -109,10 +81,9 @@
         android:padding="@dimen/icon_padding"
         android:src="@drawable/ic_remove_black_24dp"
         android:tint="?colorOnBackground"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/detailed_view_target_temp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/plus"
-        app:layout_constraintTop_toTopOf="@id/detailed_view_target_temp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/plus"
@@ -121,9 +92,8 @@
         android:padding="@dimen/icon_padding"
         android:src="@drawable/ic_add_black_24dp"
         android:tint="?colorOnBackground"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/detailed_view_target_temp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/detailed_view_target_temp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

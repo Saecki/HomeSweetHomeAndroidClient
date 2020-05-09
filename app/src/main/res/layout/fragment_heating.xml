@@ -28,6 +28,16 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <ImageView
+            android:id="@+id/room_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/ic_home_black_24dp"
+            android:tint="?colorOnBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tags" />
+
         <TextView
             android:id="@+id/room_label"
             android:layout_width="wrap_content"
@@ -36,7 +46,7 @@
             android:text="@string/room"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="?colorLabel"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/room_icon"
             app:layout_constraintTop_toBottomOf="@id/tags" />
 
         <TextView
@@ -53,7 +63,109 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="room_label,room" />
+            app:constraint_referenced_ids="room_icon,room_label,room" />
+
+        <ImageView
+            android:id="@+id/temp_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/ic_thermometer_black_24dp"
+            android:tint="?colorOnBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_barrier" />
+
+        <TextView
+            android:id="@+id/actual_temp_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/actual_temperature"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorLabel"
+            app:layout_constraintStart_toEndOf="@id/temp_icon"
+            app:layout_constraintTop_toBottomOf="@id/room_barrier" />
+
+        <TextView
+            android:id="@+id/actual_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_padding"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorLabel"
+            app:layout_constraintBaseline_toBaselineOf="@id/actual_temp_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/actual_temp_barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="actual_temp_label,actual_temp" />
+
+        <TextView
+            android:id="@+id/target_temp_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/target_temperature"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorLabel"
+            app:layout_constraintStart_toEndOf="@id/temp_icon"
+            app:layout_constraintTop_toBottomOf="@id/actual_temp_barrier" />
+
+        <TextView
+            android:id="@+id/target_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_padding"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBaseline_toBaselineOf="@id/target_temp_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/target_temp_barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="temp_icon,target_temp_label,target_temp" />
+
+        <ImageView
+            android:id="@+id/rule_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/ic_home_black_24dp"
+            android:tint="?colorOnBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tags" />
+
+        <TextView
+            android:id="@+id/rule_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/rule"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorLabel"
+            app:layout_constraintStart_toEndOf="@id/rule_icon"
+            app:layout_constraintTop_toBottomOf="@id/tags" />
+
+        <TextView
+            android:id="@+id/rule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_padding"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBaseline_toBaselineOf="@id/rule_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/rule_barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="rule_icon,rule_label,rule" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

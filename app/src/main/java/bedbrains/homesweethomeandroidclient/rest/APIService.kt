@@ -14,11 +14,8 @@ interface APIService {
     @GET("/v1/devices/{uid}")
     fun device(@Path("uid") uid: String): Call<Device>
 
-    @POST("/v1/devices/device")
+    @PUT("/v1/devices/device")
     fun postDevice(@Body device: Device): Call<Unit>
-
-    @DELETE("/v1/devices/{uid}")
-    fun deleteDevice(@Path("uid") uid: String): Call<Unit>
 
     @GET("/v1/rules")
     fun rules(): Call<List<Rule>>

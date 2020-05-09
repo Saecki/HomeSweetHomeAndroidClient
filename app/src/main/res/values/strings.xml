@@ -6,6 +6,9 @@
     <string name="nav_header_subtitle">A smart home system</string>
     <string name="room">Room</string>
     <string name="temperature">Temperature</string>
+    <string name="actual_temperature">Actual temperature</string>
+    <string name="target_temperature">Target temperature</string>
+    <string name="rule">Rule</string>
 
     <!-- Menu !-->
     <string name="menu_home">Home</string>
@@ -14,7 +17,7 @@
     <string name="menu_settings">Settings</string>
 
     <!-- Items !-->
-    <string name="item_untitled">Untitled</string>
+    <string name="item_unnamed">Unnamed</string>
 
     <!-- General Actions !-->
     <string name="action_apply_to_all">Apply to all</string>

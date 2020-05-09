@@ -5,6 +5,9 @@
     <string name="nav_header_subtitle">Ein Smart Home System</string>
     <string name="room">Room</string>
     <string name="temperature">Temperatur</string>
+    <string name="actual_temperature">Ist-Temperatur</string>
+    <string name="target_temperature">Soll-Temperatur</string>
+    <string name="rule">Regel</string>
 
     <!-- Menu !-->
     <string name="menu_home">Start</string>
@@ -13,7 +16,7 @@
     <string name="menu_settings">Einstellungen</string>
 
     <!-- Items !-->
-    <string name="item_untitled">Unbenannt</string>
+    <string name="item_unnamed">Unbenannt</string>
 
     <!-- General Actions !-->
     <string name="action_apply_to_all">Auf alle anwenden</string>

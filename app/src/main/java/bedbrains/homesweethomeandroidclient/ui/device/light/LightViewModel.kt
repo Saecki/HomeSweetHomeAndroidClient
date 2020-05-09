@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 import bedbrains.shared.datatypes.devices.Light
 
 class LightViewModel : ViewModel() {
-    val light = Light("asdflkj", "My Room", "My Light", true)
+    val light = Light("asdflkj", "My Room", "My Light")
 }
