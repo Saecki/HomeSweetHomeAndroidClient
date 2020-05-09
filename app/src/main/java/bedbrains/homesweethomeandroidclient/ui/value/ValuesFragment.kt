@@ -51,7 +51,7 @@ class ValuesFragment : Fragment() {
         addButton.setOnClickListener {
             val bundle = Bundle()
             val newValue = RuleValue.UNSPECIFIED.apply {
-                name = resources.getString(R.string.item_untitled)
+                name = resources.getString(R.string.item_unnamed)
             }
 
             DataRepository.upsertValue(newValue)

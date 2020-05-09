@@ -185,7 +185,7 @@ class WeeklyRuleFragment : Fragment() {
             val newTimeSpan = WeeklyTimeSpan.UNSPECIFIED
 
             newTimeSpan.apply {
-                value.name = resources.getString(R.string.item_untitled)
+                value.name = resources.getString(R.string.item_unnamed)
                 end += 1.hours
             }
 

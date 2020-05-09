@@ -45,6 +45,7 @@ object InputDialog {
 
         binding.input.inputType = inputType
         binding.input.setText(text)
+        binding.input.setSelection(text.length)
 
         displayOptions(context, validOptions, binding.options) {
             binding.input.setText(it)

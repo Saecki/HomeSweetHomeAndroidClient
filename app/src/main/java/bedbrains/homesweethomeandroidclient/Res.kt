@@ -44,7 +44,7 @@ object Res {
     fun setTempDecimals(value: Any) {
         Temperature.globalDecimals = try {
             value.toString().toInt()
-        } catch (e: ClassCastException) {
+        } catch (e: Exception) {
             Temperature.DEFAULT_DECIMALS
         }
     }
@@ -52,7 +52,7 @@ object Res {
     fun setTempUnit(value: Any) {
         val index = try {
             value.toString().toInt()
-        } catch (e: ClassCastException) {
+        } catch (e: Exception) {
             Temperature.DEFAULT_UNIT.index
         }
         Temperature.globalUnit = when (index) {

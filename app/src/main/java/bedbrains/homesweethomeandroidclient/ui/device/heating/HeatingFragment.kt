@@ -1,6 +1,7 @@
 package bedbrains.homesweethomeandroidclient.ui.device.heating
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -48,8 +49,10 @@ class HeatingFragment : Fragment() {
                 Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
             } else {
                 MainActivity.toolbar.title = it.name
-                binding.room.text = it.room
                 displayTags(it.tags)
+                binding.room.text = it.room
+                binding.actualTemp.text = it.actualTemp.formatGlobal(true)
+                binding.targetTemp.text = it.targetTemp.formatGlobal(true)
             }
         })
 
@@ -63,6 +66,10 @@ class HeatingFragment : Fragment() {
 
         binding.room.setOnClickListener {
             showRoomDialog(heatingViewModel.heating.value!!.room)
+        }
+
+        binding.targetTemp.setOnClickListener {
+            showTargetTempDialog(heatingViewModel.heating.value!!.targetTemp.formatGlobal(false))
         }
 
         return binding.root
@@ -83,8 +90,9 @@ class HeatingFragment : Fragment() {
     }
 
     private fun displayTags(tags: Set<String>) {
-        val removed = binding.tags.children.filter { view -> tags.none { (view as Chip).text == it } }
-        val added = tags.filter { tag -> binding.tags.children.none { (it as Chip).text == tag } }
+        val chips = binding.tags.children.map { it as Chip }.toList()
+        val removed = chips.filter { chip -> tags.none { tag -> chip.text == tag } }
+        val added = tags.filter { tag -> chips.none { chip -> chip.text == tag } }
 
         removed.forEach {
             if (it.id != R.id.add_chip)
@@ -105,7 +113,7 @@ class HeatingFragment : Fragment() {
 
     private fun showRenameDialog(text: String) {
         InputDialog.show(context!!, R.string.action_rename, text, invalidOptions = setOf(text)) {
-            DataRepository.upsertDevice(heatingViewModel.heating.value!!.apply {
+            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
                 name = it
             })
         }
@@ -122,7 +130,7 @@ class HeatingFragment : Fragment() {
             options = options,
             invalidOptions = heatingViewModel.heating.value!!.tags
         ) {
-            DataRepository.upsertDevice(heatingViewModel.heating.value!!.apply {
+            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
                 tags.add(it)
             })
         }
@@ -134,7 +142,7 @@ class HeatingFragment : Fragment() {
         AlertDialog.Builder(context!!)
             .setTitle(title)
             .setPositiveButton(android.R.string.ok) { _, _ ->
-                DataRepository.upsertDevice(heatingViewModel.heating.value!!.apply {
+                DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
                     tags.remove(tag)
                 })
             }
@@ -143,8 +151,22 @@ class HeatingFragment : Fragment() {
 
     private fun showRoomDialog(text: String) {
         InputDialog.show(context!!, R.string.room, text, invalidOptions = setOf(text)) {
-            DataRepository.upsertDevice(heatingViewModel.heating.value!!.apply {
+            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
                 room = it
+            })
+        }
+    }
+
+    private fun showTargetTempDialog(text: String) {
+        InputDialog.show(
+            context!!,
+            R.string.temperature,
+            text = text,
+            inputType = InputType.TYPE_CLASS_PHONE,
+            validator = { it.replace(',', '.').toDoubleOrNull() != null }
+        ) {
+            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
+                targetTemp.global = it.replace(',', '.').toDouble()
             })
         }
     }

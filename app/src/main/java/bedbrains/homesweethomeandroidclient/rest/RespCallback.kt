@@ -10,7 +10,7 @@ class RespCallback<T> : Callback<T> {
 
     private val responded = MutableLiveData(Resp.AWAITING)
     private var resp: T? = null
-    private var onResponse: ((T?) -> Unit)? = null
+    private lateinit var onResponse: (T?) -> Unit
 
     override fun onFailure(call: Call<T>, t: Throwable) {
         resp = null
@@ -31,7 +31,7 @@ class RespCallback<T> : Callback<T> {
         }
     }
 
-    fun enqueue(call: Call<T>?, onResponse: ((T?) -> Unit)?): LiveData<Resp> {
+    fun enqueue(call: Call<T>?, onResponse: (T?) -> Unit = {}): LiveData<Resp> {
         this.onResponse = onResponse
         if (call == null)
             responded.value = Resp.FAILURE
