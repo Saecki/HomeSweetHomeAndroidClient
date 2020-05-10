@@ -17,7 +17,7 @@ import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.FragmentHeatingBinding
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
-import bedbrains.homesweethomeandroidclient.ui.dialog.InputDialog
+import bedbrains.homesweethomeandroidclient.ui.dialog.*
 import com.google.android.material.chip.Chip
 
 class HeatingFragment : Fragment() {
@@ -53,6 +53,7 @@ class HeatingFragment : Fragment() {
                 binding.room.text = it.room
                 binding.actualTemp.text = it.actualTemp.formatGlobal(true)
                 binding.targetTemp.text = it.targetTemp.formatGlobal(true)
+                binding.rule.text = it.rule?.name
             }
         })
 
@@ -70,6 +71,18 @@ class HeatingFragment : Fragment() {
 
         binding.targetTemp.setOnClickListener {
             showTargetTempDialog(heatingViewModel.heating.value!!.targetTemp.formatGlobal(false))
+        }
+
+        binding.rule.setOnClickListener {
+            if (heatingViewModel.heating.value!!.rule != null) {
+                val bundle = Bundle()
+
+                bundle.putString(Res.resources.getString(R.string.uid), heatingViewModel.heating.value!!.rule?.uid)
+                findNavController().navigate(
+                    R.id.action_nav_heating_to_nav_weekly_rule,
+                    bundle
+                )
+            }
         }
 
         return binding.root
@@ -112,28 +125,30 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        InputDialog.show(context!!, R.string.action_rename, text, invalidOptions = setOf(text)) {
-            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
-                name = it
-            })
-        }
+        BaseInputDialog(context!!)
+            .title(R.string.action_rename)
+            .text(text)
+            .onFinished {
+                DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
+                    name = it
+                })
+            }
+            .show()
     }
 
     private fun showAddTagDialog() {
-        val options = DataRepository.devices.value!!.flatMap {
-            it.tags
-        }.toSet()
+        val suggestions = DataRepository.devices.value!!.flatMap { it.tags }
 
-        InputDialog.show(
-            context!!,
-            R.string.action_tag_new,
-            options = options,
-            invalidOptions = heatingViewModel.heating.value!!.tags
-        ) {
-            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
-                tags.add(it)
-            })
-        }
+        SuggestionInputDialog(context!!)
+            .title(R.string.action_tag_new)
+            .suggestions(suggestions)
+            .validator { !heatingViewModel.heating.value!!.tags.contains(it) }
+            .onFinished {
+                DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
+                    tags.add(it)
+                })
+            }
+            .show()
     }
 
     private fun showRemoveTagDialog(tag: String) {
@@ -150,24 +165,28 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showRoomDialog(text: String) {
-        InputDialog.show(context!!, R.string.room, text, invalidOptions = setOf(text)) {
-            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
-                room = it
-            })
-        }
+        BaseInputDialog(context!!)
+            .title(R.string.room)
+            .text(text)
+            .onFinished {
+                DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
+                    room = it
+                })
+            }
+            .show()
     }
 
     private fun showTargetTempDialog(text: String) {
-        InputDialog.show(
-            context!!,
-            R.string.temperature,
-            text = text,
-            inputType = InputType.TYPE_CLASS_PHONE,
-            validator = { it.replace(',', '.').toDoubleOrNull() != null }
-        ) {
-            DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
-                targetTemp.global = it.replace(',', '.').toDouble()
-            })
-        }
+        BaseInputDialog(context!!)
+            .title(R.string.temperature)
+            .text(text)
+            .inputType(InputType.TYPE_CLASS_PHONE)
+            .validator { it.replace(',', '.').toDoubleOrNull() != null }
+            .onFinished {
+                DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
+                    targetTemp.global = it.replace(',', '.').toDouble()
+                })
+            }
+            .show()
     }
 }

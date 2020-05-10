@@ -26,7 +26,10 @@ import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
-import bedbrains.homesweethomeandroidclient.ui.dialog.InputDialog
+import bedbrains.homesweethomeandroidclient.ui.dialog.BaseInputDialog
+import bedbrains.homesweethomeandroidclient.ui.dialog.onFinished
+import bedbrains.homesweethomeandroidclient.ui.dialog.text
+import bedbrains.homesweethomeandroidclient.ui.dialog.title
 import bedbrains.platform.Time
 import bedbrains.shared.datatypes.deepCopy
 import bedbrains.shared.datatypes.time.WeeklyTime
@@ -39,7 +42,7 @@ import java.util.*
 
 class WeeklyRuleFragment : Fragment() {
     private val weeklyRuleViewModel: WeeklyRuleViewModel by viewModels()
-    private val navListener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
+    private val navListener = NavController.OnDestinationChangedListener { _, destination, _ ->
         if (this.destinationId != destination.id) {
             hideDayToolbar(true)
             hideTimeSpanDialog()
@@ -510,11 +513,15 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        InputDialog.show(context!!, R.string.action_rename, text, invalidOptions = setOf(text)) {
-            DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
-                name = it
-            })
-        }
+        BaseInputDialog(context!!)
+            .title(R.string.action_rename)
+            .text(text)
+            .onFinished {
+                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                    name = it
+                })
+            }
+            .show()
     }
 
     private fun showClearAllDialog() {

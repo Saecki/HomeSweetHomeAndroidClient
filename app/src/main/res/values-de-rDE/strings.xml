@@ -35,6 +35,9 @@
     <string name="action_tag_new">Neuer Tag</string>
     <string name="confirmation_tag_delete">Tag \'$1\' löschen?</string>
 
+    <!-- Rule !-->
+    <string name="action_select_a_rule">Regel auswählen</string>
+
     <!-- Weekly Time Span !-->
     <string name="confirmation_weekly_time_span_clear_all">Alle Zeitspannen löschen?</string>
     <string name="confirmation_weekly_time_span_apply_to_all">Diesen Wert auf alle Zeispannen anwenden?</string>

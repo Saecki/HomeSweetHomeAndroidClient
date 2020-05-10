@@ -36,6 +36,9 @@
     <string name="action_tag_new">New tag</string>
     <string name="confirmation_tag_delete">Delete tag \'$1\'?</string>
 
+    <!-- Rule !-->
+    <string name="action_select_a_rule">Select a Rule</string>
+
     <!-- Weekly Time Span !-->
     <string name="confirmation_weekly_time_span_clear_all">Clear all time spans?</string>
     <string name="confirmation_weekly_time_span_apply_to_all">Apply this value to all time spans?</string>

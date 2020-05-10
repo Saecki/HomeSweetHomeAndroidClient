@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
-import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
+import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
 import bedbrains.homesweethomeandroidclient.ui.device.heating.HeatingViewHolder
 import bedbrains.homesweethomeandroidclient.ui.device.light.LightViewHolder
 import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
@@ -62,7 +62,7 @@ class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapte
     }
 
     fun updateDevices(new: List<Device>) {
-        val diff = DiffUtil.calculateDiff(ListDiffUtilCallback(devices, new))
+        val diff = DiffUtil.calculateDiff(UniqueListDiffUtilCallback(devices, new))
         devices = new
         diff.dispatchUpdatesTo(this)
     }
