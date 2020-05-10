@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding
-import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
+import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
 import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 import bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleViewHolder
 import bedbrains.shared.datatypes.rules.Rule
@@ -50,7 +50,7 @@ class RuleListAdapter(private var rules: List<Rule>) : RecyclerView.Adapter<Recy
     }
 
     fun updateRules(new: List<Rule>) {
-        val diff = DiffUtil.calculateDiff(ListDiffUtilCallback(rules, new))
+        val diff = DiffUtil.calculateDiff(UniqueListDiffUtilCallback(rules, new))
         rules = new
         diff.dispatchUpdatesTo(this)
     }

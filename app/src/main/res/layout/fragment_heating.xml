@@ -135,10 +135,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/icon_padding"
-            android:src="@drawable/ic_home_black_24dp"
+            android:src="@drawable/ic_schedule_black_24dp"
             android:tint="?colorOnBackground"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tags" />
+            app:layout_constraintTop_toBottomOf="@id/target_temp_barrier" />
 
         <TextView
             android:id="@+id/rule_label"
@@ -149,7 +149,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="?colorLabel"
             app:layout_constraintStart_toEndOf="@id/rule_icon"
-            app:layout_constraintTop_toBottomOf="@id/tags" />
+            app:layout_constraintTop_toBottomOf="@id/target_temp_barrier" />
 
         <TextView
             android:id="@+id/rule"

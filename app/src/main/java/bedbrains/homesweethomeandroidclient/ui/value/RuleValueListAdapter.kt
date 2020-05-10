@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.databinding.ValueRuleValueBinding
-import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
+import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
 import bedbrains.homesweethomeandroidclient.ui.value.rulevalue.RuleValueViewHolder
 import bedbrains.shared.datatypes.rules.RuleValue
 
@@ -28,7 +28,7 @@ class RuleValueListAdapter(private var values: List<RuleValue>) : RecyclerView.A
     }
 
     fun updateValues(new: List<RuleValue>) {
-        val diff = DiffUtil.calculateDiff(ListDiffUtilCallback(values, new))
+        val diff = DiffUtil.calculateDiff(UniqueListDiffUtilCallback(values, new))
         values = new
         diff.dispatchUpdatesTo(this)
     }

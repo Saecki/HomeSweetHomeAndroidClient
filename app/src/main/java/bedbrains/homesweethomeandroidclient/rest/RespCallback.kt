@@ -14,13 +14,13 @@ class RespCallback<T> : Callback<T> {
 
     override fun onFailure(call: Call<T>, t: Throwable) {
         resp = null
-        onResponse?.invoke(resp)
+        onResponse.invoke(resp)
         responded.value = Resp.FAILURE
     }
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
         resp = response.body()
-        onResponse?.let { it(resp) }
+        onResponse.let { it(resp) }
         responded.value = when (resp) {
             null -> {
                 Resp.FAILURE

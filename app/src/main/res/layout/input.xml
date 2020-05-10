@@ -2,18 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:paddingHorizontal="@dimen/input_dialog_horizontal_padding"
+    android:id="@+id/container"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <EditText
         android:id="@+id/input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/options"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true" />
+        android:inputType="text"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

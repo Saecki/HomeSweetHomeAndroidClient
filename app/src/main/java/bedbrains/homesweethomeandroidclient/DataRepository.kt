@@ -83,25 +83,13 @@ object DataRepository {
         }
     }
 
-    fun buildRestClient(host: String = "", port: String = ""): APIService? {
-        val h = if (host.isEmpty()) {
-            Res.preferences.getString(
-                Res.resources.getString(R.string.pref_network_host_key), ""
-            )?.trim()
-        } else {
-            host
-        }
+    fun buildRestClient(host: String? = null, port: String? = null): APIService? {
+        val h = host ?: Res.preferences.getString(Res.resources.getString(R.string.pref_network_host_key), "")
 
-        val p = if (port.isEmpty()) {
-            Res.preferences.getString(
-                Res.resources.getString(R.string.pref_network_port_key), ""
-            )?.trim()
-        } else {
-            port
-        }
+        val p = port ?: Res.preferences.getString(Res.resources.getString(R.string.pref_network_port_key), "")
 
         return try {
-            Controller.buildClient("http://$h:$p")
+            Controller.buildClient("http://${h?.trim()}:${p?.trim()}")
         } catch (e: Exception) {
             null
         }

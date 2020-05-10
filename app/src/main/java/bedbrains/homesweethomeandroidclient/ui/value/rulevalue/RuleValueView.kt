@@ -4,7 +4,7 @@ import android.content.Context
 import android.text.InputType
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.RuleValueViewBinding
-import bedbrains.homesweethomeandroidclient.ui.dialog.InputDialog
+import bedbrains.homesweethomeandroidclient.ui.dialog.*
 import bedbrains.shared.datatypes.rules.RuleValue
 
 class RuleValueView(private val binding: RuleValueViewBinding, private val context: Context?) {
@@ -29,16 +29,16 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
     }
 
     private fun showHeatingDialog(text: String) {
-        InputDialog.show(
-            context!!,
-            R.string.temperature,
-            text = text,
-            inputType = InputType.TYPE_CLASS_PHONE,
-            validator = { it.replace(',', '.').toDoubleOrNull() != null }
-        ) {
-            onChange(value.apply {
-                heating.global = it.replace(',', '.').toDouble()
-            })
-        }
+        BaseInputDialog(context!!)
+            .title(R.string.temperature)
+            .text(text)
+            .inputType(InputType.TYPE_CLASS_PHONE)
+            .validator { it.replace(',', '.').toDoubleOrNull() != null }
+            .onFinished {
+                onChange(value.apply {
+                    heating.global = it.replace(',', '.').toDouble()
+                })
+            }
+            .show()
     }
 }
