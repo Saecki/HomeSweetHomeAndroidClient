@@ -1,22 +1,25 @@
 package bedbrains.homesweethomeandroidclient.ui.dialog
 
 import android.content.Context
-import android.widget.LinearLayout
+import android.view.LayoutInflater
 import androidx.core.view.children
+import androidx.core.view.forEachIndexed
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListUpdateCallback
+import bedbrains.homesweethomeandroidclient.databinding.SuggestionInputBinding
+import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 
 open class SuggestionInputDialog(context: Context) : BaseInputDialog(context) {
     var suggestions: List<String> = listOf()
-    val suggestionGroup = ChipGroup(context).apply {
-        layoutParams = LinearLayout.LayoutParams(
-            ChipGroup.LayoutParams.MATCH_PARENT,
-            ChipGroup.LayoutParams.WRAP_CONTENT
-        )
+
+    protected val suggestionBinding = SuggestionInputBinding.inflate(LayoutInflater.from(context))
+
+    init {
+        binding.container.addView(suggestionBinding.root)
     }
 
-    override fun onCreate(dialog: androidx.appcompat.app.AlertDialog) {
-        binding.container.addView(suggestionGroup)
+    override fun onCreate() {
         displaySuggestions(suggestions)
     }
 
@@ -26,27 +29,43 @@ open class SuggestionInputDialog(context: Context) : BaseInputDialog(context) {
         return super.onInput(input)
     }
 
-    fun displaySuggestions(suggestions: List<String>) {
-        val validSuggestions = suggestions
-            .filter { it.startsWith(binding.input.text) }
+    protected open fun displaySuggestions(suggestions: List<String>) {
+        val old = suggestionBinding.suggestions.children.map { (it as Chip).text.toString() }.toList()
+        val new = suggestions
+            .filter { it.startsWith(binding.input.text, true) }
             .filter(validator)
 
-        val chips = suggestionGroup.children.map { it as Chip }.toList()
-        val removed = chips.filter { chip -> validSuggestions.none { s -> chip.text == s } }
-        val added = validSuggestions.filter { s -> chips.none { chip -> chip.text == s } }
-
-        removed.forEach {
-            suggestionGroup.removeView(it)
+        val diff = object : ListDiffUtilCallback<String>(old, new) {
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return old[oldItemPosition] == new[newItemPosition]
+            }
         }
 
-        added.forEach { tag ->
-            val chip = Chip(context)
+        val update = object : ListUpdateCallback {
+            override fun onChanged(position: Int, count: Int, payload: Any?) {}
 
-            chip.text = tag
-            chip.setOnClickListener {
-                binding.input.setText((it as Chip).text.toString())
+            override fun onMoved(fromPosition: Int, toPosition: Int) {}
+
+            override fun onInserted(position: Int, count: Int) {
+                for (i in 0 until count) {
+                    val chip = Chip(context)
+
+                    chip.setOnClickListener {
+                        binding.input.setText((it as Chip).text.toString())
+                    }
+                    suggestionBinding.suggestions.addView(chip)
+                }
             }
-            suggestionGroup.addView(chip)
+
+            override fun onRemoved(position: Int, count: Int) {
+                for (i in 0 until count) suggestionBinding.suggestions.removeViewAt(position)
+            }
+        }
+
+        DiffUtil.calculateDiff(diff).dispatchUpdatesTo(update)
+
+        suggestionBinding.suggestions.forEachIndexed { i, v ->
+            (v as Chip).text = new[i]
         }
     }
 }

@@ -18,6 +18,8 @@ import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.FragmentHeatingBinding
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.homesweethomeandroidclient.ui.dialog.*
+import bedbrains.platform.DataProvider
+import bedbrains.shared.datatypes.rules.Rule
 import com.google.android.material.chip.Chip
 
 class HeatingFragment : Fragment() {
@@ -74,15 +76,7 @@ class HeatingFragment : Fragment() {
         }
 
         binding.rule.setOnClickListener {
-            if (heatingViewModel.heating.value!!.rule != null) {
-                val bundle = Bundle()
-
-                bundle.putString(Res.resources.getString(R.string.uid), heatingViewModel.heating.value!!.rule?.uid)
-                findNavController().navigate(
-                    R.id.action_nav_heating_to_nav_weekly_rule,
-                    bundle
-                )
-            }
+            showSelectRuleDialog(heatingViewModel.heating.value!!.rule)
         }
 
         return binding.root
@@ -137,7 +131,10 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showAddTagDialog() {
-        val suggestions = DataRepository.devices.value!!.flatMap { it.tags }
+        val suggestions = DataRepository.devices.value!!
+            .flatMap { it.tags }
+            .distinct()
+            .sorted()
 
         SuggestionInputDialog(context!!)
             .title(R.string.action_tag_new)
@@ -165,9 +162,15 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showRoomDialog(text: String) {
-        BaseInputDialog(context!!)
+        val suggestions = DataRepository.devices.value!!
+            .map { it.room }
+            .distinct()
+            .sorted()
+
+        SuggestionInputDialog(context!!)
             .title(R.string.room)
             .text(text)
+            .suggestions(suggestions)
             .onFinished {
                 DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
                     room = it
@@ -189,4 +192,21 @@ class HeatingFragment : Fragment() {
             }
             .show()
     }
+
+    private fun showSelectRuleDialog(rule: Rule?) {
+        val dialog = SelectionInputDialog<String>(context!!)
+            .title(R.string.rule)
+            .options(DataProvider.rules.map { Pair(it.name, it.uid) })
+            .onFinishedSelection { _, uid ->
+                DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
+                    ruleUID = uid
+                })
+            }
+
+        if (rule != null)
+            dialog.selection(rule.name, rule.uid)
+
+        dialog.show()
+    }
+
 }
