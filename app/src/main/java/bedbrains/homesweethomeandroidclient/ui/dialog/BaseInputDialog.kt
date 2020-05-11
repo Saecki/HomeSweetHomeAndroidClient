@@ -1,6 +1,7 @@
 package bedbrains.homesweethomeandroidclient.ui.dialog
 
 import android.content.Context
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
@@ -12,21 +13,25 @@ import bedbrains.homesweethomeandroidclient.databinding.InputBinding
 
 open class BaseInputDialog(protected val context: Context) {
 
+    var title = ""
+    var inputType = InputType.TYPE_CLASS_TEXT
     var initialText = ""
     var validator: (String) -> Boolean = { true }
     var onFinished: (String) -> Unit = {}
     var selectedOption: String? = null
 
-    val binding: InputBinding = InputBinding.inflate(LayoutInflater.from(context))
-    val dialogBuilder = AlertDialog.Builder(context)
+    protected val binding: InputBinding = InputBinding.inflate(LayoutInflater.from(context))
+    protected val dialogBuilder = AlertDialog.Builder(context)
         .setView(binding.root)
         .setPositiveButton(android.R.string.ok) { _, _ ->
             if (selectedOption != null) onFinished(selectedOption!!)
         }
-    lateinit var dialog: AlertDialog
+
+    protected lateinit var dialog: AlertDialog
 
     fun create(): AlertDialog {
         binding.input.setText(initialText)
+        binding.input.inputType = inputType
         binding.input.setSelection(initialText.length)
         binding.input.addTextChangedListener {
             val input = it.toString()
@@ -49,29 +54,29 @@ open class BaseInputDialog(protected val context: Context) {
                     .showSoftInput(binding.input, InputMethodManager.SHOW_IMPLICIT)
             }
         }
-        onCreate(dialog)
+        onCreate()
 
         return dialog
-    }
-
-    open fun onCreate(dialog: AlertDialog) {}
-
-    open fun onInput(input: String): Boolean {
-        return input.isNotBlank() && validator(input) && input != initialText
     }
 
     fun show() {
         create().show()
     }
+
+    protected open fun onCreate() {}
+
+    protected open fun onInput(input: String): Boolean {
+        return input.isNotBlank() && validator(input) && input != initialText
+    }
 }
 
 fun <T : BaseInputDialog> T.title(title: Int): T {
-    this.dialogBuilder.setTitle(title)
+    this.title = Res.resources.getString(title)
     return this
 }
 
 fun <T : BaseInputDialog> T.title(title: String): T {
-    dialogBuilder.setTitle(title)
+    this.title = title
     return this
 }
 
@@ -81,7 +86,7 @@ fun <T : BaseInputDialog> T.text(text: CharSequence): T {
 }
 
 fun <T : BaseInputDialog> T.inputType(inputType: Int): T {
-    this.binding.input.inputType = inputType
+    this.inputType = inputType
     return this
 }
 

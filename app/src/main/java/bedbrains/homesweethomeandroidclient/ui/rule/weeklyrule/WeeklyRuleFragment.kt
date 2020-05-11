@@ -56,7 +56,7 @@ class WeeklyRuleFragment : Fragment() {
     private lateinit var daySpace: View
     private lateinit var days: List<TextView>
     private lateinit var locale: Locale
-    private var weekDayStrings = List(7) { "" }
+    private lateinit var weekDayStrings: List<String>
 
     private lateinit var constraintSet: ConstraintSet
     private lateinit var timeLayout: ConstraintLayout
@@ -83,7 +83,7 @@ class WeeklyRuleFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         locale = Locale.getDefault()
-        weekDayStrings = weekDayStrings.mapIndexed { index, _ -> Time.formatWeekdayNarrow(index, locale) }
+        weekDayStrings = (0..6).mapIndexed { index, _ -> Time.formatWeekdayNarrow(index, locale) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -279,7 +279,13 @@ class WeeklyRuleFragment : Fragment() {
             if (i > t.start.localizedDay) {
                 constraintSet.connect(card.id, ConstraintSet.TOP, topTimeSpanAnchor.id, ConstraintSet.TOP)
             } else {
-                constraintSet.connect(card.id, ConstraintSet.TOP, timeLine.id, ConstraintSet.TOP, (hourHeight * t.start.inDailyHours).toInt())
+                constraintSet.connect(
+                    card.id,
+                    ConstraintSet.TOP,
+                    timeLine.id,
+                    ConstraintSet.TOP,
+                    (hourHeight * t.start.inDailyHours).toInt()
+                )
             }
 
             if (i == endDay && t.end.inDailyMilliseconds == 0) {
@@ -287,7 +293,13 @@ class WeeklyRuleFragment : Fragment() {
             } else if (i < endDay) {
                 constraintSet.connect(card.id, ConstraintSet.BOTTOM, bottomTimeSpanAnchor.id, ConstraintSet.BOTTOM)
             } else {
-                constraintSet.connect(card.id, ConstraintSet.BOTTOM, timeLine.id, ConstraintSet.BOTTOM, (hourHeight * (24 - t.end.inDailyHours)).toInt())
+                constraintSet.connect(
+                    card.id,
+                    ConstraintSet.BOTTOM,
+                    timeLine.id,
+                    ConstraintSet.BOTTOM,
+                    (hourHeight * (24 - t.end.inDailyHours)).toInt()
+                )
             }
         }
 
@@ -308,8 +320,20 @@ class WeeklyRuleFragment : Fragment() {
             showTimeSpanDialog(timeSpan.deepCopy())
         }
 
-        constraintSet.connect(card.id, ConstraintSet.LEFT, verticalGuideLines[day].id, ConstraintSet.RIGHT, timeSpanMargin)
-        constraintSet.connect(card.id, ConstraintSet.RIGHT, verticalGuideLines[day + 1].id, ConstraintSet.LEFT, timeSpanBigMargin)
+        constraintSet.connect(
+            card.id,
+            ConstraintSet.LEFT,
+            verticalGuideLines[day].id,
+            ConstraintSet.RIGHT,
+            timeSpanMargin
+        )
+        constraintSet.connect(
+            card.id,
+            ConstraintSet.RIGHT,
+            verticalGuideLines[day + 1].id,
+            ConstraintSet.LEFT,
+            timeSpanBigMargin
+        )
 
         return card
     }
@@ -329,15 +353,31 @@ class WeeklyRuleFragment : Fragment() {
         constraintSet.clear(timeIndicatorHead.id)
         constraintSet.clear(timeIndicatorLine.id)
 
-        constraintSet.connect(timeIndicatorHead.id, ConstraintSet.RIGHT, verticalGuideLines[time.localizedDay].id, ConstraintSet.RIGHT)
+        constraintSet.connect(
+            timeIndicatorHead.id,
+            ConstraintSet.RIGHT,
+            verticalGuideLines[time.localizedDay].id,
+            ConstraintSet.RIGHT
+        )
         constraintSet.connect(timeIndicatorHead.id, ConstraintSet.TOP, timeIndicatorLine.id, ConstraintSet.TOP)
         constraintSet.connect(timeIndicatorHead.id, ConstraintSet.BOTTOM, timeIndicatorLine.id, ConstraintSet.BOTTOM)
         constraintSet.constrainWidth(timeIndicatorHead.id, indicatorHeadDiameter)
         constraintSet.constrainHeight(timeIndicatorHead.id, indicatorHeadDiameter)
 
-        constraintSet.connect(timeIndicatorLine.id, ConstraintSet.RIGHT, verticalGuideLines[time.localizedDay + 1].id, ConstraintSet.LEFT)
+        constraintSet.connect(
+            timeIndicatorLine.id,
+            ConstraintSet.RIGHT,
+            verticalGuideLines[time.localizedDay + 1].id,
+            ConstraintSet.LEFT
+        )
         constraintSet.connect(timeIndicatorLine.id, ConstraintSet.LEFT, timeIndicatorHead.id, ConstraintSet.RIGHT)
-        constraintSet.connect(timeIndicatorLine.id, ConstraintSet.TOP, timeLine.id, ConstraintSet.TOP, (hourHeight * time.inDailyHours).toInt())
+        constraintSet.connect(
+            timeIndicatorLine.id,
+            ConstraintSet.TOP,
+            timeLine.id,
+            ConstraintSet.TOP,
+            (hourHeight * time.inDailyHours).toInt()
+        )
         constraintSet.constrainHeight(timeIndicatorLine.id, indicatorLineWidth)
 
         constraintSet.applyTo(timeLayout)
