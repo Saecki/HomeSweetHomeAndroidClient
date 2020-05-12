@@ -15,13 +15,16 @@ interface APIService {
     fun device(@Path("uid") uid: String): Call<Device>
 
     @PUT("/v1/devices/device")
-    fun postDevice(@Body device: Device): Call<Unit>
+    fun putDevice(@Body device: Device): Call<Unit>
 
     @GET("/v1/rules")
     fun rules(): Call<List<Rule>>
 
     @GET("/v1/rules/{uid}")
     fun rule(@Path("uid") uid: String): Call<Rule>
+
+    @PUT("/v1/rules/rule")
+    fun putRule(@Body rule: Rule): Call<Unit>
 
     @POST("/v1/rules/rule")
     fun postRule(@Body rule: Rule): Call<Unit>
@@ -34,6 +37,9 @@ interface APIService {
 
     @GET("/v1/values/{uid}")
     fun value(@Path("uid") uid: String): Call<RuleValue>
+
+    @PUT("/v1/values/value")
+    fun putValue(@Body value: RuleValue): Call<Unit>
 
     @POST("/v1/values/value")
     fun postValue(@Body value: RuleValue): Call<Unit>

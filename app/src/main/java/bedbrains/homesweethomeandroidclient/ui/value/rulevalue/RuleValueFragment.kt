@@ -15,6 +15,10 @@ import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentRuleValueBinding
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
+import bedbrains.homesweethomeandroidclient.ui.dialog.BaseInputDialog
+import bedbrains.homesweethomeandroidclient.ui.dialog.onFinished
+import bedbrains.homesweethomeandroidclient.ui.dialog.text
+import bedbrains.homesweethomeandroidclient.ui.dialog.title
 
 class RuleValueFragment() : Fragment() {
     private val ruleValueViewModel: RuleValueViewModel by viewModels()
@@ -54,7 +58,7 @@ class RuleValueFragment() : Fragment() {
                 MainActivity.toolbar.title = it.name
 
                 ruleValueView.bind(it) { value ->
-                    DataRepository.upsertValue(value)
+                    DataRepository.updateValue(value)
                 }
             }
         })
@@ -73,10 +77,22 @@ class RuleValueFragment() : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_refresh -> swipeRefreshLayout.refresh(viewLifecycleOwner, context)
-            R.id.action_rename -> Unit//TODO
+            R.id.action_rename -> showRenameDialog(ruleValueViewModel.value.value!!.name)
             else -> return super.onOptionsItemSelected(item)
         }
 
         return false
+    }
+
+    private fun showRenameDialog(text: String) {
+        BaseInputDialog(context!!)
+            .title(R.string.action_rename)
+            .text(text)
+            .onFinished {
+                DataRepository.updateValue(ruleValueViewModel.value.value!!.apply {
+                    name = it
+                })
+            }
+            .show()
     }
 }
