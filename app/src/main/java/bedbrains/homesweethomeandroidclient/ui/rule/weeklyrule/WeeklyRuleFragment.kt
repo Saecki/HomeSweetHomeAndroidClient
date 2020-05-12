@@ -507,7 +507,7 @@ class WeeklyRuleFragment : Fragment() {
                     return
                 }
 
-                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                DataRepository.updateRule(weeklyRuleViewModel.rule.value!!.apply {
                     timeSpans.upsert(event.timeSpan) { event.timeSpan.uid == it.uid }
                 })
 
@@ -516,7 +516,7 @@ class WeeklyRuleFragment : Fragment() {
                 hideTimeSpanDialog()
             }
             WeeklyTimeSpanEditEvent.Action.DELETED -> {
-                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                DataRepository.updateRule(weeklyRuleViewModel.rule.value!!.apply {
                     timeSpans.removeIf { event.timeSpan.uid == it.uid }
                 })
 
@@ -533,7 +533,7 @@ class WeeklyRuleFragment : Fragment() {
                 displayTimeSpans(weeklyRuleViewModel.rule.value!!.timeSpans)
             }
             WeeklyTimeSpanEditEvent.Action.APPLIED_TO_ALL -> {
-                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                DataRepository.updateRule(weeklyRuleViewModel.rule.value!!.apply {
                     timeSpans.applyToAll(event.timeSpan.value)
                 })
             }
@@ -557,7 +557,7 @@ class WeeklyRuleFragment : Fragment() {
             .title(R.string.action_rename)
             .text(text)
             .onFinished {
-                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.apply {
+                DataRepository.updateRule(weeklyRuleViewModel.rule.value!!.apply {
                     name = it
                 })
             }
@@ -568,7 +568,7 @@ class WeeklyRuleFragment : Fragment() {
         AlertDialog.Builder(context!!)
             .setTitle(R.string.confirmation_weekly_time_span_clear_all)
             .setPositiveButton(android.R.string.ok) { _, _ ->
-                DataRepository.upsertRule(weeklyRuleViewModel.rule.value!!.also {
+                DataRepository.updateRule(weeklyRuleViewModel.rule.value!!.also {
                     it.timeSpans.clear()
                 })
             }

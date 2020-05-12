@@ -29,17 +29,24 @@ object DataRepository {
         return resultOf(fetchDevices(), fetchRules(), fetchValues())
     }
 
+
     fun fetchDevices() = RespCallback<List<Device>>().enqueue(restClient?.devices()) {
         devices.value = it?.toMutableList() ?: mutableListOf()
     }
 
     fun updateDevice(device: Device): LiveData<Resp> {
         devices.value = devices.value.apply { this?.update(device) { it.uid == device.uid } }
-        return RespCallback<Unit>().enqueue(restClient?.postDevice(device))
+        return RespCallback<Unit>().enqueue(restClient?.putDevice(device))
     }
+
 
     fun fetchRules() = RespCallback<List<Rule>>().enqueue(restClient?.rules()) {
         rules.value = it?.toMutableList() ?: mutableListOf()
+    }
+
+    fun updateRule(rule: Rule): LiveData<Resp> {
+        rules.value = rules.value.apply { this?.update(rule) { it.uid == rule.uid } }
+        return RespCallback<Unit>().enqueue(restClient?.putRule(rule))
     }
 
     fun upsertRule(rule: Rule): LiveData<Resp> {
@@ -52,8 +59,14 @@ object DataRepository {
         return RespCallback<Unit>().enqueue(restClient?.deleteRule(rule.uid))
     }
 
+
     fun fetchValues() = RespCallback<List<RuleValue>>().enqueue(restClient?.values()) {
         values.value = it?.toMutableList() ?: mutableListOf()
+    }
+
+    fun updateValue(value: RuleValue): LiveData<Resp> {
+        values.value = values.value.apply { this?.update(value) { it.uid == value.uid } }
+        return RespCallback<Unit>().enqueue(restClient?.putValue(value))
     }
 
     fun upsertValue(value: RuleValue): LiveData<Resp> {
@@ -65,6 +78,7 @@ object DataRepository {
         values.value = values.value.apply { this?.remove(value) }
         return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid))
     }
+
 
     fun startAutomaticUpdate(delay: Long) {
         handler.removeCallbacks(updateRunnable)
