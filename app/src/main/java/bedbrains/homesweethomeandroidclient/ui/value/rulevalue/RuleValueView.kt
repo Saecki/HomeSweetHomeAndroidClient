@@ -29,7 +29,7 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
     }
 
     private fun showHeatingDialog(text: String) {
-        BaseInputDialog(context!!)
+        InputDialog(context!!)
             .title(R.string.temperature)
             .text(text)
             .inputType(InputType.TYPE_CLASS_PHONE)

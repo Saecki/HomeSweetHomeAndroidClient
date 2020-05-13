@@ -1,9 +1,11 @@
 package bedbrains.homesweethomeandroidclient.ui.device.light
 
+import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
 import bedbrains.shared.datatypes.devices.Light
 
@@ -30,7 +32,13 @@ class LightViewHolder(val viewBinding: DeviceLightBinding) :
         }
 
         viewBinding.root.setOnClickListener {
-            viewBinding.root.findNavController().navigate(R.id.action_nav_home_to_nav_light)
+            val bundle = Bundle()
+
+            bundle.putString(Res.resources.getString(R.string.uid), light.uid)
+            viewBinding.root.findNavController().navigate(
+                R.id.action_nav_home_to_nav_light,
+                bundle
+            )
         }
     }
 }

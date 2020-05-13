@@ -15,7 +15,7 @@ import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.FragmentRuleValueBinding
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
-import bedbrains.homesweethomeandroidclient.ui.dialog.BaseInputDialog
+import bedbrains.homesweethomeandroidclient.ui.dialog.InputDialog
 import bedbrains.homesweethomeandroidclient.ui.dialog.onFinished
 import bedbrains.homesweethomeandroidclient.ui.dialog.text
 import bedbrains.homesweethomeandroidclient.ui.dialog.title
@@ -85,7 +85,7 @@ class RuleValueFragment() : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        BaseInputDialog(context!!)
+        InputDialog(context!!)
             .title(R.string.action_rename)
             .text(text)
             .onFinished {

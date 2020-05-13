@@ -31,6 +31,7 @@
     <string name="action_rename">Rename</string>
     <string name="action_done">Done</string>
     <string name="action_new">New</string>
+    <string name="action_search">Search</string>
 
     <!-- Tag !-->
     <string name="action_tag_new">New tag</string>

@@ -26,7 +26,7 @@ import bedbrains.homesweethomeandroidclient.databinding.WeeklyRuleToolbarBinding
 import bedbrains.homesweethomeandroidclient.ui.animation.CollapseAnimation
 import bedbrains.homesweethomeandroidclient.ui.animation.ExpandAnimation
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
-import bedbrains.homesweethomeandroidclient.ui.dialog.BaseInputDialog
+import bedbrains.homesweethomeandroidclient.ui.dialog.InputDialog
 import bedbrains.homesweethomeandroidclient.ui.dialog.onFinished
 import bedbrains.homesweethomeandroidclient.ui.dialog.text
 import bedbrains.homesweethomeandroidclient.ui.dialog.title
@@ -553,7 +553,7 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        BaseInputDialog(context!!)
+        InputDialog(context!!)
             .title(R.string.action_rename)
             .text(text)
             .onFinished {
