@@ -10,7 +10,7 @@ import bedbrains.homesweethomeandroidclient.databinding.SuggestionInputBinding
 import bedbrains.homesweethomeandroidclient.ui.adapter.ListDiffUtilCallback
 import com.google.android.material.chip.Chip
 
-open class SuggestionInputDialog(context: Context) : BaseInputDialog(context) {
+open class SuggestionInputDialog(context: Context) : InputDialog(context) {
     var suggestions: List<String> = listOf()
 
     protected val suggestionBinding = SuggestionInputBinding.inflate(LayoutInflater.from(context))

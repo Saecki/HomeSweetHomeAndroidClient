@@ -3,4 +3,6 @@
 
     <integer name="keyboard_show_delay">50</integer>
 
+    <integer name="selectable_background_alpha">64</integer>
+
 </resources>

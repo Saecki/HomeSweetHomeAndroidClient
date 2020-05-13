@@ -55,7 +55,7 @@ class HeatingFragment : Fragment() {
                 binding.room.text = it.room
                 binding.actualTemp.text = it.actualTemp.formatGlobal(true)
                 binding.targetTemp.text = it.targetTemp.formatGlobal(true)
-                binding.rule.text = it.rule?.name
+                binding.rule.text = it.rule?.name ?: Res.resources.getString(R.string.action_select_a_rule)
             }
         })
 
@@ -119,7 +119,7 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        BaseInputDialog(context!!)
+        InputDialog(context!!)
             .title(R.string.action_rename)
             .text(text)
             .onFinished {
@@ -180,7 +180,7 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showTargetTempDialog(text: String) {
-        BaseInputDialog(context!!)
+        InputDialog(context!!)
             .title(R.string.temperature)
             .text(text)
             .inputType(InputType.TYPE_CLASS_PHONE)
@@ -194,19 +194,17 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showSelectRuleDialog(rule: Rule?) {
-        val dialog = SelectionInputDialog<String>(context!!)
+        val options = DataProvider.rules.map { Pair(it.name, it.uid) }
+
+        SelectionInputDialog<String>(context!!)
             .title(R.string.rule)
             .options(DataProvider.rules.map { Pair(it.name, it.uid) })
+            .selection(options.indexOfFirst { it.second == rule?.uid })
             .onFinishedSelection { _, uid ->
                 DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
                     ruleUID = uid
                 })
             }
-
-        if (rule != null)
-            dialog.selection(rule.name, rule.uid)
-
-        dialog.show()
+            .show()
     }
-
 }

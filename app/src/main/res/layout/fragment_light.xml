@@ -1,7 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/item_margin">
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_margin"
+            android:animateLayoutChanges="true"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/add_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_new"
+                app:chipIcon="@drawable/ic_add_black_24dp" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <ImageView
+            android:id="@+id/room_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/ic_home_black_24dp"
+            android:tint="?colorOnBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tags" />
+
+        <TextView
+            android:id="@+id/room_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/room"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorLabel"
+            app:layout_constraintStart_toEndOf="@id/room_icon"
+            app:layout_constraintTop_toBottomOf="@id/tags" />
+
+        <TextView
+            android:id="@+id/room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_padding"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBaseline_toBaselineOf="@id/room_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/room_barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="room_icon,room_label,room" />
+
+        <ImageView
+            android:id="@+id/light_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/ic_light_bulb_outline_black_24dp"
+            android:tint="?colorOnBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_barrier" />
+
+        <TextView
+            android:id="@+id/light_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/actual_temperature"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorLabel"
+            app:layout_constraintStart_toEndOf="@id/light_icon"
+            app:layout_constraintTop_toBottomOf="@id/room_barrier" />
+
+        <Switch
+            android:id="@+id/light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@id/light_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/target_temp_barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="light_icon, light_label, light" />
+
+        <ImageView
+            android:id="@+id/rule_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/icon_padding"
+            android:src="@drawable/ic_schedule_black_24dp"
+            android:tint="?colorOnBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/target_temp_barrier" />
+
+        <TextView
+            android:id="@+id/rule_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/rule"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorLabel"
+            app:layout_constraintStart_toEndOf="@id/rule_icon"
+            app:layout_constraintTop_toBottomOf="@id/target_temp_barrier" />
+
+        <TextView
+            android:id="@+id/rule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/control_padding"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBaseline_toBaselineOf="@id/rule_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/rule_barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="rule_icon,rule_label,rule" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
