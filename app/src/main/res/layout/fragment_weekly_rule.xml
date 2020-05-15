@@ -1,504 +1,488 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/time_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/weekly_rule_time_layout_height"
+            android:maxHeight="@dimen/weekly_rule_time_layout_height"
+            android:minHeight="@dimen/weekly_rule_time_layout_height">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/time_layout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/weekly_rule_time_layout_height"
-                android:maxHeight="@dimen/weekly_rule_time_layout_height"
-                android:minHeight="@dimen/weekly_rule_time_layout_height">
-
-                <LinearLayout
-                    android:id="@+id/time_line"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/weekly_rule_quarter_hour_height"
-                    android:layout_marginBottom="@dimen/weekly_rule_quarter_hour_height"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/weekly_rule_half_hour_height" />
-
-                    <include
-                        android:id="@+id/time_1"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_2"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_3"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_4"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_5"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_6"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_7"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_8"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_9"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_10"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_11"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_12"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_13"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_14"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_15"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_16"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_17"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_18"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_19"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_20"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_21"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_22"
-                        layout="@layout/weekly_rule_time" />
-
-                    <include
-                        android:id="@+id/time_23"
-                        layout="@layout/weekly_rule_time" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/weekly_rule_half_hour_height" />
-
-                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/time_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/weekly_rule_quarter_hour_height"
+                android:layout_marginBottom="@dimen/weekly_rule_quarter_hour_height"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <Space
-                    android:id="@+id/time_line_space"
-                    android:layout_width="@dimen/weekly_rule_grid_margin"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="@id/time_line"
-                    app:layout_constraintStart_toEndOf="@+id/time_line"
-                    app:layout_constraintTop_toTopOf="@id/time_line" />
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/weekly_rule_half_hour_height" />
 
-                <View
-                    android:id="@+id/vertical_line_0"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/vertical_line_1"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toEndOf="@id/time_line_space"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_1"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/vertical_line_1"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/vertical_line_2"
-                    app:layout_constraintStart_toEndOf="@id/vertical_line_0"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_2"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/vertical_line_2"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/vertical_line_3"
-                    app:layout_constraintStart_toEndOf="@id/vertical_line_1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_3"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/vertical_line_3"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/vertical_line_4"
-                    app:layout_constraintStart_toEndOf="@id/vertical_line_2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_4"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/vertical_line_4"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/vertical_line_5"
-                    app:layout_constraintStart_toEndOf="@id/vertical_line_3"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_5"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/vertical_line_5"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/vertical_line_6"
-                    app:layout_constraintStart_toEndOf="@id/vertical_line_4"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_6"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/vertical_line_6"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/vertical_line_7"
-                    app:layout_constraintStart_toEndOf="@id/vertical_line_5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_7"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/vertical_line_7"
-                    android:layout_width="@dimen/separator_line_width"
-                    android:layout_height="0dp"
-                    android:background="#0000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/vertical_line_6"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/time_8"
+                    layout="@layout/weekly_rule_time" />
 
-                <!-- horizontal lines !-->
+                <include
+                    android:id="@+id/time_9"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toTopOf="@id/time_line"
-                    app:layout_constraintVertical_chainStyle="spread" />
+                <include
+                    android:id="@+id/time_10"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_1" />
+                <include
+                    android:id="@+id/time_11"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_4"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_2" />
+                <include
+                    android:id="@+id/time_12"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_3" />
+                <include
+                    android:id="@+id/time_13"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_4" />
+                <include
+                    android:id="@+id/time_14"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_6"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_7"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_5" />
+                <include
+                    android:id="@+id/time_15"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_7"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_8"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_6" />
+                <include
+                    android:id="@+id/time_16"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_8"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_9"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_7" />
+                <include
+                    android:id="@+id/time_17"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_9"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_10"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_8" />
+                <include
+                    android:id="@+id/time_18"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_10"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_11"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_9" />
+                <include
+                    android:id="@+id/time_19"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_11"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_12"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_10" />
+                <include
+                    android:id="@+id/time_20"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_12"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_13"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_11" />
+                <include
+                    android:id="@+id/time_21"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_13"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_14"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_12" />
+                <include
+                    android:id="@+id/time_22"
+                    layout="@layout/weekly_rule_time" />
 
-                <View
-                    android:id="@+id/horizontal_line_14"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_15"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_13" />
-
-                <View
-                    android:id="@+id/horizontal_line_15"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_16"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_14" />
-
-                <View
-                    android:id="@+id/horizontal_line_16"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_17"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_15" />
-
-                <View
-                    android:id="@+id/horizontal_line_17"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_18"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_16" />
-
-                <View
-                    android:id="@+id/horizontal_line_18"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_19"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_17" />
-
-                <View
-                    android:id="@+id/horizontal_line_19"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_20"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_18" />
-
-                <View
-                    android:id="@+id/horizontal_line_20"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_21"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_19" />
-
-                <View
-                    android:id="@+id/horizontal_line_21"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_22"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_20" />
-
-                <View
-                    android:id="@+id/horizontal_line_22"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toTopOf="@id/horizontal_line_23"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_21" />
-
-                <View
-                    android:id="@+id/horizontal_line_23"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/separator_line_width"
-                    android:background="?attr/colorGridLine"
-                    app:layout_constraintBottom_toBottomOf="@id/time_line"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/time_line"
-                    app:layout_constraintTop_toBottomOf="@id/horizontal_line_22" />
+                <include
+                    android:id="@+id/time_23"
+                    layout="@layout/weekly_rule_time" />
 
                 <Space
-                    android:id="@+id/top_time_span_anchor"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/weekly_rule_hour_height"
-                    app:layout_constraintBottom_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/weekly_rule_half_hour_height" />
 
-                <Space
-                    android:id="@+id/bottom_time_span_anchor"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/weekly_rule_hour_height"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+            </LinearLayout>
 
-                <View
-                    android:id="@+id/time_indicator_head"
-                    android:layout_width="@dimen/time_indicator_head_diameter"
-                    android:layout_height="@dimen/time_indicator_head_diameter"
-                    android:background="@drawable/time_indicator_head"
-                    android:elevation="@dimen/time_indicator_elevation"
-                    tools:ignore="MissingConstraints" />
+            <Space
+                android:id="@+id/time_line_space"
+                android:layout_width="@dimen/weekly_rule_grid_margin"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="@id/time_line"
+                app:layout_constraintStart_toEndOf="@+id/time_line"
+                app:layout_constraintTop_toTopOf="@id/time_line" />
 
-                <View
-                    android:id="@+id/time_indicator_line"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/time_indicator_line_width"
-                    android:background="@drawable/time_indicator_line"
-                    android:elevation="@dimen/time_indicator_elevation"
-                    tools:ignore="MissingConstraints" />
+            <View
+                android:id="@+id/vertical_line_0"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/vertical_line_1"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@id/time_line_space"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:id="@+id/vertical_line_1"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vertical_line_2"
+                app:layout_constraintStart_toEndOf="@id/vertical_line_0"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.core.widget.NestedScrollView>
+            <View
+                android:id="@+id/vertical_line_2"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vertical_line_3"
+                app:layout_constraintStart_toEndOf="@id/vertical_line_1"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <View
+                android:id="@+id/vertical_line_3"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vertical_line_4"
+                app:layout_constraintStart_toEndOf="@id/vertical_line_2"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="@string/action_new"
-        app:icon="@drawable/ic_add_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <View
+                android:id="@+id/vertical_line_4"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vertical_line_5"
+                app:layout_constraintStart_toEndOf="@id/vertical_line_3"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:id="@+id/vertical_line_5"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vertical_line_6"
+                app:layout_constraintStart_toEndOf="@id/vertical_line_4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vertical_line_6"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vertical_line_7"
+                app:layout_constraintStart_toEndOf="@id/vertical_line_5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vertical_line_7"
+                android:layout_width="@dimen/separator_line_width"
+                android:layout_height="0dp"
+                android:background="#0000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/vertical_line_6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- horizontal lines !-->
+
+            <View
+                android:id="@+id/horizontal_line_1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toTopOf="@id/time_line"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <View
+                android:id="@+id/horizontal_line_2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_1" />
+
+            <View
+                android:id="@+id/horizontal_line_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_2" />
+
+            <View
+                android:id="@+id/horizontal_line_4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_3" />
+
+            <View
+                android:id="@+id/horizontal_line_5"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_4" />
+
+            <View
+                android:id="@+id/horizontal_line_6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_5" />
+
+            <View
+                android:id="@+id/horizontal_line_7"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_6" />
+
+            <View
+                android:id="@+id/horizontal_line_8"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_7" />
+
+            <View
+                android:id="@+id/horizontal_line_9"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_8" />
+
+            <View
+                android:id="@+id/horizontal_line_10"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_9" />
+
+            <View
+                android:id="@+id/horizontal_line_11"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_10" />
+
+            <View
+                android:id="@+id/horizontal_line_12"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_11" />
+
+            <View
+                android:id="@+id/horizontal_line_13"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_12" />
+
+            <View
+                android:id="@+id/horizontal_line_14"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_13" />
+
+            <View
+                android:id="@+id/horizontal_line_15"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_14" />
+
+            <View
+                android:id="@+id/horizontal_line_16"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_17"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_15" />
+
+            <View
+                android:id="@+id/horizontal_line_17"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_18"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_16" />
+
+            <View
+                android:id="@+id/horizontal_line_18"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_19"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_17" />
+
+            <View
+                android:id="@+id/horizontal_line_19"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_18" />
+
+            <View
+                android:id="@+id/horizontal_line_20"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_21"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_19" />
+
+            <View
+                android:id="@+id/horizontal_line_21"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_22"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_20" />
+
+            <View
+                android:id="@+id/horizontal_line_22"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toTopOf="@id/horizontal_line_23"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_21" />
+
+            <View
+                android:id="@+id/horizontal_line_23"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/separator_line_width"
+                android:background="?attr/colorGridLine"
+                app:layout_constraintBottom_toBottomOf="@id/time_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/time_line"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_22" />
+
+            <Space
+                android:id="@+id/top_time_span_anchor"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/weekly_rule_hour_height"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Space
+                android:id="@+id/bottom_time_span_anchor"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/weekly_rule_hour_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <View
+                android:id="@+id/time_indicator_head"
+                android:layout_width="@dimen/time_indicator_head_diameter"
+                android:layout_height="@dimen/time_indicator_head_diameter"
+                android:background="@drawable/time_indicator_head"
+                android:elevation="@dimen/time_indicator_elevation"
+                tools:ignore="MissingConstraints" />
+
+            <View
+                android:id="@+id/time_indicator_line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/time_indicator_line_width"
+                android:background="@drawable/time_indicator_line"
+                android:elevation="@dimen/time_indicator_elevation"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

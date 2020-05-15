@@ -18,14 +18,19 @@ open class SelectionInputDialog<T>(context: Context) : InputDialog(context) {
     var selectedValue: T? = null
     var selectedIndex: Int = -1
 
-    protected var optionsBinding = SelectionInputBinding.inflate(LayoutInflater.from(context), binding.container, true)
+    protected var optionsBinding =
+        SelectionInputBinding.inflate(LayoutInflater.from(context), binding.container, true)
     protected var displayedOptions: List<Pair<String, T>> = listOf()
 
     private val optionsAdapter = object : RecyclerView.Adapter<SelectableViewHolder<T>>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectableViewHolder<T> {
             return SelectableViewHolder(
                 context,
-                SelectableBinding.inflate(LayoutInflater.from(context), optionsBinding.options, false)
+                SelectableBinding.inflate(
+                    LayoutInflater.from(context),
+                    optionsBinding.options,
+                    false
+                )
             )
         }
 

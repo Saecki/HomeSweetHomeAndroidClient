@@ -7,7 +7,7 @@ import bedbrains.homesweethomeandroidclient.databinding.RuleValueViewBinding
 import bedbrains.homesweethomeandroidclient.ui.dialog.*
 import bedbrains.shared.datatypes.rules.RuleValue
 
-class RuleValueView(private val binding: RuleValueViewBinding, private val context: Context?) {
+class RuleValueView(private val binding: RuleValueViewBinding, private val context: Context) {
 
     private lateinit var value: RuleValue
     private lateinit var onChange: (RuleValue) -> Unit
@@ -29,7 +29,7 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
     }
 
     private fun showHeatingDialog(text: String) {
-        InputDialog(context!!)
+        InputDialog(context)
             .title(R.string.temperature)
             .text(text)
             .inputType(InputType.TYPE_CLASS_PHONE)

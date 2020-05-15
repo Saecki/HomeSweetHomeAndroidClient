@@ -2,6 +2,7 @@ package bedbrains.homesweethomeandroidclient.ui.value
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -9,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import bedbrains.homesweethomeandroidclient.DataRepository
+import bedbrains.homesweethomeandroidclient.MainActivity
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.FragmentValuesBinding
@@ -33,7 +35,7 @@ class ValuesFragment : Fragment() {
         swipeRefreshLayout = binding.swipeRefreshLayout
 
         val values = binding.values
-        val addButton = binding.addButton
+        val addButton = MainActivity.fab
         val linearLayoutManager = LinearLayoutManager(context)
         val ruleValueListAdapter = RuleValueListAdapter(valuesViewModel.values.value!!)
 
@@ -48,6 +50,9 @@ class ValuesFragment : Fragment() {
             swipeRefreshLayout.refresh(viewLifecycleOwner, context)
         }
 
+        MainActivity.showFabDelayed()
+        addButton.text = resources.getString(R.string.action_new)
+        addButton.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_add_black_24dp)
         addButton.setOnClickListener {
             val bundle = Bundle()
             val newValue = RuleValue.UNSPECIFIED.apply {

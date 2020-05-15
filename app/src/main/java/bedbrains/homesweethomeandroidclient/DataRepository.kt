@@ -98,9 +98,15 @@ object DataRepository {
     }
 
     fun buildRestClient(host: String? = null, port: String? = null): APIService? {
-        val h = host ?: Res.preferences.getString(Res.resources.getString(R.string.pref_network_host_key), "")
+        val h = host ?: Res.preferences.getString(
+            Res.resources.getString(R.string.pref_network_host_key),
+            ""
+        )
 
-        val p = port ?: Res.preferences.getString(Res.resources.getString(R.string.pref_network_port_key), "")
+        val p = port ?: Res.preferences.getString(
+            Res.resources.getString(R.string.pref_network_port_key),
+            ""
+        )
 
         return try {
             Controller.buildClient("http://${h?.trim()}:${p?.trim()}")

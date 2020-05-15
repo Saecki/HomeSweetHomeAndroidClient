@@ -11,7 +11,11 @@ import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.shared.datatypes.devices.Heating
 
-class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private val context: Context, private val parent: View) :
+class HeatingViewHolder(
+    private val viewBinding: DeviceHeatingBinding,
+    private val context: Context,
+    private val parent: View
+) :
     RecyclerView.ViewHolder(viewBinding.root) {
 
     private lateinit var heating: Heating
@@ -62,7 +66,11 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private fun decrementTemp() {
         var temp = heating.targetTemp.global
-        temp -= if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_step_key), true)) {
+        temp -= if (Res.preferences.getBoolean(
+                Res.resources.getString(R.string.pref_temperature_round_to_next_step_key),
+                true
+            )
+        ) {
             if (temp.rem(increment) == 0.0) {
                 increment
             } else {
@@ -77,7 +85,11 @@ class HeatingViewHolder(private val viewBinding: DeviceHeatingBinding, private v
 
     private fun incrementTemp() {
         var temp = heating.targetTemp.global
-        temp += if (Res.preferences.getBoolean(Res.resources.getString(R.string.pref_temperature_round_to_next_step_key), true)) {
+        temp += if (Res.preferences.getBoolean(
+                Res.resources.getString(R.string.pref_temperature_round_to_next_step_key),
+                true
+            )
+        ) {
             increment - temp.rem(increment)
         } else {
             increment
