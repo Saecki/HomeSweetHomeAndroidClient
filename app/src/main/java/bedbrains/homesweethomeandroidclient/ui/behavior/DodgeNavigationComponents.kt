@@ -18,7 +18,11 @@ class DodgeNavigationComponents : CoordinatorLayout.Behavior<View> {
 
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
 
-    override fun layoutDependsOn(parent: CoordinatorLayout, child: View, dependency: View): Boolean {
+    override fun layoutDependsOn(
+        parent: CoordinatorLayout,
+        child: View,
+        dependency: View
+    ): Boolean {
         val params = dependency.layoutParams as CoordinatorLayout.LayoutParams
 
         return when {
@@ -29,13 +33,18 @@ class DodgeNavigationComponents : CoordinatorLayout.Behavior<View> {
         }
     }
 
-    override fun onDependentViewChanged(parent: CoordinatorLayout, child: View, dependency: View): Boolean {
+    override fun onDependentViewChanged(
+        parent: CoordinatorLayout,
+        child: View,
+        dependency: View
+    ): Boolean {
         val params = dependency.layoutParams as CoordinatorLayout.LayoutParams
 
         when {
             dependency is AppBarLayout -> appBarHeight = dependency.height
             dependency is BottomNavigationView -> bottomNavHeight = dependency.height
-            params.behavior is BottomSheetBehavior -> bottomSheetHeight = parent.height - dependency.y.toInt()
+            params.behavior is BottomSheetBehavior -> bottomSheetHeight =
+                parent.height - dependency.y.toInt()
             else -> return false
         }
 

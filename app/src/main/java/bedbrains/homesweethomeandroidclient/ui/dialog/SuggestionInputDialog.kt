@@ -30,7 +30,8 @@ open class SuggestionInputDialog(context: Context) : InputDialog(context) {
     }
 
     protected open fun displaySuggestions(suggestions: List<String>) {
-        val old = suggestionBinding.suggestions.children.map { (it as Chip).text.toString() }.toList()
+        val old =
+            suggestionBinding.suggestions.children.map { (it as Chip).text.toString() }.toList()
         val new = suggestions
             .filter { it.startsWith(binding.input.text, true) }
             .filter(validator)

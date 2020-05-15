@@ -27,7 +27,11 @@ class LightFragment : Fragment() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var binding: FragmentLightBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
 
         if (lightViewModel.initialCreation) {
@@ -35,7 +39,8 @@ class LightFragment : Fragment() {
 
             if (uid == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 lightViewModel.observe(viewLifecycleOwner, uid)
             }
@@ -47,13 +52,15 @@ class LightFragment : Fragment() {
         lightViewModel.light.observe(viewLifecycleOwner, Observer {
             if (it == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 MainActivity.toolbar.title = it.name
                 displayTags(it.tags)
                 binding.room.text = it.room
                 binding.light.isChecked = it.isOn
-                binding.rule.text = it.rule?.name ?: Res.resources.getString(R.string.action_select_a_rule)
+                binding.rule.text =
+                    it.rule?.name ?: Res.resources.getString(R.string.action_select_a_rule)
             }
         })
 
@@ -120,7 +127,7 @@ class LightFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        InputDialog(context!!)
+        InputDialog(requireContext())
             .title(R.string.action_rename)
             .text(text)
             .onFinished {
@@ -137,7 +144,7 @@ class LightFragment : Fragment() {
             .distinct()
             .sorted()
 
-        SuggestionInputDialog(context!!)
+        SuggestionInputDialog(requireContext())
             .title(R.string.action_tag_new)
             .suggestions(suggestions)
             .validator { !lightViewModel.light.value!!.tags.contains(it) }
@@ -152,7 +159,7 @@ class LightFragment : Fragment() {
     private fun showRemoveTagDialog(tag: String) {
         val title = Res.resources.getString(R.string.confirmation_tag_delete).replace("$1", tag)
 
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setTitle(title)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 DataRepository.updateDevice(lightViewModel.light.value!!.apply {
@@ -168,7 +175,7 @@ class LightFragment : Fragment() {
             .distinct()
             .sorted()
 
-        SuggestionInputDialog(context!!)
+        SuggestionInputDialog(requireContext())
             .title(R.string.room)
             .text(text)
             .suggestions(suggestions)
@@ -183,7 +190,7 @@ class LightFragment : Fragment() {
     private fun showSelectRuleDialog(rule: Rule?) {
         val options = DataProvider.rules.map { Pair(it.name, it.uid) }
 
-        SelectionInputDialog<String>(context!!)
+        SelectionInputDialog<String>(requireContext())
             .title(R.string.rule)
             .options(DataProvider.rules.map { Pair(it.name, it.uid) })
             .selection(options.indexOfFirst { it.second == rule?.uid })

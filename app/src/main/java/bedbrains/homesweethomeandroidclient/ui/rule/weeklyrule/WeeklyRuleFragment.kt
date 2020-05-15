@@ -50,7 +50,6 @@ class WeeklyRuleFragment : Fragment() {
     }
     private var destinationId: Int? = null
 
-    private lateinit var root: ConstraintLayout
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var dayToolbar: LinearLayout
     private lateinit var daySpace: View
@@ -86,7 +85,11 @@ class WeeklyRuleFragment : Fragment() {
         weekDayStrings = (0..6).mapIndexed { index, _ -> Time.formatWeekdayNarrow(index, locale) }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
 
         if (weeklyRuleViewModel.initialCreation) {
@@ -94,7 +97,8 @@ class WeeklyRuleFragment : Fragment() {
 
             if (uid == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 weeklyRuleViewModel.observe(viewLifecycleOwner, uid)
             }
@@ -116,7 +120,6 @@ class WeeklyRuleFragment : Fragment() {
         daySpace = dayToolbarBinding.daySpace
 
         val binding = FragmentWeeklyRuleBinding.inflate(inflater)
-        root = binding.root as ConstraintLayout
         swipeRefreshLayout = binding.swipeRefreshLayout
         constraintSet = ConstraintSet()
         timeLayout = binding.timeLayout
@@ -161,13 +164,15 @@ class WeeklyRuleFragment : Fragment() {
         timeIndicatorHead = binding.timeIndicatorHead
         timeIndicatorLine = binding.timeIndicatorLine
 
-        addButton = binding.addButton
+        addButton = MainActivity.fab
 
         hourHeight = resources.getDimensionPixelSize(R.dimen.weekly_rule_hour_height)
         indicatorLineWidth = resources.getDimensionPixelSize(R.dimen.time_indicator_line_width)
-        indicatorHeadDiameter = resources.getDimensionPixelSize(R.dimen.time_indicator_head_diameter)
+        indicatorHeadDiameter =
+            resources.getDimensionPixelSize(R.dimen.time_indicator_head_diameter)
         timeSpanMargin = resources.getDimensionPixelSize(R.dimen.weekly_rule_time_span_margin)
-        timeSpanBigMargin = resources.getDimensionPixelSize(R.dimen.weekly_rule_time_span_big_margin)
+        timeSpanBigMargin =
+            resources.getDimensionPixelSize(R.dimen.weekly_rule_time_span_big_margin)
 
         //toolbar
         days.forEachIndexed { index, textView ->
@@ -184,6 +189,9 @@ class WeeklyRuleFragment : Fragment() {
         }
 
         //add button
+        MainActivity.showFabDelayed()
+        addButton.text = resources.getString(R.string.action_new)
+        addButton.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_add_black_24dp)
         addButton.setOnClickListener {
             val newTimeSpan = WeeklyTimeSpan.UNSPECIFIED
 
@@ -195,7 +203,8 @@ class WeeklyRuleFragment : Fragment() {
             showTimeSpanDialog(newTimeSpan)
         }
 
-        val wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        val wrapContentMeasureSpec =
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         timeLine.measure(wrapContentMeasureSpec, wrapContentMeasureSpec)
         daySpace.layoutParams.width = timeLine.measuredWidth
 
@@ -210,7 +219,8 @@ class WeeklyRuleFragment : Fragment() {
         weeklyRuleViewModel.rule.observe(viewLifecycleOwner, Observer {
             if (it == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 MainActivity.toolbar.title = it.name
                 displayTimeSpans(it.timeSpans)
@@ -221,7 +231,7 @@ class WeeklyRuleFragment : Fragment() {
             swipeRefreshLayout.refresh(viewLifecycleOwner, context)
         }
 
-        return root
+        return binding.root
     }
 
     override fun onResume() {
@@ -277,7 +287,12 @@ class WeeklyRuleFragment : Fragment() {
             timeSpans.add(card)
 
             if (i > t.start.localizedDay) {
-                constraintSet.connect(card.id, ConstraintSet.TOP, topTimeSpanAnchor.id, ConstraintSet.TOP)
+                constraintSet.connect(
+                    card.id,
+                    ConstraintSet.TOP,
+                    topTimeSpanAnchor.id,
+                    ConstraintSet.TOP
+                )
             } else {
                 constraintSet.connect(
                     card.id,
@@ -289,9 +304,19 @@ class WeeklyRuleFragment : Fragment() {
             }
 
             if (i == endDay && t.end.inDailyMilliseconds == 0) {
-                constraintSet.connect(card.id, ConstraintSet.BOTTOM, timeLine.id, ConstraintSet.BOTTOM)
+                constraintSet.connect(
+                    card.id,
+                    ConstraintSet.BOTTOM,
+                    timeLine.id,
+                    ConstraintSet.BOTTOM
+                )
             } else if (i < endDay) {
-                constraintSet.connect(card.id, ConstraintSet.BOTTOM, bottomTimeSpanAnchor.id, ConstraintSet.BOTTOM)
+                constraintSet.connect(
+                    card.id,
+                    ConstraintSet.BOTTOM,
+                    bottomTimeSpanAnchor.id,
+                    ConstraintSet.BOTTOM
+                )
             } else {
                 constraintSet.connect(
                     card.id,
@@ -309,9 +334,10 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun createTimeSpan(day: Int, timeSpan: WeeklyTimeSpan): View {
-        val card = CardView(context!!)
+        val card = CardView(requireContext())
 
-        card.background = ContextCompat.getDrawable(context!!, R.drawable.time_span_background)
+        card.background =
+            ContextCompat.getDrawable(requireContext(), R.drawable.time_span_background)
         card.id = View.generateViewId()
         card.tag = timeSpan.uid
         timeLayout.addView(card)
@@ -359,8 +385,18 @@ class WeeklyRuleFragment : Fragment() {
             verticalGuideLines[time.localizedDay].id,
             ConstraintSet.RIGHT
         )
-        constraintSet.connect(timeIndicatorHead.id, ConstraintSet.TOP, timeIndicatorLine.id, ConstraintSet.TOP)
-        constraintSet.connect(timeIndicatorHead.id, ConstraintSet.BOTTOM, timeIndicatorLine.id, ConstraintSet.BOTTOM)
+        constraintSet.connect(
+            timeIndicatorHead.id,
+            ConstraintSet.TOP,
+            timeIndicatorLine.id,
+            ConstraintSet.TOP
+        )
+        constraintSet.connect(
+            timeIndicatorHead.id,
+            ConstraintSet.BOTTOM,
+            timeIndicatorLine.id,
+            ConstraintSet.BOTTOM
+        )
         constraintSet.constrainWidth(timeIndicatorHead.id, indicatorHeadDiameter)
         constraintSet.constrainHeight(timeIndicatorHead.id, indicatorHeadDiameter)
 
@@ -370,7 +406,12 @@ class WeeklyRuleFragment : Fragment() {
             verticalGuideLines[time.localizedDay + 1].id,
             ConstraintSet.LEFT
         )
-        constraintSet.connect(timeIndicatorLine.id, ConstraintSet.LEFT, timeIndicatorHead.id, ConstraintSet.RIGHT)
+        constraintSet.connect(
+            timeIndicatorLine.id,
+            ConstraintSet.LEFT,
+            timeIndicatorHead.id,
+            ConstraintSet.RIGHT
+        )
         constraintSet.connect(
             timeIndicatorLine.id,
             ConstraintSet.TOP,
@@ -446,15 +487,11 @@ class WeeklyRuleFragment : Fragment() {
             .setDuration(duration)
             .start()
 
-        addButton.animate()
-            .alpha(0f)
-            .scaleX(0f)
-            .scaleY(0f)
-            .setDuration(duration)
-            .start()
+        MainActivity.hideFab()
 
         Handler().postDelayed({
-            val height = MainActivity.bottomSheet.findViewById<ConstraintLayout>(R.id.rule_value).y.toInt()
+            val height =
+                MainActivity.bottomSheet.findViewById<ConstraintLayout>(R.id.rule_value).y.toInt()
 
             MainActivity.bottomSheetBehavior.isHideable = false
             MainActivity.bottomSheetBehavior.peekHeight = height
@@ -484,12 +521,8 @@ class WeeklyRuleFragment : Fragment() {
                 .setDuration(duration)
                 .start()
 
-            addButton.animate()
-                .alpha(1f)
-                .scaleX(1f)
-                .scaleY(1f)
-                .setDuration(duration)
-                .start()
+            MainActivity.showFab()
+
         }, (duration * 0.8).toLong())
     }
 
@@ -500,10 +533,18 @@ class WeeklyRuleFragment : Fragment() {
         when (event.action) {
             WeeklyTimeSpanEditEvent.Action.FINISHED -> {
                 if (weeklyRuleViewModel.rule.value!!.timeSpans.overlays(event.timeSpan)) {
-                    Toast.makeText(context, R.string.notice_weekly_time_span_overlaying, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        R.string.notice_weekly_time_span_overlaying,
+                        Toast.LENGTH_LONG
+                    ).show()
                     return
                 } else if (event.timeSpan.length == WeeklyTime.MIN) {
-                    Toast.makeText(context, R.string.notice_weekly_time_span_no_length, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        R.string.notice_weekly_time_span_no_length,
+                        Toast.LENGTH_LONG
+                    ).show()
                     return
                 }
 
@@ -553,7 +594,7 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        InputDialog(context!!)
+        InputDialog(requireContext())
             .title(R.string.action_rename)
             .text(text)
             .onFinished {
@@ -565,7 +606,7 @@ class WeeklyRuleFragment : Fragment() {
     }
 
     private fun showClearAllDialog() {
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setTitle(R.string.confirmation_weekly_time_span_clear_all)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 DataRepository.updateRule(weeklyRuleViewModel.rule.value!!.also {

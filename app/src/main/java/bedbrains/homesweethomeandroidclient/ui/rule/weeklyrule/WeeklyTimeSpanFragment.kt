@@ -34,7 +34,11 @@ class WeeklyTimeSpanFragment() : Fragment() {
     private lateinit var endTime: TextView
     private lateinit var ruleValueView: RuleValueView
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         locale = Locale.getDefault()
         days = Array(7) { i -> Time.formatWeekDayFull(i, locale) }
 
@@ -47,7 +51,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
         endDay = binding.endDay
         startTime = binding.startTime
         endTime = binding.endTime
-        ruleValueView = RuleValueView(binding.ruleValue, context)
+        ruleValueView = RuleValueView(binding.ruleValue, requireContext())
 
         return binding.root
     }
@@ -118,7 +122,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     private fun showStartDayDialog() {
         val timeSpan = weeklyTimeSpanViewModel.timeSpan
 
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setSingleChoiceItems(days, timeSpan.start.localizedDay) { dialog, which ->
                 startDay.text = days[which]
 
@@ -133,7 +137,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     private fun showEndDayDialog() {
         val timeSpan = weeklyTimeSpanViewModel.timeSpan
 
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setSingleChoiceItems(days, timeSpan.end.localizedDay) { dialog, which ->
                 endDay.text = days[which]
 
@@ -189,7 +193,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     }
 
     private fun showApplyToAllDialog() {
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setTitle(R.string.confirmation_weekly_time_span_apply_to_all)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 weeklyTimeSpanViewModel.onEdit(
@@ -203,7 +207,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
     }
 
     private fun showDeleteDialog() {
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setTitle(R.string.confirmation_weekly_time_span_delete)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 weeklyTimeSpanViewModel.onEdit(

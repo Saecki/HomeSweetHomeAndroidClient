@@ -28,7 +28,11 @@ class HeatingFragment : Fragment() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var binding: FragmentHeatingBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
 
         if (heatingViewModel.initialCreation) {
@@ -36,7 +40,8 @@ class HeatingFragment : Fragment() {
 
             if (uid == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 heatingViewModel.observe(viewLifecycleOwner, uid)
             }
@@ -48,14 +53,16 @@ class HeatingFragment : Fragment() {
         heatingViewModel.heating.observe(viewLifecycleOwner, Observer {
             if (it == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 MainActivity.toolbar.title = it.name
                 displayTags(it.tags)
                 binding.room.text = it.room
                 binding.actualTemp.text = it.actualTemp.formatGlobal(true)
                 binding.targetTemp.text = it.targetTemp.formatGlobal(true)
-                binding.rule.text = it.rule?.name ?: Res.resources.getString(R.string.action_select_a_rule)
+                binding.rule.text =
+                    it.rule?.name ?: Res.resources.getString(R.string.action_select_a_rule)
             }
         })
 
@@ -119,7 +126,7 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        InputDialog(context!!)
+        InputDialog(requireContext())
             .title(R.string.action_rename)
             .text(text)
             .onFinished {
@@ -136,7 +143,7 @@ class HeatingFragment : Fragment() {
             .distinct()
             .sorted()
 
-        SuggestionInputDialog(context!!)
+        SuggestionInputDialog(requireContext())
             .title(R.string.action_tag_new)
             .suggestions(suggestions)
             .validator { !heatingViewModel.heating.value!!.tags.contains(it) }
@@ -151,7 +158,7 @@ class HeatingFragment : Fragment() {
     private fun showRemoveTagDialog(tag: String) {
         val title = Res.resources.getString(R.string.confirmation_tag_delete).replace("$1", tag)
 
-        AlertDialog.Builder(context!!)
+        AlertDialog.Builder(requireContext())
             .setTitle(title)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 DataRepository.updateDevice(heatingViewModel.heating.value!!.apply {
@@ -167,7 +174,7 @@ class HeatingFragment : Fragment() {
             .distinct()
             .sorted()
 
-        SuggestionInputDialog(context!!)
+        SuggestionInputDialog(requireContext())
             .title(R.string.room)
             .text(text)
             .suggestions(suggestions)
@@ -180,7 +187,7 @@ class HeatingFragment : Fragment() {
     }
 
     private fun showTargetTempDialog(text: String) {
-        InputDialog(context!!)
+        InputDialog(requireContext())
             .title(R.string.temperature)
             .text(text)
             .inputType(InputType.TYPE_CLASS_PHONE)
@@ -196,7 +203,7 @@ class HeatingFragment : Fragment() {
     private fun showSelectRuleDialog(rule: Rule?) {
         val options = DataProvider.rules.map { Pair(it.name, it.uid) }
 
-        SelectionInputDialog<String>(context!!)
+        SelectionInputDialog<String>(requireContext())
             .title(R.string.rule)
             .options(DataProvider.rules.map { Pair(it.name, it.uid) })
             .selection(options.indexOfFirst { it.second == rule?.uid })

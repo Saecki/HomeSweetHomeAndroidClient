@@ -1,9 +1,11 @@
 package bedbrains.homesweethomeandroidclient
 
 import android.os.Bundle
+import android.os.Handler
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,8 +16,10 @@ import androidx.preference.PreferenceManager
 import bedbrains.homesweethomeandroidclient.databinding.ActivityMainBinding
 import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +30,30 @@ class MainActivity : AppCompatActivity() {
         lateinit var bottomNav: BottomNavigationView
         lateinit var bottomSheet: LinearLayout
         lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+        lateinit var fab: ExtendedFloatingActionButton
+        lateinit var fabBehavior: HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
+
+        fun showFab() {
+            fabBehavior.slideUp(fab)
+            fab.show()
+        }
+
+        fun showFabDelayed() {
+            val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            Handler().postDelayed({
+                fabBehavior.slideUp(fab)
+                fab.show()
+            }, (duration))
+        }
+
+        fun hideFab() {
+            fabBehavior.slideDown(fab)
+
+            val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            Handler().postDelayed({
+                fab.hide()
+            }, duration)
+        }
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -53,11 +81,15 @@ class MainActivity : AppCompatActivity() {
         toolbar = binding.appBarMain.toolbar
         bottomNav = binding.appBarMain.bottomNav
         bottomSheet = binding.appBarMain.bottomSheet
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.appBarMain.bottomSheet)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        fab = binding.appBarMain.fab
+        fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams).behavior
+                as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
 
         setSupportActionBar(toolbar)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
@@ -70,6 +102,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
         bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            hideFab()
+            fab.setOnClickListener(null)
+            fab.text = null
+            fab.icon = null
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

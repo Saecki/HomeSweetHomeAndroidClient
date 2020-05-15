@@ -15,7 +15,8 @@ import bedbrains.shared.datatypes.devices.Device
 import bedbrains.shared.datatypes.devices.Heating
 import bedbrains.shared.datatypes.devices.Light
 
-class DeviceListAdapter(private var devices: List<Device>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DeviceListAdapter(private var devices: List<Device>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

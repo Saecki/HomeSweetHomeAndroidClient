@@ -40,7 +40,8 @@ class RuleValueFragment() : Fragment() {
 
             if (uid == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 ruleValueViewModel.observe(viewLifecycleOwner, uid)
             }
@@ -48,12 +49,13 @@ class RuleValueFragment() : Fragment() {
 
         val binding = FragmentRuleValueBinding.inflate(inflater)
         swipeRefreshLayout = binding.swipeRefreshLayout
-        ruleValueView = RuleValueView(binding.ruleValue, context)
+        ruleValueView = RuleValueView(binding.ruleValue, requireContext())
 
         ruleValueViewModel.value.observe(viewLifecycleOwner, Observer {
             if (it == null) {
                 findNavController().popBackStack()
-                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.resp_item_no_longer_exists, Toast.LENGTH_LONG)
+                    .show()
             } else {
                 MainActivity.toolbar.title = it.name
 
@@ -85,7 +87,7 @@ class RuleValueFragment() : Fragment() {
     }
 
     private fun showRenameDialog(text: String) {
-        InputDialog(context!!)
+        InputDialog(requireContext())
             .title(R.string.action_rename)
             .text(text)
             .onFinished {
