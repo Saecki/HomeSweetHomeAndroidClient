@@ -35,7 +35,7 @@
 
     <!-- Tag !-->
     <string name="action_tag_new">New tag</string>
-    <string name="confirmation_tag_delete">Delete tag \'$1\'?</string>
+    <string name="confirmation_tag_delete">Delete tag \"$1\"?</string>
 
     <!-- Rule !-->
     <string name="action_select_a_rule">Select a Rule</string>
