@@ -39,20 +39,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun showFabDelayed() {
-            val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            val delay = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
             Handler().postDelayed({
                 fabBehavior.slideUp(fab)
                 fab.show()
-            }, (duration))
+            }, (delay))
         }
 
         fun hideFab() {
             fabBehavior.slideDown(fab)
 
-            val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            val delay = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
             Handler().postDelayed({
                 fab.hide()
-            }, duration)
+            }, delay)
         }
     }
 
@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity() {
         bottomSheet = binding.appBarMain.bottomSheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         fab = binding.appBarMain.fab
-        fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams).behavior
-                as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
+        fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams)
+            .behavior as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
 
         setSupportActionBar(toolbar)
 
