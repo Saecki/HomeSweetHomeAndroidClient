@@ -4,10 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding
 import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
-import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 import bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleViewHolder
 import bedbrains.shared.datatypes.rules.Rule
 import bedbrains.shared.datatypes.rules.WeeklyRule
@@ -20,13 +18,10 @@ class RuleListAdapter(private var rules: List<Rule>) :
 
         return when (viewType) {
             WeeklyRule.TYPE -> {
-                val weeklyRuleViewBinding = RuleWeeklyRuleBinding.inflate(inflater, parent, false)
-                WeeklyRuleViewHolder(weeklyRuleViewBinding)
+                val weeklyRuleBinding = RuleWeeklyRuleBinding.inflate(inflater, parent, false)
+                WeeklyRuleViewHolder(weeklyRuleBinding)
             }
-            else -> {
-                val dummyView = inflater.inflate(R.layout.dummy, parent)
-                DummyViewHolder(dummyView)
-            }
+            else -> throw IllegalArgumentException()
         }
     }
 

@@ -3,9 +3,9 @@
     android:id="@+id/bottom_nav_items">
 
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_devices"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/menu_home" />
+        android:title="@string/menu_devices" />
 
     <item
         android:id="@+id/nav_rules"

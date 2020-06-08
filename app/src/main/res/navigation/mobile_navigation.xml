@@ -3,21 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_devices"
+    tools:ignore="UnusedNavigation">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_devices"
         android:name="bedbrains.homesweethomeandroidclient.ui.device.DevicesFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_devices"
         tools:layout="@layout/fragment_devices">
         <action
-            android:id="@+id/action_nav_home_to_nav_heating"
+            android:id="@+id/action_nav_devices_to_nav_heating"
             app:destination="@id/nav_heating"
-            app:popUpTo="@+id/nav_home" />
+            app:popUpTo="@+id/nav_devices" />
         <action
-            android:id="@+id/action_nav_home_to_nav_light"
+            android:id="@+id/action_nav_devices_to_nav_light"
             app:destination="@id/nav_light"
-            app:popUpTo="@+id/nav_home" />
+            app:popUpTo="@id/nav_devices" />
     </fragment>
 
     <fragment

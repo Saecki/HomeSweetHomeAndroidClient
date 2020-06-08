@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             Handler().postDelayed({
                 fabBehavior.slideUp(fab)
                 fab.show()
-            }, (duration))
+            }, duration)
         }
 
         fun hideFab() {
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
+                R.id.nav_devices,
                 R.id.nav_rules,
                 R.id.nav_values
             ), binding.drawerLayout

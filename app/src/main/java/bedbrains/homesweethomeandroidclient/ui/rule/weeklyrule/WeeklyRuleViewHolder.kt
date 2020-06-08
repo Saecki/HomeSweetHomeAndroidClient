@@ -8,21 +8,21 @@ import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding
 import bedbrains.shared.datatypes.rules.WeeklyRule
 
-class WeeklyRuleViewHolder(private val viewBinding: RuleWeeklyRuleBinding) :
-    RecyclerView.ViewHolder(viewBinding.root) {
+class WeeklyRuleViewHolder(private val binding: RuleWeeklyRuleBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var weeklyRule: WeeklyRule
-    private val name = viewBinding.name
+    private val name = binding.name
 
     fun bindView(weeklyRule: WeeklyRule) {
         this.weeklyRule = weeklyRule
         name.text = weeklyRule.name
 
-        viewBinding.root.setOnClickListener {
+        binding.root.setOnClickListener {
             val bundle = Bundle()
 
             bundle.putString(Res.resources.getString(R.string.uid), weeklyRule.uid)
-            viewBinding.root.findNavController().navigate(
+            binding.root.findNavController().navigate(
                 R.id.action_nav_rules_to_nav_weekly_rule,
                 bundle
             )

@@ -9,13 +9,13 @@ import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
 import bedbrains.shared.datatypes.devices.Light
 
-class LightViewHolder(val viewBinding: DeviceLightBinding) :
-    RecyclerView.ViewHolder(viewBinding.root) {
+class LightViewHolder(private val binding: DeviceLightBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var light: Light
-    private val room = viewBinding.room
-    private val name = viewBinding.name
-    private val isOn = viewBinding.state
+    private val room = binding.room
+    private val name = binding.name
+    private val isOn = binding.state
 
     fun update(light: Light) {
         room.text = light.room
@@ -31,12 +31,12 @@ class LightViewHolder(val viewBinding: DeviceLightBinding) :
             DataRepository.updateDevice(light.apply { isOn = isChecked })
         }
 
-        viewBinding.root.setOnClickListener {
+        binding.root.setOnClickListener {
             val bundle = Bundle()
 
             bundle.putString(Res.resources.getString(R.string.uid), light.uid)
-            viewBinding.root.findNavController().navigate(
-                R.id.action_nav_home_to_nav_light,
+            binding.root.findNavController().navigate(
+                R.id.action_nav_devices_to_nav_light,
                 bundle
             )
         }
