@@ -39,20 +39,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun showFabDelayed() {
-            val delay = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
             Handler().postDelayed({
                 fabBehavior.slideUp(fab)
                 fab.show()
-            }, delay)
+            }, (duration))
         }
 
         fun hideFab() {
             fabBehavior.slideDown(fab)
 
-            val delay = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+            val duration = Res.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
             Handler().postDelayed({
                 fab.hide()
-            }, delay)
+            }, duration)
         }
     }
 
@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity() {
         bottomSheet = binding.appBarMain.bottomSheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         fab = binding.appBarMain.fab
-        fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams)
-            .behavior as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
+        fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams).behavior
+                as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
 
         setSupportActionBar(toolbar)
 
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_devices,
+                R.id.nav_home,
                 R.id.nav_rules,
                 R.id.nav_values
             ), binding.drawerLayout
