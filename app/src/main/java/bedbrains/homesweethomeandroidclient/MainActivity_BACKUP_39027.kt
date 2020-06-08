@@ -43,7 +43,11 @@ class MainActivity : AppCompatActivity() {
             Handler().postDelayed({
                 fabBehavior.slideUp(fab)
                 fab.show()
-            }, delay)
+<<<<<<< HEAD
+            }, duration)
+=======
+            }, (delay))
+>>>>>>> 862eb53af22c3ab1598dab3993a1048765ba370c
         }
 
         fun hideFab() {

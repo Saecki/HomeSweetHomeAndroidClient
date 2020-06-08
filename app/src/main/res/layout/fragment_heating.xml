@@ -124,7 +124,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/target_temp_barrier"
+            android:id="@+id/light_barrier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
@@ -138,7 +138,7 @@
             android:src="@drawable/ic_schedule_black_24dp"
             android:tint="?colorOnBackground"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/target_temp_barrier" />
+            app:layout_constraintTop_toBottomOf="@id/light_barrier" />
 
         <TextView
             android:id="@+id/rule_label"
@@ -149,7 +149,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="?colorLabel"
             app:layout_constraintStart_toEndOf="@id/rule_icon"
-            app:layout_constraintTop_toBottomOf="@id/target_temp_barrier" />
+            app:layout_constraintTop_toBottomOf="@id/light_barrier" />
 
         <TextView
             android:id="@+id/rule"

@@ -19,7 +19,6 @@ import bedbrains.platform.UIDProvider
 import bedbrains.shared.datatypes.rules.WeeklyRule
 
 class RulesFragment : Fragment() {
-
     private val rulesViewModel: RulesViewModel by viewModels()
     private lateinit var binding: FragmentRulesBinding
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
