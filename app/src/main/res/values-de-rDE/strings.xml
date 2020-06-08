@@ -10,7 +10,7 @@
     <string name="rule">Regel</string>
 
     <!-- Menu !-->
-    <string name="menu_home">Start</string>
+    <string name="menu_devices">Start</string>
     <string name="menu_rules">Regeln</string>
     <string name="menu_values">Werte</string>
     <string name="menu_settings">Einstellungen</string>

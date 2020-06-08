@@ -14,9 +14,9 @@ class RuleValueListAdapter(private var values: List<RuleValue>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RuleValueViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val viewBinding = ValueRuleValueBinding.inflate(inflater, parent, false)
+        val binding = ValueRuleValueBinding.inflate(inflater, parent, false)
         return RuleValueViewHolder(
-            viewBinding
+            binding
         )
     }
 

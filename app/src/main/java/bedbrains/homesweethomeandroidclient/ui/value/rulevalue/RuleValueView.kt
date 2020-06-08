@@ -38,6 +38,7 @@ class RuleValueView(private val binding: RuleValueViewBinding, private val conte
                 onChange(value.apply {
                     heating.global = it.replace(',', '.').toDouble()
                 })
+                binding.heating.text = value.heating.formatGlobal(true)
             }
             .show()
     }

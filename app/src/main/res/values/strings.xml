@@ -11,7 +11,7 @@
     <string name="rule">Rule</string>
 
     <!-- Menu !-->
-    <string name="menu_home">Home</string>
+    <string name="menu_devices">Home</string>
     <string name="menu_rules">Rules</string>
     <string name="menu_values">Values</string>
     <string name="menu_settings">Settings</string>

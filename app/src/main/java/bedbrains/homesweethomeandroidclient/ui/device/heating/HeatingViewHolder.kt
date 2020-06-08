@@ -1,8 +1,6 @@
 package bedbrains.homesweethomeandroidclient.ui.device.heating
 
-import android.content.Context
 import android.os.Bundle
-import android.view.View
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
@@ -11,20 +9,16 @@ import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.shared.datatypes.devices.Heating
 
-class HeatingViewHolder(
-    private val viewBinding: DeviceHeatingBinding,
-    private val context: Context,
-    private val parent: View
-) :
-    RecyclerView.ViewHolder(viewBinding.root) {
+class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var heating: Heating
-    private val room = viewBinding.room
-    private val name = viewBinding.name
-    private val actualTemp = viewBinding.actualTemp
-    private val targetTemp = viewBinding.targetTemp
-    private val minus = viewBinding.minus
-    private val plus = viewBinding.plus
+    private val room = binding.room
+    private val name = binding.name
+    private val actualTemp = binding.actualTemp
+    private val targetTemp = binding.targetTemp
+    private val minus = binding.minus
+    private val plus = binding.plus
 
     private val increment: Double
         get() {
@@ -46,12 +40,12 @@ class HeatingViewHolder(
             DataRepository.updateDevice(heating)
         }
 
-        viewBinding.root.setOnClickListener {
+        binding.root.setOnClickListener {
             val bundle = Bundle()
 
             bundle.putString(Res.resources.getString(R.string.uid), heating.uid)
-            viewBinding.root.findNavController().navigate(
-                R.id.action_nav_home_to_nav_heating,
+            binding.root.findNavController().navigate(
+                R.id.action_nav_devices_to_nav_heating,
                 bundle
             )
         }

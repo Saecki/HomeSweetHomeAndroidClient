@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
 import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
 import bedbrains.homesweethomeandroidclient.ui.device.heating.HeatingViewHolder
 import bedbrains.homesweethomeandroidclient.ui.device.light.LightViewHolder
-import bedbrains.homesweethomeandroidclient.ui.dummy.DummyViewHolder
 import bedbrains.shared.datatypes.devices.Device
 import bedbrains.shared.datatypes.devices.Heating
 import bedbrains.shared.datatypes.devices.Light
@@ -23,17 +21,14 @@ class DeviceListAdapter(private var devices: List<Device>) :
 
         return when (viewType) {
             Heating.TYPE -> {
-                val heatingViewBinding = DeviceHeatingBinding.inflate(inflater, parent, false)
-                HeatingViewHolder(heatingViewBinding, parent.context, parent)
+                val heatingBinding = DeviceHeatingBinding.inflate(inflater, parent, false)
+                HeatingViewHolder(heatingBinding)
             }
             Light.TYPE -> {
-                val lightViewBinding = DeviceLightBinding.inflate(inflater, parent, false)
-                LightViewHolder(lightViewBinding)
+                val lightBinding = DeviceLightBinding.inflate(inflater, parent, false)
+                LightViewHolder(lightBinding)
             }
-            else -> {
-                val dummyView = inflater.inflate(R.layout.dummy, parent)
-                DummyViewHolder(dummyView)
-            }
+            else -> throw IllegalArgumentException()
         }
     }
 

@@ -8,26 +8,26 @@ import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.ValueRuleValueBinding
 import bedbrains.shared.datatypes.rules.RuleValue
 
-class RuleValueViewHolder(private val viewBinding: ValueRuleValueBinding) :
-    RecyclerView.ViewHolder(viewBinding.root) {
+class RuleValueViewHolder(private val binding: ValueRuleValueBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     lateinit var value: RuleValue
-    val name = viewBinding.name
+    val name = binding.name
 
     fun bindView(value: RuleValue) {
         this.value = value
         name.text = value.name
 
-        viewBinding.root.setOnClickListener {
+        binding.root.setOnClickListener {
             val bundle = Bundle()
 
             bundle.putString(Res.resources.getString(R.string.uid), value.uid)
-            viewBinding.root.findNavController().navigate(
+            binding.root.findNavController().navigate(
                 R.id.action_nav_values_to_nav_rule_value,
                 bundle
             )
         }
-        viewBinding.root.setOnLongClickListener {
+        binding.root.setOnLongClickListener {
             true
         }
     }
