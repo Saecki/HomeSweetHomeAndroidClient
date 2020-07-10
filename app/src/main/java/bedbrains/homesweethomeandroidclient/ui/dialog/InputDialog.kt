@@ -11,9 +11,8 @@ import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.InputBinding
 
-open class InputDialog(protected val context: Context) {
+open class InputDialog(context: Context) : BaseDialog(context) {
 
-    var title = ""
     var inputType = InputType.TYPE_CLASS_TEXT
     var initialText = ""
     var validator: (String) -> Boolean = { true }
@@ -22,22 +21,16 @@ open class InputDialog(protected val context: Context) {
     var focusAutomatically = true
 
     protected val binding: InputBinding = InputBinding.inflate(LayoutInflater.from(context))
-    protected val dialogBuilder = AlertDialog.Builder(context)
-        .setView(binding.root)
-        .setPositiveButton(android.R.string.ok) { _, _ ->
-            if (selectedOption != null) onFinished()
-        }
 
-    protected lateinit var dialog: AlertDialog
-    protected var positveButtonEnabled: Boolean
-        get() = dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled
-        set(value) {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = value
-        }
+    init {
+        dialogBuilder
+            .setView(binding.root)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                if (selectedOption != null) onFinished()
+            }
+    }
 
-    fun create(): AlertDialog {
-        dialogBuilder.setTitle(title)
-
+    override fun onCreate() {
         binding.input.setText(initialText)
         binding.input.inputType = inputType
         binding.input.setSelection(initialText.length)
@@ -51,29 +44,19 @@ open class InputDialog(protected val context: Context) {
                 false -> null
             }
         }
+    }
 
-        dialog = dialogBuilder.create()
-        dialog.setOnShowListener {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
+    override fun onShow() {
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
 
-            if (focusAutomatically) {
-                binding.input.requestFocus()
-                binding.input.postDelayed(Res.resources.getInteger(R.integer.keyboard_show_delay).toLong()) {
-                    (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-                        .showSoftInput(binding.input, InputMethodManager.SHOW_IMPLICIT)
-                }
+        if (focusAutomatically) {
+            binding.input.requestFocus()
+            binding.input.postDelayed(Res.resources.getInteger(R.integer.keyboard_show_delay).toLong()) {
+                (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                    .showSoftInput(binding.input, InputMethodManager.SHOW_IMPLICIT)
             }
         }
-        onCreate()
-
-        return dialog
     }
-
-    fun show() {
-        create().show()
-    }
-
-    protected open fun onCreate() {}
 
     protected open fun onInput(input: String): Boolean {
         return input.isNotBlank() && validator(input) && input != initialText
@@ -82,16 +65,6 @@ open class InputDialog(protected val context: Context) {
     protected open fun onFinished() {
         onFinished(selectedOption!!)
     }
-}
-
-fun <T : InputDialog> T.title(title: Int): T {
-    this.title = Res.resources.getString(title)
-    return this
-}
-
-fun <T : InputDialog> T.title(title: String): T {
-    this.title = title
-    return this
 }
 
 fun <T : InputDialog> T.text(text: CharSequence): T {

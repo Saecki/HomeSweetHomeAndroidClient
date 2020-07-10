@@ -15,10 +15,34 @@ object Res {
         defaultValue
     }
 
+    fun putPrefString(key: Int, value: String) {
+        preferences.edit()
+            .putString(resources.getString(key), value)
+            .apply()
+    }
+
     fun getPrefInt(key: Int, defaultValue: Int): Int = try {
         preferences.getInt(resources.getString(key), defaultValue)
     } catch (e: Exception) {
         defaultValue
+    }
+
+    fun putPrefInt(key: Int, value: Int) {
+        preferences.edit()
+            .putInt(resources.getString(key), value)
+            .apply()
+    }
+
+    fun getPrefBool(key: Int, defaultValue: Boolean): Boolean = try {
+        preferences.getBoolean(resources.getString(key), defaultValue)
+    } catch (e: Exception) {
+        defaultValue
+    }
+
+    fun putPrefBool(key: Int, value: Boolean) {
+        preferences.edit()
+            .putBoolean(resources.getString(key), value)
+            .apply()
     }
 
     fun getPrefStringAsInt(key: Int, defaultValue: Int): Int = try {
@@ -42,16 +66,11 @@ object Res {
     }
 
     fun setTempUnit(value: Any) {
-        val index = try {
-            value.toString().toInt()
+        try {
+            val ordinal = value.toString().toInt()
+            Temperature.globalUnit = Temperature.Unit.values()[ordinal]
         } catch (e: Exception) {
-            Temperature.DEFAULT_UNIT.index
-        }
-        Temperature.globalUnit = when (index) {
-            Temperature.Unit.KELVIN.index -> Temperature.Unit.KELVIN
-            Temperature.Unit.CELSIUS.index -> Temperature.Unit.CELSIUS
-            Temperature.Unit.FAHRENHEIT.index -> Temperature.Unit.FAHRENHEIT
-            else -> Temperature.DEFAULT_UNIT
+            Temperature.globalUnit = Temperature.DEFAULT_UNIT
         }
     }
 

@@ -30,6 +30,7 @@
         <item name="floatingActionButtonStyle">@style/FloatingActionButton</item>
         <item name="extendedFloatingActionButtonStyle">@style/ExtendedFloatingActionButton</item>
         <item name="materialButtonStyle">@style/Button</item>
+        <item name="radioButtonStyle">@style/RadioButton</item>
 
         <item name="dialogCornerRadius">@dimen/dialog_corner_radius</item>
         <item name="cornerRadius">@dimen/corner_radius</item>
@@ -70,6 +71,10 @@
     <style name="Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="cornerRadius">@dimen/button_corner_radius</item>
         <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
     </style>
 
     <!-- Custom Component Themes !-->

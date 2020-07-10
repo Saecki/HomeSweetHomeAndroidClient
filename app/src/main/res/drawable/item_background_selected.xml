@@ -2,6 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:tint="?colorPrimary">
 
+    <solid android:color="@drawable/item_background_selected_color" />
+
     <corners android:radius="@dimen/corner_radius" />
 
 </shape>

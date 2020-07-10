@@ -33,6 +33,15 @@
     <string name="action_new">New</string>
     <string name="action_search">Search</string>
 
+    <!-- Sorting !-->
+    <string name="sorting_criteria">Sorting criteria</string>
+    <string name="sorting_criteria_manually" >Manually</string>
+    <string name="sorting_criteria_name" >Name</string>
+    <string name="sorting_criteria_room" >Room</string>
+    <string name="sorting_order">Sorting order</string>
+    <string name="sorting_order_ascending">Ascending</string>
+    <string name="sorting_order_descending">Descending</string>
+
     <!-- Tag !-->
     <string name="action_tag_new">New tag</string>
     <string name="confirmation_tag_delete">Delete tag \"$1\"?</string>
@@ -57,6 +66,11 @@
 
     <!-- UID !-->
     <string name="uid" translatable="false">uid</string>
+
+    <!-- Devices !-->
+    <string name="pref_devices_sorting_criterion_key" translatable="false">devices_sorting_type</string>
+    <string name="pref_devices_sorting_order_key" translatable="false">devices_sorting_order</string>
+    <string name="pref_devices_filtering_key" translatable="false">devices_sorting</string>
 
     <!-- Settings !-->
     <!-- Network !-->

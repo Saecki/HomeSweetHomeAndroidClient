@@ -66,6 +66,8 @@ open class SelectionInputDialog<T>(context: Context) : InputDialog(context) {
     }
 
     override fun onCreate() {
+        super.onCreate()
+
         if (selectedIndex >= 0) {
             selectedOption = options[selectedIndex].first
             selectedValue = options[selectedIndex].second

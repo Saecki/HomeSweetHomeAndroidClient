@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "bedbrains.homesweethomeandroidclient"
         minSdkVersion 24
@@ -45,6 +45,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.2.2"
     implementation "androidx.navigation:navigation-ui:2.2.2"
     implementation "androidx.preference:preference:1.1.1"
+    implementation "androidx.recyclerview:recyclerview-selection:1.0.0"
     implementation "androidx.work:work-runtime-ktx:2.3.4"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0.rc1"
     implementation "com.google.android.material:material:1.1.0"
