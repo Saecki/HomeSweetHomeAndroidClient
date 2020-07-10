@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/input_dialog_horizontal_padding"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sorting_criteria"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+    <RadioGroup
+        android:id="@+id/sorting_criteria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sorting_order"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+    <RadioGroup
+        android:id="@+id/sorting_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/sorting_order_ascending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sorting_order_ascending" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/sorting_order_descending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sorting_order_descending" />
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -2,6 +2,7 @@ package bedbrains.homesweethomeandroidclient.ui.device.light
 
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
@@ -17,15 +18,17 @@ class LightViewHolder(private val binding: DeviceLightBinding) :
     private val name = binding.name
     private val isOn = binding.state
 
-    fun update(light: Light) {
-        room.text = light.room
-        name.text = light.name
-        isOn.isChecked = light.isOn
-    }
+    val itemDetails
+        get() = object : ItemDetailsLookup.ItemDetails<String>() {
+            override fun getSelectionKey(): String? = light.uid
+            override fun getPosition(): Int = adapterPosition
+        }
 
-    fun bindView(light: Light) {
+    fun bind(light: Light, isSelected: Boolean = false) {
         this.light = light
         update(light)
+
+        binding.root.isActivated = isSelected
 
         isOn.setOnCheckedChangeListener { _, isChecked ->
             DataRepository.updateDevice(light.apply { isOn = isChecked })
@@ -40,5 +43,11 @@ class LightViewHolder(private val binding: DeviceLightBinding) :
                 bundle
             )
         }
+    }
+
+    private fun update(light: Light) {
+        room.text = light.room
+        name.text = light.name
+        isOn.isChecked = light.isOn
     }
 }

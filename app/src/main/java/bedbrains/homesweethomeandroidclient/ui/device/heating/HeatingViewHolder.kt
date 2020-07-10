@@ -2,6 +2,7 @@ package bedbrains.homesweethomeandroidclient.ui.device.heating
 
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
@@ -21,16 +22,23 @@ class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
     private val plus = binding.plus
 
     private val increment: Double
-        get() {
-            return Res.getPrefStringAsDouble(
-                R.string.pref_temperature_step_key,
-                0.5
-            )
+        get() = Res.getPrefStringAsDouble(
+            R.string.pref_temperature_step_key,
+            0.5
+        )
+
+    val itemDetails
+        get() = object : ItemDetailsLookup.ItemDetails<String>() {
+            override fun getSelectionKey(): String? = heating.uid
+            override fun getPosition(): Int = adapterPosition
         }
 
-    fun bindView(heating: Heating) {
+    fun bind(heating: Heating, isSelected: Boolean = false) {
         this.heating = heating
         update(heating)
+
+        binding.root.isActivated = isSelected
+
         minus.setOnClickListener {
             decrementTemp()
             DataRepository.updateDevice(heating)

@@ -17,9 +17,9 @@ object DataRepository {
     val handler = Handler(Looper.getMainLooper())
     var updateRunnable = buildUpdateRunnable(5000)
 
-    val devices: MutableLiveData<MutableList<Device>> = MutableLiveData(mutableListOf())
-    val rules: MutableLiveData<MutableList<Rule>> = MutableLiveData(mutableListOf())
-    val values: MutableLiveData<MutableList<RuleValue>> = MutableLiveData(mutableListOf())
+    val devices: MutableLiveData<List<Device>> = MutableLiveData(listOf())
+    val rules: MutableLiveData<List<Rule>> = MutableLiveData(listOf())
+    val values: MutableLiveData<List<RuleValue>> = MutableLiveData(listOf())
 
     init {
         fetchUpdates()
@@ -55,7 +55,7 @@ object DataRepository {
     }
 
     fun removeRule(rule: Rule): LiveData<Resp> {
-        rules.value = rules.value.apply { this?.remove(rule) }
+        rules.value = rules.value.apply { this?.minus(rule) }
         return RespCallback<Unit>().enqueue(restClient?.deleteRule(rule.uid))
     }
 
@@ -75,7 +75,7 @@ object DataRepository {
     }
 
     fun removeValue(value: RuleValue): LiveData<Resp> {
-        values.value = values.value.apply { this?.remove(value) }
+        values.value = values.value.apply { this?.minus(value) }
         return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid))
     }
 

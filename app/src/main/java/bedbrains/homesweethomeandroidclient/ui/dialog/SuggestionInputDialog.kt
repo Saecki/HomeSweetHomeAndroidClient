@@ -20,6 +20,8 @@ open class SuggestionInputDialog(context: Context) : InputDialog(context) {
     }
 
     override fun onCreate() {
+        super.onCreate()
+
         displaySuggestions(suggestions)
     }
 

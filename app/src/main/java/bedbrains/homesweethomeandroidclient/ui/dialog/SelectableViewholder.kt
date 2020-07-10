@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
-import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.SelectableBinding
 
 class SelectableViewHolder<T>(
@@ -20,10 +19,7 @@ class SelectableViewHolder<T>(
 
         binding.text.text = selectable.text
         if (selectable.selected) {
-            binding.root.background =
-                ContextCompat.getDrawable(context, R.drawable.selectable_background_selected)
-            binding.root.background.alpha =
-                Res.resources.getInteger(R.integer.selectable_background_alpha)
+            binding.root.background = ContextCompat.getDrawable(context, R.drawable.item_background_selected)
         } else {
             binding.root.background = null
         }
