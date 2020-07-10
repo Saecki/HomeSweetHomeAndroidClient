@@ -24,8 +24,10 @@ class DeviceListAdapter(devices: List<Device>) : RecyclerView.Adapter<RecyclerVi
         get() {
             if (devicesValid) return cachedDevices
 
+            cachedDevices = sortDevices(field)
             devicesValid = true
-            return sortDevices(field)
+
+            return cachedDevices
         }
         set(value) {
             devicesValid = false
@@ -113,7 +115,7 @@ class DeviceListAdapter(devices: List<Device>) : RecyclerView.Adapter<RecyclerVi
             Sorting.DeviceCriterion.Room -> { device -> device.room }
         }
 
-        val sortingOrder = Res.getPrefBool(R.string.pref_devices_sorting_criterion_key, Sorting.DEFAULT_ORDER)
+        val sortingOrder = Res.getPrefBool(R.string.pref_devices_sorting_order_key, Sorting.DEFAULT_ORDER)
 
         return when (sortingOrder) {
             Sorting.ASCENDING -> devices.sortedBy(selector)

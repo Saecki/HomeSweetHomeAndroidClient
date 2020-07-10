@@ -35,7 +35,7 @@ object DataRepository {
     }
 
     fun updateDevice(device: Device): LiveData<Resp> {
-        devices.value = devices.value.apply { this?.update(device) { it.uid == device.uid } }
+        devices.value = devices.value?.update(device) { it.uid == device.uid }
         return RespCallback<Unit>().enqueue(restClient?.putDevice(device))
     }
 
@@ -45,17 +45,17 @@ object DataRepository {
     }
 
     fun updateRule(rule: Rule): LiveData<Resp> {
-        rules.value = rules.value.apply { this?.update(rule) { it.uid == rule.uid } }
+        rules.value = rules.value?.update(rule) { it.uid == rule.uid }
         return RespCallback<Unit>().enqueue(restClient?.putRule(rule))
     }
 
     fun upsertRule(rule: Rule): LiveData<Resp> {
-        rules.value = rules.value.apply { this?.upsert(rule) { it.uid == rule.uid } }
+        rules.value = rules.value?.upsert(rule) { it.uid == rule.uid }
         return RespCallback<Unit>().enqueue(restClient?.postRule(rule))
     }
 
     fun removeRule(rule: Rule): LiveData<Resp> {
-        rules.value = rules.value.apply { this?.minus(rule) }
+        rules.value = rules.value?.minus(rule)
         return RespCallback<Unit>().enqueue(restClient?.deleteRule(rule.uid))
     }
 
@@ -65,17 +65,17 @@ object DataRepository {
     }
 
     fun updateValue(value: RuleValue): LiveData<Resp> {
-        values.value = values.value.apply { this?.update(value) { it.uid == value.uid } }
+        values.value = values.value?.update(value) { it.uid == value.uid }
         return RespCallback<Unit>().enqueue(restClient?.putValue(value))
     }
 
     fun upsertValue(value: RuleValue): LiveData<Resp> {
-        values.value = values.value.apply { this?.upsert(value) { it.uid == value.uid } }
+        values.value = values.value?.upsert(value) { it.uid == value.uid }
         return RespCallback<Unit>().enqueue(restClient?.postValue(value))
     }
 
     fun removeValue(value: RuleValue): LiveData<Resp> {
-        values.value = values.value.apply { this?.minus(value) }
+        values.value = values.value?.minus(value)
         return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid))
     }
 
