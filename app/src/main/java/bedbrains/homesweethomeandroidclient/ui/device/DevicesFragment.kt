@@ -3,6 +3,7 @@ package bedbrains.homesweethomeandroidclient.ui.device
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.selection.SelectionPredicates
@@ -26,6 +27,8 @@ class DevicesFragment : Fragment() {
     private lateinit var binding: FragmentDevicesBinding
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var deviceListAdapter: DeviceListAdapter
+    private lateinit var tracker: SelectionTracker<String>
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
@@ -39,18 +42,21 @@ class DevicesFragment : Fragment() {
         devices.layoutManager = linearLayoutManager
         devices.adapter = deviceListAdapter
 
-        val tracker = SelectionTracker.Builder(
+        tracker = SelectionTracker.Builder(
             "deviceSelection",
             devices,
             deviceListAdapter.KeyProvider(),
             DeviceDetailsLookup(devices),
             StorageStrategy.createStringStorage()
         )
-            .withSelectionPredicate(
-                SelectionPredicates.createSelectAnything()
-            )
+            .withSelectionPredicate(SelectionPredicates.createSelectAnything())
             .build()
         deviceListAdapter.tracker = tracker
+        tracker.addObserver(object : SelectionTracker.SelectionObserver<String>() {
+            override fun onSelectionChanged() {
+                selectionChanged()
+            }
+        })
 
         DataRepository.devices.observe(viewLifecycleOwner, Observer {
             deviceListAdapter.updateDevices(it)
@@ -80,7 +86,13 @@ class DevicesFragment : Fragment() {
         return false
     }
 
-    fun showSortMenu() {
+    private fun selectionChanged() {
+        val count = tracker.selection.size()
+
+        Toast.makeText(requireContext(), "$count items selected", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showSortMenu() {
         val sortingCriterion = Res.getPrefString(R.string.pref_devices_sorting_criterion_key, Sorting.DEFAULT_DEVICE_CRITERION.name)
         val currentCriterion = Sorting.DeviceCriterion.valueOf(sortingCriterion).ordinal
         val currentOrder = Res.getPrefBool(R.string.pref_devices_sorting_order_key, Sorting.DEFAULT_ORDER)

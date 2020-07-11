@@ -54,7 +54,7 @@
     <string name="confirmation_weekly_time_span_apply_to_all">Apply this value to all time spans?</string>
     <string name="confirmation_weekly_time_span_delete">Delete this time span?</string>
     <string name="notice_weekly_time_span_overlaying">Time spans cannot overlay each other</string>
-    <string name="notice_weekly_time_span_no_length">Time spans cannot end at the start time</string>
+    <string name="notice_weekly_time_span_no_length">Time spans cannot start at the same time they end</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heating</string>

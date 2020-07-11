@@ -53,7 +53,7 @@
     <string name="confirmation_weekly_time_span_apply_to_all">Diesen Wert auf alle Zeispannen anwenden?</string>
     <string name="confirmation_weekly_time_span_delete">Diese Zeitspanne löschen?</string>
     <string name="notice_weekly_time_span_overlaying">Zeitspannen dürfen sich nicht überlagern</string>
-    <string name="notice_weekly_time_span_no_length">Zeitspannen können nicht zur Startzeit enden</string>
+    <string name="notice_weekly_time_span_no_length">Zeitspannen können nicht zur gleichen Zeit starten und enden</string>
 
     <!-- Rule Value !-->
     <string name="value_heating">Heizung</string>
