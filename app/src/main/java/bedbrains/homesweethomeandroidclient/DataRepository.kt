@@ -8,8 +8,8 @@ import bedbrains.homesweethomeandroidclient.rest.*
 import bedbrains.shared.datatypes.devices.Device
 import bedbrains.shared.datatypes.rules.Rule
 import bedbrains.shared.datatypes.rules.RuleValue
-import bedbrains.shared.datatypes.update
-import bedbrains.shared.datatypes.upsert
+import bedbrains.shared.datatypes.updated
+import bedbrains.shared.datatypes.upserted
 
 object DataRepository {
     var restClient: APIService? = buildRestClient()
@@ -35,7 +35,7 @@ object DataRepository {
     }
 
     fun updateDevice(device: Device): LiveData<Resp> {
-        devices.value = devices.value?.update(device) { it.uid == device.uid }
+        devices.value = devices.value?.updated(device) { it.uid == device.uid }
         return RespCallback<Unit>().enqueue(restClient?.putDevice(device))
     }
 
@@ -45,12 +45,12 @@ object DataRepository {
     }
 
     fun updateRule(rule: Rule): LiveData<Resp> {
-        rules.value = rules.value?.update(rule) { it.uid == rule.uid }
+        rules.value = rules.value?.updated(rule) { it.uid == rule.uid }
         return RespCallback<Unit>().enqueue(restClient?.putRule(rule))
     }
 
     fun upsertRule(rule: Rule): LiveData<Resp> {
-        rules.value = rules.value?.upsert(rule) { it.uid == rule.uid }
+        rules.value = rules.value?.upserted(rule) { it.uid == rule.uid }
         return RespCallback<Unit>().enqueue(restClient?.postRule(rule))
     }
 
@@ -65,12 +65,12 @@ object DataRepository {
     }
 
     fun updateValue(value: RuleValue): LiveData<Resp> {
-        values.value = values.value?.update(value) { it.uid == value.uid }
+        values.value = values.value?.updated(value) { it.uid == value.uid }
         return RespCallback<Unit>().enqueue(restClient?.putValue(value))
     }
 
     fun upsertValue(value: RuleValue): LiveData<Resp> {
-        values.value = values.value?.upsert(value) { it.uid == value.uid }
+        values.value = values.value?.upserted(value) { it.uid == value.uid }
         return RespCallback<Unit>().enqueue(restClient?.postValue(value))
     }
 
