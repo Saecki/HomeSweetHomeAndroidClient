@@ -2,9 +2,9 @@ package bedbrains.homesweethomeandroidclient
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +16,7 @@ import androidx.preference.PreferenceManager
 import bedbrains.homesweethomeandroidclient.databinding.ActivityMainBinding
 import bedbrains.homesweethomeandroidclient.ui.Theme
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -24,9 +25,13 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 class MainActivity : AppCompatActivity() {
 
     companion object {
+
+        var selecting = false
+
         lateinit var activity: MainActivity
         lateinit var appBarLayout: AppBarLayout
-        lateinit var toolbar: Toolbar
+        lateinit var toolbar: MaterialToolbar
+        lateinit var selectionToolbar: MaterialToolbar
         lateinit var bottomNav: BottomNavigationView
         lateinit var bottomSheet: LinearLayout
         lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
@@ -54,6 +59,20 @@ class MainActivity : AppCompatActivity() {
                 fab.hide()
             }, delay)
         }
+
+        fun showSelectionToolbar() {
+            toolbar.visibility = View.INVISIBLE
+            selectionToolbar.visibility = View.VISIBLE
+            selecting = true
+        }
+
+        fun hideSelectionToolbar() {
+            selectionToolbar.visibility = View.INVISIBLE
+            selectionToolbar.setOnMenuItemClickListener(null)
+            selectionToolbar.menu.clear()
+            toolbar.visibility = View.VISIBLE
+            selecting = false
+        }
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -74,11 +93,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
-
-        setContentView(binding.root)
-
         appBarLayout = binding.appBarMain.appBarLayout
         toolbar = binding.appBarMain.toolbar
+        selectionToolbar = binding.appBarMain.selectionToolbar
         bottomNav = binding.appBarMain.bottomNav
         bottomSheet = binding.appBarMain.bottomSheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -86,10 +103,10 @@ class MainActivity : AppCompatActivity() {
         fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams)
             .behavior as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
 
+        setContentView(binding.root)
         setSupportActionBar(toolbar)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
@@ -97,7 +114,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_devices,
                 R.id.nav_rules,
                 R.id.nav_values
-            ), binding.drawerLayout
+            ),
+            binding.drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
@@ -108,7 +126,13 @@ class MainActivity : AppCompatActivity() {
             fab.setOnClickListener(null)
             fab.text = null
             fab.icon = null
+
+            if (selecting) {
+                hideSelectionToolbar()
+            }
         }
+
+        selectionToolbar.setNavigationIcon(R.drawable.ic_close_black_24dp)
     }
 
     override fun onSupportNavigateUp(): Boolean {

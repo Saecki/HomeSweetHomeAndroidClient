@@ -8,6 +8,7 @@
     <string name="actual_temperature">Ist-Temperatur</string>
     <string name="target_temperature">Soll-Temperatur</string>
     <string name="rule">Regel</string>
+    <string name="multiple_values">Multiple values</string>
 
     <!-- Menu !-->
     <string name="menu_devices">Start</string>
@@ -32,6 +33,14 @@
     <string name="action_new">Neu</string>
     <string name="action_search">Suchen</string>
 
+    <!-- Tag !-->
+    <string name="action_tag_new">Neuer Tag</string>
+    <string name="confirmation_tag_delete">Tag \"$1\" löschen?</string>
+
+    <!-- Response !-->
+    <string name="resp_update_error">Beim Aktualisieren ist ein Fehler aufgetreten</string>
+    <string name="resp_item_no_longer_exists">Das Element, das sie angeschaut haben existiert nicht mehr</string>
+
     <!-- Sorting !-->
     <string name="sorting_criteria">Sortierung</string>
     <string name="sorting_order">Sortierreihenfolge</string>
@@ -41,9 +50,8 @@
     <string name="sorting_order_ascending">Aufsteigend</string>
     <string name="sorting_order_descending">Absteigend</string>
 
-    <!-- Tag !-->
-    <string name="action_tag_new">Neuer Tag</string>
-    <string name="confirmation_tag_delete">Tag \"$1\" löschen?</string>
+    <!-- Devices !-->
+    <string name="action_device_change_room">Raum ändern</string>
 
     <!-- Rule !-->
     <string name="action_select_a_rule">Regel auswählen</string>
@@ -58,10 +66,6 @@
     <!-- Rule Value !-->
     <string name="value_heating">Heizung</string>
     <string name="value_light">Licht</string>
-
-    <!-- Response !-->
-    <string name="resp_update_error">Beim Aktualisieren ist ein Fehler aufgetreten</string>
-    <string name="resp_item_no_longer_exists">Das Element, das sie angeschaut haben existiert nicht mehr</string>
 
     <!-- Settings !-->
     <!-- Network !-->

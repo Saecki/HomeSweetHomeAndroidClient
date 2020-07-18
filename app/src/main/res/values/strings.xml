@@ -9,6 +9,7 @@
     <string name="actual_temperature">Actual temperature</string>
     <string name="target_temperature">Target temperature</string>
     <string name="rule">Rule</string>
+    <string name="multiple_values">Multiple values</string>
 
     <!-- Menu !-->
     <string name="menu_devices">Home</string>
@@ -33,6 +34,17 @@
     <string name="action_new">New</string>
     <string name="action_search">Search</string>
 
+    <!-- Tag !-->
+    <string name="action_tag_new">New tag</string>
+    <string name="confirmation_tag_delete">Delete tag \"$1\"?</string>
+
+    <!-- Response !-->
+    <string name="resp_update_error">An error occurred while updating</string>
+    <string name="resp_item_no_longer_exists">The item you were viewing no longer exists</string>
+
+    <!-- UID !-->
+    <string name="uid" translatable="false">uid</string>
+
     <!-- Sorting !-->
     <string name="sorting_criteria">Sorting criteria</string>
     <string name="sorting_criteria_manually" >Manually</string>
@@ -42,9 +54,11 @@
     <string name="sorting_order_ascending">Ascending</string>
     <string name="sorting_order_descending">Descending</string>
 
-    <!-- Tag !-->
-    <string name="action_tag_new">New tag</string>
-    <string name="confirmation_tag_delete">Delete tag \"$1\"?</string>
+    <!-- Devices !-->
+    <string name="action_device_change_room">Change room</string>
+    <string name="pref_devices_sorting_criterion_key" translatable="false">devices_sorting_type</string>
+    <string name="pref_devices_sorting_order_key" translatable="false">devices_sorting_order</string>
+    <string name="pref_devices_filtering_key" translatable="false">devices_sorting</string>
 
     <!-- Rule !-->
     <string name="action_select_a_rule">Select a Rule</string>
@@ -59,18 +73,6 @@
     <!-- Rule Value !-->
     <string name="value_heating">Heating</string>
     <string name="value_light">Light</string>
-
-    <!-- Response !-->
-    <string name="resp_update_error">An error occurred while updating</string>
-    <string name="resp_item_no_longer_exists">The item you were viewing no longer exists</string>
-
-    <!-- UID !-->
-    <string name="uid" translatable="false">uid</string>
-
-    <!-- Devices !-->
-    <string name="pref_devices_sorting_criterion_key" translatable="false">devices_sorting_type</string>
-    <string name="pref_devices_sorting_order_key" translatable="false">devices_sorting_order</string>
-    <string name="pref_devices_filtering_key" translatable="false">devices_sorting</string>
 
     <!-- Settings !-->
     <!-- Network !-->
