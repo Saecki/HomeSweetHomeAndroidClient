@@ -14,7 +14,8 @@ import bedbrains.homesweethomeandroidclient.databinding.InputBinding
 open class InputDialog(context: Context) : BaseDialog(context) {
 
     var inputType = InputType.TYPE_CLASS_TEXT
-    var initialText = ""
+    var initialText: CharSequence = ""
+    var hint: CharSequence = ""
     var validator: (String) -> Boolean = { true }
     var onFinished: (String) -> Unit = {}
     var selectedOption: String? = null
@@ -32,6 +33,7 @@ open class InputDialog(context: Context) : BaseDialog(context) {
 
     override fun onCreate() {
         binding.input.setText(initialText)
+        binding.input.hint = hint
         binding.input.inputType = inputType
         binding.input.setSelection(initialText.length)
         binding.input.addTextChangedListener {
@@ -68,7 +70,12 @@ open class InputDialog(context: Context) : BaseDialog(context) {
 }
 
 fun <T : InputDialog> T.text(text: CharSequence): T {
-    this.initialText = text.toString()
+    this.initialText = text
+    return this
+}
+
+fun <T : InputDialog> T.hint(hint: CharSequence): T {
+    this.hint = hint
     return this
 }
 

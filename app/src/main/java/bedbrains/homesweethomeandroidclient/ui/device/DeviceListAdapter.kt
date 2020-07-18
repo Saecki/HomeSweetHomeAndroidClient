@@ -118,8 +118,8 @@ class DeviceListAdapter(devices: List<Device>) : RecyclerView.Adapter<RecyclerVi
         val sortingOrder = Res.getPrefBool(R.string.pref_devices_sorting_order_key, Sorting.DEFAULT_ORDER)
 
         return when (sortingOrder) {
-            Sorting.ASCENDING -> devices.sortedBy(selector)
-            else -> devices.sortedByDescending(selector)
+            Sorting.ASCENDING -> devices.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, selector))
+            else -> devices.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, selector))
         }
     }
 }
