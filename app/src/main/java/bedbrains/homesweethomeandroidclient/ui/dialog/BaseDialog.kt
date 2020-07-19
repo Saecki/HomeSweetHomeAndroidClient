@@ -9,7 +9,7 @@ abstract class BaseDialog(protected val context: Context) {
     var title = ""
 
     protected val dialogBuilder = AlertDialog.Builder(context)
-        .setNegativeButton(android.R.string.cancel) { _, _ -> }
+        .setNegativeButton(android.R.string.cancel, null)
 
     protected lateinit var dialog: AlertDialog
     protected var positveButtonEnabled: Boolean

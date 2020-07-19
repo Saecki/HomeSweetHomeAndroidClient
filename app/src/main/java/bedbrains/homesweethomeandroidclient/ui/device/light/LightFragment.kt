@@ -166,6 +166,7 @@ class LightFragment : Fragment() {
                     tags.remove(tag)
                 })
             }
+            .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
 

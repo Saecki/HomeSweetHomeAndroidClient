@@ -108,7 +108,7 @@ class DevicesFragment : Fragment() {
             }
         }
 
-        MainActivity.selectionToolbar.title = count.toString()
+        MainActivity.setSelectedCount(count)
     }
 
     private fun showRenameDialog() {

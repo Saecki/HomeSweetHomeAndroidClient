@@ -29,6 +29,7 @@ open class InputDialog(context: Context) : BaseDialog(context) {
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 if (selectedOption != null) onFinished()
             }
+            .setNegativeButton(android.R.string.cancel, null)
     }
 
     override fun onCreate() {
