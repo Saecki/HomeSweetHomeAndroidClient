@@ -17,9 +17,6 @@
     <string name="menu_values">Values</string>
     <string name="menu_settings">Settings</string>
 
-    <!-- Items !-->
-    <string name="item_unnamed">Unnamed</string>
-
     <!-- General Actions !-->
     <string name="action_apply_to_all">Apply to all</string>
     <string name="action_clear">Clear all</string>
@@ -33,6 +30,12 @@
     <string name="action_done">Done</string>
     <string name="action_new">New</string>
     <string name="action_search">Search</string>
+
+    <!-- Items !-->
+    <string name="item_unnamed">Unnamed</string>
+
+    <!-- Miscellaneous !-->
+    <string name="n_selected">$1 selected</string>
 
     <!-- Tag !-->
     <string name="action_tag_new">New tag</string>

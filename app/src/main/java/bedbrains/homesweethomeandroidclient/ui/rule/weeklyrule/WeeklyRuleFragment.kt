@@ -613,6 +613,7 @@ class WeeklyRuleFragment : Fragment() {
                         it.timeSpans.clear()
                     })
                 }
+                .setNegativeButton(android.R.string.cancel, null)
                 .show()
         }
     }

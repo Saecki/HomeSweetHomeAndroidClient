@@ -22,6 +22,7 @@ open class SortingDialog(context: Context) : BaseDialog(context) {
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 onFinished()
             }
+            .setNegativeButton(android.R.string.cancel, null)
 
         binding.sortingOrderAscending.id = 0
         binding.sortingOrderDescending.id = 1

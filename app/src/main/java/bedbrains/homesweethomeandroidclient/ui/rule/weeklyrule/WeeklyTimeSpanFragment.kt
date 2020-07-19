@@ -203,6 +203,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
                     )
                 )
             }
+            .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
 
@@ -217,6 +218,7 @@ class WeeklyTimeSpanFragment() : Fragment() {
                     )
                 )
             }
+            .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
 }

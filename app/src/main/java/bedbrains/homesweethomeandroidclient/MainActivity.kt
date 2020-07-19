@@ -73,6 +73,11 @@ class MainActivity : AppCompatActivity() {
             toolbar.visibility = View.VISIBLE
             selecting = false
         }
+
+        fun setSelectedCount(count: Int) {
+            val title = Res.resources.getString(R.string.n_selected).replace("$1", count.toString())
+            MainActivity.selectionToolbar.title = title
+        }
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -93,13 +98,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        appBarLayout = binding.appBarMain.appBarLayout
-        toolbar = binding.appBarMain.toolbar
-        selectionToolbar = binding.appBarMain.selectionToolbar
-        bottomNav = binding.appBarMain.bottomNav
-        bottomSheet = binding.appBarMain.bottomSheet
+        appBarLayout = binding.appBarLayout
+        toolbar = binding.toolbar
+        selectionToolbar = binding.selectionToolbar
+        bottomNav = binding.bottomNav
+        bottomSheet = binding.bottomSheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        fab = binding.appBarMain.fab
+        fab = binding.fab
         fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams)
             .behavior as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
 
@@ -131,8 +136,6 @@ class MainActivity : AppCompatActivity() {
                 hideSelectionToolbar()
             }
         }
-
-        selectionToolbar.setNavigationIcon(R.drawable.ic_close_black_24dp)
     }
 
     override fun onSupportNavigateUp(): Boolean {

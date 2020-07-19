@@ -16,9 +16,6 @@
     <string name="menu_values">Werte</string>
     <string name="menu_settings">Einstellungen</string>
 
-    <!-- Items !-->
-    <string name="item_unnamed">Unbenannt</string>
-
     <!-- General Actions !-->
     <string name="action_apply_to_all">Auf alle anwenden</string>
     <string name="action_clear">Alle Entfernen</string>
@@ -32,6 +29,12 @@
     <string name="action_done">Fertig</string>
     <string name="action_new">Neu</string>
     <string name="action_search">Suchen</string>
+
+    <!-- Items !-->
+    <string name="item_unnamed">Unbenannt</string>
+
+    <!-- Miscellaneous !-->
+    <string name="n_selected">$1 ausgewählt</string>
 
     <!-- Tag !-->
     <string name="action_tag_new">Neuer Tag</string>
