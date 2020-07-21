@@ -38,7 +38,7 @@ class DevicesFragment : Fragment() {
         devices.adapter = deviceListAdapter
 
         tracker = SelectionTracker.Builder(
-            "deviceSelection",
+            "devicesSelection",
             devices,
             deviceListAdapter.KeyProvider(),
             DeviceDetailsLookup(devices),
@@ -54,7 +54,7 @@ class DevicesFragment : Fragment() {
         })
 
         DataRepository.devices.observe(viewLifecycleOwner, Observer {
-            deviceListAdapter.updateDevices(it)
+            deviceListAdapter.updateList(it)
         })
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -113,7 +113,7 @@ class DevicesFragment : Fragment() {
 
     private fun showRenameDialog() {
         val selectedUids = tracker.selection.toList()
-        val selectedDevices = selectedUids.map { uid -> DataRepository.devices.value!!.first { it.uid == uid } }
+        val selectedDevices = DataRepository.devices.value!!.filter { it.uid in selectedUids }
         val uniqueNames = selectedDevices.map { it.name }.distinct()
 
         val name = if (uniqueNames.size > 1) "" else uniqueNames[0]
@@ -125,18 +125,17 @@ class DevicesFragment : Fragment() {
             .text(name)
             .hint(hint)
             .suggestions(suggestions)
-            .onFinished {
-                for (d in selectedDevices) {
-                    DataRepository.updateDevice(d.apply { this.name = it })
-                }
-                deviceListAdapter.notifyDataSetChanged()
+            .onFinished { newName ->
+                DataRepository.updateDevices(
+                    selectedDevices.map { it.also { it.name = newName } }
+                )
             }
             .show()
     }
 
     private fun showChangeRoomDialog() {
         val selectedUids = tracker.selection.toList()
-        val selectedDevices = selectedUids.map { uid -> DataRepository.devices.value!!.first { it.uid == uid } }
+        val selectedDevices = DataRepository.devices.value!!.filter { it.uid in selectedUids }
         val uniqueRooms = selectedDevices.map { it.room }.distinct()
 
         val room = if (uniqueRooms.size > 1) "" else uniqueRooms[0]
@@ -148,11 +147,10 @@ class DevicesFragment : Fragment() {
             .text(room)
             .hint(hint)
             .suggestions(suggestions)
-            .onFinished {
-                for (d in selectedDevices) {
-                    DataRepository.updateDevice(d.apply { this.room = it })
-                }
-                deviceListAdapter.notifyDataSetChanged()
+            .onFinished { newRoom ->
+                DataRepository.updateDevices(
+                    selectedDevices.map { it.also { it.room = newRoom } }
+                )
             }
             .show()
     }
@@ -171,7 +169,7 @@ class DevicesFragment : Fragment() {
                 Res.putPrefString(R.string.pref_devices_sorting_criterion_key, Sorting.DeviceCriterion.values()[criterion].name)
                 Res.putPrefBool(R.string.pref_devices_sorting_order_key, ascending)
 
-                deviceListAdapter.updateDevices(DataRepository.devices.value!!)
+                deviceListAdapter.updateList(DataRepository.devices.value!!)
             }
             .show()
     }

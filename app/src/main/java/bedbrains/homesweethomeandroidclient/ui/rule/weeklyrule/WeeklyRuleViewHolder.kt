@@ -2,6 +2,7 @@ package bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule
 
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
@@ -14,9 +15,17 @@ class WeeklyRuleViewHolder(private val binding: RuleWeeklyRuleBinding) :
     private lateinit var weeklyRule: WeeklyRule
     private val name = binding.name
 
-    fun bindView(weeklyRule: WeeklyRule) {
+    val itemDetails
+        get() = object : ItemDetailsLookup.ItemDetails<String>() {
+            override fun getSelectionKey(): String? = weeklyRule.uid
+            override fun getPosition(): Int = adapterPosition
+        }
+
+    fun bind(weeklyRule: WeeklyRule, isSelected: Boolean = false) {
         this.weeklyRule = weeklyRule
         name.text = weeklyRule.name
+
+        binding.root.isActivated = isSelected
 
         binding.root.setOnClickListener {
             val bundle = Bundle()

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/item_margin"
-    android:orientation="horizontal">
+    android:background="@drawable/item_background">
 
     <ImageView
         android:id="@+id/icon"

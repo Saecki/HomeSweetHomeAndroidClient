@@ -2,54 +2,21 @@ package bedbrains.homesweethomeandroidclient.ui.device
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.selection.ItemKeyProvider
 import androidx.recyclerview.selection.SelectionTracker
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
 import bedbrains.homesweethomeandroidclient.databinding.DeviceLightBinding
 import bedbrains.homesweethomeandroidclient.ui.Sorting
-import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
+import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListAdapter
 import bedbrains.homesweethomeandroidclient.ui.device.heating.HeatingViewHolder
 import bedbrains.homesweethomeandroidclient.ui.device.light.LightViewHolder
 import bedbrains.shared.datatypes.devices.Device
 import bedbrains.shared.datatypes.devices.Heating
 import bedbrains.shared.datatypes.devices.Light
 
-class DeviceListAdapter(devices: List<Device>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var devicesValid = false
-    var devices = devices
-        get() {
-            if (devicesValid) return cachedDevices
-
-            cachedDevices = sortDevices(field)
-            devicesValid = true
-
-            return cachedDevices
-        }
-        set(value) {
-            devicesValid = false
-            field = value
-        }
-
-    private var cachedDevices = devices
-
-    inner class KeyProvider : ItemKeyProvider<String>(SCOPE_MAPPED) {
-        override fun getKey(position: Int): String? {
-            return devices[position].uid
-        }
-
-        override fun getPosition(key: String): Int {
-            val position = devices.indexOfFirst { it.uid == key }
-
-            return if (position == -1)
-                RecyclerView.NO_POSITION
-            else
-                position
-        }
-    }
+class DeviceListAdapter(devices: List<Device>) : UniqueListAdapter<Device>(devices) {
 
     var tracker: SelectionTracker<String>? = null
 
@@ -70,7 +37,7 @@ class DeviceListAdapter(devices: List<Device>) : RecyclerView.Adapter<RecyclerVi
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val device = devices[position]
+        val device = list[position]
 
         tracker?.let {
             when (device) {
@@ -87,30 +54,14 @@ class DeviceListAdapter(devices: List<Device>) : RecyclerView.Adapter<RecyclerVi
     }
 
     override fun getItemViewType(position: Int): Int {
-        return devices[position].type
+        return list[position].type
     }
 
-    override fun getItemCount(): Int {
-        return devices.size
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    fun updateDevices(new: List<Device>) {
-        val newSorted = sortDevices(new)
-        val diff = DiffUtil.calculateDiff(UniqueListDiffUtilCallback(cachedDevices, newSorted))
-
-        devices = new
-        diff.dispatchUpdatesTo(this)
-    }
-
-    private fun sortDevices(devices: List<Device>): List<Device> {
+    override fun sortList(list: List<Device>): List<Device> {
         val sortingType = Res.getPrefString(R.string.pref_devices_sorting_criterion_key, Sorting.DEFAULT_DEVICE_CRITERION.name)
 
         val selector: (Device) -> String = when (Sorting.DeviceCriterion.valueOf(sortingType)) {
-            Sorting.DeviceCriterion.Manually -> return devices
+            Sorting.DeviceCriterion.Manually -> return list
             Sorting.DeviceCriterion.Name -> { device -> device.name }
             Sorting.DeviceCriterion.Room -> { device -> device.room }
         }
@@ -118,8 +69,8 @@ class DeviceListAdapter(devices: List<Device>) : RecyclerView.Adapter<RecyclerVi
         val sortingOrder = Res.getPrefBool(R.string.pref_devices_sorting_order_key, Sorting.DEFAULT_ORDER)
 
         return when (sortingOrder) {
-            Sorting.ASCENDING -> devices.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, selector))
-            else -> devices.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, selector))
+            Sorting.ASCENDING -> list.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, selector))
+            else -> list.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, selector))
         }
     }
 }

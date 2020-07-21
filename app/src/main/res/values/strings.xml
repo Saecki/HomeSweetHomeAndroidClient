@@ -65,6 +65,9 @@
 
     <!-- Rule !-->
     <string name="action_select_a_rule">Select a Rule</string>
+    <string name="confirmation_n_rules_delete">Delete $1 rules?</string>
+    <string name="pref_rules_sorting_criterion_key" translatable="false">rules_sorting_type</string>
+    <string name="pref_rules_sorting_order_key" translatable="false">rules_sorting_order</string>
 
     <!-- Weekly Time Span !-->
     <string name="confirmation_weekly_time_span_clear_all">Clear all time spans?</string>

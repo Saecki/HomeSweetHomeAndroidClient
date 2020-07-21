@@ -2,16 +2,21 @@ package bedbrains.homesweethomeandroidclient.ui.rule
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
+import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding
-import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
+import bedbrains.homesweethomeandroidclient.ui.Sorting
+import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListAdapter
 import bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleViewHolder
 import bedbrains.shared.datatypes.rules.Rule
 import bedbrains.shared.datatypes.rules.WeeklyRule
 
-class RuleListAdapter(private var rules: List<Rule>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RuleListAdapter(rules: List<Rule>) : UniqueListAdapter<Rule>(rules) {
+
+    var tracker: SelectionTracker<String>? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,28 +31,35 @@ class RuleListAdapter(private var rules: List<Rule>) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return rules[position].type
-    }
-
-    override fun getItemCount(): Int {
-        return rules.size
+        return list[position].type
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val rule = rules[position]
+        val rule = list[position]
 
-        when (rule.type) {
-            WeeklyRule.TYPE -> {
-                val weeklyRuleViewHolder = holder as WeeklyRuleViewHolder
-                val weeklyRule = rule as WeeklyRule
-                weeklyRuleViewHolder.bindView(weeklyRule)
+        tracker?.let {
+            when (rule) {
+                is WeeklyRule -> {
+                    val weeklyRuleViewHolder = holder as WeeklyRuleViewHolder
+                    weeklyRuleViewHolder.bind(rule, it.isSelected(rule.uid))
+                }
             }
         }
     }
 
-    fun updateRules(new: List<Rule>) {
-        val diff = DiffUtil.calculateDiff(UniqueListDiffUtilCallback(rules, new))
-        rules = new
-        diff.dispatchUpdatesTo(this)
+    override fun sortList(list: List<Rule>): List<Rule> {
+        val sortingType = Res.getPrefString(R.string.pref_rules_sorting_criterion_key, Sorting.DEFAULT_RULE_CRITERION.name)
+
+        val selector: (Rule) -> String = when (Sorting.RuleCriterion.valueOf(sortingType)) {
+            Sorting.RuleCriterion.Manually -> return list
+            Sorting.RuleCriterion.Name -> { rule -> rule.name }
+        }
+
+        val sortingOrder = Res.getPrefBool(R.string.pref_rules_sorting_order_key, Sorting.DEFAULT_ORDER)
+
+        return when (sortingOrder) {
+            Sorting.ASCENDING -> list.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, selector))
+            else -> list.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, selector))
+        }
     }
 }

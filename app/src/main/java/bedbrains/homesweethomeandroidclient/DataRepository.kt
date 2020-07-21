@@ -39,6 +39,12 @@ object DataRepository {
         return RespCallback<Unit>().enqueue(restClient?.putDevice(device))
     }
 
+    fun updateDevices(list: List<Device>): LiveData<Resp> {
+        for (d in list) {
+            devices.value = devices.value?.updated(d) { it.uid == d.uid }
+        }
+        return RespCallback<Unit>().enqueue(restClient?.putDevices(list))
+    }
 
     fun fetchRules() = RespCallback<List<Rule>>().enqueue(restClient?.rules()) {
         rules.value = it?.toMutableList() ?: mutableListOf()
@@ -47,6 +53,13 @@ object DataRepository {
     fun updateRule(rule: Rule): LiveData<Resp> {
         rules.value = rules.value?.updated(rule) { it.uid == rule.uid }
         return RespCallback<Unit>().enqueue(restClient?.putRule(rule))
+    }
+
+    fun updateRules(list: List<Rule>): LiveData<Resp> {
+        for (r in list) {
+            rules.value = rules.value?.updated(r) { it.uid == r.uid }
+        }
+        return RespCallback<Unit>().enqueue(restClient?.putRules(list))
     }
 
     fun upsertRule(rule: Rule): LiveData<Resp> {
@@ -59,6 +72,11 @@ object DataRepository {
         return RespCallback<Unit>().enqueue(restClient?.deleteRule(rule.uid))
     }
 
+    fun removeRules(list: List<Rule>): LiveData<Resp> {
+        rules.value = rules.value?.minus(list)
+        return RespCallback<Unit>().enqueue(restClient?.deleteRules(list.map { it.uid }))
+    }
+
 
     fun fetchValues() = RespCallback<List<RuleValue>>().enqueue(restClient?.values()) {
         values.value = it?.toMutableList() ?: mutableListOf()
@@ -67,6 +85,13 @@ object DataRepository {
     fun updateValue(value: RuleValue): LiveData<Resp> {
         values.value = values.value?.updated(value) { it.uid == value.uid }
         return RespCallback<Unit>().enqueue(restClient?.putValue(value))
+    }
+
+    fun updateValues(list: List<RuleValue>): LiveData<Resp> {
+        for (v in list) {
+            values.value = values.value?.updated(v) { it.uid == v.uid }
+        }
+        return RespCallback<Unit>().enqueue(restClient?.putValues(list))
     }
 
     fun upsertValue(value: RuleValue): LiveData<Resp> {
@@ -78,6 +103,8 @@ object DataRepository {
         values.value = values.value?.minus(value)
         return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid))
     }
+
+    //TODO fun removeRemoveValues(list: List<Rule>): LiveData<Resp>
 
 
     fun startAutomaticUpdate(delay: Long) {
