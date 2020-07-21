@@ -58,6 +58,7 @@
 
     <!-- Rule !-->
     <string name="action_select_a_rule">Regel auswählen</string>
+    <string name="confirmation_n_rules_delete">$1 Regeln löschen?</string>
 
     <!-- Weekly Time Span !-->
     <string name="confirmation_weekly_time_span_clear_all">Alle Zeitspannen löschen?</string>

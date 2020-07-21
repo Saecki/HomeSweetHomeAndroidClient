@@ -9,13 +9,17 @@
 
     <item
         android:id="@+id/action_edit"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
         android:title="@string/action_edit"
+        app:iconTint="?colorOnBackground"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_sort_by"
+        android:icon="@drawable/ic_sort_black_24dp"
         android:title="@string/action_sort_by"
-        app:showAsAction="never" />
+        app:iconTint="?colorOnBackground"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_group_by"
