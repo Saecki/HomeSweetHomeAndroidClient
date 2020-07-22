@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-
     <solid android:color="@drawable/time_span_background_color" />
-
+    <stroke
+        android:width="@dimen/weekly_rule_time_span_outline_width"
+        android:color="@drawable/time_span_outline_color" />
     <corners android:radius="?cardCornerRadius" />
 
 </shape>

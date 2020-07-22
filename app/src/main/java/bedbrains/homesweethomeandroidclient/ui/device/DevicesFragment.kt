@@ -1,7 +1,6 @@
 package bedbrains.homesweethomeandroidclient.ui.device
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -129,6 +128,7 @@ class DevicesFragment : Fragment() {
                 DataRepository.updateDevices(
                     selectedDevices.map { it.also { it.name = newName } }
                 )
+                //deviceListAdapter.notifyDataSetChanged()
             }
             .show()
     }
@@ -151,6 +151,7 @@ class DevicesFragment : Fragment() {
                 DataRepository.updateDevices(
                     selectedDevices.map { it.also { it.room = newRoom } }
                 )
+                //deviceListAdapter.notifyDataSetChanged()
             }
             .show()
     }
@@ -159,13 +160,11 @@ class DevicesFragment : Fragment() {
         val sortingCriterion = Res.getPrefString(R.string.pref_devices_sorting_criterion_key, Sorting.DEFAULT_DEVICE_CRITERION.name)
         val currentCriterion = Sorting.DeviceCriterion.valueOf(sortingCriterion).ordinal
         val currentOrder = Res.getPrefBool(R.string.pref_devices_sorting_order_key, Sorting.DEFAULT_ORDER)
-        Log.d("TESTING", "shown - criterion: $currentCriterion ascending: $currentOrder")
 
         SortingDialog(requireContext())
             .sortingCriteriaRes(Sorting.DeviceCriterion.values().map { it.resId }, currentCriterion)
             .ascending(currentOrder)
             .onFinished { criterion, ascending ->
-                Log.d("TESTING", "finished - criterion: $criterion ascending: $ascending")
                 Res.putPrefString(R.string.pref_devices_sorting_criterion_key, Sorting.DeviceCriterion.values()[criterion].name)
                 Res.putPrefBool(R.string.pref_devices_sorting_order_key, ascending)
 

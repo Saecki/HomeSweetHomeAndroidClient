@@ -2,12 +2,14 @@ package bedbrains.homesweethomeandroidclient
 
 import android.content.SharedPreferences
 import android.content.res.Resources
+import android.util.TypedValue
 import bedbrains.homesweethomeandroidclient.ui.Theme
 import bedbrains.shared.datatypes.temperature.Temperature
 
 object Res {
     lateinit var preferences: SharedPreferences
     lateinit var resources: Resources
+    lateinit var theme: Resources.Theme
 
     fun getPrefString(key: Int, defaultValue: String): String = try {
         preferences.getString(resources.getString(key), defaultValue)!!
@@ -55,6 +57,13 @@ object Res {
         preferences.getString(resources.getString(key), defaultValue.toString())!!.toDouble()
     } catch (e: Exception) {
         defaultValue
+    }
+
+    fun getAttrColor(resId: Int, resolveRefs: Boolean = true): Int {
+        val typedValue = TypedValue()
+        theme.resolveAttribute(resId, typedValue, resolveRefs)
+
+        return typedValue.data
     }
 
     fun setTempDecimals(value: Any) {

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:alpha="0.8" android:color="?colorSecondary" />
+    <item android:alpha="@fraction/weekly_rule_time_span_alpha" android:color="?colorBackgroundFloating" android:state_selected="true" />
+    <item android:alpha="@fraction/weekly_rule_time_span_alpha" android:color="?colorPrimary" />
 </selector>

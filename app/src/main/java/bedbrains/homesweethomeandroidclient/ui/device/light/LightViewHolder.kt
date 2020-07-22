@@ -28,7 +28,7 @@ class LightViewHolder(private val binding: DeviceLightBinding) :
         this.light = light
         update(light)
 
-        binding.root.isActivated = isSelected
+        binding.root.isSelected = isSelected
 
         isOn.setOnCheckedChangeListener { _, isChecked ->
             DataRepository.updateDevice(light.apply { isOn = isChecked })

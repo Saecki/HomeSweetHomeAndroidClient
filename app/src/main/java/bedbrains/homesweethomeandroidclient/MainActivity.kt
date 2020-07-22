@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         fun setSelectedCount(count: Int) {
             val title = Res.resources.getString(R.string.n_selected).replace("$1", count.toString())
-            MainActivity.selectionToolbar.title = title
+            selectionToolbar.title = title
         }
     }
 
@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         activity = this
         Res.preferences = PreferenceManager.getDefaultSharedPreferences(this)
         Res.resources = resources
+        Res.theme = theme
 
         setTheme(R.style.Theme_App)
         Theme.setMode(Res.getPrefStringAsInt(R.string.pref_theme_key, Theme.DEFAULT))
@@ -107,6 +108,8 @@ class MainActivity : AppCompatActivity() {
         fab = binding.fab
         fabBehavior = (fab.layoutParams as CoordinatorLayout.LayoutParams)
             .behavior as HideBottomViewOnScrollBehavior<ExtendedFloatingActionButton>
+
+        selectionToolbar.navigationIcon?.setTint(Res.getAttrColor(R.attr.colorOnBackground))
 
         setContentView(binding.root)
         setSupportActionBar(toolbar)

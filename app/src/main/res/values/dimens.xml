@@ -39,8 +39,10 @@
     <dimen name="weekly_rule_quarter_hour_height">10dp</dimen>
     <dimen name="weekly_rule_time_span_margin">2dp</dimen>
     <dimen name="weekly_rule_time_span_big_margin">12dp</dimen>
+    <dimen name="weekly_rule_time_span_outline_width">2dp</dimen>
 
     <dimen name="separator_line_width">0.8dp</dimen>
+
 
     <dimen name="time_indicator_head_diameter">8dp</dimen>
     <dimen name="time_indicator_line_width">1dp</dimen>

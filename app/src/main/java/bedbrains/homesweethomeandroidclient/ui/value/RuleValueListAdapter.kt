@@ -2,35 +2,48 @@ package bedbrains.homesweethomeandroidclient.ui.value
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
+import bedbrains.homesweethomeandroidclient.R
+import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.ValueRuleValueBinding
-import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListDiffUtilCallback
+import bedbrains.homesweethomeandroidclient.ui.Sorting
+import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListAdapter
 import bedbrains.homesweethomeandroidclient.ui.value.rulevalue.RuleValueViewHolder
 import bedbrains.shared.datatypes.rules.RuleValue
 
-class RuleValueListAdapter(private var values: List<RuleValue>) :
-    RecyclerView.Adapter<RuleValueViewHolder>() {
+class RuleValueListAdapter(values: List<RuleValue>) : UniqueListAdapter<RuleValue>(values) {
+
+    var tracker: SelectionTracker<String>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RuleValueViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ValueRuleValueBinding.inflate(inflater, parent, false)
-        return RuleValueViewHolder(
-            binding
-        )
+
+        return RuleValueViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return values.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        tracker?.let {
+            val value = list[position]
+
+            (holder as RuleValueViewHolder).bind(value, it.isSelected(value.uid))
+        }
     }
 
-    override fun onBindViewHolder(holder: RuleValueViewHolder, position: Int) {
-        holder.bindView(values[position])
-    }
+    override fun sortList(list: List<RuleValue>): List<RuleValue> {
+        val sortingType = Res.getPrefString(R.string.pref_values_sorting_criterion_key, Sorting.DEFAULT_VALUE_CRITERION.name)
 
-    fun updateValues(new: List<RuleValue>) {
-        val diff = DiffUtil.calculateDiff(UniqueListDiffUtilCallback(values, new))
-        values = new
-        diff.dispatchUpdatesTo(this)
+        val selector: (RuleValue) -> String = when (Sorting.ValueCriterion.valueOf(sortingType)) {
+            Sorting.ValueCriterion.Manually -> return list
+            Sorting.ValueCriterion.Name -> { value -> value.name }
+        }
+
+        val sortingOrder = Res.getPrefBool(R.string.pref_values_sorting_order_key, Sorting.DEFAULT_ORDER)
+
+        return when (sortingOrder) {
+            Sorting.ASCENDING -> list.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, selector))
+            else -> list.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, selector))
+        }
     }
 }

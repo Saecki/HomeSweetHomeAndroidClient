@@ -39,10 +39,7 @@ class RuleListAdapter(rules: List<Rule>) : UniqueListAdapter<Rule>(rules) {
 
         tracker?.let {
             when (rule) {
-                is WeeklyRule -> {
-                    val weeklyRuleViewHolder = holder as WeeklyRuleViewHolder
-                    weeklyRuleViewHolder.bind(rule, it.isSelected(rule.uid))
-                }
+                is WeeklyRule -> (holder as WeeklyRuleViewHolder).bind(rule, it.isSelected(rule.uid))
             }
         }
     }

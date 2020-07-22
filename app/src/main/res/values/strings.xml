@@ -4,12 +4,15 @@
     <string name="app_name" translatable="false">HomeSweetHome</string>
     <string name="nav_header_title" translatable="false">HomeSweetHome</string>
     <string name="nav_header_subtitle">A smart home system</string>
-    <string name="room">Room</string>
-    <string name="temperature">Temperature</string>
+
     <string name="actual_temperature">Actual temperature</string>
-    <string name="target_temperature">Target temperature</string>
-    <string name="rule">Rule</string>
+    <string name="heating">Heating</string>
+    <string name="light">Light</string>
     <string name="multiple_values">Multiple values</string>
+    <string name="room">Room</string>
+    <string name="rule">Rule</string>
+    <string name="target_temperature">Target temperature</string>
+    <string name="temperature">Temperature</string>
 
     <!-- Menu !-->
     <string name="menu_devices">Home</string>
@@ -65,6 +68,7 @@
 
     <!-- Rule !-->
     <string name="action_select_a_rule">Select a Rule</string>
+    <string name="confirmation_1_rule_delete">Delete 1 rule?</string>
     <string name="confirmation_n_rules_delete">Delete $1 rules?</string>
     <string name="pref_rules_sorting_criterion_key" translatable="false">rules_sorting_type</string>
     <string name="pref_rules_sorting_order_key" translatable="false">rules_sorting_order</string>
@@ -77,8 +81,10 @@
     <string name="notice_weekly_time_span_no_length">Time spans cannot start at the same time they end</string>
 
     <!-- Rule Value !-->
-    <string name="value_heating">Heating</string>
-    <string name="value_light">Light</string>
+    <string name="confirmation_1_value_delete">Delete 1 value?</string>
+    <string name="confirmation_n_values_delete">Delete $1 values?</string>
+    <string name="pref_values_sorting_criterion_key" translatable="false">rules_sorting_type</string>
+    <string name="pref_values_sorting_order_key" translatable="false">rules_sorting_order</string>
 
     <!-- Settings !-->
     <!-- Network !-->

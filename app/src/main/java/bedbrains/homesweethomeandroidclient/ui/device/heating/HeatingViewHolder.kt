@@ -37,7 +37,7 @@ class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
         this.heating = heating
         update(heating)
 
-        binding.root.isActivated = isSelected
+        binding.root.isSelected = isSelected
 
         minus.setOnClickListener {
             decrementTemp()

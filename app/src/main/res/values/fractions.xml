@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <fraction name="weekly_rule_time_span_alpha">0.6</fraction>
+
+</resources>
