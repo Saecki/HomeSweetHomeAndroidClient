@@ -2,6 +2,7 @@ package bedbrains.homesweethomeandroidclient.ui.value.rulevalue
 
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
@@ -14,9 +15,17 @@ class RuleValueViewHolder(private val binding: ValueRuleValueBinding) :
     lateinit var value: RuleValue
     val name = binding.name
 
-    fun bindView(value: RuleValue) {
+    val itemDetails
+        get() = object : ItemDetailsLookup.ItemDetails<String>() {
+            override fun getSelectionKey(): String? = value.uid
+            override fun getPosition(): Int = adapterPosition
+        }
+
+    fun bind(value: RuleValue, isSelected: Boolean = false) {
         this.value = value
         name.text = value.name
+
+        binding.root.isSelected = isSelected
 
         binding.root.setOnClickListener {
             val bundle = Bundle()

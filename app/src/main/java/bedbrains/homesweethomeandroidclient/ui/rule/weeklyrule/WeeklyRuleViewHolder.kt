@@ -25,7 +25,7 @@ class WeeklyRuleViewHolder(private val binding: RuleWeeklyRuleBinding) :
         this.weeklyRule = weeklyRule
         name.text = weeklyRule.name
 
-        binding.root.isActivated = isSelected
+        binding.root.isSelected = isSelected
 
         binding.root.setOnClickListener {
             val bundle = Bundle()

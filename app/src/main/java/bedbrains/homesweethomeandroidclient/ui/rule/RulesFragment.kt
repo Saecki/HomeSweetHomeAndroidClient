@@ -1,7 +1,6 @@
 package bedbrains.homesweethomeandroidclient.ui.rule
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -139,7 +138,11 @@ class RulesFragment : Fragment() {
     }
 
     private fun showDeleteDialog() {
-        val title = getString(R.string.confirmation_n_rules_delete).replace("$1", tracker.selection.size().toString())
+        val count = tracker.selection.size()
+        val title = if (count == 1)
+            getString(R.string.confirmation_1_rule_delete)
+        else
+            getString(R.string.confirmation_n_rules_delete).replace("$1", count.toString())
 
         AlertDialog.Builder(requireContext())
             .setTitle(title)
@@ -169,7 +172,10 @@ class RulesFragment : Fragment() {
             .hint(hint)
             .suggestions(suggestions)
             .onFinished { newName ->
-                DataRepository.updateRules(selectedRules.map { it.also { it.name = newName } })
+                DataRepository.updateRules(
+                    selectedRules.map { it.also { it.name = newName } }
+                )
+                //ruleListAdapter.notifyDataSetChanged()
             }
             .show()
     }
@@ -178,13 +184,11 @@ class RulesFragment : Fragment() {
         val sortingCriterion = Res.getPrefString(R.string.pref_rules_sorting_criterion_key, Sorting.DEFAULT_RULE_CRITERION.name)
         val currentCriterion = Sorting.RuleCriterion.valueOf(sortingCriterion).ordinal
         val currentOrder = Res.getPrefBool(R.string.pref_rules_sorting_order_key, Sorting.DEFAULT_ORDER)
-        Log.d("TESTING", "shown - criterion: $currentCriterion ascending: $currentOrder")
 
         SortingDialog(requireContext())
             .sortingCriteriaRes(Sorting.RuleCriterion.values().map { it.resId }, currentCriterion)
             .ascending(currentOrder)
             .onFinished { criterion, ascending ->
-                Log.d("TESTING", "finished - criterion: $criterion ascending: $ascending")
                 Res.putPrefString(R.string.pref_rules_sorting_criterion_key, Sorting.RuleCriterion.values()[criterion].name)
                 Res.putPrefBool(R.string.pref_rules_sorting_order_key, ascending)
 

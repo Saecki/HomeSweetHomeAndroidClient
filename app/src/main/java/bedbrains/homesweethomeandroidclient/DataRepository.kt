@@ -104,7 +104,10 @@ object DataRepository {
         return RespCallback<Unit>().enqueue(restClient?.deleteValue(value.uid))
     }
 
-    //TODO fun removeRemoveValues(list: List<Rule>): LiveData<Resp>
+    fun removeValues(list: List<RuleValue>): LiveData<Resp> {
+        values.value = values.value?.minus(list)
+        return RespCallback<Unit>().enqueue(restClient?.deleteValues(list.map { it.uid }))
+    }
 
 
     fun startAutomaticUpdate(delay: Long) {

@@ -41,14 +41,8 @@ class DeviceListAdapter(devices: List<Device>) : UniqueListAdapter<Device>(devic
 
         tracker?.let {
             when (device) {
-                is Heating -> {
-                    val heatingViewHolder = holder as HeatingViewHolder
-                    heatingViewHolder.bind(device, it.isSelected(device.uid))
-                }
-                is Light -> {
-                    val lightViewHolder = holder as LightViewHolder
-                    lightViewHolder.bind(device, it.isSelected(device.uid))
-                }
+                is Heating -> (holder as HeatingViewHolder).bind(device, it.isSelected(device.uid))
+                is Light -> (holder as LightViewHolder).bind(device, it.isSelected(device.uid))
             }
         }
     }
