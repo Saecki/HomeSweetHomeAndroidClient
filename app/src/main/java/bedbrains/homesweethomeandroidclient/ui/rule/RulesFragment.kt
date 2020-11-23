@@ -12,10 +12,7 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import bedbrains.homesweethomeandroidclient.DataRepository
-import bedbrains.homesweethomeandroidclient.MainActivity
-import bedbrains.homesweethomeandroidclient.R
-import bedbrains.homesweethomeandroidclient.Res
+import bedbrains.homesweethomeandroidclient.*
 import bedbrains.homesweethomeandroidclient.databinding.FragmentRulesBinding
 import bedbrains.homesweethomeandroidclient.ui.Sorting
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
@@ -115,7 +112,7 @@ class RulesFragment : Fragment() {
             return
         }
 
-        if (!MainActivity.selecting) {
+        if (MainActivity.state.value == State.Default) {
             MainActivity.showSelectionToolbar()
             MainActivity.selectionToolbar.inflateMenu(R.menu.rules_selection)
 

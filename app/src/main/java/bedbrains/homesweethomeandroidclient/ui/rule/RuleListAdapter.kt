@@ -3,11 +3,11 @@ package bedbrains.homesweethomeandroidclient.ui.rule
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.selection.SelectionTracker
-import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.RuleWeeklyRuleBinding
 import bedbrains.homesweethomeandroidclient.ui.Sorting
+import bedbrains.homesweethomeandroidclient.ui.adapter.ListItemViewHolder
 import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListAdapter
 import bedbrains.homesweethomeandroidclient.ui.rule.weeklyrule.WeeklyRuleViewHolder
 import bedbrains.shared.datatypes.rules.Rule
@@ -18,13 +18,13 @@ class RuleListAdapter(rules: List<Rule>) : UniqueListAdapter<Rule>(rules) {
     var tracker: SelectionTracker<String>? = null
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder<Rule> {
         val inflater = LayoutInflater.from(parent.context)
 
         return when (viewType) {
             WeeklyRule.TYPE -> {
                 val weeklyRuleBinding = RuleWeeklyRuleBinding.inflate(inflater, parent, false)
-                WeeklyRuleViewHolder(weeklyRuleBinding)
+                WeeklyRuleViewHolder(weeklyRuleBinding) as ListItemViewHolder<Rule>
             }
             else -> throw IllegalArgumentException()
         }
@@ -34,7 +34,7 @@ class RuleListAdapter(rules: List<Rule>) : UniqueListAdapter<Rule>(rules) {
         return list[position].type
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListItemViewHolder<Rule>, position: Int) {
         val rule = list[position]
 
         tracker?.let {

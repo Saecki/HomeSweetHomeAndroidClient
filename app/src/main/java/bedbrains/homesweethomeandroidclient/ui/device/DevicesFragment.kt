@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import bedbrains.homesweethomeandroidclient.DataRepository
-import bedbrains.homesweethomeandroidclient.MainActivity
-import bedbrains.homesweethomeandroidclient.R
-import bedbrains.homesweethomeandroidclient.Res
+import bedbrains.homesweethomeandroidclient.*
 import bedbrains.homesweethomeandroidclient.databinding.FragmentDevicesBinding
 import bedbrains.homesweethomeandroidclient.ui.Sorting
+import bedbrains.homesweethomeandroidclient.ui.adapter.ItemMoveCallback
 import bedbrains.homesweethomeandroidclient.ui.component.refresh
 import bedbrains.homesweethomeandroidclient.ui.dialog.*
 
@@ -23,6 +21,7 @@ class DevicesFragment : Fragment() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var deviceListAdapter: DeviceListAdapter
     private lateinit var tracker: SelectionTracker<String>
+    private lateinit var itemTouchHelper: ItemTouchHelper
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
@@ -36,6 +35,11 @@ class DevicesFragment : Fragment() {
         devices.layoutManager = linearLayoutManager
         devices.adapter = deviceListAdapter
 
+        val itemMoveCallback = ItemMoveCallback(deviceListAdapter)
+        itemTouchHelper = ItemTouchHelper(itemMoveCallback)
+        itemTouchHelper.attachToRecyclerView(devices)
+        deviceListAdapter.itemTouchHelper = itemTouchHelper
+
         tracker = SelectionTracker.Builder(
             "devicesSelection",
             devices,
@@ -43,7 +47,19 @@ class DevicesFragment : Fragment() {
             DeviceDetailsLookup(devices),
             StorageStrategy.createStringStorage()
         )
-            .withSelectionPredicate(SelectionPredicates.createSelectAnything())
+            .withSelectionPredicate(object : SelectionTracker.SelectionPredicate<String>() {
+                override fun canSetStateForKey(key: String, nextState: Boolean): Boolean {
+                    return MainActivity.state.value == State.Default || MainActivity.state.value == State.Selecting
+                }
+
+                override fun canSetStateAtPosition(position: Int, nextState: Boolean): Boolean {
+                    return MainActivity.state.value == State.Default || MainActivity.state.value == State.Selecting
+                }
+
+                override fun canSelectMultiple(): Boolean {
+                    return true
+                }
+            })
             .build()
         deviceListAdapter.tracker = tracker
         tracker.addObserver(object : SelectionTracker.SelectionObserver<String>() {
@@ -70,7 +86,7 @@ class DevicesFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_refresh -> swipeRefreshLayout.refresh(viewLifecycleOwner, context)
-            R.id.action_edit -> Unit//TODO
+            R.id.action_edit -> if (MainActivity.state.value == State.Default) startEditing() else stopEditing()
             R.id.action_sort_by -> showSortDialog()
             R.id.action_group_by -> Unit//TODO
             R.id.action_filter_by -> Unit//TODO
@@ -88,7 +104,7 @@ class DevicesFragment : Fragment() {
             return
         }
 
-        if (!MainActivity.selecting) {
+        if (MainActivity.state.value == State.Default) {
             MainActivity.showSelectionToolbar()
             MainActivity.selectionToolbar.inflateMenu(R.menu.devices_selection)
 
@@ -126,7 +142,7 @@ class DevicesFragment : Fragment() {
             .suggestions(suggestions)
             .onFinished { newName ->
                 DataRepository.updateDevices(
-                    selectedDevices.map { it.also { it.name = newName } }
+                    selectedDevices.map { it.apply { it.name = newName } }
                 )
                 //deviceListAdapter.notifyDataSetChanged()
             }
@@ -171,5 +187,17 @@ class DevicesFragment : Fragment() {
                 deviceListAdapter.updateList(DataRepository.devices.value!!)
             }
             .show()
+    }
+
+    private fun startEditing() {
+        MainActivity.state.value = State.Dragging
+        swipeRefreshLayout.isEnabled = false
+        deviceListAdapter.notifyDataSetChanged()
+    }
+
+    private fun stopEditing() {
+        MainActivity.state.value = State.Default
+        swipeRefreshLayout.isEnabled = true
+        deviceListAdapter.notifyDataSetChanged()
     }
 }

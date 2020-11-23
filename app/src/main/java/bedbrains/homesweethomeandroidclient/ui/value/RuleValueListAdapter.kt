@@ -3,11 +3,11 @@ package bedbrains.homesweethomeandroidclient.ui.value
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.selection.SelectionTracker
-import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.ValueRuleValueBinding
 import bedbrains.homesweethomeandroidclient.ui.Sorting
+import bedbrains.homesweethomeandroidclient.ui.adapter.ListItemViewHolder
 import bedbrains.homesweethomeandroidclient.ui.adapter.UniqueListAdapter
 import bedbrains.homesweethomeandroidclient.ui.value.rulevalue.RuleValueViewHolder
 import bedbrains.shared.datatypes.rules.RuleValue
@@ -16,14 +16,14 @@ class RuleValueListAdapter(values: List<RuleValue>) : UniqueListAdapter<RuleValu
 
     var tracker: SelectionTracker<String>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RuleValueViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder<RuleValue> {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ValueRuleValueBinding.inflate(inflater, parent, false)
 
         return RuleValueViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListItemViewHolder<RuleValue>, position: Int) {
         tracker?.let {
             val value = list[position]
 

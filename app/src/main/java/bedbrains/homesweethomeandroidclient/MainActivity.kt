@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,11 +23,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
+enum class State {
+    Selecting,
+    Dragging,
+    Default,
+}
+
 class MainActivity : AppCompatActivity() {
 
     companion object {
 
-        var selecting = false
+        val state = MutableLiveData(State.Default)
 
         lateinit var activity: MainActivity
         lateinit var appBarLayout: AppBarLayout
@@ -63,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         fun showSelectionToolbar() {
             toolbar.visibility = View.INVISIBLE
             selectionToolbar.visibility = View.VISIBLE
-            selecting = true
+            state.value = State.Selecting
         }
 
         fun hideSelectionToolbar() {
@@ -71,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             selectionToolbar.setOnMenuItemClickListener(null)
             selectionToolbar.menu.clear()
             toolbar.visibility = View.VISIBLE
-            selecting = false
+            state.value = State.Default
         }
 
         fun setSelectedCount(count: Int) {
@@ -135,7 +142,7 @@ class MainActivity : AppCompatActivity() {
             fab.text = null
             fab.icon = null
 
-            if (selecting) {
+            if (state.value == State.Selecting) {
                 hideSelectionToolbar()
             }
         }

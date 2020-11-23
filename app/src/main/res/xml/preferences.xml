@@ -4,12 +4,12 @@
     <PreferenceCategory android:title="@string/pref_network_category_title">
 
         <EditTextPreference
-            android:defaultValue=" "
+            android:defaultValue=""
             android:key="@string/pref_network_host_key"
             android:title="@string/pref_network_host_title" />
 
         <EditTextPreference
-            android:defaultValue=" "
+            android:defaultValue=""
             android:key="@string/pref_network_port_key"
             android:title="@string/pref_network_port_title" />
 

@@ -2,18 +2,15 @@ package bedbrains.homesweethomeandroidclient.ui.device.heating
 
 import android.os.Bundle
 import androidx.navigation.findNavController
-import androidx.recyclerview.selection.ItemDetailsLookup
-import androidx.recyclerview.widget.RecyclerView
 import bedbrains.homesweethomeandroidclient.DataRepository
 import bedbrains.homesweethomeandroidclient.R
 import bedbrains.homesweethomeandroidclient.Res
 import bedbrains.homesweethomeandroidclient.databinding.DeviceHeatingBinding
+import bedbrains.homesweethomeandroidclient.ui.adapter.ListItemViewHolder
 import bedbrains.shared.datatypes.devices.Heating
 
-class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
-    RecyclerView.ViewHolder(binding.root) {
+class HeatingViewHolder(val binding: DeviceHeatingBinding) : ListItemViewHolder<Heating>(binding.root) {
 
-    private lateinit var heating: Heating
     private val room = binding.room
     private val name = binding.name
     private val actualTemp = binding.actualTemp
@@ -27,35 +24,28 @@ class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
             0.5
         )
 
-    val itemDetails
-        get() = object : ItemDetailsLookup.ItemDetails<String>() {
-            override fun getSelectionKey(): String? = heating.uid
-            override fun getPosition(): Int = adapterPosition
-        }
-
-    fun bind(heating: Heating, isSelected: Boolean = false) {
-        this.heating = heating
-        update(heating)
-
-        binding.root.isSelected = isSelected
+    override fun onBind(value: Heating, isSelected: Boolean, isEditing: Boolean) {
+        update(this.value)
 
         minus.setOnClickListener {
             decrementTemp()
-            DataRepository.updateDevice(heating)
+            DataRepository.updateDevice(this.value)
         }
         plus.setOnClickListener {
             incrementTemp()
-            DataRepository.updateDevice(heating)
+            DataRepository.updateDevice(this.value)
         }
 
         binding.root.setOnClickListener {
-            val bundle = Bundle()
+            navigate {
+                val bundle = Bundle()
 
-            bundle.putString(Res.resources.getString(R.string.uid), heating.uid)
-            binding.root.findNavController().navigate(
-                R.id.action_nav_devices_to_nav_heating,
-                bundle
-            )
+                bundle.putString(Res.resources.getString(R.string.uid), this.value.uid)
+                binding.root.findNavController().navigate(
+                    R.id.action_nav_devices_to_nav_heating,
+                    bundle
+                )
+            }
         }
     }
 
@@ -67,7 +57,7 @@ class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
     }
 
     private fun decrementTemp() {
-        var temp = heating.targetTemp.global
+        var temp = value.targetTemp.global
         temp -= if (Res.preferences.getBoolean(
                 Res.resources.getString(R.string.pref_temperature_round_to_next_step_key),
                 true
@@ -81,12 +71,12 @@ class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
         } else {
             increment
         }
-        heating.targetTemp.global = temp
-        update(heating)
+        value.targetTemp.global = temp
+        update(value)
     }
 
     private fun incrementTemp() {
-        var temp = heating.targetTemp.global
+        var temp = value.targetTemp.global
         temp += if (Res.preferences.getBoolean(
                 Res.resources.getString(R.string.pref_temperature_round_to_next_step_key),
                 true
@@ -96,7 +86,7 @@ class HeatingViewHolder(private val binding: DeviceHeatingBinding) :
         } else {
             increment
         }
-        heating.targetTemp.global = temp
-        update(heating)
+        value.targetTemp.global = temp
+        update(value)
     }
 }

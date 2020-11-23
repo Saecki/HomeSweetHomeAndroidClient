@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import bedbrains.shared.datatypes.Unique
 
-abstract class UniqueListAdapter<T : Unique>(list: List<T>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class UniqueListAdapter<T : Unique>(list: List<T>) :
+    RecyclerView.Adapter<ListItemViewHolder<T>>(),
+    ItemMoveCallback.Listener {
+
     private var listValid = false
     private var cachedList: List<T> = list
     protected var list = list
@@ -43,6 +46,16 @@ abstract class UniqueListAdapter<T : Unique>(list: List<T>) : RecyclerView.Adapt
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
+    }
+
+    override fun onMove(from: Int, to: Int) {
+        val mList = cachedList.toMutableList()
+        val movedItem = mList.removeAt(from)
+
+        if (from < to) mList.add(to - 1, movedItem)
+        else mList.add(to, movedItem)
+
+        cachedList = mList
     }
 
     fun updateList(new: List<T>) {

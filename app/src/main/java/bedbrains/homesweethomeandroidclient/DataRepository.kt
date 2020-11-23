@@ -31,7 +31,8 @@ object DataRepository {
 
 
     fun fetchDevices() = RespCallback<List<Device>>().enqueue(restClient?.devices()) {
-        devices.value = it?.toMutableList() ?: mutableListOf()
+        val list = it?.toMutableList() ?: mutableListOf()
+        if (list != devices.value) devices.value = list
     }
 
     fun updateDevice(device: Device): LiveData<Resp> {
@@ -47,7 +48,8 @@ object DataRepository {
     }
 
     fun fetchRules() = RespCallback<List<Rule>>().enqueue(restClient?.rules()) {
-        rules.value = it?.toMutableList() ?: mutableListOf()
+        val list = it?.toMutableList() ?: mutableListOf()
+        if (list != rules.value) rules.value = list
     }
 
     fun updateRule(rule: Rule): LiveData<Resp> {
@@ -79,7 +81,8 @@ object DataRepository {
 
 
     fun fetchValues() = RespCallback<List<RuleValue>>().enqueue(restClient?.values()) {
-        values.value = it?.toMutableList() ?: mutableListOf()
+        val list = it?.toMutableList() ?: mutableListOf()
+        if (list != values.value) values.value = list
     }
 
     fun updateValue(value: RuleValue): LiveData<Resp> {
